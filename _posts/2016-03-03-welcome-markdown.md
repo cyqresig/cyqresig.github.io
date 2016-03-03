@@ -6,7 +6,7 @@ date:       2016-03-03 12:00:00
 author:     "绯雨闲丸"
 header-img: "img/post-bg-2016-03-03.jpg"
 tags:
-    - 生活
+    - 文档
 ---
 
 > “try markdown”
