@@ -19,3 +19,7 @@
 * 运行 `grunt watch`
 
 二个同时运行就可以达到修改文件自动编译, 并且可以在本地查看blog
+
+## 支持
+
+查看官方主题模板[Start Bootstrap && Clean Blog](http://startbootstrap.com/template-overviews/clean-blog/)
