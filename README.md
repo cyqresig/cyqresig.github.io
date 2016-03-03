@@ -1,18 +1,18 @@
-#Jekyll版本Bootstrap样式的博客程序
+# Jekyll版本Bootstrap样式的博客程序
 
 官方版本的主题详见[Start Bootstrap](http://startbootstrap.com/)
 
 国人的修改版本详见[Huxpro/huxpro.github.io · GitHub](https://github.com/Huxpro/huxpro.github.io)
 
-###[View Live Demo &rarr;](http://www.vanadis.cn/)
+### [View Live Demo &rarr;](http://www.vanadis.cn/)
 
-##必需的环境
+## 必需的环境
 
 * 需要安装一个完整的  **Jekyll**  环境
 
 * 需要安装  **grunt**  环境
 
-##编译运行
+## 编译运行
 
 * 运行`jekyll serve --watch`
 
