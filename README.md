@@ -1,4 +1,4 @@
-# Jekyll版本Bootstrap样式的博客程序
+# Jekyll版本Bootstrap样式的博客生成程序
 
 官方版本的主题详见[Start Bootstrap](http://startbootstrap.com/)
 
