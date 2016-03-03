@@ -33,8 +33,7 @@ tags:
 *   [其它](#misc)
     *   [反斜杠](#backslash)
     *   [自动链接](#autolink)
-*   [感谢](#acknowledgement)
-*	[Markdown 免费编辑器](#editor)
+*   [WebStorm使用markdown](#webstorm)
 
 * * *
 
@@ -184,11 +183,11 @@ Markdown 标记区块引用是使用类似 email 中用 `>` 的引用方式。�
 Markdown 也允许你偷懒只在整个段落的第一行最前面加上 `>` ：
 
     > This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
-    consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
-    Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
+                                                     consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
+                                                     Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
 
-    > Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
-    id sem consectetuer libero luctus adipiscing.
+                                                     > Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
+                                                     id sem consectetuer libero luctus adipiscing.
 
 区块引用可以嵌套（例如：引用内的引用），只要根据层次加上不同数量的 `>` ：
 
@@ -704,49 +703,23 @@ Markdown 支持以下这些符号前面加上反斜杠来帮助插入普通的�
     .   英文句点
     !   惊叹号
 
-<h2 id="acknowledgement">感谢</h2>
+<h3 id="webstorm">WebStorm使用Markdown</h3>
 
-感谢 [leafy7382][] 协助翻译，[hlb][]、[Randylien][] 帮忙润稿，[ethantw][] 的[汉字标准格式・CSS Reset][]， [WM][] 回报文字错误。
+####    安装markdown插件
 
-[leafy7382]:https://twitter.com/#!/leafy7382
-[hlb]:http://iamhlb.com/
-[Randylien]:http://twitter.com/randylien
-[ethantw]:https://twitter.com/#!/ethantw
-[汉字标准格式・CSS Reset]:http://ethantw.net/projects/han/
-[WM]:http://kidwm.net/
+*   菜单栏选择File -> Settings -> Plugins -> Browse repositories
 
-感谢 [fenprace][]，[addv][]。
+*   在插件搜索栏输入markdown -> 选择Markdown Support -> 右键 -> Download and Install
 
-[fenprace]:https://github.com/fenprace
-[addv]:https://github.com/addv
+*   安装结束后restart webstorm
 
-----------
-<h2 id="editor">Markdown 免费编辑器</h2>
+####    增加markdown类型的文件模板
 
-Windows 平台
+*   菜单栏选择File -> Settings -> Editor -> File and Code Templates
 
-* [MarkdownPad](http://markdownpad.com/)
-* [MarkPad](http://code52.org/DownmarkerWPF/)
+*   点击绿色的加号增加一个文件模板类型 -> Name处填写markdown(随意命名) -> Extension处填写md -> Apply
 
-Linux 平台
+*   菜单栏选择File -> New -> 选择Markdown类型
 
-* [ReText](http://sourceforge.net/p/retext/home/ReText/)
-
-Mac 平台
-
-* [Mou](http://mouapp.com/)
-
-在线编辑器
-
-* [Markable.in](http://markable.in/)
-* [Dillinger.io](http://dillinger.io/)
-
-浏览器插件
-
-* [MaDe](https://chrome.google.com/webstore/detail/oknndfeeopgpibecfjljjfanledpbkog) (Chrome)
-
-高级应用
-
-* [Sublime Text 2](http://www.sublimetext.com/2) + [MarkdownEditing](http://ttscoff.github.com/MarkdownEditing/) / [教程](http://lucifr.com/2012/07/12/markdownediting-for-sublime-text-2/)
-
-\*** 如有更好的 Markdown 免费编辑器推荐，请到[这里反馈](https://gitcafe.com/riku/Markdown-Syntax-CN/tickets/1)，谢谢！
+之后新增的*.md类型的文件在打开后，可以看到编辑器区域一分为二，
+左边区域可以使用markdown语法，右边区域会自动编译预览最终的页面效果。
