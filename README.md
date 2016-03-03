@@ -4,7 +4,7 @@
 
 国人的修改版本详见[Huxpro/huxpro.github.io · GitHub](https://github.com/Huxpro/huxpro.github.io)
 
-###[View Live Demo &rarr;](http://blackrockdigital.github.io/startbootstrap-clean-blog-jekyll/)
+###[View Live Demo &rarr;](http://www.vanadis.cn/)
 
 ##必需的环境
 
