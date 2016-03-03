@@ -8,14 +8,14 @@
 
 ##必需的环境
 
-*需要安装一个完整的 **Jekyll** 环境
+* 需要安装一个完整的  **Jekyll**  环境
 
-*需要安装 **grunt** 环境
+* 需要安装  **grunt**  环境
 
 ##编译运行
 
-*运行`jekyll serve --watch`
+* 运行`jekyll serve --watch`
 
-*运行 `grunt watch`
+* 运行 `grunt watch`
 
 二个同时运行就可以达到修改文件自动编译, 并且可以在本地查看blog
