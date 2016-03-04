@@ -227,8 +227,7 @@
       <li><a href="#autolink">自动链接</a></li>
     </ul>
   </li>
-  <li><a href="#acknowledgement">感谢</a></li>
-  <li><a href="#editor">Markdown 免费编辑器</a></li>
+  <li><a href="#webstorm">WebStorm使用markdown</a></li>
 </ul>
 
 <hr />
@@ -391,11 +390,11 @@ This is an H2
 <p>Markdown 也允许你偷懒只在整个段落的第一行最前面加上 <code class="highlighter-rouge">&gt;</code> ：</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>&gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
-consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
-Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
+                                                 consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
+                                                 Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
 
-&gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
-id sem consectetuer libero luctus adipiscing.
+                                                 &gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
+                                                 id sem consectetuer libero luctus adipiscing.
 </code></pre>
 </div>
 
@@ -1051,54 +1050,38 @@ _   底线
 </code></pre>
 </div>
 
-<h2 id="acknowledgement">感谢</h2>
+<h3 id="webstorm">WebStorm使用Markdown</h3>
 
-<p>感谢 <a href="https://twitter.com/#!/leafy7382">leafy7382</a> 协助翻译，<a href="http://iamhlb.com/">hlb</a>、<a href="http://twitter.com/randylien">Randylien</a> 帮忙润稿，<a href="https://twitter.com/#!/ethantw">ethantw</a> 的<a href="http://ethantw.net/projects/han/">汉字标准格式・CSS Reset</a>， <a href="http://kidwm.net/">WM</a> 回报文字错误。</p>
-
-<p>感谢 <a href="https://github.com/fenprace">fenprace</a>，<a href="https://github.com/addv">addv</a>。</p>
-
-<hr />
-<h2 id="editor">Markdown 免费编辑器</h2>
-
-<p>Windows 平台</p>
+<h4 id="markdown-1">安装markdown插件</h4>
 
 <ul>
-  <li><a href="http://markdownpad.com/">MarkdownPad</a></li>
-  <li><a href="http://code52.org/DownmarkerWPF/">MarkPad</a></li>
+  <li>
+    <p>菜单栏选择File -&gt; Settings -&gt; Plugins -&gt; Browse repositories</p>
+  </li>
+  <li>
+    <p>在插件搜索栏输入markdown -&gt; 选择Markdown Support -&gt; 右键 -&gt; Download and Install</p>
+  </li>
+  <li>
+    <p>安装结束后restart webstorm</p>
+  </li>
 </ul>
 
-<p>Linux 平台</p>
+<h4 id="markdown-2">增加markdown类型的文件模板</h4>
 
 <ul>
-  <li><a href="http://sourceforge.net/p/retext/home/ReText/">ReText</a></li>
+  <li>
+    <p>菜单栏选择File -&gt; Settings -&gt; Editor -&gt; File and Code Templates</p>
+  </li>
+  <li>
+    <p>点击绿色的加号增加一个文件模板类型 -&gt; Name处填写markdown(随意命名) -&gt; Extension处填写md -&gt; Apply</p>
+  </li>
+  <li>
+    <p>菜单栏选择File -&gt; New -&gt; 选择Markdown类型</p>
+  </li>
 </ul>
 
-<p>Mac 平台</p>
-
-<ul>
-  <li><a href="http://mouapp.com/">Mou</a></li>
-</ul>
-
-<p>在线编辑器</p>
-
-<ul>
-  <li><a href="http://markable.in/">Markable.in</a></li>
-  <li><a href="http://dillinger.io/">Dillinger.io</a></li>
-</ul>
-
-<p>浏览器插件</p>
-
-<ul>
-  <li><a href="https://chrome.google.com/webstore/detail/oknndfeeopgpibecfjljjfanledpbkog">MaDe</a> (Chrome)</li>
-</ul>
-
-<p>高级应用</p>
-
-<ul>
-  <li><a href="http://www.sublimetext.com/2">Sublime Text 2</a> + <a href="http://ttscoff.github.com/MarkdownEditing/">MarkdownEditing</a> / <a href="http://lucifr.com/2012/07/12/markdownediting-for-sublime-text-2/">教程</a></li>
-</ul>
-
-<p>*** 如有更好的 Markdown 免费编辑器推荐，请到<a href="https://gitcafe.com/riku/Markdown-Syntax-CN/tickets/1">这里反馈</a>，谢谢！</p>
+<p>之后新增的*.md类型的文件在打开后，可以看到编辑器区域一分为二，
+左边区域可以使用markdown语法，右边区域会自动编译预览最终的页面效果。</p>
 
 
                 <hr>
@@ -1150,6 +1133,13 @@ Markdown语法说明
                     </li>
                     
                     
+                    <li class="next">
+                        <a href="/2016/03/03/plugin-jquery-autocomplete/" data-toggle="tooltip" data-placement="top" title="autocomplete功能实现分析">
+                        Next<br>
+                        <span>autocomplete功能实现分析</span>
+                        </a>
+                    </li>
+                    
                 </ul>
 
 
@@ -1191,6 +1181,12 @@ Markdown语法说明
                             
                 				<a href="/tags/#文档" title="文档" rel="1">
                                     文档
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#jquery组件" title="jquery组件" rel="1">
+                                    jquery组件
                                 </a>
                             
         				

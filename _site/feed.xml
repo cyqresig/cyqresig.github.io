@@ -5,9 +5,753 @@
     <description>关于前端开发,架构,动漫 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 03 Mar 2016 20:58:03 +0800</pubDate>
-    <lastBuildDate>Thu, 03 Mar 2016 20:58:03 +0800</lastBuildDate>
+    <pubDate>Fri, 04 Mar 2016 20:23:33 +0800</pubDate>
+    <lastBuildDate>Fri, 04 Mar 2016 20:23:33 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
+    
+      <item>
+        <title>autocomplete功能实现分析</title>
+        <description>&lt;h1 id=&quot;autocomplete-&quot;&gt;autocomplete 功能实现分析&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;功能分析参照了taobo首页的搜索框功能&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;确定实现功能所需的所有界面(按逻辑划分)&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;一个单行文本框&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-input&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;/p&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;em&gt;头部区域块&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-header&lt;/code&gt;(默认不显示)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;em&gt;内容区域块&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-content&lt;/code&gt;&lt;/p&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;
+            &lt;p&gt;&lt;em&gt;推荐搜索项区域块&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-item&lt;/code&gt;&lt;/p&gt;
+
+            &lt;ol&gt;
+              &lt;li&gt;
+                &lt;p&gt;&lt;em&gt;推荐搜索文字区域块&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;item-text&lt;/code&gt;&lt;/p&gt;
+              &lt;/li&gt;
+              &lt;li&gt;
+                &lt;p&gt;&lt;em&gt;推荐搜索附加信息区域块&lt;/em&gt;, 例如: &lt;code class=&quot;highlighter-rouge&quot;&gt;item-count&lt;/code&gt;&lt;/p&gt;
+              &lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;em&gt;尾部区域块&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-footer&lt;/code&gt;(默认显示)&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;确定实现功能所需的所有逻辑(按人机交互事件划分)&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;em&gt;一个单行文本框&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-input&lt;/code&gt;
+    &lt;ol&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;input&lt;/code&gt;&lt;em&gt;事件&lt;/em&gt;&lt;/p&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;
+            &lt;p&gt;获取&lt;em&gt;一个单行文本框&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-input&lt;/code&gt;的&lt;em&gt;输入文本值&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;value&lt;/code&gt;在移除首尾空白符后转化成&lt;em&gt;推荐搜索关键词&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeyword&lt;/code&gt;&lt;/p&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;p&gt;[分支]&lt;em&gt;是否使用远程数据&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;remote&lt;/code&gt;的值为false时,&lt;/p&gt;
+
+            &lt;ol&gt;
+              &lt;li&gt;
+                &lt;p&gt;[分支]当&lt;em&gt;推荐搜索关键词&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeyword&lt;/code&gt;的值为空时,&lt;/p&gt;
+
+                &lt;ol&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;为true&lt;/p&gt;
+
+                    &lt;ol&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;[结束]隐藏&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;赋值为false&lt;/p&gt;
+                      &lt;/li&gt;
+                    &lt;/ol&gt;
+                  &lt;/li&gt;
+                &lt;/ol&gt;
+              &lt;/li&gt;
+              &lt;li&gt;
+                &lt;p&gt;[分支]当&lt;em&gt;推荐搜索关键词&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeyword&lt;/code&gt;的值不为空时,&lt;/p&gt;
+
+                &lt;ol&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;[分支]当&lt;em&gt;推荐搜索关键词&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeyword&lt;/code&gt;被&lt;em&gt;本地数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;localData&lt;/code&gt;中的关键词匹配时&lt;/p&gt;
+
+                    &lt;ol&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;将值给&lt;em&gt;search-menu-content的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeywordDataList&lt;/code&gt;赋值 -&amp;gt; &lt;em&gt;本地数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;localData&lt;/code&gt;&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;&lt;em&gt;头部区域块是否显示标识&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;isShowHeader&lt;/code&gt;, 赋值为false, 以便模板中可以不显示出&lt;em&gt;头部区域块&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-header&lt;/code&gt;&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;给&lt;em&gt;search-menu的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchMenuObject&lt;/code&gt;的[key] &lt;code class=&quot;highlighter-rouge&quot;&gt;isShowHeader&lt;/code&gt; 赋值&lt;/p&gt;
+                      &lt;/li&gt;
+                    &lt;/ol&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;[分支]当&lt;em&gt;推荐搜索关键词&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeyword&lt;/code&gt;被&lt;em&gt;本地数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;localData&lt;/code&gt;中的关键词不匹配时&lt;/p&gt;
+
+                    &lt;ol&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;为true&lt;/p&gt;
+
+                        &lt;ol&gt;
+                          &lt;li&gt;
+                            &lt;p&gt;[结束]隐藏&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;/p&gt;
+                          &lt;/li&gt;
+                          &lt;li&gt;
+                            &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;赋值为false&lt;/p&gt;
+                          &lt;/li&gt;
+                        &lt;/ol&gt;
+                      &lt;/li&gt;
+                    &lt;/ol&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;将&lt;em&gt;search-menu的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchMenuObject&lt;/code&gt;传入配置的模板, 得到最终的html代码&lt;/p&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;将&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;内容替换&lt;/p&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;为false&lt;/p&gt;
+
+                    &lt;ol&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;[结束]显示&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;赋值为true&lt;/p&gt;
+                      &lt;/li&gt;
+                    &lt;/ol&gt;
+                  &lt;/li&gt;
+                &lt;/ol&gt;
+              &lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;p&gt;[分支]&lt;em&gt;是否使用远程数据&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;remote&lt;/code&gt;的值为true时,&lt;/p&gt;
+
+            &lt;ol&gt;
+              &lt;li&gt;
+                &lt;p&gt;[判断]&lt;em&gt;延迟进行fetch数据请求对象&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;defered&lt;/code&gt;存在, 说明下一个请求即将开始, 需要阻止&lt;/p&gt;
+
+                &lt;ol&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;中止延迟请求&lt;/p&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;&lt;em&gt;延迟进行fetch数据请求对象&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;defered&lt;/code&gt;赋值null&lt;/p&gt;
+                  &lt;/li&gt;
+                &lt;/ol&gt;
+              &lt;/li&gt;
+              &lt;li&gt;
+                &lt;p&gt;[判断]&lt;em&gt;fetch数据的请求对象&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;xhr&lt;/code&gt;存在, 说明请求正在进行中&lt;/p&gt;
+
+                &lt;ol&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;中止请求&lt;/p&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;&lt;em&gt;fetch数据的请求对象&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;xhr&lt;/code&gt;赋值null&lt;/p&gt;
+                  &lt;/li&gt;
+                &lt;/ol&gt;
+              &lt;/li&gt;
+              &lt;li&gt;
+                &lt;p&gt;[分支]当&lt;em&gt;推荐搜索关键词&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeyword&lt;/code&gt;的值为空时,&lt;/p&gt;
+
+                &lt;ol&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;[分支]当已经存在&lt;em&gt;历史提交搜索关键词缓存&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;historySearchKeywordList&lt;/code&gt;时&lt;/p&gt;
+
+                    &lt;ol&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;给&lt;em&gt;search-menu-content的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeywordDataList&lt;/code&gt;赋值 -&amp;gt; &lt;em&gt;历史提交搜索关键词缓存&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;historySearchKeywordList&lt;/code&gt;&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;&lt;em&gt;头部区域块是否显示标识&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;isShowHeader&lt;/code&gt;, 赋值为true, 以便模板中可以显示出&lt;em&gt;头部区域块&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-header&lt;/code&gt;&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;给&lt;em&gt;search-menu的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchMenuObject&lt;/code&gt;的[key] &lt;code class=&quot;highlighter-rouge&quot;&gt;isShowHeader&lt;/code&gt; 赋值&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;将&lt;em&gt;search-menu的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchMenuObject&lt;/code&gt;传入配置的模板, 得到最终的html代码&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;将&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;内容替换&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;为false&lt;/p&gt;
+
+                        &lt;ol&gt;
+                          &lt;li&gt;
+                            &lt;p&gt;[结束]显示&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;/p&gt;
+                          &lt;/li&gt;
+                          &lt;li&gt;
+                            &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;赋值为true&lt;/p&gt;
+                          &lt;/li&gt;
+                        &lt;/ol&gt;
+                      &lt;/li&gt;
+                    &lt;/ol&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;[分支][有效分支]当已经不存在&lt;em&gt;历史提交搜索关键词缓存&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;historySearchKeywordList&lt;/code&gt;时&lt;/p&gt;
+
+                    &lt;ol&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;为true&lt;/p&gt;
+
+                        &lt;ol&gt;
+                          &lt;li&gt;
+                            &lt;p&gt;[结束]隐藏&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;/p&gt;
+                          &lt;/li&gt;
+                          &lt;li&gt;
+                            &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;赋值为false&lt;/p&gt;
+                          &lt;/li&gt;
+                        &lt;/ol&gt;
+                      &lt;/li&gt;
+                    &lt;/ol&gt;
+                  &lt;/li&gt;
+                &lt;/ol&gt;
+              &lt;/li&gt;
+              &lt;li&gt;
+                &lt;p&gt;[分支]当&lt;em&gt;推荐搜索关键词&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeyword&lt;/code&gt;的值不为空时,&lt;/p&gt;
+
+                &lt;ol&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;[分支]当&lt;em&gt;推荐搜索关键词&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeyword&lt;/code&gt;被&lt;em&gt;历史未提交搜索关键词缓存&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;historyKeywordCacheList&lt;/code&gt;中的关键词匹配时&lt;/p&gt;
+
+                    &lt;ol&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;获取匹配键的值, 对值进行Json反序列化&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;将值给&lt;em&gt;search-menu-content的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeywordDataList&lt;/code&gt;赋值&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;&lt;em&gt;头部区域块是否显示标识&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;isShowHeader&lt;/code&gt;, 赋值为false, 以便模板中不显示出&lt;em&gt;头部区域块&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-header&lt;/code&gt;&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;给&lt;em&gt;search-menu的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchMenuObject&lt;/code&gt;的[key] &lt;code class=&quot;highlighter-rouge&quot;&gt;isShowHeader&lt;/code&gt; 赋值&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;将&lt;em&gt;search-menu的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchMenuObject&lt;/code&gt;传入配置的模板, 得到最终的html代码&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;将&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;内容替换&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;为false&lt;/p&gt;
+
+                        &lt;ol&gt;
+                          &lt;li&gt;
+                            &lt;p&gt;[结束]显示&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;/p&gt;
+                          &lt;/li&gt;
+                          &lt;li&gt;
+                            &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;赋值为true&lt;/p&gt;
+                          &lt;/li&gt;
+                        &lt;/ol&gt;
+                      &lt;/li&gt;
+                    &lt;/ol&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;[分支][有效分支]当&lt;em&gt;推荐搜索关键词&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeyword&lt;/code&gt;被&lt;em&gt;历史未提交搜索关键词缓存&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;historyKeywordCacheList&lt;/code&gt;中的关键词不匹配时&lt;/p&gt;
+
+                    &lt;ol&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;创建&lt;em&gt;fetch数据的请求对象&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;xhr&lt;/code&gt;curry&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;创建并启动&lt;em&gt;延迟进行fetch数据请求对象&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;defered&lt;/code&gt;&lt;/p&gt;
+                      &lt;/li&gt;
+                    &lt;/ol&gt;
+
+                    &lt;blockquote&gt;
+                      &lt;p&gt;该分支以下逻辑都在&lt;em&gt;fetch数据的请求对象&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;xhr&lt;/code&gt;的回调函数中进行&lt;/p&gt;
+                    &lt;/blockquote&gt;
+
+                    &lt;ol&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;将请求的返回json对象给&lt;em&gt;search-menu-content的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeywordDataList&lt;/code&gt;赋值&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;&lt;em&gt;头部区域块是否显示标识&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;isShowHeader&lt;/code&gt;, 赋值为false, 以便模板中不显示出&lt;em&gt;头部区域块&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-header&lt;/code&gt;&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;给&lt;em&gt;search-menu的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchMenuObject&lt;/code&gt;的[key] &lt;code class=&quot;highlighter-rouge&quot;&gt;isShowHeader&lt;/code&gt; 赋值&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;将&lt;em&gt;search-menu的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchMenuObject&lt;/code&gt;传入配置的模板, 得到最终的html代码&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;将&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;内容替换&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;为false&lt;/p&gt;
+
+                        &lt;ol&gt;
+                          &lt;li&gt;
+                            &lt;p&gt;[结束]显示&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;/p&gt;
+                          &lt;/li&gt;
+                          &lt;li&gt;
+                            &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;赋值为true&lt;/p&gt;
+                          &lt;/li&gt;
+                        &lt;/ol&gt;
+                      &lt;/li&gt;
+                    &lt;/ol&gt;
+                  &lt;/li&gt;
+                &lt;/ol&gt;
+              &lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;click&lt;/code&gt;&lt;em&gt;事件&lt;/em&gt;&lt;/p&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;
+            &lt;p&gt;[分支]当&lt;em&gt;推荐搜索关键词&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeyword&lt;/code&gt;的值为空时,&lt;/p&gt;
+
+            &lt;ol&gt;
+              &lt;li&gt;
+                &lt;p&gt;[分支]当已经存在&lt;em&gt;历史提交搜索关键词缓存&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;historySearchKeywordList&lt;/code&gt;时&lt;/p&gt;
+
+                &lt;ol&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;给&lt;em&gt;search-menu-content的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeywordDataList&lt;/code&gt;赋值 -&amp;gt; &lt;em&gt;历史提交搜索关键词缓存&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;historySearchKeywordList&lt;/code&gt;&lt;/p&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;&lt;em&gt;头部区域块是否显示标识&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;isShowHeader&lt;/code&gt;, 赋值为true, 以便模板中可以显示出&lt;em&gt;头部区域块&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-header&lt;/code&gt;&lt;/p&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;给&lt;em&gt;search-menu的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchMenuObject&lt;/code&gt;的[key] &lt;code class=&quot;highlighter-rouge&quot;&gt;isShowHeader&lt;/code&gt; 赋值&lt;/p&gt;
+                  &lt;/li&gt;
+                &lt;/ol&gt;
+              &lt;/li&gt;
+              &lt;li&gt;
+                &lt;p&gt;[分支][无效分支]当已经不存在&lt;em&gt;历史提交搜索关键词缓存&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;historySearchKeywordList&lt;/code&gt;时&lt;/p&gt;
+
+                &lt;ol&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;[判断]&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;为true&lt;/p&gt;
+
+                    &lt;ol&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;[结束]隐藏&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;赋值为false&lt;/p&gt;
+                      &lt;/li&gt;
+                    &lt;/ol&gt;
+                  &lt;/li&gt;
+                &lt;/ol&gt;
+              &lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;p&gt;[分支]当&lt;em&gt;推荐搜索关键词&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeyword&lt;/code&gt;的值不为空时,&lt;/p&gt;
+
+            &lt;ol&gt;
+              &lt;li&gt;
+                &lt;p&gt;[分支]当&lt;em&gt;推荐搜索关键词&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeyword&lt;/code&gt;被&lt;em&gt;历史未提交搜索关键词缓存&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;historyKeywordCacheList&lt;/code&gt;中的关键词匹配时&lt;/p&gt;
+
+                &lt;ol&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;获取匹配键的值, 对值进行Json反序列化&lt;/p&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;将值给&lt;em&gt;search-menu-content的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeywordDataList&lt;/code&gt;赋值&lt;/p&gt;
+                  &lt;/li&gt;
+                &lt;/ol&gt;
+              &lt;/li&gt;
+              &lt;li&gt;
+                &lt;p&gt;[分支][无效分支]当&lt;em&gt;推荐搜索关键词&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeyword&lt;/code&gt;被&lt;em&gt;历史未提交搜索关键词缓存&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;historyKeywordCacheList&lt;/code&gt;中的关键词不匹配时&lt;/p&gt;
+
+                &lt;ol&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;[判断]&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;为true&lt;/p&gt;
+
+                    &lt;ol&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;[结束]隐藏&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;赋值为false&lt;/p&gt;
+                      &lt;/li&gt;
+                    &lt;/ol&gt;
+                  &lt;/li&gt;
+                &lt;/ol&gt;
+              &lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;p&gt;将&lt;em&gt;search-menu的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchMenuObject&lt;/code&gt;传入配置的模板, 得到最终的html代码&lt;/p&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;p&gt;将&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;内容替换&lt;/p&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;p&gt;[判断]&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;为false&lt;/p&gt;
+
+            &lt;ol&gt;
+              &lt;li&gt;
+                &lt;p&gt;[结束]显示&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;/p&gt;
+              &lt;/li&gt;
+              &lt;li&gt;
+                &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;赋值为true&lt;/p&gt;
+              &lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;foucsin&lt;/code&gt; 事件&lt;/p&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;&lt;em&gt;一个单行文本框&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-input&lt;/code&gt;&lt;em&gt;当前focus状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;focusState&lt;/code&gt;赋值为true&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;focusout&lt;/code&gt; 事件&lt;/p&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;
+            &lt;p&gt;&lt;em&gt;一个单行文本框&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-input&lt;/code&gt;&lt;em&gt;当前focus状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;focusState&lt;/code&gt;赋值为false&lt;/p&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;p&gt;[判断]&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;为true&lt;/p&gt;
+
+            &lt;ol&gt;
+              &lt;li&gt;
+                &lt;p&gt;[结束]隐藏&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;/p&gt;
+              &lt;/li&gt;
+              &lt;li&gt;
+                &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;赋值为false&lt;/p&gt;
+              &lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;keydown&lt;/code&gt; 事件&lt;/p&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;
+            &lt;p&gt;ESC: 27&lt;/p&gt;
+
+            &lt;ol&gt;
+              &lt;li&gt;
+                &lt;p&gt;[判断]&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;为true&lt;/p&gt;
+
+                &lt;ol&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;[结束]隐藏&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;/p&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;赋值为false&lt;/p&gt;
+                  &lt;/li&gt;
+                &lt;/ol&gt;
+              &lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;p&gt;RETURN: 13&lt;/p&gt;
+
+            &lt;ol&gt;
+              &lt;li&gt;
+                &lt;p&gt;[判断]&lt;em&gt;提交搜索事件 -&amp;gt; 回调函数&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;onSearch&lt;/code&gt;是否存在&lt;/p&gt;
+
+                &lt;ol&gt;
+                  &lt;li&gt;执行&lt;code class=&quot;highlighter-rouge&quot;&gt;onSearch&lt;/code&gt;&lt;/li&gt;
+                &lt;/ol&gt;
+              &lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;p&gt;LEFT: 37&lt;/p&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;p&gt;UP: 38&lt;/p&gt;
+
+            &lt;ol&gt;
+              &lt;li&gt;
+                &lt;p&gt;[判断]&lt;em&gt;一个单行文本框&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-input&lt;/code&gt;&lt;em&gt;当前focus状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;focusState&lt;/code&gt;为true&lt;/p&gt;
+
+                &lt;ol&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;[分支]&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;为false&lt;/p&gt;
+
+                    &lt;ol&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;&lt;em&gt;当前选择/停留的搜索项index&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchItemIndex&lt;/code&gt;赋值为&lt;em&gt;推荐搜索项count&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendItemsCount&lt;/code&gt; (最后一项+1)&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;显示&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;赋值为true&lt;/p&gt;
+                      &lt;/li&gt;
+                    &lt;/ol&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;[分支]&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;为false&lt;/p&gt;
+
+                    &lt;ol&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;[分支]&lt;em&gt;当前选择/停留的搜索项index&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchItemIndex&lt;/code&gt;的值等于0&lt;/p&gt;
+
+                        &lt;ol&gt;
+                          &lt;li&gt;&lt;em&gt;当前选择/停留的搜索项index&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchItemIndex&lt;/code&gt;赋值为&lt;em&gt;推荐搜索项count&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendItemsCount&lt;/code&gt;&lt;/li&gt;
+                        &lt;/ol&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;[分支]&lt;em&gt;当前选择/停留的搜索项index&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchItemIndex&lt;/code&gt;的值不等于0&lt;/p&gt;
+
+                        &lt;ol&gt;
+                          &lt;li&gt;&lt;em&gt;当前选择/停留的搜索项index&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchItemIndex&lt;/code&gt;赋值为旧值+1&lt;/li&gt;
+                        &lt;/ol&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;[分支2]&lt;em&gt;当前选择/停留的搜索项index&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchItemIndex&lt;/code&gt;的值等于&lt;em&gt;推荐搜索项count&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendItemsCount&lt;/code&gt; 或者 等于 -1&lt;/p&gt;
+
+                        &lt;ol&gt;
+                          &lt;li&gt;&lt;em&gt;一个单行文本框&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-input&lt;/code&gt;&lt;em&gt;输入文本值&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;input.value&lt;/code&gt; 赋值为 &lt;em&gt;推荐搜索关键词&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeyword&lt;/code&gt;&lt;/li&gt;
+                        &lt;/ol&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;[分支2]&lt;em&gt;当前选择/停留的搜索项index&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchItemIndex&lt;/code&gt;的值不等于&lt;em&gt;推荐搜索项count&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendItemsCount&lt;/code&gt; 或者 等于 -1&lt;/p&gt;
+
+                        &lt;ol&gt;
+                          &lt;li&gt;&lt;em&gt;一个单行文本框&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-input&lt;/code&gt;&lt;em&gt;输入文本值&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;input.value&lt;/code&gt; 赋值为 &lt;em&gt;search-menu-content的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeywordDataList&lt;/code&gt;的第&lt;code class=&quot;highlighter-rouge&quot;&gt;searchItemIndex&lt;/code&gt;项的keyword值&lt;/li&gt;
+                        &lt;/ol&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;[判断]&lt;em&gt;切换推荐搜索项事件 -&amp;gt; 回调函数&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;onSelect&lt;/code&gt;是否存在&lt;/p&gt;
+
+                        &lt;ol&gt;
+                          &lt;li&gt;执行&lt;code class=&quot;highlighter-rouge&quot;&gt;onSelect&lt;/code&gt;&lt;/li&gt;
+                        &lt;/ol&gt;
+                      &lt;/li&gt;
+                    &lt;/ol&gt;
+                  &lt;/li&gt;
+                &lt;/ol&gt;
+              &lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;p&gt;RIGHT: 39&lt;/p&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;p&gt;DOWN: 40&lt;/p&gt;
+
+            &lt;ol&gt;
+              &lt;li&gt;
+                &lt;p&gt;[判断]&lt;em&gt;一个单行文本框&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-input&lt;/code&gt;&lt;em&gt;当前focus状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;focusState&lt;/code&gt;为true&lt;/p&gt;
+
+                &lt;ol&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;[分支]&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;为false&lt;/p&gt;
+
+                    &lt;ol&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;&lt;em&gt;当前选择/停留的搜索项index&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchItemIndex&lt;/code&gt;赋值为-1&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;显示&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;/p&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;赋值为true&lt;/p&gt;
+                      &lt;/li&gt;
+                    &lt;/ol&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;
+                    &lt;p&gt;[分支]&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;为false&lt;/p&gt;
+
+                    &lt;ol&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;[分支]&lt;em&gt;当前选择/停留的搜索项index&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchItemIndex&lt;/code&gt;的值等于&lt;em&gt;推荐搜索项count&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendItemsCount&lt;/code&gt;&lt;/p&gt;
+
+                        &lt;ol&gt;
+                          &lt;li&gt;&lt;em&gt;当前选择/停留的搜索项index&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchItemIndex&lt;/code&gt;赋值为0&lt;/li&gt;
+                        &lt;/ol&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;[分支]&lt;em&gt;当前选择/停留的搜索项index&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchItemIndex&lt;/code&gt;的值不等于&lt;em&gt;推荐搜索项count&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendItemsCount&lt;/code&gt;&lt;/p&gt;
+
+                        &lt;ol&gt;
+                          &lt;li&gt;&lt;em&gt;当前选择/停留的搜索项index&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchItemIndex&lt;/code&gt;赋值为旧值+1&lt;/li&gt;
+                        &lt;/ol&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;[分支2]&lt;em&gt;当前选择/停留的搜索项index&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchItemIndex&lt;/code&gt;的值等于&lt;em&gt;推荐搜索项count&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendItemsCount&lt;/code&gt; 或者 等于 -1&lt;/p&gt;
+
+                        &lt;ol&gt;
+                          &lt;li&gt;&lt;em&gt;一个单行文本框&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-input&lt;/code&gt;&lt;em&gt;输入文本值&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;input.value&lt;/code&gt; 赋值为 &lt;em&gt;推荐搜索关键词&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeyword&lt;/code&gt;&lt;/li&gt;
+                        &lt;/ol&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;[分支2]&lt;em&gt;当前选择/停留的搜索项index&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchItemIndex&lt;/code&gt;的值不等于&lt;em&gt;推荐搜索项count&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendItemsCount&lt;/code&gt; 或者 等于 -1&lt;/p&gt;
+
+                        &lt;ol&gt;
+                          &lt;li&gt;&lt;em&gt;一个单行文本框&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-input&lt;/code&gt;&lt;em&gt;输入文本值&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;input.value&lt;/code&gt; 赋值为 &lt;em&gt;search-menu-content的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeywordDataList&lt;/code&gt;的第&lt;code class=&quot;highlighter-rouge&quot;&gt;searchItemIndex&lt;/code&gt;项的keyword值&lt;/li&gt;
+                        &lt;/ol&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;
+                        &lt;p&gt;[判断]&lt;em&gt;切换推荐搜索项事件 -&amp;gt; 回调函数&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;onSelect&lt;/code&gt;是否存在&lt;/p&gt;
+
+                        &lt;ol&gt;
+                          &lt;li&gt;执行&lt;code class=&quot;highlighter-rouge&quot;&gt;onSelect&lt;/code&gt;&lt;/li&gt;
+                        &lt;/ol&gt;
+                      &lt;/li&gt;
+                    &lt;/ol&gt;
+                  &lt;/li&gt;
+                &lt;/ol&gt;
+              &lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;确定数据存储&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;search-menu的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchMenuObject&lt;/code&gt;(Object) 默认为空对象&lt;/p&gt;
+
+    &lt;p&gt;[key] &lt;code class=&quot;highlighter-rouge&quot;&gt;isShowHeader&lt;/code&gt;
+[key] &lt;code class=&quot;highlighter-rouge&quot;&gt;isShowFooter&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;search-menu-content的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeywordDataList&lt;/code&gt;(Array&amp;lt;Object&amp;gt;)   默认未定义&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;历史已提交搜索关键词缓存&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;historySearchedKeywordCacheList&lt;/code&gt;(Array&amp;lt;String&amp;gt;) 默认为空数组&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;历史未提交搜索关键词缓存&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;historyKeywordCacheList&lt;/code&gt;(Array&amp;lt;String&amp;gt;) 默认为空数组&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;历史推荐搜索关键词 -&amp;gt; 返回的数据结果集&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;historyRecommendKeywordCache&lt;/code&gt;(Object) 默认为空对象&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;key -&amp;gt; historyKeyword&lt;/td&gt;
+          &lt;td&gt;value -&amp;gt; recommendKeywordDataList toJson&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;确定关键属性&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;一个单行文本框&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-input&lt;/code&gt;&lt;em&gt;输入文本值&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;input.value&lt;/code&gt;(String) 默认没有输入值&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;推荐搜索关键词&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeyword&lt;/code&gt;(String) 默认未定义&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;头部区域块是否显示标识&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;isShowHeader&lt;/code&gt;(Boolean) 默认false&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;尾部区域块是否显示标识&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;isShowFooter&lt;/code&gt;(Boolean) 默认true&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;历史已提交搜索关键词缓存最大个数&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;maximumHistorySearchedKeywordCacheList&lt;/code&gt;(Int) 默认为10&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;历史未提交搜索关键词缓存最大个数&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;maximumHistoryKeywordCacheList&lt;/code&gt;(Int) 默认为100&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[公开]&lt;em&gt;是否使用远程数据&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;remote&lt;/code&gt;(Boolean) 默认false (请求方式强制使用jsonp)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[公开]&lt;em&gt;远程请求地址&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;url&lt;/code&gt;(String) 默认未定义 (当&lt;code class=&quot;highlighter-rouge&quot;&gt;remote&lt;/code&gt;为true时必须指定)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[公开]&lt;em&gt;对应搜索文本的请求参数名&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;paramName&lt;/code&gt;(String) 默认为’query’&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[公开]&lt;em&gt;附加请求参数对象&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;params&lt;/code&gt;(Object) 默认null (需要支持实例修改)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[公开]&lt;em&gt;本地数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;localData&lt;/code&gt;(Object) 默认null (当&lt;code class=&quot;highlighter-rouge&quot;&gt;remote&lt;/code&gt;为false时必须指定)&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;key -&amp;gt; keyword&lt;/td&gt;
+          &lt;td&gt;value -&amp;gt; recommendKeywordDataList toJson&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[公开]&lt;em&gt;对每个推荐搜索返回结果集里指定的字段进行格式化, 返回格式化后的值 -&amp;gt; 回调函数&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;formatRecommendKeywordData&lt;/code&gt;(Function)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[公开]&lt;em&gt;允许触发一次获取搜索推荐数据动作最小间隔&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendFetchInterval&lt;/code&gt;(Int) 默认为10(ms)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;fetch数据的请求对象&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;xhr&lt;/code&gt;(Object) 默认null 由jQuery.ajax创建&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;延迟进行fetch数据请求对象&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;defered&lt;/code&gt;(Object) 默认null 由setTimeout创建&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;一个单行文本框&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-input&lt;/code&gt;&lt;em&gt;当前focus状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;focusState&lt;/code&gt;(Boolean) 默认false&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;(Boolean)  默认false&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;推荐搜索项count&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendItemsCount&lt;/code&gt;(Int) 默认0&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;当前选择/停留的搜索项index&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchItemIndex&lt;/code&gt;(Int) 默认-1 选择搜索推荐项时使用, 0表示第一项, &lt;code class=&quot;highlighter-rouge&quot;&gt;recommendItemsCount-1&lt;/code&gt;表示最后一项&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;提交搜索事件 -&amp;gt; 回调函数&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;onSearch&lt;/code&gt;(Function)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;切换推荐搜索项事件 -&amp;gt; 回调函数&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;onSelect&lt;/code&gt;(Function)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Thu, 03 Mar 2016 20:00:00 +0800</pubDate>
+        <link>http://www.vanadis.cn/2016/03/03/plugin-jquery-autocomplete/</link>
+        <guid isPermaLink="true">http://www.vanadis.cn/2016/03/03/plugin-jquery-autocomplete/</guid>
+        
+        <category>jquery组件</category>
+        
+        
+      </item>
     
       <item>
         <title>请使用Markdown写文档</title>
@@ -49,8 +793,7 @@
       &lt;li&gt;&lt;a href=&quot;#autolink&quot;&gt;自动链接&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#acknowledgement&quot;&gt;感谢&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#editor&quot;&gt;Markdown 免费编辑器&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#webstorm&quot;&gt;WebStorm使用markdown&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
@@ -213,11 +956,11 @@ This is an H2
 &lt;p&gt;Markdown 也允许你偷懒只在整个段落的第一行最前面加上 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;gt;&lt;/code&gt; ：&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
-consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
-Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
+                                                 consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
+                                                 Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
 
-&amp;gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
-id sem consectetuer libero luctus adipiscing.
+                                                 &amp;gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
+                                                 id sem consectetuer libero luctus adipiscing.
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -873,54 +1616,38 @@ _   底线
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;h2 id=&quot;acknowledgement&quot;&gt;感谢&lt;/h2&gt;
+&lt;h3 id=&quot;webstorm&quot;&gt;WebStorm使用Markdown&lt;/h3&gt;
 
-&lt;p&gt;感谢 &lt;a href=&quot;https://twitter.com/#!/leafy7382&quot;&gt;leafy7382&lt;/a&gt; 协助翻译，&lt;a href=&quot;http://iamhlb.com/&quot;&gt;hlb&lt;/a&gt;、&lt;a href=&quot;http://twitter.com/randylien&quot;&gt;Randylien&lt;/a&gt; 帮忙润稿，&lt;a href=&quot;https://twitter.com/#!/ethantw&quot;&gt;ethantw&lt;/a&gt; 的&lt;a href=&quot;http://ethantw.net/projects/han/&quot;&gt;汉字标准格式・CSS Reset&lt;/a&gt;， &lt;a href=&quot;http://kidwm.net/&quot;&gt;WM&lt;/a&gt; 回报文字错误。&lt;/p&gt;
-
-&lt;p&gt;感谢 &lt;a href=&quot;https://github.com/fenprace&quot;&gt;fenprace&lt;/a&gt;，&lt;a href=&quot;https://github.com/addv&quot;&gt;addv&lt;/a&gt;。&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;h2 id=&quot;editor&quot;&gt;Markdown 免费编辑器&lt;/h2&gt;
-
-&lt;p&gt;Windows 平台&lt;/p&gt;
+&lt;h4 id=&quot;markdown-1&quot;&gt;安装markdown插件&lt;/h4&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://markdownpad.com/&quot;&gt;MarkdownPad&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://code52.org/DownmarkerWPF/&quot;&gt;MarkPad&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;菜单栏选择File -&amp;gt; Settings -&amp;gt; Plugins -&amp;gt; Browse repositories&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在插件搜索栏输入markdown -&amp;gt; 选择Markdown Support -&amp;gt; 右键 -&amp;gt; Download and Install&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;安装结束后restart webstorm&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Linux 平台&lt;/p&gt;
+&lt;h4 id=&quot;markdown-2&quot;&gt;增加markdown类型的文件模板&lt;/h4&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://sourceforge.net/p/retext/home/ReText/&quot;&gt;ReText&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;菜单栏选择File -&amp;gt; Settings -&amp;gt; Editor -&amp;gt; File and Code Templates&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;点击绿色的加号增加一个文件模板类型 -&amp;gt; Name处填写markdown(随意命名) -&amp;gt; Extension处填写md -&amp;gt; Apply&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;菜单栏选择File -&amp;gt; New -&amp;gt; 选择Markdown类型&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Mac 平台&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://mouapp.com/&quot;&gt;Mou&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;在线编辑器&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://markable.in/&quot;&gt;Markable.in&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://dillinger.io/&quot;&gt;Dillinger.io&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;浏览器插件&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://chrome.google.com/webstore/detail/oknndfeeopgpibecfjljjfanledpbkog&quot;&gt;MaDe&lt;/a&gt; (Chrome)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;高级应用&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.sublimetext.com/2&quot;&gt;Sublime Text 2&lt;/a&gt; + &lt;a href=&quot;http://ttscoff.github.com/MarkdownEditing/&quot;&gt;MarkdownEditing&lt;/a&gt; / &lt;a href=&quot;http://lucifr.com/2012/07/12/markdownediting-for-sublime-text-2/&quot;&gt;教程&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;*** 如有更好的 Markdown 免费编辑器推荐，请到&lt;a href=&quot;https://gitcafe.com/riku/Markdown-Syntax-CN/tickets/1&quot;&gt;这里反馈&lt;/a&gt;，谢谢！&lt;/p&gt;
+&lt;p&gt;之后新增的*.md类型的文件在打开后，可以看到编辑器区域一分为二，
+左边区域可以使用markdown语法，右边区域会自动编译预览最终的页面效果。&lt;/p&gt;
 </description>
         <pubDate>Thu, 03 Mar 2016 20:00:00 +0800</pubDate>
         <link>http://www.vanadis.cn/2016/03/03/markdown-welcome/</link>
