@@ -2,11 +2,11 @@
 layout:     post
 title:      "autocomplete功能实现分析"
 subtitle:   " \"先写伪代码的好处\""
-date:       2016-03-03 12:00:00
+date:       2016-03-04 12:00:00
 author:     "绯雨闲丸"
 header-img: "img/post-bg-2016-03-03.jpg"
 tags:
-    - jquery组件
+    - javascript组件
 ---
 
 #   autocomplete 功能实现分析
