@@ -2,14 +2,13 @@
 layout:     post
 title:      "请使用Markdown写文档"
 subtitle:   " \"程序员快速优雅的写文档方式\""
-date:       2016-03-03 12:00:00
 author:     "绯雨闲丸"
 header-img: "img/post-bg-2016-03-03.jpg"
 tags:
     - 文档
 ---
 
-> “try markdown”
+> “尝试使用一下markdown吧”
 
 
 # Markdown语法说明

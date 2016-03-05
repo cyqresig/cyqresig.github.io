@@ -1,13 +1,14 @@
 ---
 layout:     post
 title:      "autocomplete功能实现分析"
-subtitle:   " \"先写伪代码的好处\""
-date:       2016-03-04 12:00:00
+subtitle:   " \"实现任何功能前都应先分析\""
 author:     "绯雨闲丸"
-header-img: "img/post-bg-2016-03-03.jpg"
+header-img: "img/post-bg-2016-03-04.jpg"
 tags:
     - javascript组件
 ---
+
+> “先分析是一个好习惯”
 
 #   autocomplete 功能实现分析
 
@@ -15,9 +16,9 @@ tags:
 
 ##  确定实现功能所需的所有界面(按逻辑划分)
 
-1.  *一个单行文本框*`search-input`
+1.  *一个单行文本框*`search-input`      (必要元素, 事先存在)
 
-2.  *一个填充搜索推荐层*`search-menu`
+2.  *一个填充搜索推荐层*`search-menu`    (作为自定义模板, 通过公开api生成)
 
     1. *头部区域块*`search-menu-header`(默认不显示)
 
@@ -35,7 +36,7 @@ tags:
 
 1. *一个单行文本框*`search-input`
     1.  `input`*事件*
-    
+
         1.  获取*一个单行文本框*`search-input`的*输入文本值*`value`在移除首尾空白符后转化成*推荐搜索关键词*`recommendKeyword`
 
         1.  [分支]*是否使用远程数据*`remote`的值为false时,
@@ -53,6 +54,8 @@ tags:
                 1.  [分支]当*推荐搜索关键词*`recommendKeyword`被*本地数据源*`localData`中的关键词匹配时
 
                     1.  将值给*search-menu-content的赋值数据源*`recommendKeywordDataList`赋值 -> *本地数据源*`localData`
+
+                    2.  *推荐搜索项count*`recommendItemsCount`赋值
 
                     2.  *头部区域块是否显示标识*`isShowHeader`, 赋值为false, 以便模板中可以不显示出*头部区域块*`search-menu-header`
 
@@ -90,7 +93,7 @@ tags:
 
                 2.  *fetch数据的请求对象*`xhr`赋值null
 
-            3.  [分支]当*推荐搜索关键词*`recommendKeyword`的值为空时,
+            1.  [分支]当*推荐搜索关键词*`recommendKeyword`的值为空时,
 
                 1.  [分支]当已经存在*历史提交搜索关键词缓存*`historySearchKeywordList`时
 
@@ -125,6 +128,8 @@ tags:
                     1.  获取匹配键的值, 对值进行Json反序列化
 
                     2.  将值给*search-menu-content的赋值数据源*`recommendKeywordDataList`赋值
+
+                    2.  *推荐搜索项count*`recommendItemsCount`赋值
 
                     2.  *头部区域块是否显示标识*`isShowHeader`, 赋值为false, 以便模板中不显示出*头部区域块*`search-menu-header`
 
@@ -191,7 +196,9 @@ tags:
                 1.  获取匹配键的值, 对值进行Json反序列化
 
                 2.  将值给*search-menu-content的赋值数据源*`recommendKeywordDataList`赋值
-                
+
+                3.  *推荐搜索项count*`recommendItemsCount`赋值
+
             2.  [分支][无效分支]当*推荐搜索关键词*`recommendKeyword`被*历史未提交搜索关键词缓存*`historyKeywordCacheList`中的关键词不匹配时
 
                 1.  [判断]*一个填充搜索推荐层*`search-menu`*当前显示状态*`displayState`为true
@@ -254,27 +261,27 @@ tags:
 
                     2.  *一个填充搜索推荐层*`search-menu`*当前显示状态*`displayState`赋值为true
 
-                2.  [分支]*一个填充搜索推荐层*`search-menu`*当前显示状态*`displayState`为false
+                2.  [分支]*一个填充搜索推荐层*`search-menu`*当前显示状态*`displayState`为true
 
-                    1.  [分支]*当前选择/停留的搜索项index*`searchItemIndex`的值等于0
+                    1.  [分支]*当前选择/停留的搜索项index*`searchItemIndex`的值等于-1
 
-                        1.  *当前选择/停留的搜索项index*`searchItemIndex`赋值为*推荐搜索项count*`recommendItemsCount`
+                        1.  *当前选择/停留的搜索项index*`searchItemIndex`赋值为*推荐搜索项count*`recommendItemsCount`-1
 
-                    2.  [分支]*当前选择/停留的搜索项index*`searchItemIndex`的值不等于0
+                    2.  [分支]*当前选择/停留的搜索项index*`searchItemIndex`的值不等于-1
 
-                        1.  *当前选择/停留的搜索项index*`searchItemIndex`赋值为旧值+1
+                        1.  *当前选择/停留的搜索项index*`searchItemIndex`赋值为旧值-1
 
-                    3.  [分支2]*当前选择/停留的搜索项index*`searchItemIndex`的值等于*推荐搜索项count*`recommendItemsCount` 或者 等于 -1
+                    3.  [移至onSelect内处理][分支2]*当前选择/停留的搜索项index*`searchItemIndex`的值等于*推荐搜索项count*`recommendItemsCount` 或者 等于 -1
 
-                        1.  *一个单行文本框*`search-input`*输入文本值*`input.value` 赋值为 *推荐搜索关键词*`recommendKeyword`
+                        1.  *一个单行文本框*`search-input`*输入文本值*`searchInputValue` 赋值为 *推荐搜索关键词*`recommendKeyword`
 
-                    4.  [分支2]*当前选择/停留的搜索项index*`searchItemIndex`的值不等于*推荐搜索项count*`recommendItemsCount` 或者 等于 -1
+                    4.  [移至onSelect内处理][分支2]*当前选择/停留的搜索项index*`searchItemIndex`的值不等于*推荐搜索项count*`recommendItemsCount` 或者 不等于 -1
 
-                        1.  *一个单行文本框*`search-input`*输入文本值*`input.value` 赋值为 *search-menu-content的赋值数据源*`recommendKeywordDataList`的第`searchItemIndex`项的keyword值
+                        1.  *一个单行文本框*`search-input`*输入文本值*`searchInputValue` 赋值为 *search-menu-content的赋值数据源*`recommendKeywordDataList`的第`searchItemIndex`项的keyword值
 
                     5.  [判断]*切换推荐搜索项事件 -> 回调函数*`onSelect`是否存在
 
-                        1.  执行`onSelect`
+                        1.  执行`onSelect` (处理UI层变化, 例如变更选中项的样式, 变更输入文本框中显示的推荐词)
 
         5.  RIGHT: 39
 
@@ -290,7 +297,7 @@ tags:
 
                     2.  *一个填充搜索推荐层*`search-menu`*当前显示状态*`displayState`赋值为true
 
-                2.  [分支]*一个填充搜索推荐层*`search-menu`*当前显示状态*`displayState`为false
+                2.  [分支]*一个填充搜索推荐层*`search-menu`*当前显示状态*`displayState`为true
 
                     1.  [分支]*当前选择/停留的搜索项index*`searchItemIndex`的值等于*推荐搜索项count*`recommendItemsCount`
 
@@ -300,17 +307,17 @@ tags:
 
                         1.  *当前选择/停留的搜索项index*`searchItemIndex`赋值为旧值+1
 
-                    3.  [分支2]*当前选择/停留的搜索项index*`searchItemIndex`的值等于*推荐搜索项count*`recommendItemsCount` 或者 等于 -1
+                    3.  [移至onSelect内处理][分支2]*当前选择/停留的搜索项index*`searchItemIndex`的值等于*推荐搜索项count*`recommendItemsCount` 或者 等于 -1
 
-                        1.  *一个单行文本框*`search-input`*输入文本值*`input.value` 赋值为 *推荐搜索关键词*`recommendKeyword`
+                        1.  *一个单行文本框*`search-input`*输入文本值*`searchInputValue` 赋值为 *推荐搜索关键词*`recommendKeyword`
 
-                    4.  [分支2]*当前选择/停留的搜索项index*`searchItemIndex`的值不等于*推荐搜索项count*`recommendItemsCount` 或者 等于 -1
+                    4.  [移至onSelect内处理][分支2]*当前选择/停留的搜索项index*`searchItemIndex`的值不等于*推荐搜索项count*`recommendItemsCount` 或者 不等于 -1
 
-                        1.  *一个单行文本框*`search-input`*输入文本值*`input.value` 赋值为 *search-menu-content的赋值数据源*`recommendKeywordDataList`的第`searchItemIndex`项的keyword值
+                        1.  *一个单行文本框*`search-input`*输入文本值*`searchInputValue` 赋值为 *search-menu-content的赋值数据源*`recommendKeywordDataList`的第`searchItemIndex`项的keyword值
 
                     5.  [判断]*切换推荐搜索项事件 -> 回调函数*`onSelect`是否存在
 
-                        1.  执行`onSelect`
+                        1.  执行`onSelect` (处理UI层变化, 例如变更选中项的样式, 变更输入文本框中显示的推荐词)
 
 
 
@@ -319,10 +326,19 @@ tags:
 
 1.  *search-menu的赋值数据源*`searchMenuObject`(Object) 默认为空对象
 
+    [key] `id`
+
     [key] `isShowHeader`
+
     [key] `isShowFooter`
 
+    [key] `recommendKeywordDataList`
+
 1.  *search-menu-content的赋值数据源*`recommendKeywordDataList`(Array\<Object>)   默认未定义
+
+    其中Object部分
+
+    [key] `keyword` 可以自定义指定这个key
 
 2.  *历史已提交搜索关键词缓存*`historySearchedKeywordCacheList`(Array\<String>) 默认为空数组
 
@@ -335,7 +351,7 @@ tags:
 
 ## 确定关键属性
 
-1.  *一个单行文本框*`search-input`*输入文本值*`input.value`(String) 默认没有输入值
+1.  *一个单行文本框*`search-input`*输入文本值*`searchInputValue`(String) 默认未定义
 
 2.  *推荐搜索关键词*`recommendKeyword`(String) 默认未定义
 
@@ -343,9 +359,11 @@ tags:
 
 4.  *尾部区域块是否显示标识*`isShowFooter`(Boolean) 默认true
 
-5.  *历史已提交搜索关键词缓存最大个数*`maximumHistorySearchedKeywordCacheList`(Int) 默认为10
+5.  [公开]*历史已提交搜索关键词缓存最大个数*`maximumHistorySearchedKeywordCacheList`(Int) 默认为10
 
-6.  *历史未提交搜索关键词缓存最大个数*`maximumHistoryKeywordCacheList`(Int) 默认为100
+5.  [公开]*推荐搜索项显示个数*`maximumRecommendKeywordDataList`(Int) 默认为10
+
+6.  [公开]*历史未提交搜索关键词缓存最大个数*`maximumHistoryKeywordCacheList`(Int) 默认为100
 
 7.  [公开]*是否使用远程数据*`remote`(Boolean) 默认false (请求方式强制使用jsonp)
 
@@ -359,7 +377,7 @@ tags:
 
     key -> keyword | value -> recommendKeywordDataList toJson
 
-12. [公开]*对每个推荐搜索返回结果集里指定的字段进行格式化, 返回格式化后的值 -> 回调函数*`formatRecommendKeywordData`(Function)
+12. [公开]*对每个推荐搜索返回结果集里指定的字段进行格式化, 返回格式化后的值 -> 回调函数*`formatRecommendKeywordData`(Function) 默认为null
 
 13. [公开]*允许触发一次获取搜索推荐数据动作最小间隔*`recommendFetchInterval`(Int) 默认为10(ms)
 
@@ -375,6 +393,12 @@ tags:
 
 19. *当前选择/停留的搜索项index*`searchItemIndex`(Int) 默认-1 选择搜索推荐项时使用, 0表示第一项, `recommendItemsCount-1`表示最后一项
 
-20. *提交搜索事件 -> 回调函数*`onSearch`(Function)
+20. [公开]*提交搜索事件 -> 回调函数*`onSearch`(Function)
 
-21. *切换推荐搜索项事件 -> 回调函数*`onSelect`(Function)
+21. [公开]*切换推荐搜索项事件 -> 回调函数*`onSelect`(Function)
+
+21. [公开]*切换搜索菜单层显示状态事件 -> 回调函数*`onSearchMenuDisplayStateChange`(Function)
+
+22. [公开]*搜索文本框元素*`searchInput`(HTMLElement) (必须指定)
+
+23. *推荐搜索层元素*`searchMenu`(HTMLElemnt) 默认为null, 内部模板解析创建元素后, 自动关联(通过id)
