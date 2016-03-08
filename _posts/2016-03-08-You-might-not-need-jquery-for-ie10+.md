@@ -5,7 +5,7 @@ subtitle:   " \"使用原生api代替jQuery\""
 author:     "绯雨闲丸"
 header-img: "img/post-bg-2016-03-08.jpg"
 tags:
-    - javascript组件
+    - javascript
 ---
 
 > ”仅限IE10+浏览器”
