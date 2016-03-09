@@ -190,27 +190,28 @@
                 post-container">
 
 				<blockquote>
-  <p>“先分析是一个好习惯”</p>
+  <p>“先分析, 后动工”</p>
 </blockquote>
 
 <h1 id="autocomplete-">autocomplete 功能实现分析</h1>
 
 <blockquote>
-  <p>功能分析参照了taobo首页的搜索框功能</p>
+  <p>一般说来, 一个组件内抽象着很多具体的实现, 想要全面控制这些实现,
+   需要先分析, 然后将具体实现分离关注.</p>
 </blockquote>
 
 <h2 id="section">确定实现功能所需的所有界面(按逻辑划分)</h2>
 
 <ol>
   <li>
-    <p><em>一个单行文本框</em><code class="highlighter-rouge">search-input</code>      (必要元素, 事先存在)</p>
+    <p><em>一个单行文本框</em><code class="highlighter-rouge">search-input</code></p>
   </li>
   <li>
-    <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code>    (作为自定义模板, 通过公开api生成)</p>
+    <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code></p>
 
     <ol>
       <li>
-        <p><em>头部区域块</em><code class="highlighter-rouge">search-menu-header</code>(默认不显示)</p>
+        <p><em>头部区域块</em><code class="highlighter-rouge">search-menu-header</code></p>
       </li>
       <li>
         <p><em>内容区域块</em><code class="highlighter-rouge">search-menu-content</code></p>
@@ -231,7 +232,7 @@
         </ol>
       </li>
       <li>
-        <p><em>尾部区域块</em><code class="highlighter-rouge">search-menu-footer</code>(默认显示)</p>
+        <p><em>尾部区域块</em><code class="highlighter-rouge">search-menu-footer</code></p>
       </li>
     </ol>
   </li>
@@ -247,269 +248,13 @@
 
         <ol>
           <li>
-            <p>获取<em>一个单行文本框</em><code class="highlighter-rouge">search-input</code>的<em>输入文本值</em><code class="highlighter-rouge">value</code>在移除首尾空白符后转化成<em>推荐搜索关键词</em><code class="highlighter-rouge">recommendKeyword</code></p>
+            <p>主要控制输入的关键字与推荐关键词数据的匹配获取,</p>
           </li>
           <li>
-            <p>[分支]<em>是否使用远程数据</em><code class="highlighter-rouge">remote</code>的值为false时,</p>
-
-            <ol>
-              <li>
-                <p>[分支]当<em>推荐搜索关键词</em><code class="highlighter-rouge">recommendKeyword</code>的值为空时,</p>
-
-                <ol>
-                  <li>
-                    <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>为true</p>
-
-                    <ol>
-                      <li>
-                        <p>[结束]隐藏<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code></p>
-                      </li>
-                      <li>
-                        <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>赋值为false</p>
-                      </li>
-                    </ol>
-                  </li>
-                </ol>
-              </li>
-              <li>
-                <p>[分支]当<em>推荐搜索关键词</em><code class="highlighter-rouge">recommendKeyword</code>的值不为空时,</p>
-
-                <ol>
-                  <li>
-                    <p>[分支]当<em>推荐搜索关键词</em><code class="highlighter-rouge">recommendKeyword</code>被<em>本地数据源</em><code class="highlighter-rouge">localData</code>中的关键词匹配时</p>
-
-                    <ol>
-                      <li>
-                        <p>将值给<em>search-menu-content的赋值数据源</em><code class="highlighter-rouge">recommendKeywordDataList</code>赋值 -&gt; <em>本地数据源</em><code class="highlighter-rouge">localData</code></p>
-                      </li>
-                      <li>
-                        <p><em>推荐搜索项count</em><code class="highlighter-rouge">recommendItemsCount</code>赋值</p>
-                      </li>
-                      <li>
-                        <p><em>头部区域块是否显示标识</em><code class="highlighter-rouge">isShowHeader</code>, 赋值为false, 以便模板中可以不显示出<em>头部区域块</em><code class="highlighter-rouge">search-menu-header</code></p>
-                      </li>
-                      <li>
-                        <p>给<em>search-menu的赋值数据源</em><code class="highlighter-rouge">searchMenuObject</code>的[key] <code class="highlighter-rouge">isShowHeader</code> 赋值</p>
-                      </li>
-                    </ol>
-                  </li>
-                  <li>
-                    <p>[分支]当<em>推荐搜索关键词</em><code class="highlighter-rouge">recommendKeyword</code>被<em>本地数据源</em><code class="highlighter-rouge">localData</code>中的关键词不匹配时</p>
-
-                    <ol>
-                      <li>
-                        <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>为true</p>
-
-                        <ol>
-                          <li>
-                            <p>[结束]隐藏<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code></p>
-                          </li>
-                          <li>
-                            <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>赋值为false</p>
-                          </li>
-                        </ol>
-                      </li>
-                    </ol>
-                  </li>
-                  <li>
-                    <p>将<em>search-menu的赋值数据源</em><code class="highlighter-rouge">searchMenuObject</code>传入配置的模板, 得到最终的html代码</p>
-                  </li>
-                  <li>
-                    <p>将<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code>内容替换</p>
-                  </li>
-                  <li>
-                    <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>为false</p>
-
-                    <ol>
-                      <li>
-                        <p>[结束]显示<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code></p>
-                      </li>
-                      <li>
-                        <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>赋值为true</p>
-                      </li>
-                    </ol>
-                  </li>
-                </ol>
-              </li>
-            </ol>
+            <p><code class="highlighter-rouge">search-menu</code>的控制隐显, 模板重新生成</p>
           </li>
           <li>
-            <p>[分支]<em>是否使用远程数据</em><code class="highlighter-rouge">remote</code>的值为true时,</p>
-
-            <ol>
-              <li>
-                <p>[判断]<em>延迟进行fetch数据请求对象</em><code class="highlighter-rouge">defered</code>存在, 说明下一个请求即将开始, 需要阻止</p>
-
-                <ol>
-                  <li>
-                    <p>中止延迟请求</p>
-                  </li>
-                  <li>
-                    <p><em>延迟进行fetch数据请求对象</em><code class="highlighter-rouge">defered</code>赋值null</p>
-                  </li>
-                </ol>
-              </li>
-              <li>
-                <p>[判断]<em>fetch数据的请求对象</em><code class="highlighter-rouge">xhr</code>存在, 说明请求正在进行中</p>
-
-                <ol>
-                  <li>
-                    <p>中止请求</p>
-                  </li>
-                  <li>
-                    <p><em>fetch数据的请求对象</em><code class="highlighter-rouge">xhr</code>赋值null</p>
-                  </li>
-                </ol>
-              </li>
-              <li>
-                <p>[分支]当<em>推荐搜索关键词</em><code class="highlighter-rouge">recommendKeyword</code>的值为空时,</p>
-
-                <ol>
-                  <li>
-                    <p>[分支]当已经存在<em>历史提交搜索关键词缓存</em><code class="highlighter-rouge">historySearchKeywordList</code>时</p>
-
-                    <ol>
-                      <li>
-                        <p>给<em>search-menu-content的赋值数据源</em><code class="highlighter-rouge">recommendKeywordDataList</code>赋值 -&gt; <em>历史提交搜索关键词缓存</em><code class="highlighter-rouge">historySearchKeywordList</code></p>
-                      </li>
-                      <li>
-                        <p><em>头部区域块是否显示标识</em><code class="highlighter-rouge">isShowHeader</code>, 赋值为true, 以便模板中可以显示出<em>头部区域块</em><code class="highlighter-rouge">search-menu-header</code></p>
-                      </li>
-                      <li>
-                        <p>给<em>search-menu的赋值数据源</em><code class="highlighter-rouge">searchMenuObject</code>的[key] <code class="highlighter-rouge">isShowHeader</code> 赋值</p>
-                      </li>
-                      <li>
-                        <p>将<em>search-menu的赋值数据源</em><code class="highlighter-rouge">searchMenuObject</code>传入配置的模板, 得到最终的html代码</p>
-                      </li>
-                      <li>
-                        <p>将<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code>内容替换</p>
-                      </li>
-                      <li>
-                        <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>为false</p>
-
-                        <ol>
-                          <li>
-                            <p>[结束]显示<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code></p>
-                          </li>
-                          <li>
-                            <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>赋值为true</p>
-                          </li>
-                        </ol>
-                      </li>
-                    </ol>
-                  </li>
-                  <li>
-                    <p>[分支][有效分支]当已经不存在<em>历史提交搜索关键词缓存</em><code class="highlighter-rouge">historySearchKeywordList</code>时</p>
-
-                    <ol>
-                      <li>
-                        <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>为true</p>
-
-                        <ol>
-                          <li>
-                            <p>[结束]隐藏<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code></p>
-                          </li>
-                          <li>
-                            <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>赋值为false</p>
-                          </li>
-                        </ol>
-                      </li>
-                    </ol>
-                  </li>
-                </ol>
-              </li>
-              <li>
-                <p>[分支]当<em>推荐搜索关键词</em><code class="highlighter-rouge">recommendKeyword</code>的值不为空时,</p>
-
-                <ol>
-                  <li>
-                    <p>[分支]当<em>推荐搜索关键词</em><code class="highlighter-rouge">recommendKeyword</code>被<em>历史未提交搜索关键词缓存</em><code class="highlighter-rouge">historyKeywordCacheList</code>中的关键词匹配时</p>
-
-                    <ol>
-                      <li>
-                        <p>获取匹配键的值, 对值进行Json反序列化</p>
-                      </li>
-                      <li>
-                        <p>将值给<em>search-menu-content的赋值数据源</em><code class="highlighter-rouge">recommendKeywordDataList</code>赋值</p>
-                      </li>
-                      <li>
-                        <p><em>推荐搜索项count</em><code class="highlighter-rouge">recommendItemsCount</code>赋值</p>
-                      </li>
-                      <li>
-                        <p><em>头部区域块是否显示标识</em><code class="highlighter-rouge">isShowHeader</code>, 赋值为false, 以便模板中不显示出<em>头部区域块</em><code class="highlighter-rouge">search-menu-header</code></p>
-                      </li>
-                      <li>
-                        <p>给<em>search-menu的赋值数据源</em><code class="highlighter-rouge">searchMenuObject</code>的[key] <code class="highlighter-rouge">isShowHeader</code> 赋值</p>
-                      </li>
-                      <li>
-                        <p>将<em>search-menu的赋值数据源</em><code class="highlighter-rouge">searchMenuObject</code>传入配置的模板, 得到最终的html代码</p>
-                      </li>
-                      <li>
-                        <p>将<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code>内容替换</p>
-                      </li>
-                      <li>
-                        <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>为false</p>
-
-                        <ol>
-                          <li>
-                            <p>[结束]显示<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code></p>
-                          </li>
-                          <li>
-                            <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>赋值为true</p>
-                          </li>
-                        </ol>
-                      </li>
-                    </ol>
-                  </li>
-                  <li>
-                    <p>[分支][有效分支]当<em>推荐搜索关键词</em><code class="highlighter-rouge">recommendKeyword</code>被<em>历史未提交搜索关键词缓存</em><code class="highlighter-rouge">historyKeywordCacheList</code>中的关键词不匹配时</p>
-
-                    <ol>
-                      <li>
-                        <p>创建<em>fetch数据的请求对象</em><code class="highlighter-rouge">xhr</code>curry</p>
-                      </li>
-                      <li>
-                        <p>创建并启动<em>延迟进行fetch数据请求对象</em><code class="highlighter-rouge">defered</code></p>
-                      </li>
-                    </ol>
-
-                    <blockquote>
-                      <p>该分支以下逻辑都在<em>fetch数据的请求对象</em><code class="highlighter-rouge">xhr</code>的回调函数中进行</p>
-                    </blockquote>
-
-                    <ol>
-                      <li>
-                        <p>将请求的返回json对象给<em>search-menu-content的赋值数据源</em><code class="highlighter-rouge">recommendKeywordDataList</code>赋值</p>
-                      </li>
-                      <li>
-                        <p><em>头部区域块是否显示标识</em><code class="highlighter-rouge">isShowHeader</code>, 赋值为false, 以便模板中不显示出<em>头部区域块</em><code class="highlighter-rouge">search-menu-header</code></p>
-                      </li>
-                      <li>
-                        <p>给<em>search-menu的赋值数据源</em><code class="highlighter-rouge">searchMenuObject</code>的[key] <code class="highlighter-rouge">isShowHeader</code> 赋值</p>
-                      </li>
-                      <li>
-                        <p>将<em>search-menu的赋值数据源</em><code class="highlighter-rouge">searchMenuObject</code>传入配置的模板, 得到最终的html代码</p>
-                      </li>
-                      <li>
-                        <p>将<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code>内容替换</p>
-                      </li>
-                      <li>
-                        <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>为false</p>
-
-                        <ol>
-                          <li>
-                            <p>[结束]显示<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code></p>
-                          </li>
-                          <li>
-                            <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>赋值为true</p>
-                          </li>
-                        </ol>
-                      </li>
-                    </ol>
-                  </li>
-                </ol>
-              </li>
-            </ol>
+            <p>记忆已进行匹配操作的关键词, 以及匹配的推荐关键词数据</p>
           </li>
         </ol>
       </li>
@@ -517,109 +262,14 @@
         <p><code class="highlighter-rouge">click</code><em>事件</em></p>
 
         <ol>
-          <li>
-            <p>[分支]当<em>推荐搜索关键词</em><code class="highlighter-rouge">recommendKeyword</code>的值为空时,</p>
-
-            <ol>
-              <li>
-                <p>[分支]当已经存在<em>历史提交搜索关键词缓存</em><code class="highlighter-rouge">historySearchKeywordList</code>时</p>
-
-                <ol>
-                  <li>
-                    <p>给<em>search-menu-content的赋值数据源</em><code class="highlighter-rouge">recommendKeywordDataList</code>赋值 -&gt; <em>历史提交搜索关键词缓存</em><code class="highlighter-rouge">historySearchKeywordList</code></p>
-                  </li>
-                  <li>
-                    <p><em>头部区域块是否显示标识</em><code class="highlighter-rouge">isShowHeader</code>, 赋值为true, 以便模板中可以显示出<em>头部区域块</em><code class="highlighter-rouge">search-menu-header</code></p>
-                  </li>
-                  <li>
-                    <p>给<em>search-menu的赋值数据源</em><code class="highlighter-rouge">searchMenuObject</code>的[key] <code class="highlighter-rouge">isShowHeader</code> 赋值</p>
-                  </li>
-                </ol>
-              </li>
-              <li>
-                <p>[分支][无效分支]当已经不存在<em>历史提交搜索关键词缓存</em><code class="highlighter-rouge">historySearchKeywordList</code>时</p>
-
-                <ol>
-                  <li>
-                    <p>[判断]<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>为true</p>
-
-                    <ol>
-                      <li>
-                        <p>[结束]隐藏<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code></p>
-                      </li>
-                      <li>
-                        <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>赋值为false</p>
-                      </li>
-                    </ol>
-                  </li>
-                </ol>
-              </li>
-            </ol>
-          </li>
-          <li>
-            <p>[分支]当<em>推荐搜索关键词</em><code class="highlighter-rouge">recommendKeyword</code>的值不为空时,</p>
-
-            <ol>
-              <li>
-                <p>[分支]当<em>推荐搜索关键词</em><code class="highlighter-rouge">recommendKeyword</code>被<em>历史未提交搜索关键词缓存</em><code class="highlighter-rouge">historyKeywordCacheList</code>中的关键词匹配时</p>
-
-                <ol>
-                  <li>
-                    <p>获取匹配键的值, 对值进行Json反序列化</p>
-                  </li>
-                  <li>
-                    <p>将值给<em>search-menu-content的赋值数据源</em><code class="highlighter-rouge">recommendKeywordDataList</code>赋值</p>
-                  </li>
-                  <li>
-                    <p><em>推荐搜索项count</em><code class="highlighter-rouge">recommendItemsCount</code>赋值</p>
-                  </li>
-                </ol>
-              </li>
-              <li>
-                <p>[分支][无效分支]当<em>推荐搜索关键词</em><code class="highlighter-rouge">recommendKeyword</code>被<em>历史未提交搜索关键词缓存</em><code class="highlighter-rouge">historyKeywordCacheList</code>中的关键词不匹配时</p>
-
-                <ol>
-                  <li>
-                    <p>[判断]<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>为true</p>
-
-                    <ol>
-                      <li>
-                        <p>[结束]隐藏<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code></p>
-                      </li>
-                      <li>
-                        <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>赋值为false</p>
-                      </li>
-                    </ol>
-                  </li>
-                </ol>
-              </li>
-            </ol>
-          </li>
-          <li>
-            <p>将<em>search-menu的赋值数据源</em><code class="highlighter-rouge">searchMenuObject</code>传入配置的模板, 得到最终的html代码</p>
-          </li>
-          <li>
-            <p>将<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code>内容替换</p>
-          </li>
-          <li>
-            <p>[判断]<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>为false</p>
-
-            <ol>
-              <li>
-                <p>[结束]显示<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code></p>
-              </li>
-              <li>
-                <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>赋值为true</p>
-              </li>
-            </ol>
-          </li>
+          <li><code class="highlighter-rouge">search-menu</code>的控制隐显</li>
         </ol>
       </li>
       <li>
         <p><code class="highlighter-rouge">foucsin</code> 事件</p>
 
         <ol>
-          <li><em>一个单行文本框</em><code class="highlighter-rouge">search-input</code><em>当前focus状态</em><code class="highlighter-rouge">focusState</code>赋值为true</li>
+          <li>记忆<code class="highlighter-rouge">search-input</code>当前的focus状态, 键盘事件要用</li>
         </ol>
       </li>
       <li>
@@ -627,19 +277,10 @@
 
         <ol>
           <li>
-            <p><em>一个单行文本框</em><code class="highlighter-rouge">search-input</code><em>当前focus状态</em><code class="highlighter-rouge">focusState</code>赋值为false</p>
+            <p>记忆<code class="highlighter-rouge">search-input</code>当前的focus状态, 键盘事件要用</p>
           </li>
           <li>
-            <p>[判断]<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>为true</p>
-
-            <ol>
-              <li>
-                <p>[结束]隐藏<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code></p>
-              </li>
-              <li>
-                <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>赋值为false</p>
-              </li>
-            </ol>
+            <p><code class="highlighter-rouge">search-menu</code>的控制隐显</p>
           </li>
         </ol>
       </li>
@@ -651,31 +292,14 @@
             <p>ESC: 27</p>
 
             <ol>
-              <li>
-                <p>[判断]<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>为true</p>
-
-                <ol>
-                  <li>
-                    <p>[结束]隐藏<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code></p>
-                  </li>
-                  <li>
-                    <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>赋值为false</p>
-                  </li>
-                </ol>
-              </li>
+              <li><code class="highlighter-rouge">search-menu</code>的控制隐显</li>
             </ol>
           </li>
           <li>
             <p>RETURN: 13</p>
 
             <ol>
-              <li>
-                <p>[判断]<em>提交搜索事件 -&gt; 回调函数</em><code class="highlighter-rouge">onSearch</code>是否存在</p>
-
-                <ol>
-                  <li>执行<code class="highlighter-rouge">onSearch</code></li>
-                </ol>
-              </li>
+              <li>提交搜索(比如提交数据至远程服务器进行关键词匹配的商品搜索)</li>
             </ol>
           </li>
           <li>
@@ -686,66 +310,16 @@
 
             <ol>
               <li>
-                <p>[判断]<em>一个单行文本框</em><code class="highlighter-rouge">search-input</code><em>当前focus状态</em><code class="highlighter-rouge">focusState</code>为true</p>
-
-                <ol>
-                  <li>
-                    <p>[分支]<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>为false</p>
-
-                    <ol>
-                      <li>
-                        <p><em>当前选择/停留的搜索项index</em><code class="highlighter-rouge">searchItemIndex</code>赋值为<em>推荐搜索项count</em><code class="highlighter-rouge">recommendItemsCount</code> (最后一项+1)</p>
-                      </li>
-                      <li>
-                        <p>显示<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code></p>
-                      </li>
-                      <li>
-                        <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>赋值为true</p>
-                      </li>
-                    </ol>
-                  </li>
-                  <li>
-                    <p>[分支]<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>为true</p>
-
-                    <ol>
-                      <li>
-                        <p>[分支]<em>当前选择/停留的搜索项index</em><code class="highlighter-rouge">searchItemIndex</code>的值等于-1</p>
-
-                        <ol>
-                          <li><em>当前选择/停留的搜索项index</em><code class="highlighter-rouge">searchItemIndex</code>赋值为<em>推荐搜索项count</em><code class="highlighter-rouge">recommendItemsCount</code>-1</li>
-                        </ol>
-                      </li>
-                      <li>
-                        <p>[分支]<em>当前选择/停留的搜索项index</em><code class="highlighter-rouge">searchItemIndex</code>的值不等于-1</p>
-
-                        <ol>
-                          <li><em>当前选择/停留的搜索项index</em><code class="highlighter-rouge">searchItemIndex</code>赋值为旧值-1</li>
-                        </ol>
-                      </li>
-                      <li>
-                        <p>[移至onSelect内处理][分支2]<em>当前选择/停留的搜索项index</em><code class="highlighter-rouge">searchItemIndex</code>的值等于<em>推荐搜索项count</em><code class="highlighter-rouge">recommendItemsCount</code> 或者 等于 -1</p>
-
-                        <ol>
-                          <li><em>一个单行文本框</em><code class="highlighter-rouge">search-input</code><em>输入文本值</em><code class="highlighter-rouge">searchInputValue</code> 赋值为 <em>推荐搜索关键词</em><code class="highlighter-rouge">recommendKeyword</code></li>
-                        </ol>
-                      </li>
-                      <li>
-                        <p>[移至onSelect内处理][分支2]<em>当前选择/停留的搜索项index</em><code class="highlighter-rouge">searchItemIndex</code>的值不等于<em>推荐搜索项count</em><code class="highlighter-rouge">recommendItemsCount</code> 或者 不等于 -1</p>
-
-                        <ol>
-                          <li><em>一个单行文本框</em><code class="highlighter-rouge">search-input</code><em>输入文本值</em><code class="highlighter-rouge">searchInputValue</code> 赋值为 <em>search-menu-content的赋值数据源</em><code class="highlighter-rouge">recommendKeywordDataList</code>的第<code class="highlighter-rouge">searchItemIndex</code>项的keyword值</li>
-                        </ol>
-                      </li>
-                      <li>
-                        <p>[判断]<em>切换推荐搜索项事件 -&gt; 回调函数</em><code class="highlighter-rouge">onSelect</code>是否存在</p>
-
-                        <ol>
-                          <li>执行<code class="highlighter-rouge">onSelect</code> (处理UI层变化, 例如变更选中项的样式, 变更输入文本框中显示的推荐词)</li>
-                        </ol>
-                      </li>
-                    </ol>
-                  </li>
-                </ol>
+                <p><code class="highlighter-rouge">search-menu</code>的控制隐显</p>
+              </li>
+              <li>
+                <p>记忆<code class="highlighter-rouge">search-menu-item</code>选中第几项</p>
+              </li>
+              <li>
+                <p>处理选中后<code class="highlighter-rouge">search-menu-item</code>的UI变化</p>
+              </li>
+              <li>
+                <p>处理选中后<code class="highlighter-rouge">search-input</code>的value变化</p>
               </li>
             </ol>
           </li>
@@ -757,68 +331,66 @@
 
             <ol>
               <li>
-                <p>[判断]<em>一个单行文本框</em><code class="highlighter-rouge">search-input</code><em>当前focus状态</em><code class="highlighter-rouge">focusState</code>为true</p>
-
-                <ol>
-                  <li>
-                    <p>[分支]<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>为false</p>
-
-                    <ol>
-                      <li>
-                        <p><em>当前选择/停留的搜索项index</em><code class="highlighter-rouge">searchItemIndex</code>赋值为-1</p>
-                      </li>
-                      <li>
-                        <p>显示<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code></p>
-                      </li>
-                      <li>
-                        <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>赋值为true</p>
-                      </li>
-                    </ol>
-                  </li>
-                  <li>
-                    <p>[分支]<em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>为true</p>
-
-                    <ol>
-                      <li>
-                        <p>[分支]<em>当前选择/停留的搜索项index</em><code class="highlighter-rouge">searchItemIndex</code>的值等于<em>推荐搜索项count</em><code class="highlighter-rouge">recommendItemsCount</code></p>
-
-                        <ol>
-                          <li><em>当前选择/停留的搜索项index</em><code class="highlighter-rouge">searchItemIndex</code>赋值为0</li>
-                        </ol>
-                      </li>
-                      <li>
-                        <p>[分支]<em>当前选择/停留的搜索项index</em><code class="highlighter-rouge">searchItemIndex</code>的值不等于<em>推荐搜索项count</em><code class="highlighter-rouge">recommendItemsCount</code></p>
-
-                        <ol>
-                          <li><em>当前选择/停留的搜索项index</em><code class="highlighter-rouge">searchItemIndex</code>赋值为旧值+1</li>
-                        </ol>
-                      </li>
-                      <li>
-                        <p>[移至onSelect内处理][分支2]<em>当前选择/停留的搜索项index</em><code class="highlighter-rouge">searchItemIndex</code>的值等于<em>推荐搜索项count</em><code class="highlighter-rouge">recommendItemsCount</code> 或者 等于 -1</p>
-
-                        <ol>
-                          <li><em>一个单行文本框</em><code class="highlighter-rouge">search-input</code><em>输入文本值</em><code class="highlighter-rouge">searchInputValue</code> 赋值为 <em>推荐搜索关键词</em><code class="highlighter-rouge">recommendKeyword</code></li>
-                        </ol>
-                      </li>
-                      <li>
-                        <p>[移至onSelect内处理][分支2]<em>当前选择/停留的搜索项index</em><code class="highlighter-rouge">searchItemIndex</code>的值不等于<em>推荐搜索项count</em><code class="highlighter-rouge">recommendItemsCount</code> 或者 不等于 -1</p>
-
-                        <ol>
-                          <li><em>一个单行文本框</em><code class="highlighter-rouge">search-input</code><em>输入文本值</em><code class="highlighter-rouge">searchInputValue</code> 赋值为 <em>search-menu-content的赋值数据源</em><code class="highlighter-rouge">recommendKeywordDataList</code>的第<code class="highlighter-rouge">searchItemIndex</code>项的keyword值</li>
-                        </ol>
-                      </li>
-                      <li>
-                        <p>[判断]<em>切换推荐搜索项事件 -&gt; 回调函数</em><code class="highlighter-rouge">onSelect</code>是否存在</p>
-
-                        <ol>
-                          <li>执行<code class="highlighter-rouge">onSelect</code> (处理UI层变化, 例如变更选中项的样式, 变更输入文本框中显示的推荐词)</li>
-                        </ol>
-                      </li>
-                    </ol>
-                  </li>
-                </ol>
+                <p><code class="highlighter-rouge">search-menu</code>的控制隐显</p>
+              </li>
+              <li>
+                <p>记忆<code class="highlighter-rouge">search-menu-item</code>选中第几项</p>
+              </li>
+              <li>
+                <p>处理选中后<code class="highlighter-rouge">search-menu-item</code>的UI变化</p>
+              </li>
+              <li>
+                <p>处理选中后<code class="highlighter-rouge">search-input</code>的value变化</p>
               </li>
             </ol>
+          </li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+  <li>
+    <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code></p>
+
+    <ol>
+      <li>
+        <p><code class="highlighter-rouge">mouseenter</code>事件 (针对searchItem冒泡)</p>
+
+        <ol>
+          <li>
+            <p>记忆<code class="highlighter-rouge">search-menu-item</code>选中第几项</p>
+          </li>
+          <li>
+            <p>处理选中后<code class="highlighter-rouge">search-menu-item</code>的UI变化</p>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <p><code class="highlighter-rouge">mouseleave</code>事件</p>
+
+        <ol>
+          <li>
+            <p>记忆<code class="highlighter-rouge">search-menu-item</code>选中第几项</p>
+          </li>
+          <li>
+            <p>处理选中后<code class="highlighter-rouge">search-menu-item</code>的UI变化</p>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <p><code class="highlighter-rouge">click</code>事件 (针对searchItem冒泡)</p>
+
+        <ol>
+          <li>
+            <p>记忆<code class="highlighter-rouge">search-menu-item</code>选中第几项</p>
+          </li>
+          <li>
+            <p>处理选中后<code class="highlighter-rouge">search-menu-item</code>的UI变化</p>
+          </li>
+          <li>
+            <p><code class="highlighter-rouge">search-menu</code>的控制隐显</p>
+          </li>
+          <li>
+            <p>提交搜索(比如提交数据至远程服务器进行关键词匹配的商品搜索)</p>
           </li>
         </ol>
       </li>
@@ -830,58 +402,25 @@
 
 <ol>
   <li>
-    <p><em>search-menu的赋值数据源</em><code class="highlighter-rouge">searchMenuObject</code>(Object) 默认为空对象</p>
-
-    <p>[key] <code class="highlighter-rouge">id</code></p>
-
-    <p>[key] <code class="highlighter-rouge">isShowHeader</code></p>
-
-    <p>[key] <code class="highlighter-rouge">isShowFooter</code></p>
-
-    <p>[key] <code class="highlighter-rouge">recommendKeywordDataList</code></p>
+    <p><em>search-menu的赋值数据源</em></p>
   </li>
   <li>
-    <p><em>search-menu-content的赋值数据源</em><code class="highlighter-rouge">recommendKeywordDataList</code>(Array&lt;Object&gt;)   默认未定义</p>
-
-    <p>其中Object部分</p>
-
-    <p>[key] <code class="highlighter-rouge">keyword</code> 可以自定义指定这个key</p>
+    <p><em>search-menu-content的赋值数据源</em></p>
   </li>
   <li>
-    <p><em>历史已提交搜索关键词缓存</em><code class="highlighter-rouge">historySearchedKeywordCacheList</code>(Array&lt;String&gt;) 默认为空数组</p>
+    <p><em>历史已提交搜索关键词缓存</em></p>
   </li>
   <li>
-    <p><em>历史未提交搜索关键词缓存</em><code class="highlighter-rouge">historyKeywordCacheList</code>(Array&lt;String&gt;) 默认为空数组</p>
+    <p><em>历史未提交搜索关键词缓存</em></p>
   </li>
   <li>
-    <p><em>历史推荐搜索关键词 -&gt; 返回的数据结果集</em><code class="highlighter-rouge">historyRecommendKeywordCache</code>(Object) 默认为空对象</p>
-
-    <table>
-      <tbody>
-        <tr>
-          <td>key -&gt; historyKeyword</td>
-          <td>value -&gt; recommendKeywordDataList toJson</td>
-        </tr>
-      </tbody>
-    </table>
+    <p><em>历史未提交搜索关键词 -&gt; 推荐搜索关键词数据源缓存</em></p>
   </li>
 </ol>
 
-<h2 id="section-3">确定关键属性</h2>
+<h2 id="section-3">确定公开配置</h2>
 
 <ol>
-  <li>
-    <p><em>一个单行文本框</em><code class="highlighter-rouge">search-input</code><em>输入文本值</em><code class="highlighter-rouge">searchInputValue</code>(String) 默认未定义</p>
-  </li>
-  <li>
-    <p><em>推荐搜索关键词</em><code class="highlighter-rouge">recommendKeyword</code>(String) 默认未定义</p>
-  </li>
-  <li>
-    <p><em>头部区域块是否显示标识</em><code class="highlighter-rouge">isShowHeader</code>(Boolean) 默认false</p>
-  </li>
-  <li>
-    <p><em>尾部区域块是否显示标识</em><code class="highlighter-rouge">isShowFooter</code>(Boolean) 默认true</p>
-  </li>
   <li>
     <p>[公开]<em>历史已提交搜索关键词缓存最大个数</em><code class="highlighter-rouge">maximumHistorySearchedKeywordCacheList</code>(Int) 默认为10</p>
   </li>
@@ -898,22 +437,13 @@
     <p>[公开]<em>远程请求地址</em><code class="highlighter-rouge">url</code>(String) 默认未定义 (当<code class="highlighter-rouge">remote</code>为true时必须指定)</p>
   </li>
   <li>
-    <p>[公开]<em>对应搜索文本的请求参数名</em><code class="highlighter-rouge">paramName</code>(String) 默认为’query’</p>
+    <p>[公开]<em>对应搜索文本的请求参数名</em><code class="highlighter-rouge">queryName</code>(String) 默认为’query’</p>
   </li>
   <li>
-    <p>[公开]<em>附加请求参数对象</em><code class="highlighter-rouge">params</code>(Object) 默认null (需要支持实例修改)</p>
+    <p>[公开]<em>附加请求参数对象</em><code class="highlighter-rouge">additionalQueryParams</code>(Object) 默认null (需要支持实例修改)</p>
   </li>
   <li>
     <p>[公开]<em>本地数据源</em><code class="highlighter-rouge">localData</code>(Object) 默认null (当<code class="highlighter-rouge">remote</code>为false时必须指定)</p>
-
-    <table>
-      <tbody>
-        <tr>
-          <td>key -&gt; keyword</td>
-          <td>value -&gt; recommendKeywordDataList toJson</td>
-        </tr>
-      </tbody>
-    </table>
   </li>
   <li>
     <p>[公开]<em>对每个推荐搜索返回结果集里指定的字段进行格式化, 返回格式化后的值 -&gt; 回调函数</em><code class="highlighter-rouge">formatRecommendKeywordData</code>(Function) 默认为null</p>
@@ -922,37 +452,31 @@
     <p>[公开]<em>允许触发一次获取搜索推荐数据动作最小间隔</em><code class="highlighter-rouge">recommendFetchInterval</code>(Int) 默认为10(ms)</p>
   </li>
   <li>
-    <p><em>fetch数据的请求对象</em><code class="highlighter-rouge">xhr</code>(Object) 默认null 由jQuery.ajax创建</p>
-  </li>
-  <li>
-    <p><em>延迟进行fetch数据请求对象</em><code class="highlighter-rouge">defered</code>(Object) 默认null 由setTimeout创建</p>
-  </li>
-  <li>
-    <p><em>一个单行文本框</em><code class="highlighter-rouge">search-input</code><em>当前focus状态</em><code class="highlighter-rouge">focusState</code>(Boolean) 默认false</p>
-  </li>
-  <li>
-    <p><em>一个填充搜索推荐层</em><code class="highlighter-rouge">search-menu</code><em>当前显示状态</em><code class="highlighter-rouge">displayState</code>(Boolean)  默认false</p>
-  </li>
-  <li>
-    <p><em>推荐搜索项count</em><code class="highlighter-rouge">recommendItemsCount</code>(Int) 默认0</p>
-  </li>
-  <li>
-    <p><em>当前选择/停留的搜索项index</em><code class="highlighter-rouge">searchItemIndex</code>(Int) 默认-1 选择搜索推荐项时使用, 0表示第一项, <code class="highlighter-rouge">recommendItemsCount-1</code>表示最后一项</p>
-  </li>
-  <li>
     <p>[公开]<em>提交搜索事件 -&gt; 回调函数</em><code class="highlighter-rouge">onSearch</code>(Function)</p>
   </li>
   <li>
-    <p>[公开]<em>切换推荐搜索项事件 -&gt; 回调函数</em><code class="highlighter-rouge">onSelect</code>(Function)</p>
+    <p>[公开]<em>切换推荐搜索项事件 -&gt; 回调函数</em><code class="highlighter-rouge">onSelect</code>(Function) 默认为更新UI方法 应是指定<em>搜索文本框元素</em><code class="highlighter-rouge">searchInput</code>的value值, 以及针对自定义模板选中的searchItem切换选中样式</p>
   </li>
   <li>
-    <p>[公开]<em>切换搜索菜单层显示状态事件 -&gt; 回调函数</em><code class="highlighter-rouge">onSearchMenuDisplayStateChange</code>(Function)</p>
+    <p>[公开]<em>切换搜索菜单层显示状态事件 -&gt; 回调函数</em><code class="highlighter-rouge">onSearchMenuDisplayStateChange</code>(Function) 默认为更新UI方法 应指定切换<em>推荐搜索层元素</em><code class="highlighter-rouge">searchMenu</code>的隐显</p>
   </li>
   <li>
     <p>[公开]<em>搜索文本框元素</em><code class="highlighter-rouge">searchInput</code>(HTMLElement) (必须指定)</p>
   </li>
   <li>
-    <p><em>推荐搜索层元素</em><code class="highlighter-rouge">searchMenu</code>(HTMLElemnt) 默认为null, 内部模板解析创建元素后, 自动关联(通过id)</p>
+    <p>[公开]<em>设置完search-menu的赋值数据源事件<code class="highlighter-rouge">searchMenuData</code></em> -&gt; 回调函数*<code class="highlighter-rouge">onSetSearchMenuData*</code>(Function) 默认为设置header与footer值方法 使用者可以在这里指定搜索菜单header, footer或其他自定义变量</p>
+  </li>
+  <li>
+    <p>[公开]<em>自定义模板解析生成方法</em><code class="highlighter-rouge">template</code>(Function) 默认为模板方法 该方法应是获取到自定义模板后, 直接传入js对象即可返回html代码</p>
+  </li>
+  <li>
+    <p>[公开]<em>模板生成html后事件 -&gt; 回调函数</em><code class="highlighter-rouge">onTemplate</code>(Function) 默认为更新UI方法 应是获取到模板解析数据后生成的html代码, 然后将<em>推荐搜索层元素</em><code class="highlighter-rouge">searchMenu</code>内容替换(模板需要作控制, 只有第一次才包含容器元素标签)</p>
+  </li>
+  <li>
+    <p>[公开]<em>每个推荐搜索项匹配的选择器</em><code class="highlighter-rouge">searchItemSelector</code>(String) 默认为与默认模板匹配的选择器 可自定义, 但需要同时自定义模板</p>
+  </li>
+  <li>
+    <p>[公开]<em>被选中的那个推荐搜索项匹配的附加选择器</em><code class="highlighter-rouge">searchItemSelectedSelector</code>(String) 默认为与默认模板匹配的附加选择器 可自定义, 但需要同时自定义css</p>
   </li>
 </ol>
 
@@ -969,16 +493,14 @@
                     data-url="http://www.vanadis.cn/2016/03/04/plugin-jquery-autocomplete/"
                     data-images="http://www.vanadis.cn/img/post-bg-2016-03-04.jpg"
                     data-content="
-  “先分析是一个好习惯”
+  “先分析, 后动工”
 
 
 autocomplete 功能实现分析
 
 
-  功能分析参照了taobo首页的搜索框功能
-
-
-确定实现功能所需的所有界面... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
+  一般说来, 一个组件内抽象着很多具体的实现, 想要全面控制这些实现,
+  ... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
                         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
@@ -1059,6 +581,12 @@ autocomplete 功能实现分析
                             
                 				<a href="/tags/#javascript组件" title="javascript组件" rel="2">
                                     javascript组件
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#javascript" title="javascript" rel="2">
+                                    javascript
                                 </a>
                             
         				
