@@ -10021,17 +10021,13 @@
 
 		setHistorySearchedKeywordCacheList: function() {
 
-			if(this._attrs.recommendKeyword != '') {
+			if(this._attrs.historySearchedKeywordCacheList.length == this._options.maximumHistorySearchedKeywordCacheList) {
 
-				if(this._attrs.historySearchedKeywordCacheList.length == this._options.maximumHistorySearchedKeywordCacheList) {
-
-					service.popHistorySearchedKeywordCacheList.call(this);
-
-				}
-
-				this._attrs.historySearchedKeywordCacheList.unshift(this._attrs.recommendKeyword);
+				service.popHistorySearchedKeywordCacheList.call(this);
 
 			}
+
+			this._attrs.historySearchedKeywordCacheList.unshift(this._attrs.recommendKeyword);
 
 		},
 
