@@ -5,8 +5,8 @@
     <description>关于前端开发,架构,动漫 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 09 Mar 2016 10:18:41 +0800</pubDate>
-    <lastBuildDate>Wed, 09 Mar 2016 10:18:41 +0800</lastBuildDate>
+    <pubDate>Wed, 09 Mar 2016 14:26:20 +0800</pubDate>
+    <lastBuildDate>Wed, 09 Mar 2016 14:26:20 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -1045,7 +1045,7 @@ github上也遍地都是jquery插件的提交, 其中不乏很多大牛,明星�
       </item>
     
       <item>
-        <title>autocomplete功能实现分析</title>
+        <title>autocomplete组件分析与实现</title>
         <description>&lt;blockquote&gt;
   &lt;p&gt;“先分析, 后动工”&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -1082,7 +1082,7 @@ github上也遍地都是jquery插件的提交, 其中不乏很多大牛,明星�
                 &lt;p&gt;&lt;em&gt;推荐搜索文字区域块&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;item-text&lt;/code&gt;&lt;/p&gt;
               &lt;/li&gt;
               &lt;li&gt;
-                &lt;p&gt;&lt;em&gt;推荐搜索附加信息区域块&lt;/em&gt;, 例如: &lt;code class=&quot;highlighter-rouge&quot;&gt;item-count&lt;/code&gt;&lt;/p&gt;
+                &lt;p&gt;&lt;em&gt;推荐搜索附加信息区域块&lt;/em&gt;, 例如: &lt;em&gt;商品数量显示&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;item-count&lt;/code&gt;或者&lt;em&gt;历史提交搜索记录删除按钮&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-history-delete&lt;/code&gt;&lt;/p&gt;
               &lt;/li&gt;
             &lt;/ol&gt;
           &lt;/li&gt;
@@ -1090,6 +1090,10 @@ github上也遍地都是jquery插件的提交, 其中不乏很多大牛,明星�
       &lt;/li&gt;
       &lt;li&gt;
         &lt;p&gt;&lt;em&gt;尾部区域块&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-footer&lt;/code&gt;&lt;/p&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;&lt;em&gt;关闭按钮&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-close&lt;/code&gt;&lt;/li&gt;
+        &lt;/ol&gt;
       &lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
@@ -1119,7 +1123,7 @@ github上也遍地都是jquery插件的提交, 其中不乏很多大牛,明星�
         &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;click&lt;/code&gt;&lt;em&gt;事件&lt;/em&gt;&lt;/p&gt;
 
         &lt;ol&gt;
-          &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;的控制隐显&lt;/li&gt;
+          &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;的控制隐显, 模板重新生成&lt;/li&gt;
         &lt;/ol&gt;
       &lt;/li&gt;
       &lt;li&gt;
@@ -1156,7 +1160,12 @@ github上也遍地都是jquery插件的提交, 其中不乏很多大牛,明星�
             &lt;p&gt;RETURN: 13&lt;/p&gt;
 
             &lt;ol&gt;
-              &lt;li&gt;提交搜索(比如提交数据至远程服务器进行关键词匹配的商品搜索)&lt;/li&gt;
+              &lt;li&gt;
+                &lt;p&gt;记忆历史搜索提交项&lt;/p&gt;
+              &lt;/li&gt;
+              &lt;li&gt;
+                &lt;p&gt;提交搜索(比如提交数据至远程服务器进行关键词匹配的商品搜索)&lt;/p&gt;
+              &lt;/li&gt;
             &lt;/ol&gt;
           &lt;/li&gt;
           &lt;li&gt;
@@ -1173,10 +1182,10 @@ github上也遍地都是jquery插件的提交, 其中不乏很多大牛,明星�
                 &lt;p&gt;记忆&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-item&lt;/code&gt;选中第几项&lt;/p&gt;
               &lt;/li&gt;
               &lt;li&gt;
-                &lt;p&gt;处理选中后&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-item&lt;/code&gt;的UI变化&lt;/p&gt;
+                &lt;p&gt;处理操作后&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-item&lt;/code&gt;的UI变化&lt;/p&gt;
               &lt;/li&gt;
               &lt;li&gt;
-                &lt;p&gt;处理选中后&lt;code class=&quot;highlighter-rouge&quot;&gt;search-input&lt;/code&gt;的value变化&lt;/p&gt;
+                &lt;p&gt;处理操作后&lt;code class=&quot;highlighter-rouge&quot;&gt;search-input&lt;/code&gt;的value变化&lt;/p&gt;
               &lt;/li&gt;
             &lt;/ol&gt;
           &lt;/li&gt;
@@ -1194,10 +1203,10 @@ github上也遍地都是jquery插件的提交, 其中不乏很多大牛,明星�
                 &lt;p&gt;记忆&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-item&lt;/code&gt;选中第几项&lt;/p&gt;
               &lt;/li&gt;
               &lt;li&gt;
-                &lt;p&gt;处理选中后&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-item&lt;/code&gt;的UI变化&lt;/p&gt;
+                &lt;p&gt;处理操作后&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-item&lt;/code&gt;的UI变化&lt;/p&gt;
               &lt;/li&gt;
               &lt;li&gt;
-                &lt;p&gt;处理选中后&lt;code class=&quot;highlighter-rouge&quot;&gt;search-input&lt;/code&gt;的value变化&lt;/p&gt;
+                &lt;p&gt;处理操作后&lt;code class=&quot;highlighter-rouge&quot;&gt;search-input&lt;/code&gt;的value变化&lt;/p&gt;
               &lt;/li&gt;
             &lt;/ol&gt;
           &lt;/li&gt;
@@ -1217,7 +1226,7 @@ github上也遍地都是jquery插件的提交, 其中不乏很多大牛,明星�
             &lt;p&gt;记忆&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-item&lt;/code&gt;选中第几项&lt;/p&gt;
           &lt;/li&gt;
           &lt;li&gt;
-            &lt;p&gt;处理选中后&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-item&lt;/code&gt;的UI变化&lt;/p&gt;
+            &lt;p&gt;处理操作后&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-item&lt;/code&gt;的UI变化&lt;/p&gt;
           &lt;/li&gt;
         &lt;/ol&gt;
       &lt;/li&gt;
@@ -1229,7 +1238,7 @@ github上也遍地都是jquery插件的提交, 其中不乏很多大牛,明星�
             &lt;p&gt;记忆&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-item&lt;/code&gt;选中第几项&lt;/p&gt;
           &lt;/li&gt;
           &lt;li&gt;
-            &lt;p&gt;处理选中后&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-item&lt;/code&gt;的UI变化&lt;/p&gt;
+            &lt;p&gt;处理操作后&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-item&lt;/code&gt;的UI变化&lt;/p&gt;
           &lt;/li&gt;
         &lt;/ol&gt;
       &lt;/li&gt;
@@ -1241,7 +1250,7 @@ github上也遍地都是jquery插件的提交, 其中不乏很多大牛,明星�
             &lt;p&gt;记忆&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-item&lt;/code&gt;选中第几项&lt;/p&gt;
           &lt;/li&gt;
           &lt;li&gt;
-            &lt;p&gt;处理选中后&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-item&lt;/code&gt;的UI变化&lt;/p&gt;
+            &lt;p&gt;处理操作后&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-item&lt;/code&gt;的UI变化&lt;/p&gt;
           &lt;/li&gt;
           &lt;li&gt;
             &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;的控制隐显&lt;/p&gt;
@@ -1253,36 +1262,103 @@ github上也遍地都是jquery插件的提交, 其中不乏很多大牛,明星�
       &lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;关闭按钮&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-close&lt;/code&gt;&lt;/p&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;click&lt;/code&gt;事件&lt;/p&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;的控制隐显&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;历史提交搜索记录删除按钮&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-history-delete&lt;/code&gt;&lt;/p&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;
+        &lt;p&gt;‘click’事件&lt;/p&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;
+            &lt;p&gt;删除该项历史提交搜索记录&lt;/p&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;p&gt;处理操作后&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu-item&lt;/code&gt;的UI变化&lt;/p&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;p&gt;将焦点返回&lt;code class=&quot;highlighter-rouge&quot;&gt;search-input&lt;/code&gt;&lt;/p&gt;
+          &lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h2 id=&quot;section-2&quot;&gt;确定数据存储&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;search-menu的赋值数据源&lt;/em&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;em&gt;search-menu的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchMenuData&lt;/code&gt;(Object) 默认为空对象&lt;/p&gt;
+
+    &lt;p&gt;[key] &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt;  默认未定义&lt;/p&gt;
+
+    &lt;p&gt;[key] &lt;code class=&quot;highlighter-rouge&quot;&gt;isShowHeader&lt;/code&gt; 默认false&lt;/p&gt;
+
+    &lt;p&gt;[key] &lt;code class=&quot;highlighter-rouge&quot;&gt;isShowFooter&lt;/code&gt; 默认true&lt;/p&gt;
+
+    &lt;p&gt;[key] &lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeywordDataList&lt;/code&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;search-menu-content的赋值数据源&lt;/em&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;em&gt;search-menu-content的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeywordDataList&lt;/code&gt;(Array&amp;lt;Object&amp;gt;)   默认未定义&lt;/p&gt;
+
+    &lt;p&gt;其中Object部分&lt;/p&gt;
+
+    &lt;p&gt;[key] &lt;code class=&quot;highlighter-rouge&quot;&gt;keyword&lt;/code&gt; 可以自定义指定这个key&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;历史已提交搜索关键词缓存&lt;/em&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;em&gt;历史已提交搜索关键词缓存&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;historySearchedKeywordCacheList&lt;/code&gt;(Array&amp;lt;String&amp;gt;) 默认为空数组&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;历史未提交搜索关键词缓存&lt;/em&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;em&gt;历史未提交推荐搜索关键词缓存&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;historyRecommendKeywordCacheList&lt;/code&gt;(Array&amp;lt;String&amp;gt;) 默认为空数组&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;历史未提交搜索关键词 -&amp;gt; 推荐搜索关键词数据源缓存&lt;/em&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;em&gt;历史未提交推荐搜索关键词 -&amp;gt; 返回的数据结果集&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;historyRecommendKeywordCache&lt;/code&gt;(Object) 默认为空对象&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;key -&amp;gt; historyKeyword&lt;/td&gt;
+          &lt;td&gt;value -&amp;gt; recommendKeywordDataList toJson&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&quot;section-3&quot;&gt;确定公开配置&lt;/h2&gt;
+&lt;h2 id=&quot;section-3&quot;&gt;确定关键属性&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
-    &lt;p&gt;[公开]&lt;em&gt;历史已提交搜索关键词缓存最大个数&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;maximumHistorySearchedKeywordCacheList&lt;/code&gt;(Int) 默认为10&lt;/p&gt;
+    &lt;p&gt;&lt;em&gt;一个单行文本框&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-input&lt;/code&gt;&lt;em&gt;输入文本值&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchInputValue&lt;/code&gt;(String) 默认未定义&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;[公开]&lt;em&gt;推荐搜索项显示个数&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;maximumRecommendKeywordDataList&lt;/code&gt;(Int) 默认为10&lt;/p&gt;
+    &lt;p&gt;&lt;em&gt;推荐搜索关键词&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeyword&lt;/code&gt;(String) 默认未定义&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;头部区域块是否显示标识&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;isShowHeader&lt;/code&gt;(Boolean) 默认false&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;尾部区域块是否显示标识&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;isShowFooter&lt;/code&gt;(Boolean) 默认true&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[公开]&lt;em&gt;历史已提交搜索关键词缓存最大个数&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;maximumHistorySearchedKeywordCacheList&lt;/code&gt;(Int) 默认为100&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[公开]&lt;em&gt;历史已提交搜索关键词显示个数&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayHistorySearchedKeywordCacheListCount&lt;/code&gt;(Int)默认为10&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;[公开]&lt;em&gt;历史未提交搜索关键词缓存最大个数&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;maximumHistoryKeywordCacheList&lt;/code&gt;(Int) 默认为100&lt;/p&gt;
@@ -1294,19 +1370,46 @@ github上也遍地都是jquery插件的提交, 其中不乏很多大牛,明星�
     &lt;p&gt;[公开]&lt;em&gt;远程请求地址&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;url&lt;/code&gt;(String) 默认未定义 (当&lt;code class=&quot;highlighter-rouge&quot;&gt;remote&lt;/code&gt;为true时必须指定)&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;[公开]&lt;em&gt;对应搜索文本的请求参数名&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;queryName&lt;/code&gt;(String) 默认为’query’&lt;/p&gt;
+    &lt;p&gt;[公开]&lt;em&gt;对应搜索文本的请求参数名&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;queryName&lt;/code&gt;(String) 默认为’searchKey’&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;[公开]&lt;em&gt;附加请求参数对象&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;additionalQueryParams&lt;/code&gt;(Object) 默认null (需要支持实例修改)&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;[公开]&lt;em&gt;本地数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;localData&lt;/code&gt;(Object) 默认null (当&lt;code class=&quot;highlighter-rouge&quot;&gt;remote&lt;/code&gt;为false时必须指定)&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;key -&amp;gt; keyword&lt;/td&gt;
+          &lt;td&gt;value -&amp;gt; recommendKeywordDataList toJson&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;[公开]&lt;em&gt;对每个推荐搜索返回结果集里指定的字段进行格式化, 返回格式化后的值 -&amp;gt; 回调函数&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;formatRecommendKeywordData&lt;/code&gt;(Function) 默认为null&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;[公开]&lt;em&gt;允许触发一次获取搜索推荐数据动作最小间隔&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendFetchInterval&lt;/code&gt;(Int) 默认为10(ms)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;fetch数据的请求对象&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;xhr&lt;/code&gt;(Object) 默认null 由jQuery.ajax创建&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;延迟进行fetch数据请求对象&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;defered&lt;/code&gt;(Object) 默认null 由setTimeout创建&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;一个单行文本框&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-input&lt;/code&gt;&lt;em&gt;当前focus状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;focusState&lt;/code&gt;(Boolean) 默认false&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;一个填充搜索推荐层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;当前显示状态&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;displayState&lt;/code&gt;(Boolean)  默认false&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;推荐搜索项count&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendItemsCount&lt;/code&gt;(Int) 默认0&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;当前选择/停留的搜索项index&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchItemIndex&lt;/code&gt;(Int) 默认-1 选择搜索推荐项时使用, 0表示第一项, &lt;code class=&quot;highlighter-rouge&quot;&gt;recommendItemsCount-1&lt;/code&gt;表示最后一项&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;[公开]&lt;em&gt;提交搜索事件 -&amp;gt; 回调函数&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;onSearch&lt;/code&gt;(Function)&lt;/p&gt;
@@ -1321,6 +1424,9 @@ github上也遍地都是jquery插件的提交, 其中不乏很多大牛,明星�
     &lt;p&gt;[公开]&lt;em&gt;搜索文本框元素&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchInput&lt;/code&gt;(HTMLElement) (必须指定)&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;推荐搜索层元素&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchMenu&lt;/code&gt;(HTMLElemnt) 默认为null, 内部模板解析创建元素后, 自动关联(通过id)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
     &lt;p&gt;[公开]&lt;em&gt;设置完search-menu的赋值数据源事件&lt;code class=&quot;highlighter-rouge&quot;&gt;searchMenuData&lt;/code&gt;&lt;/em&gt; -&amp;gt; 回调函数*&lt;code class=&quot;highlighter-rouge&quot;&gt;onSetSearchMenuData*&lt;/code&gt;(Function) 默认为设置header与footer值方法 使用者可以在这里指定搜索菜单header, footer或其他自定义变量&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
@@ -1333,9 +1439,40 @@ github上也遍地都是jquery插件的提交, 其中不乏很多大牛,明星�
     &lt;p&gt;[公开]&lt;em&gt;每个推荐搜索项匹配的选择器&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchItemSelector&lt;/code&gt;(String) 默认为与默认模板匹配的选择器 可自定义, 但需要同时自定义模板&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;[公开]&lt;em&gt;被选中的那个推荐搜索项匹配的附加选择器&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchItemSelectedSelector&lt;/code&gt;(String) 默认为与默认模板匹配的附加选择器 可自定义, 但需要同时自定义css&lt;/p&gt;
+    &lt;p&gt;[公开]&lt;em&gt;被选中的那个推荐搜索项匹配的选择器&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchItemSelectedSelector&lt;/code&gt;(String) 默认为与默认模板匹配的附加选择器 可自定义, 但需要同时自定义css&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;是否允许&lt;code class=&quot;highlighter-rouge&quot;&gt;search-input&lt;/code&gt;focusout事件触发&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;allowFocusOut&lt;/code&gt;(Boolean) 默认true 为防止点击&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;执行foucsout事件逻辑&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[公开]&lt;em&gt;search-menu-content的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeywordDataList&lt;/code&gt;&lt;em&gt;中对应显示推荐搜索词的字段名&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;suggestKeyword&lt;/code&gt;(String) 默认为’keyword’&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[公开]&lt;em&gt;请求远程数据, 返回结果对应dataList数组的key&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;resultListKey&lt;/code&gt;(String) 默认为’list’&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[公开]&lt;em&gt;推荐搜索层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;的关闭按钮匹配的选择器&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchMenuCloseSelector&lt;/code&gt;(String) 默认为’.search-menu-close’ 可自定义, 但需要同时自定义模板&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[公开]&lt;em&gt;推荐搜索层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;的内容部分匹配的选择器&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchMenuContentSelector&lt;/code&gt;(String) 默认为’.search-menu-content’   可自定义, 但需要同时自定义模板&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[公开]&lt;em&gt;远程请求超时时间&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;timeout&lt;/code&gt;(Int) 默认为3000(30s)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[公开]&lt;em&gt;远程请求返回数据方式&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;dataType&lt;/code&gt;(String) 默认为’json’ 也支持’jsonp’&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[公开]&lt;em&gt;search-menu-content的赋值数据源&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recommendKeywordDataList&lt;/code&gt;&lt;em&gt;中对应显示推荐搜索词的字段的html内容&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;suggestKeywordHtml&lt;/code&gt;(String) 默认为’suggestKeywordHtml’  可自定义, 但需要同时自定义模板&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[公开]&lt;em&gt;推荐搜索层&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search-menu&lt;/code&gt;&lt;em&gt;的历史已提交搜索记录的删除按钮匹配的选择器&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchMenuHistoryDeleteSelector&lt;/code&gt;(String) 默认为’.search-menu-history-delete’ 可自定义, 但需要同时自定义模板&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;h2 id=&quot;view-live-demohttpwwwvanadiscndemoautocompletehtml&quot;&gt;View Live Demo(http://www.vanadis.cn/demo/autocomplete.html)&lt;/h2&gt;
+
+&lt;h2 id=&quot;githubhttpsgithubcomcyqresigjqueryautocomplete&quot;&gt;Github(https://github.com/cyqresig/jquery.autocomplete)&lt;/h2&gt;
 </description>
         <pubDate>Fri, 04 Mar 2016 00:00:00 +0800</pubDate>
         <link>http://www.vanadis.cn/2016/03/04/plugin-jquery-autocomplete/</link>
