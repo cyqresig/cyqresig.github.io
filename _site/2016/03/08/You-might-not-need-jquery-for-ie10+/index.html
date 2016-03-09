@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于前端开发,架构,动漫 | 绯雨闲丸，Web & Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。">
+    <meta name="keyword"  content="绯雨闲丸, HISAME SHIZUMARU绯雨闲丸, HISAME SHIZUMARU, 绯雨闲丸的博客, HISAME SHIZUMARU Blog, 博客, 个人网站, 互联网, 前端, 动漫">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>你可能并不需要使用jQuery了 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
+
+    <link rel="canonical" href="http://www.vanadis.cn/2016/03/08/You-might-not-need-jquery-for-ie10+/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/HISAME-SHIZUMARU-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- cyqresig change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- cyqresig Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">绯雨闲丸 Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="blog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">主页</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">关于</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">分类标签</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#blog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __Nav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __Nav__.close()
+        }else{
+            __Nav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close Nav.
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __Nav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-2016-03-08.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post-bg-2016-03-08.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#javascript" title="javascript">javascript</a>
+                        
+                    </div>
+                    <h1>你可能并不需要使用jQuery了</h1>
+                    
+                    
+                    <h2 class="subheading"> "使用原生api代替jQuery"</h2>
+                    
+                    <span class="meta">Posted by 绯雨闲丸 on March 8, 2016</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<blockquote>
+  <p>”仅限IE10+浏览器”</p>
+</blockquote>
+
+<h2 id="jquery">你可能并不需要使用jQuery了</h2>
+
+<p>现代浏览器原生 API 已经越来越好用了。
+在很多情况下，我们已经不用依赖jQuery来操作DOM，绑定事件了
+同时由于 React、Angular 等框架的流行，直接操作 DOM 不再是好的模式，jQuery 使用场景大大减少。
+本文总结了大部分 jQuery API 替代的方法，支持 IE10+ 以上浏览器。</p>
+
+<h2 id="section">目录</h2>
+
+<ol>
+  <li><a href="#query-selector">Query Selector</a></li>
+  <li><a href="#css--style">CSS &amp; Style</a></li>
+  <li><a href="#dom-manipulation">DOM Manipulation</a></li>
+  <li><a href="#ajax">Ajax</a></li>
+  <li><a href="#events">Events</a></li>
+  <li><a href="#utilities">Utilities</a></li>
+  <li><a href="#alternatives">Alternatives</a></li>
+  <li><a href="#browser-support">Browser Support</a></li>
+</ol>
+
+<h2 id="query-selector">Query Selector</h2>
+
+<p>常用的 class、id、属性 选择器都可以使用 <code class="highlighter-rouge">document.querySelector</code> 或 <code class="highlighter-rouge">document.querySelectorAll</code> 替代。区别是
+* <code class="highlighter-rouge">document.querySelector</code> 返回第一个匹配的 Element
+* <code class="highlighter-rouge">document.querySelectorAll</code> 返回所有匹配的 Element 组成的 NodeList。它可以通过 <code class="highlighter-rouge">[].slice.call()</code> 把它转成 Array
+* 如果匹配不到任何 Element，jQuery 返回空数组 <code class="highlighter-rouge">[]</code>，但 <code class="highlighter-rouge">document.querySelector</code> 返回 <code class="highlighter-rouge">null</code>，注意空指针异常。当找不到时，也可以使用 <code class="highlighter-rouge">||</code> 设置默认的值，如 <code class="highlighter-rouge">document.querySelectorAll(selector) || []</code></p>
+
+<blockquote>
+  <p>注意：<code class="highlighter-rouge">document.querySelector</code> 和 <code class="highlighter-rouge">document.querySelectorAll</code> 性能很<strong>差</strong>。如果想提高性能，尽量使用 <code class="highlighter-rouge">document.getElementById</code>、<code class="highlighter-rouge">document.getElementsByClassName</code> 或 <code class="highlighter-rouge">document.getElementsByTagName</code>。</p>
+</blockquote>
+
+<ul>
+  <li>
+    <p><a href="#1.0">1.0</a> <a name="1.0"></a> Query by selector</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'selector'</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'selector'</span><span class="p">);</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><a href="#1.1">1.1</a> <a name="1.1"></a> Query by class</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'.css'</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'.css'</span><span class="p">);</span>
+
+<span class="c1">// or</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s1">'css'</span><span class="p">);</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><a href="#1.2">1.2</a> <a name="1.2"></a> Query by id</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#id'</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'#id'</span><span class="p">);</span>
+
+<span class="c1">// or</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'id'</span><span class="p">);</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><a href="#1.3">1.3</a> <a name="1.3"></a> Query by attribute</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'a[target=_blank]'</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'a[target=_blank]'</span><span class="p">);</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><a href="#1.4">1.4</a> <a name="1.4"></a> Find sth.</p>
+
+    <ul>
+      <li>
+        <p>Find nodes</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">'li'</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'li'</span><span class="p">);</span>
+</code></pre>
+        </div>
+      </li>
+      <li>
+        <p>Find body</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'body'</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+</code></pre>
+        </div>
+      </li>
+      <li>
+        <p>Find Attribute</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="nx">e</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">);</span>
+</code></pre>
+        </div>
+      </li>
+      <li>
+        <p>Find data attribute</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="c1">// using getAttribute</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">'data-foo'</span><span class="p">);</span>
+<span class="c1">// you can also use `dataset` if only need to support IE 11+</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">dataset</span><span class="p">[</span><span class="s1">'foo'</span><span class="p">];</span>
+</code></pre>
+        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><a href="#1.5">1.5</a> <a name="1.5"></a> Sibling/Previous/Next Elements</p>
+
+    <ul>
+      <li>
+        <p>Sibling elements</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">siblings</span><span class="p">();</span>
+
+<span class="c1">// Native</span>
+<span class="p">[].</span><span class="nx">filter</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">el</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">children</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">child</span> <span class="o">!==</span> <span class="nx">el</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre>
+        </div>
+      </li>
+      <li>
+        <p>Previous elements</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">prev</span><span class="p">();</span>
+
+<span class="c1">// Native</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">previousElementSibling</span><span class="p">;</span>
+
+</code></pre>
+        </div>
+      </li>
+      <li>
+        <p>Next elements</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// next</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">nextElementSibling</span><span class="p">;</span>
+</code></pre>
+        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><a href="#1.6">1.6</a> <a name="1.6"></a> Closest</p>
+
+    <p>Closest 获得匹配选择器的第一个祖先元素，从当前元素开始沿 DOM 树向上。</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">closest</span><span class="p">(</span><span class="nx">queryString</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="kd">function</span> <span class="nx">closest</span><span class="p">(</span><span class="nx">el</span><span class="p">,</span> <span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">matchesSelector</span> <span class="o">=</span> <span class="nx">el</span><span class="p">.</span><span class="nx">matches</span> <span class="o">||</span> <span class="nx">el</span><span class="p">.</span><span class="nx">webkitMatchesSelector</span> <span class="o">||</span> <span class="nx">el</span><span class="p">.</span><span class="nx">mozMatchesSelector</span> <span class="o">||</span> <span class="nx">el</span><span class="p">.</span><span class="nx">msMatchesSelector</span><span class="p">;</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">matchesSelector</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">el</span><span class="p">,</span> <span class="nx">selector</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">el</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">el</span> <span class="o">=</span> <span class="nx">el</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><a href="#1.7">1.7</a> <a name="1.7"></a> Parents Until</p>
+
+    <p>获取当前每一个匹配元素集的祖先，不包括匹配元素的本身。</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">parentsUntil</span><span class="p">(</span><span class="nx">selector</span><span class="p">,</span> <span class="nx">filter</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="kd">function</span> <span class="nx">parentsUntil</span><span class="p">(</span><span class="nx">el</span><span class="p">,</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">filter</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="kr">const</span> <span class="nx">matchesSelector</span> <span class="o">=</span> <span class="nx">el</span><span class="p">.</span><span class="nx">matches</span> <span class="o">||</span> <span class="nx">el</span><span class="p">.</span><span class="nx">webkitMatchesSelector</span> <span class="o">||</span> <span class="nx">el</span><span class="p">.</span><span class="nx">mozMatchesSelector</span> <span class="o">||</span> <span class="nx">el</span><span class="p">.</span><span class="nx">msMatchesSelector</span><span class="p">;</span>
+
+  <span class="c1">// match start from parent</span>
+  <span class="nx">el</span> <span class="o">=</span> <span class="nx">el</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">;</span>
+  <span class="k">while</span> <span class="p">(</span><span class="nx">el</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">matchesSelector</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">el</span><span class="p">,</span> <span class="nx">selector</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">filter</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">matchesSelector</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">el</span><span class="p">,</span> <span class="nx">filter</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nx">el</span> <span class="o">=</span> <span class="nx">el</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><a href="#1.8">1.8</a> <a name="1.8"></a> Form</p>
+
+    <ul>
+      <li>
+        <p>Input/Textarea</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#my-input'</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+
+<span class="c1">// Native</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'#my-input'</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
+</code></pre>
+        </div>
+      </li>
+      <li>
+        <p>Get index of e.currentTarget between <code class="highlighter-rouge">.radio</code></p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">).</span><span class="nx">index</span><span class="p">(</span><span class="s1">'.radio'</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="p">[].</span><span class="nx">indexOf</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'.radio'</span><span class="p">),</span> <span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">);</span>
+</code></pre>
+        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><a href="#1.9">1.9</a> <a name="1.9"></a> Iframe Contents</p>
+
+    <p>jQuery 对象的 iframe <code class="highlighter-rouge">contents()</code> 返回的是 iframe 内的 <code class="highlighter-rouge">document</code></p>
+
+    <ul>
+      <li>
+        <p>Iframe contents</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$iframe</span><span class="p">.</span><span class="nx">contents</span><span class="p">();</span>
+
+<span class="c1">// Native</span>
+<span class="nx">iframe</span><span class="p">.</span><span class="nx">contentDocument</span><span class="p">;</span>
+</code></pre>
+        </div>
+      </li>
+      <li>
+        <p>Iframe Query</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$iframe</span><span class="p">.</span><span class="nx">contents</span><span class="p">().</span><span class="nx">find</span><span class="p">(</span><span class="s1">'.css'</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="nx">iframe</span><span class="p">.</span><span class="nx">contentDocument</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'.css'</span><span class="p">);</span>
+</code></pre>
+        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong><a href="#目录">? 回到顶部</a></strong></p>
+
+<h2 id="css--style">CSS &amp; Style</h2>
+
+<ul>
+  <li>
+    <p><a href="#2.1">2.1</a> <a name="2.1"></a> CSS</p>
+
+    <ul>
+      <li>
+        <p>Get style</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s2">"color"</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="c1">// 注意：此处为了解决当 style 值为 auto 时，返回 auto 的问题</span>
+<span class="kr">const</span> <span class="nx">win</span> <span class="o">=</span> <span class="nx">el</span><span class="p">.</span><span class="nx">ownerDocument</span><span class="p">.</span><span class="nx">defaultView</span><span class="p">;</span>
+<span class="c1">// null 的意思是不返回伪类元素</span>
+<span class="nx">win</span><span class="p">.</span><span class="nx">getComputedStyle</span><span class="p">(</span><span class="nx">el</span><span class="p">,</span> <span class="kc">null</span><span class="p">).</span><span class="nx">color</span><span class="p">;</span>
+</code></pre>
+        </div>
+      </li>
+      <li>
+        <p>Set style</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span> <span class="na">color</span><span class="p">:</span> <span class="s2">"#ff0011"</span> <span class="p">});</span>
+
+<span class="c1">// Native</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="s1">'#ff0011'</span><span class="p">;</span>
+</code></pre>
+        </div>
+      </li>
+      <li>
+        <p>Get/Set Styles</p>
+
+        <p>注意，如果想一次设置多个 style，可以参考 oui-dom-utils 中 <a href="https://github.com/oneuijs/oui-dom-utils/blob/master/src/index.js#L194">setStyles</a> 方法</p>
+      </li>
+      <li>
+        <p>Add class</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="nx">className</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">className</span><span class="p">);</span>
+</code></pre>
+        </div>
+      </li>
+      <li>
+        <p>Remove class</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">removeClass</span><span class="p">(</span><span class="nx">className</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">className</span><span class="p">);</span>
+</code></pre>
+        </div>
+      </li>
+      <li>
+        <p>has class</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">hasClass</span><span class="p">(</span><span class="nx">className</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">className</span><span class="p">);</span>
+</code></pre>
+        </div>
+      </li>
+      <li>
+        <p>Toggle class</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">toggleClass</span><span class="p">(</span><span class="nx">className</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="nx">className</span><span class="p">);</span>
+</code></pre>
+        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><a href="#2.2">2.2</a> <a name="2.2"></a> Width &amp; Height</p>
+
+    <p>Width 与 Height 获取方法相同，下面以 Height 为例：</p>
+
+    <ul>
+      <li>
+        <p>Window height</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">height</span><span class="p">();</span>
+
+<span class="c1">// Native</span>
+<span class="c1">// 不含 scrollbar，与 jQuery 行为一致</span>
+<span class="nb">window</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientHeight</span><span class="p">;</span>
+<span class="c1">// 含 scrollbar</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">innerHeight</span><span class="p">;</span>
+</code></pre>
+        </div>
+      </li>
+      <li>
+        <p>Document height</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">height</span><span class="p">();</span>
+
+<span class="c1">// Native</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">scrollHeight</span><span class="p">;</span>
+</code></pre>
+        </div>
+      </li>
+      <li>
+        <p>Element height</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">height</span><span class="p">();</span>
+
+<span class="c1">// Native</span>
+<span class="c1">// 与 jQuery 一致（一直为 content 区域的高度）</span>
+<span class="kd">function</span> <span class="nx">getHeight</span><span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getComputedStyles</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span>
+  <span class="kr">const</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">el</span><span class="p">.</span><span class="nx">offsetHeight</span><span class="p">;</span>
+  <span class="kr">const</span> <span class="nx">borderTopWidth</span> <span class="o">=</span> <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">styles</span><span class="p">.</span><span class="nx">borderTopWidth</span><span class="p">);</span>
+  <span class="kr">const</span> <span class="nx">borderBottomWidth</span> <span class="o">=</span> <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">styles</span><span class="p">.</span><span class="nx">borderBottomWidth</span><span class="p">);</span>
+  <span class="kr">const</span> <span class="nx">paddingTop</span> <span class="o">=</span> <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">styles</span><span class="p">.</span><span class="nx">paddingTop</span><span class="p">);</span>
+  <span class="kr">const</span> <span class="nx">paddingBottom</span> <span class="o">=</span> <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">styles</span><span class="p">.</span><span class="nx">paddingBottom</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">height</span> <span class="o">-</span> <span class="nx">borderBottomWidth</span> <span class="o">-</span> <span class="nx">borderTopWidth</span> <span class="o">-</span> <span class="nx">paddingTop</span> <span class="o">-</span> <span class="nx">paddingBottom</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// 精确到整数（border-box 时为 height 值，content-box 时为 height + padding + border 值）</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">clientHeight</span><span class="p">;</span>
+<span class="c1">// 精确到小数（border-box 时为 height 值，content-box 时为 height + padding + border 值）</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">getBoundingClientRect</span><span class="p">().</span><span class="nx">height</span><span class="p">;</span>
+</code></pre>
+        </div>
+      </li>
+      <li>
+        <p>Iframe height</p>
+
+        <p>$iframe .contents() 方法返回 iframe 的 contentDocument</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'iframe'</span><span class="p">).</span><span class="nx">contents</span><span class="p">().</span><span class="nx">height</span><span class="p">();</span>
+
+<span class="c1">// Native</span>
+<span class="nx">iframe</span><span class="p">.</span><span class="nx">contentDocument</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">scrollHeight</span><span class="p">;</span>
+</code></pre>
+        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><a href="#2.3">2.3</a> <a name="2.3"></a> Position &amp; Offset</p>
+
+    <ul>
+      <li>
+        <p>Position</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">position</span><span class="p">();</span>
+
+<span class="c1">// Native</span>
+<span class="p">{</span> <span class="nl">left</span><span class="p">:</span> <span class="nx">el</span><span class="p">.</span><span class="nx">offsetLeft</span><span class="p">,</span> <span class="nx">top</span><span class="err">:</span> <span class="nx">el</span><span class="p">.</span><span class="nx">offsetTop</span> <span class="p">}</span>
+</code></pre>
+        </div>
+      </li>
+      <li>
+        <p>Offset</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">offset</span><span class="p">();</span>
+
+<span class="c1">// Native</span>
+<span class="kd">function</span> <span class="nx">getOffset</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">box</span> <span class="o">=</span> <span class="nx">el</span><span class="p">.</span><span class="nx">getBoundingClientRect</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">top</span><span class="p">:</span> <span class="nx">box</span><span class="p">.</span><span class="nx">top</span> <span class="o">+</span> <span class="nb">window</span><span class="p">.</span><span class="nx">pageYOffset</span> <span class="o">-</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientTop</span><span class="p">,</span>
+    <span class="na">left</span><span class="p">:</span> <span class="nx">box</span><span class="p">.</span><span class="nx">left</span> <span class="o">+</span> <span class="nb">window</span><span class="p">.</span><span class="nx">pageXOffset</span> <span class="o">-</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientLeft</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><a href="#2.4">2.4</a> <a name="2.4"></a> Scroll Top</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">scrollTop</span><span class="p">();</span>
+
+<span class="c1">// Native</span>
+<span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span> <span class="o">&amp;&amp;</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">scrollTop</span><span class="p">)</span> <span class="o">||</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollTop</span><span class="p">;</span>
+</code></pre>
+    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#目录">? 回到顶部</a></strong></p>
+
+<h2 id="dom-manipulation">DOM Manipulation</h2>
+
+<ul>
+  <li>
+    <p><a href="#3.1">3.1</a> <a name="3.1"></a> Remove
+```js
+// jQuery
+$el.remove();</p>
+
+    <p>// Native
+el.parentNode.removeChild(el);
+```</p>
+  </li>
+  <li>
+    <p><a href="#3.2">3.2</a> <a name="3.2"></a> Text</p>
+
+    <ul>
+      <li>
+        <p>Get text</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">text</span><span class="p">();</span>
+
+<span class="c1">// Native</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">textContent</span><span class="p">;</span>
+</code></pre>
+        </div>
+      </li>
+      <li>
+        <p>Set text</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">string</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">string</span><span class="p">;</span>
+</code></pre>
+        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><a href="#3.3">3.3</a> <a name="3.3"></a> HTML</p>
+
+    <ul>
+      <li>
+        <p>Get HTML</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">html</span><span class="p">();</span>
+
+<span class="c1">// Native</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">;</span>
+</code></pre>
+        </div>
+      </li>
+      <li>
+        <p>Set HTML</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">htmlString</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">htmlString</span><span class="p">;</span>
+</code></pre>
+        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><a href="#3.4">3.4</a> <a name="3.4"></a> Append</p>
+
+    <p>Append 插入到子节点的末尾</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">"&lt;div id='container'&gt;hello&lt;/div&gt;"</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="kd">let</span> <span class="nx">newEl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'div'</span><span class="p">);</span>
+<span class="nx">newEl</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'container'</span><span class="p">);</span>
+<span class="nx">newEl</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">'hello'</span><span class="p">;</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">newEl</span><span class="p">);</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><a href="#3.5">3.5</a> <a name="3.5"></a> Prepend</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">prepend</span><span class="p">(</span><span class="s2">"&lt;div id='container'&gt;hello&lt;/div&gt;"</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="kd">let</span> <span class="nx">newEl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'div'</span><span class="p">);</span>
+<span class="nx">newEl</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'container'</span><span class="p">);</span>
+<span class="nx">newEl</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">'hello'</span><span class="p">;</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">newEl</span><span class="p">,</span> <span class="nx">el</span><span class="p">.</span><span class="nx">firstChild</span><span class="p">);</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><a href="#3.6">3.6</a> <a name="3.6"></a> insertBefore</p>
+
+    <p>在选中元素前插入新节点</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$newEl</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">queryString</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="kr">const</span> <span class="nx">target</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="nx">queryString</span><span class="p">);</span>
+<span class="nx">target</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">newEl</span><span class="p">,</span> <span class="nx">target</span><span class="p">);</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><a href="#3.7">3.7</a> <a name="3.7"></a> insertAfter</p>
+
+    <p>在选中元素后插入新节点</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$newEl</span><span class="p">.</span><span class="nx">insertAfter</span><span class="p">(</span><span class="nx">queryString</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="kr">const</span> <span class="nx">target</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="nx">queryString</span><span class="p">);</span>
+<span class="nx">target</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">newEl</span><span class="p">,</span> <span class="nx">target</span><span class="p">.</span><span class="nx">nextSibling</span><span class="p">);</span>
+</code></pre>
+    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#目录">? 回到顶部</a></strong></p>
+
+<h2 id="ajax">Ajax</h2>
+
+<p>用 <a href="https://github.com/camsong/fetch-ie8">fetch</a> 和 <a href="https://github.com/camsong/fetch-jsonp">fetch-jsonp</a> 替代</p>
+
+<p><strong><a href="#目录">? 回到顶部</a></strong></p>
+
+<h2 id="events">Events</h2>
+
+<p>完整地替代命名空间和事件代理，链接到 https://github.com/oneuijs/oui-dom-events</p>
+
+<ul>
+  <li>
+    <p><a href="#5.1">5.1</a> <a name="5.1"></a> Bind an event with on</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">eventHandler</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">eventHandler</span><span class="p">);</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><a href="#5.2">5.2</a> <a name="5.2"></a> Unbind an event with off</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$el</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">eventHandler</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">eventHandler</span><span class="p">);</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><a href="#5.3">5.3</a> <a name="5.3"></a> Trigger</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$</span><span class="p">(</span><span class="nx">el</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">'custom-event'</span><span class="p">,</span> <span class="p">{</span><span class="na">key1</span><span class="p">:</span> <span class="s1">'data'</span><span class="p">});</span>
+
+<span class="c1">// Native</span>
+<span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">CustomEvent</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">event</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CustomEvent</span><span class="p">(</span><span class="s1">'custom-event'</span><span class="p">,</span> <span class="p">{</span><span class="na">detail</span><span class="p">:</span> <span class="p">{</span><span class="na">key1</span><span class="p">:</span> <span class="s1">'data'</span><span class="p">}});</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">event</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createEvent</span><span class="p">(</span><span class="s1">'CustomEvent'</span><span class="p">);</span>
+  <span class="nx">event</span><span class="p">.</span><span class="nx">initCustomEvent</span><span class="p">(</span><span class="s1">'custom-event'</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="p">{</span><span class="na">key1</span><span class="p">:</span> <span class="s1">'data'</span><span class="p">});</span>
+<span class="p">}</span>
+
+<span class="nx">el</span><span class="p">.</span><span class="nx">dispatchEvent</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span>
+</code></pre>
+    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#目录">? 回到顶部</a></strong></p>
+
+<h2 id="utilities">Utilities</h2>
+
+<ul>
+  <li>
+    <p><a href="#6.1">6.1</a> <a name="6.1"></a> isArray</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">range</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">range</span><span class="p">);</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><a href="#6.2">6.2</a> <a name="6.2"></a> Trim</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">trim</span><span class="p">(</span><span class="nx">string</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="nx">string</span><span class="p">.</span><span class="nx">trim</span><span class="p">();</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><a href="#6.3">6.3</a> <a name="6.3"></a> Object Assign</p>
+
+    <p>继承，使用 object.assign polyfill https://github.com/ljharb/object.assign</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">({},</span> <span class="nx">defaultOpts</span><span class="p">,</span> <span class="nx">opts</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({},</span> <span class="nx">defaultOpts</span><span class="p">,</span> <span class="nx">opts</span><span class="p">);</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><a href="#6.4">6.4</a> <a name="6.4"></a> Contains</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// jQuery</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">el</span><span class="p">,</span> <span class="nx">child</span><span class="p">);</span>
+
+<span class="c1">// Native</span>
+<span class="nx">el</span> <span class="o">!==</span> <span class="nx">child</span> <span class="o">&amp;&amp;</span> <span class="nx">el</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+</code></pre>
+    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#目录">? 回到顶部</a></strong></p>
+
+<h2 id="alternatives">Alternatives</h2>
+
+<ul>
+  <li><a href="http://youmightnotneedjquery.com/">你可能不需要 jQuery (You Might Not Need jQuery)</a> - 如何使用原生 JavaScript 实现通用事件，元素，ajax 等用法。</li>
+  <li><a href="http://github.com/npm-dom">npm-dom</a> 以及 <a href="http://github.com/webmodules">webmodules</a> - 在 NPM 上提供独立 DOM 模块的组织</li>
+</ul>
+
+<h2 id="browser-support">Browser Support</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th><img src="https://raw.github.com/alrra/browser-logos/master/chrome/chrome_48x48.png" alt="Chrome" /></th>
+      <th><img src="https://raw.github.com/alrra/browser-logos/master/firefox/firefox_48x48.png" alt="Firefox" /></th>
+      <th><img src="https://raw.github.com/alrra/browser-logos/master/internet-explorer/internet-explorer_48x48.png" alt="IE" /></th>
+      <th><img src="https://raw.github.com/alrra/browser-logos/master/opera/opera_48x48.png" alt="Opera" /></th>
+      <th><img src="https://raw.github.com/alrra/browser-logos/master/safari/safari_48x48.png" alt="Safari" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Latest ?</td>
+      <td>Latest ?</td>
+      <td>10+ ?</td>
+      <td>Latest ?</td>
+      <td>6.1+ ?</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="license">License</h1>
+
+<p>MIT</p>
+
+
+                <hr>
+
+                
+                <!-- 多说 Share start -->
+                </style>
+                <div class="ds-share"
+                    style="text-align: right"
+                    data-thread-key="/2016/03/08/You-might-not-need-jquery-for-ie10+"
+                    data-title="你可能并不需要使用jQuery了"
+                    data-url="http://www.vanadis.cn/2016/03/08/You-might-not-need-jquery-for-ie10+/"
+                    data-images="http://www.vanadis.cn/img/post-bg-2016-03-08.jpg"
+                    data-content="
+  ”仅限IE10+浏览器”
+
+
+你可能并不需要使用jQuery了
+
+现代浏览器原生 API 已经越来越好用了。
+在很多情况下，我们已经不用依赖jQue... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- 多说 Share end-->
+                
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/03/05/plugin-jquery-problem/" data-toggle="tooltip" data-placement="top" title="使用jquery插件, Yes or No?">
+                        Previous<br>
+                        <span>使用jquery插件, Yes or No?</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/03/08/front-end-development-history/" data-toggle="tooltip" data-placement="top" title="近几年前端技术盘点以及 2016 年技术发展方向">
+                        Next<br>
+                        <span>近几年前端技术盘点以及 2016 年技术发展方向</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/2016/03/08/You-might-not-need-jquery-for-ie10+"
+                        data-title="你可能并不需要使用jQuery了"
+                        data-url="http://www.vanadis.cn/2016/03/08/You-might-not-need-jquery-for-ie10+/" >
+                    </div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+
+            </div>
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">分类标签</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#生活" title="生活" rel="1">
+                                    生活
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#文档" title="文档" rel="1">
+                                    文档
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#javascript组件" title="javascript组件" rel="2">
+                                    javascript组件
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#javascript" title="javascript" rel="2">
+                                    javascript
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>友情链接</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://rockychen.me">RockyChen的博客</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by cyqresig
+    var _user = 'vanadis';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by cyqresig, add target = "_blank" to <a> by cyqresig -->
+                    
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cyqresig">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 绯雨闲丸 Blog 2016
+                    <br>
+                    Theme © <a href="http://vanadis.cn">HISAME SHIZUMARU</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=cyqresig&repo=cyqresig.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/HISAME-SHIZUMARU-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- Highlight.js -->
+<script>
+    async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+        hljs.initHighlightingOnLoad();
+    })
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+<link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        // var $nav = document.querySelector("nav");
+        // if($nav) FastClick.attach($nav);
+
+        // global FastClick!!
+        FastClick.attach(document.body);    
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by cyqresig
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'vanadis.cn';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by cyqresig
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
