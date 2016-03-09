@@ -1,23 +1,23 @@
 ---
 layout:     post
-title:      "Äã¿ÉÄÜ²¢²»ĞèÒªÊ¹ÓÃjQueryÁË"
-subtitle:   " \"Ê¹ÓÃÔ­Éúapi´úÌæjQuery\""
-author:     "ç³ÓêÏĞÍè"
+title:      "ä½ å¯èƒ½å¹¶ä¸éœ€è¦ä½¿ç”¨jQueryäº†"
+subtitle:   " \"ä½¿ç”¨åŸç”Ÿapiä»£æ›¿jQuery\""
+author:     "ç»¯é›¨é—²ä¸¸"
 header-img: "img/post-bg-2016-03-08.jpg"
 tags:
     - javascript
 ---
 
-> ¡±½öÏŞIE10+ä¯ÀÀÆ÷¡±
+> â€ä»…é™IE10+æµè§ˆå™¨â€
 
-## Äã¿ÉÄÜ²¢²»ĞèÒªÊ¹ÓÃjQueryÁË
+## ä½ å¯èƒ½å¹¶ä¸éœ€è¦ä½¿ç”¨jQueryäº†
 
-ÏÖ´úä¯ÀÀÆ÷Ô­Éú API ÒÑ¾­Ô½À´Ô½ºÃÓÃÁË¡£
-ÔÚºÜ¶àÇé¿öÏÂ£¬ÎÒÃÇÒÑ¾­²»ÓÃÒÀÀµjQueryÀ´²Ù×÷DOM£¬°ó¶¨ÊÂ¼şÁË
-Í¬Ê±ÓÉÓÚ React¡¢Angular µÈ¿ò¼ÜµÄÁ÷ĞĞ£¬Ö±½Ó²Ù×÷ DOM ²»ÔÙÊÇºÃµÄÄ£Ê½£¬jQuery Ê¹ÓÃ³¡¾°´ó´ó¼õÉÙ¡£
-±¾ÎÄ×Ü½áÁË´ó²¿·Ö jQuery API Ìæ´úµÄ·½·¨£¬Ö§³Ö IE10+ ÒÔÉÏä¯ÀÀÆ÷¡£
+ç°ä»£æµè§ˆå™¨åŸç”Ÿ API å·²ç»è¶Šæ¥è¶Šå¥½ç”¨äº†ã€‚
+åœ¨å¾ˆå¤šæƒ…å†µä¸‹ï¼Œæˆ‘ä»¬å·²ç»ä¸ç”¨ä¾èµ–jQueryæ¥æ“ä½œDOMï¼Œç»‘å®šäº‹ä»¶äº†
+åŒæ—¶ç”±äº Reactã€Angular ç­‰æ¡†æ¶çš„æµè¡Œï¼Œç›´æ¥æ“ä½œ DOM ä¸å†æ˜¯å¥½çš„æ¨¡å¼ï¼ŒjQuery ä½¿ç”¨åœºæ™¯å¤§å¤§å‡å°‘ã€‚
+æœ¬æ–‡æ€»ç»“äº†å¤§éƒ¨åˆ† jQuery API æ›¿ä»£çš„æ–¹æ³•ï¼Œæ”¯æŒ IE10+ ä»¥ä¸Šæµè§ˆå™¨ã€‚
 
-## Ä¿Â¼
+## ç›®å½•
 
 1. [Query Selector](#query-selector)
 1. [CSS & Style](#css--style)
@@ -30,12 +30,12 @@ tags:
 
 ## Query Selector
 
-³£ÓÃµÄ class¡¢id¡¢ÊôĞÔ Ñ¡ÔñÆ÷¶¼¿ÉÒÔÊ¹ÓÃ `document.querySelector` »ò `document.querySelectorAll` Ìæ´ú¡£Çø±ğÊÇ
-* `document.querySelector` ·µ»ØµÚÒ»¸öÆ¥ÅäµÄ Element
-* `document.querySelectorAll` ·µ»ØËùÓĞÆ¥ÅäµÄ Element ×é³ÉµÄ NodeList¡£Ëü¿ÉÒÔÍ¨¹ı `[].slice.call()` °ÑËü×ª³É Array
-* Èç¹ûÆ¥Åä²»µ½ÈÎºÎ Element£¬jQuery ·µ»Ø¿ÕÊı×é `[]`£¬µ« `document.querySelector` ·µ»Ø `null`£¬×¢Òâ¿ÕÖ¸ÕëÒì³£¡£µ±ÕÒ²»µ½Ê±£¬Ò²¿ÉÒÔÊ¹ÓÃ `||` ÉèÖÃÄ¬ÈÏµÄÖµ£¬Èç `document.querySelectorAll(selector) || []`
+å¸¸ç”¨çš„ classã€idã€å±æ€§ é€‰æ‹©å™¨éƒ½å¯ä»¥ä½¿ç”¨ `document.querySelector` æˆ– `document.querySelectorAll` æ›¿ä»£ã€‚åŒºåˆ«æ˜¯
+* `document.querySelector` è¿”å›ç¬¬ä¸€ä¸ªåŒ¹é…çš„ Element
+* `document.querySelectorAll` è¿”å›æ‰€æœ‰åŒ¹é…çš„ Element ç»„æˆçš„ NodeListã€‚å®ƒå¯ä»¥é€šè¿‡ `[].slice.call()` æŠŠå®ƒè½¬æˆ Array
+* å¦‚æœåŒ¹é…ä¸åˆ°ä»»ä½• Elementï¼ŒjQuery è¿”å›ç©ºæ•°ç»„ `[]`ï¼Œä½† `document.querySelector` è¿”å› `null`ï¼Œæ³¨æ„ç©ºæŒ‡é’ˆå¼‚å¸¸ã€‚å½“æ‰¾ä¸åˆ°æ—¶ï¼Œä¹Ÿå¯ä»¥ä½¿ç”¨ `||` è®¾ç½®é»˜è®¤çš„å€¼ï¼Œå¦‚ `document.querySelectorAll(selector) || []`
 
-> ×¢Òâ£º`document.querySelector` ºÍ `document.querySelectorAll` ĞÔÄÜºÜ**²î**¡£Èç¹ûÏëÌá¸ßĞÔÄÜ£¬¾¡Á¿Ê¹ÓÃ `document.getElementById`¡¢`document.getElementsByClassName` »ò `document.getElementsByTagName`¡£
+> æ³¨æ„ï¼š`document.querySelector` å’Œ `document.querySelectorAll` æ€§èƒ½å¾ˆ**å·®**ã€‚å¦‚æœæƒ³æé«˜æ€§èƒ½ï¼Œå°½é‡ä½¿ç”¨ `document.getElementById`ã€`document.getElementsByClassName` æˆ– `document.getElementsByTagName`ã€‚
 
 - [1.0](#1.0) <a name='1.0'></a> Query by selector
 
@@ -163,7 +163,7 @@ tags:
 
 - [1.6](#1.6) <a name='1.6'></a> Closest
 
-  Closest »ñµÃÆ¥ÅäÑ¡ÔñÆ÷µÄµÚÒ»¸ö×æÏÈÔªËØ£¬´Óµ±Ç°ÔªËØ¿ªÊ¼ÑØ DOM Ê÷ÏòÉÏ¡£
+  Closest è·å¾—åŒ¹é…é€‰æ‹©å™¨çš„ç¬¬ä¸€ä¸ªç¥–å…ˆå…ƒç´ ï¼Œä»å½“å‰å…ƒç´ å¼€å§‹æ²¿ DOM æ ‘å‘ä¸Šã€‚
 
   ```js
   // jQuery
@@ -186,7 +186,7 @@ tags:
 
 - [1.7](#1.7) <a name='1.7'></a> Parents Until
 
-  »ñÈ¡µ±Ç°Ã¿Ò»¸öÆ¥ÅäÔªËØ¼¯µÄ×æÏÈ£¬²»°üÀ¨Æ¥ÅäÔªËØµÄ±¾Éí¡£
+  è·å–å½“å‰æ¯ä¸€ä¸ªåŒ¹é…å…ƒç´ é›†çš„ç¥–å…ˆï¼Œä¸åŒ…æ‹¬åŒ¹é…å…ƒç´ çš„æœ¬èº«ã€‚
 
   ```js
   // jQuery
@@ -237,7 +237,7 @@ tags:
 
 - [1.9](#1.9) <a name='1.9'></a> Iframe Contents
 
-  jQuery ¶ÔÏóµÄ iframe `contents()` ·µ»ØµÄÊÇ iframe ÄÚµÄ `document`
+  jQuery å¯¹è±¡çš„ iframe `contents()` è¿”å›çš„æ˜¯ iframe å†…çš„ `document`
 
   + Iframe contents
 
@@ -259,7 +259,7 @@ tags:
     iframe.contentDocument.querySelectorAll('.css');
     ```
 
-**[? »Øµ½¶¥²¿](#Ä¿Â¼)**
+**[? å›åˆ°é¡¶éƒ¨](#ç›®å½•)**
 
 ## CSS & Style
 
@@ -272,9 +272,9 @@ tags:
     $el.css("color");
 
     // Native
-    // ×¢Òâ£º´Ë´¦ÎªÁË½â¾öµ± style ÖµÎª auto Ê±£¬·µ»Ø auto µÄÎÊÌâ
+    // æ³¨æ„ï¼šæ­¤å¤„ä¸ºäº†è§£å†³å½“ style å€¼ä¸º auto æ—¶ï¼Œè¿”å› auto çš„é—®é¢˜
     const win = el.ownerDocument.defaultView;
-    // null µÄÒâË¼ÊÇ²»·µ»ØÎ±ÀàÔªËØ
+    // null çš„æ„æ€æ˜¯ä¸è¿”å›ä¼ªç±»å…ƒç´ 
     win.getComputedStyle(el, null).color;
     ```
 
@@ -290,7 +290,7 @@ tags:
 
   + Get/Set Styles
 
-    ×¢Òâ£¬Èç¹ûÏëÒ»´ÎÉèÖÃ¶à¸ö style£¬¿ÉÒÔ²Î¿¼ oui-dom-utils ÖĞ [setStyles](https://github.com/oneuijs/oui-dom-utils/blob/master/src/index.js#L194) ·½·¨
+    æ³¨æ„ï¼Œå¦‚æœæƒ³ä¸€æ¬¡è®¾ç½®å¤šä¸ª styleï¼Œå¯ä»¥å‚è€ƒ oui-dom-utils ä¸­ [setStyles](https://github.com/oneuijs/oui-dom-utils/blob/master/src/index.js#L194) æ–¹æ³•
 
   + Add class
 
@@ -334,7 +334,7 @@ tags:
 
 - [2.2](#2.2) <a name='2.2'></a> Width & Height
 
-  Width Óë Height »ñÈ¡·½·¨ÏàÍ¬£¬ÏÂÃæÒÔ Height ÎªÀı£º
+  Width ä¸ Height è·å–æ–¹æ³•ç›¸åŒï¼Œä¸‹é¢ä»¥ Height ä¸ºä¾‹ï¼š
 
   + Window height
 
@@ -343,9 +343,9 @@ tags:
     $(window).height();
 
     // Native
-    // ²»º¬ scrollbar£¬Óë jQuery ĞĞÎªÒ»ÖÂ
+    // ä¸å« scrollbarï¼Œä¸ jQuery è¡Œä¸ºä¸€è‡´
     window.document.documentElement.clientHeight;
-    // º¬ scrollbar
+    // å« scrollbar
     window.innerHeight;
     ```
 
@@ -366,7 +366,7 @@ tags:
     $el.height();
 
     // Native
-    // Óë jQuery Ò»ÖÂ£¨Ò»Ö±Îª content ÇøÓòµÄ¸ß¶È£©
+    // ä¸ jQuery ä¸€è‡´ï¼ˆä¸€ç›´ä¸º content åŒºåŸŸçš„é«˜åº¦ï¼‰
     function getHeight(el) {
       const styles = this.getComputedStyles(el);
       const height = el.offsetHeight;
@@ -376,15 +376,15 @@ tags:
       const paddingBottom = parseFloat(styles.paddingBottom);
       return height - borderBottomWidth - borderTopWidth - paddingTop - paddingBottom;
     }
-    // ¾«È·µ½ÕûÊı£¨border-box Ê±Îª height Öµ£¬content-box Ê±Îª height + padding + border Öµ£©
+    // ç²¾ç¡®åˆ°æ•´æ•°ï¼ˆborder-box æ—¶ä¸º height å€¼ï¼Œcontent-box æ—¶ä¸º height + padding + border å€¼ï¼‰
     el.clientHeight;
-    // ¾«È·µ½Ğ¡Êı£¨border-box Ê±Îª height Öµ£¬content-box Ê±Îª height + padding + border Öµ£©
+    // ç²¾ç¡®åˆ°å°æ•°ï¼ˆborder-box æ—¶ä¸º height å€¼ï¼Œcontent-box æ—¶ä¸º height + padding + border å€¼ï¼‰
     el.getBoundingClientRect().height;
     ```
 
   + Iframe height
 
-    $iframe .contents() ·½·¨·µ»Ø iframe µÄ contentDocument
+    $iframe .contents() æ–¹æ³•è¿”å› iframe çš„ contentDocument
 
     ```js
     // jQuery
@@ -433,7 +433,7 @@ tags:
   (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
   ```
 
-**[? »Øµ½¶¥²¿](#Ä¿Â¼)**
+**[? å›åˆ°é¡¶éƒ¨](#ç›®å½•)**
 
 ## DOM Manipulation
 
@@ -492,7 +492,7 @@ tags:
 
 - [3.4](#3.4) <a name='3.4'></a> Append
 
-  Append ²åÈëµ½×Ó½ÚµãµÄÄ©Î²
+  Append æ’å…¥åˆ°å­èŠ‚ç‚¹çš„æœ«å°¾
 
   ```js
   // jQuery
@@ -520,7 +520,7 @@ tags:
 
 - [3.6](#3.6) <a name='3.6'></a> insertBefore
 
-  ÔÚÑ¡ÖĞÔªËØÇ°²åÈëĞÂ½Úµã
+  åœ¨é€‰ä¸­å…ƒç´ å‰æ’å…¥æ–°èŠ‚ç‚¹
 
   ```js
   // jQuery
@@ -533,7 +533,7 @@ tags:
 
 - [3.7](#3.7) <a name='3.7'></a> insertAfter
 
-  ÔÚÑ¡ÖĞÔªËØºó²åÈëĞÂ½Úµã
+  åœ¨é€‰ä¸­å…ƒç´ åæ’å…¥æ–°èŠ‚ç‚¹
 
   ```js
   // jQuery
@@ -544,17 +544,17 @@ tags:
   target.parentNode.insertBefore(newEl, target.nextSibling);
   ```
 
-**[? »Øµ½¶¥²¿](#Ä¿Â¼)**
+**[? å›åˆ°é¡¶éƒ¨](#ç›®å½•)**
 
 ## Ajax
 
-ÓÃ [fetch](https://github.com/camsong/fetch-ie8) ºÍ [fetch-jsonp](https://github.com/camsong/fetch-jsonp) Ìæ´ú
+ç”¨ [fetch](https://github.com/camsong/fetch-ie8) å’Œ [fetch-jsonp](https://github.com/camsong/fetch-jsonp) æ›¿ä»£
 
-**[? »Øµ½¶¥²¿](#Ä¿Â¼)**
+**[? å›åˆ°é¡¶éƒ¨](#ç›®å½•)**
 
 ## Events
 
-ÍêÕûµØÌæ´úÃüÃû¿Õ¼äºÍÊÂ¼ş´úÀí£¬Á´½Óµ½ https://github.com/oneuijs/oui-dom-events
+å®Œæ•´åœ°æ›¿ä»£å‘½åç©ºé—´å’Œäº‹ä»¶ä»£ç†ï¼Œé“¾æ¥åˆ° https://github.com/oneuijs/oui-dom-events
 
 - [5.1](#5.1) <a name='5.1'></a> Bind an event with on
 
@@ -593,7 +593,7 @@ tags:
   el.dispatchEvent(event);
   ```
 
-**[? »Øµ½¶¥²¿](#Ä¿Â¼)**
+**[? å›åˆ°é¡¶éƒ¨](#ç›®å½•)**
 
 ## Utilities
 
@@ -619,7 +619,7 @@ tags:
 
 - [6.3](#6.3) <a name='6.3'></a> Object Assign
 
-  ¼Ì³Ğ£¬Ê¹ÓÃ object.assign polyfill https://github.com/ljharb/object.assign
+  ç»§æ‰¿ï¼Œä½¿ç”¨ object.assign polyfill https://github.com/ljharb/object.assign
 
   ```js
   // jQuery
@@ -639,12 +639,12 @@ tags:
   el !== child && el.contains(child);
   ```
 
-**[? »Øµ½¶¥²¿](#Ä¿Â¼)**
+**[? å›åˆ°é¡¶éƒ¨](#ç›®å½•)**
 
 ## Alternatives
 
-* [Äã¿ÉÄÜ²»ĞèÒª jQuery (You Might Not Need jQuery)](http://youmightnotneedjquery.com/) - ÈçºÎÊ¹ÓÃÔ­Éú JavaScript ÊµÏÖÍ¨ÓÃÊÂ¼ş£¬ÔªËØ£¬ajax µÈÓÃ·¨¡£
-* [npm-dom](http://github.com/npm-dom) ÒÔ¼° [webmodules](http://github.com/webmodules) - ÔÚ NPM ÉÏÌá¹©¶ÀÁ¢ DOM Ä£¿éµÄ×éÖ¯
+* [ä½ å¯èƒ½ä¸éœ€è¦ jQuery (You Might Not Need jQuery)](http://youmightnotneedjquery.com/) - å¦‚ä½•ä½¿ç”¨åŸç”Ÿ JavaScript å®ç°é€šç”¨äº‹ä»¶ï¼Œå…ƒç´ ï¼Œajax ç­‰ç”¨æ³•ã€‚
+* [npm-dom](http://github.com/npm-dom) ä»¥åŠ [webmodules](http://github.com/webmodules) - åœ¨ NPM ä¸Šæä¾›ç‹¬ç«‹ DOM æ¨¡å—çš„ç»„ç»‡
 
 ## Browser Support
 
