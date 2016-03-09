@@ -246,6 +246,6 @@ tags:
 
 37. [公开]*推荐搜索层*`search-menu`*的历史已提交搜索记录的删除按钮匹配的选择器*`searchMenuHistoryDeleteSelector`(String) 默认为'.search-menu-history-delete' 可自定义, 但需要同时自定义模板
 
-##  View Live Demo[http://www.vanadis.cn/demo/autocomplete.html]
+##  [查看在线示例](http://www.vanadis.cn/demo/autocomplete.html)
 
-##  Github[https://github.com/cyqresig/jquery.autocomplete]
+##  [源代码](https://github.com/cyqresig/jquery.autocomplete)
