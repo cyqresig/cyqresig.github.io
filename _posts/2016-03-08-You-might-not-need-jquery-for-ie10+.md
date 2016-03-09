@@ -8,7 +8,7 @@ tags:
     - javascript
 ---
 
-> ”仅限IE10+浏览器”
+> 文章来源：github
 
 ## 你可能并不需要使用jQuery了
 
