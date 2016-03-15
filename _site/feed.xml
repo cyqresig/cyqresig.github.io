@@ -5,9 +5,205 @@
     <description>关于前端开发,架构,动漫 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 09 Mar 2016 17:53:33 +0800</pubDate>
-    <lastBuildDate>Wed, 09 Mar 2016 17:53:33 +0800</lastBuildDate>
+    <pubDate>Tue, 15 Mar 2016 19:08:42 +0800</pubDate>
+    <lastBuildDate>Tue, 15 Mar 2016 19:08:42 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
+    
+      <item>
+        <title>常用jquery组件的整理</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;未完待续&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;在做敏捷开发时, 除了公司自己造的轮子外, jquery组件是会被经常使用到的轮子, 下面就项目中经常被使用到的jquery组件做一个整理.&lt;/p&gt;
+
+&lt;h1 id=&quot;section&quot;&gt;目录&lt;/h1&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;#jquery.blockui&quot;&gt;jquery.blockui&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jquery.uniform&quot;&gt;jquery.uniform&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jquery.layout&quot;&gt;jquery.layout&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jquery.cookie&quot;&gt;jquery.cookie&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jquery.validate&quot;&gt;jquery.validate&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jquery.form&quot;&gt;jquery.form&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jquery.transit&quot;&gt;jquery.transit&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jquery.bxslider&quot;&gt;jquery.bxslider&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jquery.qrcode&quot;&gt;jquery.qrcode&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jquery.backstretch&quot;&gt;jquery.backstretch&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jquery-siderbar&quot;&gt;jquery-siderbar&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;#jquery-autocomplete&quot;&gt;jquery-autocomplete&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap.transition&quot;&gt;bootstrap.transition&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap.modal&quot;&gt;bootstrap.modal&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap.scrollspy&quot;&gt;bootstrap.scrollspy&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap.tab&quot;&gt;bootstrap.tab&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap.tooltip&quot;&gt;bootstrap.tooltip&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap.popover&quot;&gt;bootstrap.popover&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap.collapse&quot;&gt;bootstrap.collapse&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap.carousel&quot;&gt;bootstrap.carousel&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;jqueryblockui&quot;&gt;jquery.blockui&lt;/h2&gt;
+
+&lt;p&gt;这个插件可以轻松实现模拟锁屏, 遮罩效果, 在做弹出层效果, 以及做操作提示时非常有用&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://malsup.com/jquery/block/&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;jqueryuniform&quot;&gt;jquery.uniform&lt;/h2&gt;
+&lt;p&gt;Web表单是一个网站的重要方面，但在视觉方面往往被忽视。这个插件可以帮助你增加一个华丽的外观和视觉效果。
+例如单选按钮或选择下拉菜单，这些资源只能用简单的CSS，这通常是一件痛苦的事情&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://uniformjs.com&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;jquerylayout&quot;&gt;jquery.layout&lt;/h2&gt;
+
+&lt;p&gt;这个插件是一种基于jQuery的布局框架，其核心是一个大小自适应的中心面板，面板的上下左右四个方向可以放置可折叠、可缩放的面板,
+在做管理类的系统时特别有用&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://layout.jquery-dev.com/index.cfm&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;jquerycookie&quot;&gt;jquery.cookie&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://plugins.jquery.com/cookie/&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;这个插件是对原生cookie的api的封装, 适合存放小数据&lt;/p&gt;
+
+&lt;h2 id=&quot;jqueryvalidate&quot;&gt;jquery.validate&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://jqueryvalidation.org/&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;老版jquery表单验证插件, 功能也十分强大, 除了能做本地验证之外, 还可以轻松实现远程请求验证, 支持扩展, 自定义&lt;/p&gt;
+
+&lt;h2 id=&quot;jqueryform&quot;&gt;jquery.form&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://malsup.com/jquery/form/&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;这个插件API提供了几个方法，让你轻松管理表单数据和进行表单提交。&lt;/p&gt;
+
+&lt;h2 id=&quot;jquerytransit&quot;&gt;jquery.transit&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://ricostacruz.com/jquery.transit/&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;这个插件可以通过js api的方式实现css过渡效果, 而不用手动编写css&lt;/p&gt;
+
+&lt;h2 id=&quot;jquerybxslider&quot;&gt;jquery.bxslider&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://bxslider.com/&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;走马灯插件&lt;/p&gt;
+
+&lt;h2 id=&quot;jqueryqrcode&quot;&gt;jquery.qrcode&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://jeromeetienne.github.io/jquery-qrcode/&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;生成二维码插件&lt;/p&gt;
+
+&lt;h1 id=&quot;jquerychosen&quot;&gt;jquery.chosen&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://plugins.jquery.com/chosen/&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;jquery chosen一款强化原生select的插件,支持检索,多选,但不支持输入效果,&lt;/p&gt;
+
+&lt;h1 id=&quot;select2&quot;&gt;select2&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://select2.github.io/&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;强化原生select的功能强大的组件, 支持搜索, 远程加载等&lt;/p&gt;
+
+&lt;h1 id=&quot;jquerybackstretch&quot;&gt;jquery.backstretch&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/srobbin/jquery-backstretch&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;响应式背景图轮换, 可以设置页面背景图片, 也可以让背景图片动态切换, 缺点是图片可能太大会导致加载速度变慢&lt;/p&gt;
+
+&lt;h1 id=&quot;jquery-siderbar&quot;&gt;jquery-siderbar&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/jillix/jQuery-sidebar&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;一个简易的侧边栏组件&lt;/p&gt;
+
+&lt;h1 id=&quot;jquery-autocomplete&quot;&gt;jquery-autocomplete&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/devbridge/jQuery-Autocomplete&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;一个功能强大的自动填充/搜索推荐组件&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstraptransition&quot;&gt;bootstrap.transition&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://v3.bootcss.com&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;用以支持bootstrap的组件的过渡效果&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrapmodal&quot;&gt;bootstrap.modal&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://v3.bootcss.com&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;用以支持bootstrap的组件的模态框, 支持静态方式使用, 也支持弹出方式&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrapdropdown&quot;&gt;bootstrap.dropdown&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://v3.bootcss.com&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;用以支持bootstrap的下拉菜单组件&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrapscrollspy&quot;&gt;bootstrap.scrollspy&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://v3.bootcss.com&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;滚动监听插件依赖 Bootstrap 的导航组件 用于高亮显示当前激活的链接。&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstraptab&quot;&gt;bootstrap.tab&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://v3.bootcss.com&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;标签页组件依赖 Bootstrap 的导航组件&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstraptooltip&quot;&gt;bootstrap.tooltip&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://v3.bootcss.com&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;类似原生浏览器的工具条提示&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrappopover&quot;&gt;bootstrap.popover&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://v3.bootcss.com&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;弹出框依赖 工具提示插件&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrapbutton&quot;&gt;bootstrap.button&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://v3.bootcss.com&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;按钮的功能很丰富。通过控制按钮的状态或创建一组按钮并形成一些新的组件，例如工具条。&lt;/p&gt;
+
+&lt;p&gt;也可以自定义按钮点击后的状态, 例如设置按钮正在loading&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrapcollapse&quot;&gt;bootstrap.collapse&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://v3.bootcss.com&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;实现内容展开, 以及缩回的功能, 支持according&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrapcarousel&quot;&gt;bootstrap.carousel&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://v3.bootcss.com&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;走马灯, 但是动画效果不支持ie8,9&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrapaffix&quot;&gt;bootstrap.affix&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://v3.bootcss.com&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;模拟将元素变成sticky效果&lt;/p&gt;
+</description>
+        <pubDate>Tue, 15 Mar 2016 00:00:00 +0800</pubDate>
+        <link>http://www.vanadis.cn/2016/03/15/usual-jquery-plugins-collection/</link>
+        <guid isPermaLink="true">http://www.vanadis.cn/2016/03/15/usual-jquery-plugins-collection/</guid>
+        
+        <category>javascript</category>
+        
+        
+      </item>
     
       <item>
         <title>关于前端开发谈谈单元测试</title>
@@ -1453,8 +1649,12 @@ github上也遍地都是jquery插件的提交, 其中不乏很多大牛,明星�
       <item>
         <title>autocomplete组件分析与实现</title>
         <description>&lt;blockquote&gt;
-  &lt;p&gt;“先分析, 后动工”&lt;/p&gt;
+  &lt;p&gt;“”&lt;/p&gt;
 &lt;/blockquote&gt;
+
+&lt;p&gt;由于项目中有急需用到搜索推荐+自动填充的功能, 但是github上找的jquery-autocomplete又不能完全满足需求,
+  并且由于jquery插件编写方式的格式, 修改起来不是很方便, 还不如自己实现一个,
+  故开始自己造轮子&lt;/p&gt;
 
 &lt;h1 id=&quot;autocomplete-&quot;&gt;autocomplete 功能实现分析&lt;/h1&gt;
 

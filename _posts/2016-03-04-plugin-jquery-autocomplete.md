@@ -8,7 +8,11 @@ tags:
     - javascript组件
 ---
 
-> “先分析, 后动工”
+> “”
+
+  由于项目中有急需用到搜索推荐+自动填充的功能, 但是github上找的jquery-autocomplete又不能完全满足需求,
+  并且由于jquery插件编写方式的格式, 修改起来不是很方便, 还不如自己实现一个,
+  故开始自己造轮子
 
 #   autocomplete 功能实现分析
 
