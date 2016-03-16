@@ -12098,7 +12098,7 @@
 
 			onPropertyChangeHandler: function(e) {
 
-				if(e.propertyName != 'value') {
+				if(e.originalEvent.propertyName != 'value') {
 
 					return;
 
