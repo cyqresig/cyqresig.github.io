@@ -463,6 +463,8 @@
 
 	var attrs = {
 
+		watchValueChange: true,   //for ie8 onpropertychange
+
 		searchMenuData: {
 
 			//isShowHeader: false,  //UI层变化交由使用者自行控制
@@ -644,6 +646,7 @@
 
 		this._attrs.$searchMenu.find(this._options.searchItemSelector + this._options.searchItemSelectedSelector).removeClass(selectedCssClass);
 
+		this._attrs.watchValueChange = false;
 
 		if(this._attrs.searchItemIndex == this._attrs.recommendItemsCount || this._attrs.searchItemIndex == -1) {
 
@@ -672,6 +675,8 @@
 			}
 
 		}
+
+		this._attrs.watchValueChange = true;
 
 	}
 
@@ -940,6 +945,12 @@
 			onPropertyChangeHandler: function(e) {
 
 				if(e.originalEvent.propertyName != 'value') {
+
+					return;
+
+				}
+
+				if(!this._attrs.watchValueChange) {
 
 					return;
 
