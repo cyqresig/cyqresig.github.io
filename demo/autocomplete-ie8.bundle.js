@@ -1625,14 +1625,14 @@
 
 		var AutoComplete = __webpack_require__(5);
 
-		//local
-		var instance_1 = new AutoComplete({
-
-			localData: localData,
-
-			$searchInput: $('#s1')
-
-		});
+		////local
+		//var instance_1 = new AutoComplete({
+		//
+		//	localData: localData,
+		//
+		//	$searchInput: $('#s1')
+		//
+		//});
 
 
 		//remote
