@@ -5,9 +5,48 @@
     <description>关于前端开发,架构,动漫 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 16 Mar 2016 10:25:48 +0800</pubDate>
-    <lastBuildDate>Wed, 16 Mar 2016 10:25:48 +0800</lastBuildDate>
+    <pubDate>Thu, 17 Mar 2016 20:10:28 +0800</pubDate>
+    <lastBuildDate>Thu, 17 Mar 2016 20:10:28 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
+    
+      <item>
+        <title>前端开发流程整理</title>
+        <description>&lt;p&gt;随着前端技术的不断发展, 前端开发已经不仅仅是随便写点JS代码, 做一点交互和特效这么简单了, 整个开发流程会涉及到很多步骤. 这里将前端的开发流程做了一个整理汇总.&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;了解需求&lt;/h2&gt;
+
+&lt;p&gt;许多开发人员在开发时都有一个坏习惯, 开发到某一个功能时再去了解这个功能的需求, 而不是在一开始先了解下应用整体需求,
+应用要做什么, 主要有哪些功能等. 了解应用整体需求, 有助于在开发时更好的理清思路, 也更有利于模块的划分和代码的组织.&lt;/p&gt;
+
+&lt;p&gt;在这个阶段, 前端人员需要查看需求及产品设计人员制作的原型, 文字和流程图等需求文档,
+并与需求及产品设计人员密切沟通, 以便在最短的时间内最大程度的了解需求.&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;模块划分&lt;/h2&gt;
+
+&lt;p&gt;模块划分有助于应用程序的解耦, 并且在划分后可以方便地将不同模板安排给不同的前端开发人员负责进行开发.&lt;/p&gt;
+
+&lt;p&gt;在这个阶段,&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;路由定义&lt;/h2&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;框架选定&lt;/h2&gt;
+
+&lt;h2 id=&quot;section-4&quot;&gt;组件选定&lt;/h2&gt;
+
+&lt;h2 id=&quot;section-5&quot;&gt;开发模式&lt;/h2&gt;
+
+&lt;h2 id=&quot;section-6&quot;&gt;文档整理&lt;/h2&gt;
+
+&lt;h2 id=&quot;section-7&quot;&gt;项目工程化构建&lt;/h2&gt;
+</description>
+        <pubDate>Thu, 17 Mar 2016 00:00:00 +0800</pubDate>
+        <link>http://www.vanadis.cn/2016/03/17/frontEnd-workflow/</link>
+        <guid isPermaLink="true">http://www.vanadis.cn/2016/03/17/frontEnd-workflow/</guid>
+        
+        <category>javascript</category>
+        
+        
+      </item>
     
       <item>
         <title>常用jquery组件的整理</title>
@@ -15,7 +54,7 @@
   &lt;p&gt;未完待续&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;在做敏捷开发时, 除了公司自己造的轮子外, jquery组件是会被经常使用到的轮子, 下面就项目中经常被使用到的jquery组件做一个整理.&lt;/p&gt;
+&lt;p&gt;在做敏捷开发时, 除了公司自己造的轮子外, js组件是会被经常使用到的轮子, 下面就项目(电商项目, 管理类项目)中经常使用到的js组件做一个整理.&lt;/p&gt;
 
 &lt;h1 id=&quot;section&quot;&gt;目录&lt;/h1&gt;
 &lt;ol&gt;
@@ -28,10 +67,28 @@
   &lt;li&gt;&lt;a href=&quot;#jquery.transit&quot;&gt;jquery.transit&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#jquery.bxslider&quot;&gt;jquery.bxslider&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#jquery.qrcode&quot;&gt;jquery.qrcode&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jquery.chosen&quot;&gt;jquery.chosen&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#select2&quot;&gt;jquery.select2&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#jquery.backstretch&quot;&gt;jquery.backstretch&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#jquery-siderbar&quot;&gt;jquery-siderbar&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jquery-autocomplete&quot;&gt;jquery-autocomplete&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jquery.slimscroll&quot;&gt;jquery.slimscroll&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jquery.jqzoom&quot;&gt;jquery.jqzoom&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jquery.imgScroll&quot;&gt;jquery.imgScroll&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jquery.metadata&quot;&gt;jquery.metadata&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jquery.lazyload&quot;&gt;jquery.lazyload&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jquery.fancybox&quot;&gt;jquery.fancybox&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jquery.poshytip&quot;&gt;jquery.poshytip&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jquery.raty&quot;&gt;jquery.raty&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#OwlCarousel&quot;&gt;OwlCarousel&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jQuery-contextMenu&quot;&gt;jQuery-contextMenu&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jQuery-timeago&quot;&gt;jQuery-timeago&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jQuery-sessionTimeout&quot;&gt;jQuery-sessionTimeout&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jQuery.toastr&quot;&gt;jQuery.toastr&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jQuery.cubeportfolio&quot;&gt;jQuery.cubeportfolio&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jQuery.countdown&quot;&gt;jQuery.countdown&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;#jquery-autocomplete&quot;&gt;jquery-autocomplete&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;#jQuery.dataTables&quot;&gt;jQuery.dataTables&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#bootstrap.transition&quot;&gt;bootstrap.transition&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#bootstrap.modal&quot;&gt;bootstrap.modal&lt;/a&gt;&lt;/li&gt;
@@ -41,6 +98,37 @@
   &lt;li&gt;&lt;a href=&quot;#bootstrap.popover&quot;&gt;bootstrap.popover&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#bootstrap.collapse&quot;&gt;bootstrap.collapse&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#bootstrap.carousel&quot;&gt;bootstrap.carousel&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap-hover-dropdown&quot;&gt;bootstrap-hover-dropdown&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap-switch&quot;&gt;bootstrap-switch&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap-colorpicker&quot;&gt;bootstrap-colorpicker&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap-star-rating&quot;&gt;bootstrap-star-rating&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap-modal&quot;&gt;bootstrap-modal&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap-confirmation&quot;&gt;bootstrap-confirmation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap-contextmenu&quot;&gt;bootstrap-contextmenu&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap-datepicker&quot;&gt;bootstrap-datepicker&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap-datetimepicker&quot;&gt;bootstrap-datetimepicker&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap-daterangepicker&quot;&gt;bootstrap-daterangepicker&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap-timepicker&quot;&gt;bootstrap-timepicker&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#x-editable&quot;&gt;x-editable&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap-growl&quot;&gt;bootstrap-growl&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap-markdown&quot;&gt;bootstrap-markdown&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap-maxlength&quot;&gt;bootstrap-maxlength&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap-select&quot;&gt;bootstrap-select&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap-selectsplitter&quot;&gt;bootstrap-selectsplitter&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap-tabdrop&quot;&gt;bootstrap-tabdrop&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap-touchspin&quot;&gt;bootstrap-touchspin&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap-wizard&quot;&gt;bootstrap-wizard&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#clockface&quot;&gt;clockface&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap-auto-hiding-navbar&quot;&gt;bootstrap-auto-hiding-navbar&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap-duallistbox&quot;&gt;bootstrap-duallistbox&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;#bootstrap-autohidingnavbar&quot;&gt;bootstrap-autohidingnavbar&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;[]&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#autosize&quot;&gt;autosize&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#ueditor&quot;&gt;ueditor&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#Web Uploader&quot;&gt;Web Uploader&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#echarts&quot;&gt;echarts&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h2 id=&quot;jqueryblockui&quot;&gt;jquery.blockui&lt;/h2&gt;
@@ -128,6 +216,115 @@
 
 &lt;p&gt;一个功能强大的自动填充/搜索推荐组件&lt;/p&gt;
 
+&lt;h1 id=&quot;jqueryslimscroll&quot;&gt;jquery.slimscroll&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://plugins.jquery.com/slimScroll/&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;实用jQuery滚动条特效插件jQuery slimScroll&lt;/p&gt;
+
+&lt;h1 id=&quot;jqueryvmap&quot;&gt;jquery.vmap&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://plugins.jquery.com/slimScroll/&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;JQVAMP是一款jquery矢量地图生成插件, 不过没有热点功能&lt;/p&gt;
+
+&lt;h1 id=&quot;jqueryjqzoom&quot;&gt;jquery.jqzoom&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/mindprojects/jqzoom&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;jqzoom是一款图片放大镜插件, 常用于电商的商品详情页面&lt;/p&gt;
+
+&lt;h1 id=&quot;jqueryimgscroll&quot;&gt;jquery.imgScroll&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/tabooc/imgScroll&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;这个插件比较简单, 多是自定义版本&lt;/p&gt;
+
+&lt;h1 id=&quot;jquerymetadata&quot;&gt;jquery.metadata&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/jquery-archive/jquery-metadata&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;元数据插件, 在html标签属性里传对象值使用&lt;/p&gt;
+
+&lt;h1 id=&quot;jquerylazyload&quot;&gt;jquery.lazyload&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/tuupola/jquery_lazyload&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;延迟加载图片插件, 如果要实现自定义的延迟加载内容, 可以在插件基础上进行扩展&lt;/p&gt;
+
+&lt;h1 id=&quot;jqueryad-gallery&quot;&gt;jquery.ad-gallery&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/dodoroy/ad-gallery&quot;&gt;了解更多&lt;/a&gt;
+&lt;a href=&quot;http://adgallery.codeplex.com/&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;使用AD Gallery可以制作出强大的相册画廊&lt;/p&gt;
+
+&lt;h1 id=&quot;jqueryfancybox&quot;&gt;jquery.fancybox&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://fancybox.net/&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;强大的弹出层插件, 支持静态内容, 远程请求ajax内容, iframe, 图片切换等加载方式&lt;/p&gt;
+
+&lt;h1 id=&quot;jqueryposhytip&quot;&gt;jquery.poshytip&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/vadikom/poshytip&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;类似原生的工具条tooltip插件&lt;/p&gt;
+
+&lt;h1 id=&quot;jqueryraty&quot;&gt;jquery.raty&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/wbotelhos/raty&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;打星评分插件&lt;/p&gt;
+
+&lt;h1 id=&quot;owlcarousel&quot;&gt;OwlCarousel&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/OwlFonk/OwlCarousel&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;强大的旋转木马(传送带)插件&lt;/p&gt;
+
+&lt;h1 id=&quot;jquery-contextmenu&quot;&gt;jQuery-contextMenu&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/swisnl/jQuery-contextMenu&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;强大的右键菜单插件&lt;/p&gt;
+
+&lt;h1 id=&quot;jquery-timeago&quot;&gt;jQuery-timeago&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/rmm5t/jquery-timeago&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;将时间戳显示为多少时间前的强大插件&lt;/p&gt;
+
+&lt;h1 id=&quot;jquery-sessiontimeout&quot;&gt;jQuery-sessionTimeout&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/travishorn/jquery-sessionTimeout&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;让页面在经过一段时间后, 会弹出提示框, 让用户确认是否要登出还是继续保持连接, 超时后自动跳转至登出(阿里云邮箱有使用)&lt;/p&gt;
+
+&lt;h1 id=&quot;jquerytoastr&quot;&gt;jQuery.toastr&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/CodeSeven/toastr&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;类似android里源生的toast的效果&lt;/p&gt;
+
+&lt;h1 id=&quot;jquerycubeportfolio&quot;&gt;jquery.cubeportfolio&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://scriptpie.com/cubeportfolio/live-preview/templates/projects/&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;收费插件, 做各种类型的grid展现, 图文并茂(样子很不错, 交互可以借鉴, 并没有特别的功能, 只是功能集+炫)&lt;/p&gt;
+
+&lt;h1 id=&quot;jquerycountdown&quot;&gt;jQuery.countdown&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/hilios/jQuery.countdown&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;倒计时插件&lt;/p&gt;
+
+&lt;h1 id=&quot;jquerydatatables&quot;&gt;jQuery.dataTables&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/DataTables/DataTables&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;强大的数据表格插件, 支持定义成bootstrap样式&lt;/p&gt;
+
 &lt;h2 id=&quot;bootstraptransition&quot;&gt;bootstrap.transition&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://v3.bootcss.com&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
@@ -195,6 +392,193 @@
 &lt;p&gt;&lt;a href=&quot;http://v3.bootcss.com&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;模拟将元素变成sticky效果&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-hover-dropdown&quot;&gt;bootstrap-hover-dropdown&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/CWSpear/bootstrap-hover-dropdown&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;bootstrap中的dropdown组件扩展hover事件&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-switch&quot;&gt;bootstrap-switch&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.bootstrap-switch.org/&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bootstrap 开关（switch）控件&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-colorpicker&quot;&gt;bootstrap-colorpicker&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.bootstrap-switch.org/&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;一个定制化的颜色拾取器插件, 依赖于Bootstrap 2 &amp;amp; 3&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-star-rating&quot;&gt;bootstrap-star-rating&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/kartik-v/bootstrap-star-rating&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;打星评分插件&lt;/p&gt;
+
+&lt;h2 id=&quot;bootbox&quot;&gt;bootbox&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/makeusabrew/bootbox&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;不用事先写死html代码就能使用bootstrap的各种弹出模态框&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-modal&quot;&gt;bootstrap-modal&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/jschr/bootstrap-modal&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;强化了boostrap源生的modal, 增加了居中显示, 远程ajax加载, 加载时显示进度条等功能&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-confirmation&quot;&gt;bootstrap-confirmation&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/ethaizone/Bootstrap-Confirmation&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;依赖于boostrap的tooltip组件, 在用户交互后, 弹出工具确认框, 引导用户进行确认或取消操作&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-contextmenu&quot;&gt;bootstrap-contextmenu&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/sydcanem/bootstrap-contextmenu&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;右键菜单插件&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-datepicker&quot;&gt;bootstrap-datepicker&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/eternicode/bootstrap-datepicker&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;强大的日期插件, 但需要自己扩展中文的支持&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-datetimepicker&quot;&gt;bootstrap-datetimepicker&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/smalot/bootstrap-datetimepicker&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;支持时分秒的日期插件, 需要自己扩展中文的支持&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-daterangepicker&quot;&gt;bootstrap-daterangepicker&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/dangrossman/bootstrap-daterangepicker&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;日期范围选择插件, 但在选取日期时存在二个文本框值相同的bug, 并且ie8上样式也存在问题&lt;/p&gt;
+
+&lt;h2 id=&quot;x-editable&quot;&gt;x-editable&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/vitalets/x-editable&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;任意处都可以弹出工具层, 进行编辑, 支持客户端与服务端验证, 支持提交数据至远程&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-growl&quot;&gt;bootstrap-growl&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/ifightcrime/bootstrap-growl&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;notification提示操作信息插件&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-gtreetable&quot;&gt;bootstrap-gtreetable&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/gilek/bootstrap-gtreetable&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;树形数据表格插件, 在后台管理系统中做层级少的配置项操作中可以考虑使用(这样用不需要使用tree插件了)&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-markdown&quot;&gt;bootstrap-markdown&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/toopay/bootstrap-markdown&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;markdown编辑器, 如果程序员使用的话, 可以考虑使用该编辑器进行文章发布&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-maxlength&quot;&gt;bootstrap-maxlength&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/mimo84/bootstrap-maxlength&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;单行或多行文本框在输入时给予友好提示(在元素附近小工具层提示), 当前输入了多少个字, 最大能输入多少个字&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-pwstrength&quot;&gt;bootstrap-pwstrength&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/ablanco/jquery.pwstrength.bootstrap&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;提示密码强度的插件&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-select&quot;&gt;bootstrap-select&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/silviomoreto/bootstrap-select&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;美化select插件, 功能类同chosen&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-selectsplitter&quot;&gt;bootstrap-selectsplitter&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/xavierfaucon/bootstrap-selectsplitter&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;能把一个分组的select变成二个select, 一个选择分组, 另外一个级联选择分组下的内容(使用机会不多)&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-tabdrop&quot;&gt;bootstrap-tabdrop&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/jmschabdach/bootstrap-tabdrop&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;水平显示tab标签时, 如显示不下了, 这个插件可以把显示不下的tab自动并入右方一处下拉选项中, 可以自适应(只有resize事件).
+要做到像各种IDE那样又能左右切换, 又有drop菜单, 并且在drop菜单中选择一项会智能定位到那一项等, 还需要自定义&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-timepicker&quot;&gt;bootstrap-timepicker&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/jdewit/bootstrap-timepicker&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;简单的日期选择插件&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-touchspin&quot;&gt;bootstrap-touchspin&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/istvan-ujjmeszaros/bootstrap-touchspin&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;加减数字以方便输入数字值的插件(三个部件, 文本框, 减按钮, 加按钮)&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-wizard&quot;&gt;bootstrap-wizard&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/VinceG/twitter-bootstrap-wizard&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;标签+步骤插件, 比如注册环节步骤, 比如下订单环境步骤(要注意, 区别是传统做法, 插件使用的步骤都是在同一个页面, 输入项最终一起提交)&lt;/p&gt;
+
+&lt;h2 id=&quot;clockface&quot;&gt;clockface&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/vitalets/clockface&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;长的像时钟的时间选择控件&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-duallistbox&quot;&gt;bootstrap-duallistbox&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;左右ListBox选项互选插件&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-autohidingnavbar&quot;&gt;bootstrap-autohidingnavbar&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/istvan-ujjmeszaros/bootstrap-autohidingnavbar&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;页面滚动条下拉后, 自动隐藏顶部navbar(一般电商需求是, 下拉到一定位置后navbar自动sticky…)&lt;/p&gt;
+
+&lt;h2 id=&quot;dropzone&quot;&gt;dropzone&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/enyo/dropzone&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;拖放的范围内允许上传文件, 有进度条等支持&lt;/p&gt;
+
+&lt;h2 id=&quot;autosize&quot;&gt;autosize&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/jackmoore/autosize&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;使textarea能根据文字输入自适应高度&lt;/p&gt;
+
+&lt;h2 id=&quot;ueditor&quot;&gt;ueditor&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://ueditor.baidu.com/&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;百度编辑器插件&lt;/p&gt;
+
+&lt;h2 id=&quot;web-uploader&quot;&gt;Web Uploader&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://fex.baidu.com/webuploader/&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;百度上传文件插件&lt;/p&gt;
+
+&lt;h2 id=&quot;echarts&quot;&gt;echarts&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://echarts.baidu.com/&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;百度生成数据分析图形插件&lt;/p&gt;
 </description>
         <pubDate>Tue, 15 Mar 2016 00:00:00 +0800</pubDate>
         <link>http://www.vanadis.cn/2016/03/15/usual-jquery-plugins-collection/</link>
@@ -1607,7 +1991,7 @@ github上也遍地都是jquery插件的提交, 其中不乏很多大牛,明星�
 
 &lt;p&gt;为什么这么说呢? 很简单, 因为jquery插件, 涉及到UI的部分, 绝大部分都是编写inline html, 也就是说用js编写html标签字符串, 然后再进行拼接, 最后再加入到文档上.
 使用这种方式编写的jquery插件, 如果逻辑比较少, 组织代码还比较容易, 但是一旦逻辑一多, 整个插件内遍地都是js + inline html代码.
-不知道大家都没有这种感觉, 修改别的作者的jquery插件, 特别是逻辑比较复杂的插件, 在很多情况下都是比较困难的任务, 而且会无谓花费大量的时间.
+不知道大家都没有这种感觉, 修改别的作者的jquery插件, 特别是逻辑比较复杂的插件, 在很多情况下都会花费大量的时间.
 如果一个网站使用了大量的jquery插件, 一旦产生了需要修改插件源码, 或者进行扩展的需求, 相信很多开发者都会无比郁闷.&lt;/p&gt;
 
 &lt;p&gt;那么, 究竟是哪里出现了问题呢?&lt;/p&gt;
