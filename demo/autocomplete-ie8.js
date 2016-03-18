@@ -57,6 +57,16 @@ $.mockjax({
 	}
 });
 
+$.mockjax({
+	url: '/sug',
+	data: {
+
+	},
+	responseText: {
+		list: []
+	}
+});
+
 //require.ensure('./../src/autocomplete', function(require) {
 
 	var AutoComplete = require('./../src/autocomplete');
