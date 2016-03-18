@@ -5,22 +5,54 @@
  * Created on 16/3/7.
  */
 
+require('es5-shim')
+require('es5-shim/es5-sham')
 
 //仅在脱离服务端环境下做测试用
 
 $.mockjaxSettings.contentType = "application/json";
 $.mockjax({
-	url: '/sug',
+	url: '/sug?searchKey=%E6%B7%98',
 	data: {
 
 	},
 	responseText: {
 		list: [{
-			'keyword': '淘宝宝1'
+			'keyword': '淘' + Math.random()
 		},{
-			'keyword': '淘宝宝11'
+			'keyword': '淘' + Math.random()
 		},{
-			'keyword': '淘宝宝111'
+			'keyword': '淘' +  + Math.random()
+		}]
+	}
+});
+$.mockjax({
+	url: '/sug?searchKey=%E6%B7%98%E5%AE%9D',
+	data: {
+
+	},
+	responseText: {
+		list: [{
+			'keyword': '淘宝' + Math.random()
+		},{
+			'keyword': '淘宝' + Math.random()
+		},{
+			'keyword': '淘宝' + Math.random()
+		}]
+	}
+});
+$.mockjax({
+	url: '/sug?searchKey=%E6%B7%98%E5%AE%9D%E5%AE%9D',
+	data: {
+
+	},
+	responseText: {
+		list: [{
+			'keyword': '淘宝宝' + Math.random()
+		},{
+			'keyword': '淘宝宝' + Math.random()
+		},{
+			'keyword': '淘宝宝' + Math.random()
 		}]
 	}
 });
