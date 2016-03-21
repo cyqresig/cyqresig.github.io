@@ -43,7 +43,26 @@ tags:
 1. [jQuery.cubeportfolio](#jQuery.cubeportfolio)
 1. [jQuery.countdown](#jQuery.countdown)
 1. [jQuery.dataTables](#jQuery.dataTables)
-
+1. [jQuery.gritter](#jQuery.gritter)
+1. [icheck](#icheck)
+1. [ion.rangeSlider](#ion.rangeSlider)
+1. [jQuery.Jcrop](#jQuery.Jcrop)
+1. [jQuery.color](#jQuery.color)
+1. [jQuery.bootpag](#jQuery.bootpag)
+1. [jQuery.idletimer](#jQuery.idletimer)
+1. [jQuery.inputMask](#jQuery.inputMask)
+1. [jQuery knob](#jQuery knob)
+1. [jQuery.minicolors](#jQuery.minicolors)
+1. [mixitup](#mixitup)
+1. [Nestable](#Nestable)
+1. [jQuery.notific8](#jQuery.notific8)
+1. [jQuery.slimScroll](#jQuery.slimScroll)
+1. [jQuery.tagsinput](#jQuery.tagsinput)
+1. [noUiSlider](#noUiSlider)
+1. [jQuery.zoom](#jQuery.zoom)
+1. [jQuery.easing](#jQuery.easing)
+1. [jQuery.input-ip-address-contro](#jQuery.input-ip-address-control)
+1. [jQuery.parallax](#jQuery.parallax)
 
 1. [bootstrap.transition](#bootstrap.transition)
 1. [bootstrap.modal](#bootstrap.modal)
@@ -77,8 +96,13 @@ tags:
 1. [bootstrap-auto-hiding-navbar](#bootstrap-auto-hiding-navbar)
 1. [bootstrap-duallistbox](#bootstrap-duallistbox)
 1. [bootstrap-autohidingnavbar](#bootstrap-autohidingnavbar)
+1. [fuelux](#fuelux)
+1. [bootstrap-multiselect](#bootstrap-multiselect)
 
-1. []
+1. [PubSubJS](#PubSubJS)
+1. [typeahead](#typeahead)
+1. [fullcalendar](#fullcalendar)
+1. [dropzone](#dropzone)
 1. [autosize](#autosize)
 1. [ueditor](#ueditor)
 1. [Web Uploader](#Web Uploader)
@@ -279,6 +303,141 @@ jqzoom是一款图片放大镜插件, 常用于电商的商品详情页面
 
 强大的数据表格插件, 支持定义成bootstrap样式
 
+# jQuery.gritter
+
+[了解更多](https://github.com/jboesch/Gritter)
+
+notification提示插件, 不过太久不更新了...
+
+# icheck
+
+[了解更多](https://github.com/fronteed/icheck)
+
+强大的美化check, radio的插件, 支持jQuery和Zepto
+
+# ion.rangeSlider
+
+[了解更多](https://github.com/IonDen/ion.rangeSlider)
+
+刻度针选择插件
+
+# jQuery.Jcrop
+
+[了解更多](https://github.com/tapmodo/Jcrop)
+
+图案范围裁剪插件, 常用于上传头像的范围裁剪
+
+# jQuery.color
+
+[了解更多](https://github.com/jquery/jquery-color)
+
+cssHook, 能使jQuery animate API 使用骆峰式的颜色动画变化
+
+# jQuery.bootpag
+[了解更多](https://github.com/botmonster/jquery-bootpag)
+
+基于boostrap的简单pagination插件
+
+# jQuery.idletimer
+
+[了解更多](https://github.com/thorst/jquery-idletimer)
+
+用于前端页面定时(判断是否超时, 以及后续操作)
+
+# jQuery.inputMask
+
+[了解更多](https://github.com/RobinHerbots/jquery.inputmask)
+
+格式化录入的jQuery插件
+
+# jQuery knob
+
+[了解更多](https://github.com/aterrien/jQuery-Knob)
+
+旋钮插件, 圆形把手(可用于百分比显示)
+
+# jQuery.minicolors
+
+[了解更多](https://github.com/aterrien/jQuery-Knob)
+
+简单的colorpicker插件
+
+# mixitup
+
+[了解更多](https://github.com/patrickkunka/mixitup)
+
+无刷新动画排序插件
+
+# Nestable
+
+[了解更多](https://github.com/dbushell/Nestable)
+
+拖放分层项
+
+# jQuery.notific8
+
+win8的notification插件
+
+# jQuery.slimScroll
+
+[了解更多](https://github.com/rochal/jQuery-slimScroll)
+
+自定义滚动条插件
+
+# jQuery.tagsinput
+
+[了解更多](https://github.com/xoxco/jQuery-Tags-Input)
+
+inputtext输入项展现时是一个个标签
+
+# noUiSlider
+
+[了解更多](https://github.com/leongersen/noUiSlider)
+
+刻度范围选择rangeSlider
+
+# jQuery.zoom
+
+[了解更多](https://github.com/fat/zoom.js)
+
+图片放大插件
+
+# jQuery.easing
+
+[了解更多](https://github.com/gdsmith/jquery.easing)
+
+扩展jQuery动画效果插件
+
+# jQuery.input-ip-address-control
+
+[了解更多](https://github.com/gdsmith/jquery.easing)
+
+让input变成ip地址格式输入
+
+# jQuery.parallax
+
+[了解更多](https://github.com/IanLunn/jQuery-Parallax)
+
+视差插件
+
+# jQuery.ScrollTo
+
+[了解更多](https://github.com/flesler/jquery.scrollTo)
+
+控制滚动条渐变滚动插件
+
+# jQuery.sparkline
+
+[了解更多](https://github.com/gwatts/jquery.sparkline)
+
+迷你线图(反应数据趋势)
+
+# jquery-migrate
+
+[了解更多](https://github.com/jquery/jquery-migrate)
+
+用于兼容旧版本比如1.9以下的移除的API
+
 
 ## bootstrap.transition
 
@@ -382,13 +541,13 @@ Bootstrap 开关（switch）控件
 
 [了解更多](https://github.com/jschr/bootstrap-modal)
 
-强化了boostrap源生的modal, 增加了居中显示, 远程ajax加载, 加载时显示进度条等功能
+强化了bootstrap源生的modal, 增加了居中显示, 远程ajax加载, 加载时显示进度条等功能
 
 ## bootstrap-confirmation
 
 [了解更多](https://github.com/ethaizone/Bootstrap-Confirmation)
 
-依赖于boostrap的tooltip组件, 在用户交互后, 弹出工具确认框, 引导用户进行确认或取消操作
+依赖于bootstrap的tooltip组件, 在用户交互后, 弹出工具确认框, 引导用户进行确认或取消操作
 
 ## bootstrap-contextmenu
 
@@ -506,6 +665,55 @@ markdown编辑器, 如果程序员使用的话, 可以考虑使用该编辑器�
 
 页面滚动条下拉后, 自动隐藏顶部navbar(一般电商需求是, 下拉到一定位置后navbar自动sticky...)
 
+## fuelux
+
+[了解更多](https://github.com/ExactTarget/fuelux)
+
+美化了各种控件, 比如常见的表单控件, 基于bootstrap3(使用机会不大)
+
+## bootstrap-multiselect
+
+[了解更多](https://github.com/davidstutz/bootstrap-multiselect)
+
+多选插件
+
+## bootstrap-tagsinput
+
+[了解更多](https://github.com/bootstrap-tagsinput/bootstrap-tagsinput)
+
+input输入项变成标签
+
+
+## respond
+
+[了解更多](https://github.com/scottjehl/Respond)
+
+让ie9以下支持media query
+
+## moment
+
+[了解更多](https://github.com/moment/moment)
+
+强大的日期API库(格式化日期首选)
+
+
+## PubSubJS
+
+[了解更多](https://github.com/mroderick/PubSubJS)
+
+强大的订阅/发布模式实现的js库, 常用于模块间通信, 以解决业务模块的耦合问题
+
+## typeahead
+
+[了解更多](https://github.com/twitter/typeahead.js)
+
+强大的自动补全/搜索推荐插件
+
+## fullcalendar
+
+[了解更多](https://github.com/fullcalendar/fullcalendar)
+
+强大的日历组件
 
 ## dropzone
 

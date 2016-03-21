@@ -5,39 +5,70 @@
     <description>关于前端开发,架构,动漫 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 17 Mar 2016 20:10:28 +0800</pubDate>
-    <lastBuildDate>Thu, 17 Mar 2016 20:10:28 +0800</lastBuildDate>
+    <pubDate>Mon, 21 Mar 2016 15:16:51 +0800</pubDate>
+    <lastBuildDate>Mon, 21 Mar 2016 15:16:51 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
         <title>前端开发流程整理</title>
-        <description>&lt;p&gt;随着前端技术的不断发展, 前端开发已经不仅仅是随便写点JS代码, 做一点交互和特效这么简单了, 整个开发流程会涉及到很多步骤. 这里将前端的开发流程做了一个整理汇总.&lt;/p&gt;
+        <description>&lt;p&gt;随着前端技术的不断发展, 前端开发已经不仅仅是随便写点JS代码, 做一点交互和特效这么简单了, 整个开发流程会涉及到很多步骤. 这里根据个人理解, 对前端的开发流程做了一个整理汇总.&lt;/p&gt;
 
 &lt;h2 id=&quot;section&quot;&gt;了解需求&lt;/h2&gt;
 
 &lt;p&gt;许多开发人员在开发时都有一个坏习惯, 开发到某一个功能时再去了解这个功能的需求, 而不是在一开始先了解下应用整体需求,
 应用要做什么, 主要有哪些功能等. 了解应用整体需求, 有助于在开发时更好的理清思路, 也更有利于模块的划分和代码的组织.&lt;/p&gt;
 
-&lt;p&gt;在这个阶段, 前端人员需要查看需求及产品设计人员制作的原型, 文字和流程图等需求文档,
+&lt;p&gt;在这个阶段, 前端人员需要查看需求及产品设计人员制作的业务模型, UI原型, 文字和流程图等需求文档,
 并与需求及产品设计人员密切沟通, 以便在最短的时间内最大程度的了解需求.&lt;/p&gt;
 
 &lt;h2 id=&quot;section-1&quot;&gt;模块划分&lt;/h2&gt;
 
-&lt;p&gt;模块划分有助于应用程序的解耦, 并且在划分后可以方便地将不同模板安排给不同的前端开发人员负责进行开发.&lt;/p&gt;
+&lt;p&gt;模块划分有助于应用程序的解耦, 并且在划分后可以方便地将不同模块安排给不同的前端开发人员负责进行开发.&lt;/p&gt;
 
-&lt;p&gt;在这个阶段,&lt;/p&gt;
+&lt;p&gt;在这个阶段, 前端开发人员需要根据业务模型, 及UI原型, 将业务模块尽可能细分出来(一个细分的业务模块对应一个业务模块js文件),
+之后在开始阶段时需要有效的进行模块管理（文件结构、书写规范等）、模块解耦（模块间不要直接互相调用，通过订阅/发布者模式来通信）、模块复用.&lt;/p&gt;
 
 &lt;h2 id=&quot;section-2&quot;&gt;路由定义&lt;/h2&gt;
 
+&lt;p&gt;由于使用了nodejs服务器作为渲染层, 路由将全部由前端开发人员进行定义.&lt;/p&gt;
+
+&lt;p&gt;路由定义可以清晰有效地梳理出页面跳转, 有利于前后端交互接口的事先定义.&lt;/p&gt;
+
+&lt;p&gt;对单页路由来说, 还需要额外定义前端路由.&lt;/p&gt;
+
 &lt;h2 id=&quot;section-3&quot;&gt;框架选定&lt;/h2&gt;
+
+&lt;p&gt;根据应用的规模, 实际业务的需求, 开发团队的人员配置, 进行前端框架的选择.&lt;/p&gt;
+
+&lt;p&gt;比如, 管理系统如果选择做成spa单页应用, 多选用AngularJS.
+传统多页面应用, 多选用jQuery+plugins的方式进行开发.&lt;/p&gt;
 
 &lt;h2 id=&quot;section-4&quot;&gt;组件选定&lt;/h2&gt;
 
-&lt;h2 id=&quot;section-5&quot;&gt;开发模式&lt;/h2&gt;
+&lt;p&gt;在这个阶段, 前端开发人员仔细查看UI原型, 梳理功能, 并且根据实际的需要, 选定匹配的, 成熟的组件.
+如果功能定制化程度太高, 则可以考虑在相似功能的组件的基础上做二次开发, 或者考虑自己造轮子.&lt;/p&gt;
 
-&lt;h2 id=&quot;section-6&quot;&gt;文档整理&lt;/h2&gt;
+&lt;h2 id=&quot;section-5&quot;&gt;规范定义&lt;/h2&gt;
 
-&lt;h2 id=&quot;section-7&quot;&gt;项目工程化构建&lt;/h2&gt;
+&lt;p&gt;定义css编写规范
+定义js编写规范
+定义模块编写规范&lt;/p&gt;
+
+&lt;h2 id=&quot;section-6&quot;&gt;工程化构建&lt;/h2&gt;
+
+&lt;p&gt;使用webstorm进行开发, 使用markdown编写开发文档&lt;/p&gt;
+
+&lt;p&gt;使用webpack + gulp + nodejs + mocha + mockjs搭建应用工程,&lt;/p&gt;
+
+&lt;p&gt;开发时配置webpack.config, 启动webpack-dev-server或者与之对应的nodejs中间件, 用来管理模块, 自动编译及刷新浏览器.&lt;/p&gt;
+
+&lt;p&gt;使用mocha编写单元测试用例, 如需编写的用例涉及到UI的更新, 可以配合使用jsdom.&lt;/p&gt;
+
+&lt;p&gt;使用mockjs模拟测试数据, 在明确定义接口的情况下, 无须等待后端开发人员完成接口, 即可自行进行调试.&lt;/p&gt;
+
+&lt;p&gt;使用webpack + gulp进行自动化测试, 模块编译, 公共依赖提取, 文件压缩打包等构建工程的必要事项.&lt;/p&gt;
+
+&lt;p&gt;如开发环境中有搭建持续集成服务器(如Jenkins), 加入持续集成的配置, 进行自动化构建.&lt;/p&gt;
 </description>
         <pubDate>Thu, 17 Mar 2016 00:00:00 +0800</pubDate>
         <link>http://www.vanadis.cn/2016/03/17/frontEnd-workflow/</link>
@@ -87,8 +118,28 @@
   &lt;li&gt;&lt;a href=&quot;#jQuery.toastr&quot;&gt;jQuery.toastr&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#jQuery.cubeportfolio&quot;&gt;jQuery.cubeportfolio&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#jQuery.countdown&quot;&gt;jQuery.countdown&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jQuery.dataTables&quot;&gt;jQuery.dataTables&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jQuery.gritter&quot;&gt;jQuery.gritter&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#icheck&quot;&gt;icheck&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#ion.rangeSlider&quot;&gt;ion.rangeSlider&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jQuery.Jcrop&quot;&gt;jQuery.Jcrop&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jQuery.color&quot;&gt;jQuery.color&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jQuery.bootpag&quot;&gt;jQuery.bootpag&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jQuery.idletimer&quot;&gt;jQuery.idletimer&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jQuery.inputMask&quot;&gt;jQuery.inputMask&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jQuery knob&quot;&gt;jQuery knob&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jQuery.minicolors&quot;&gt;jQuery.minicolors&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#mixitup&quot;&gt;mixitup&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#Nestable&quot;&gt;Nestable&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jQuery.notific8&quot;&gt;jQuery.notific8&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jQuery.slimScroll&quot;&gt;jQuery.slimScroll&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jQuery.tagsinput&quot;&gt;jQuery.tagsinput&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#noUiSlider&quot;&gt;noUiSlider&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jQuery.zoom&quot;&gt;jQuery.zoom&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jQuery.easing&quot;&gt;jQuery.easing&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#jQuery.input-ip-address-control&quot;&gt;jQuery.input-ip-address-contro&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;#jQuery.dataTables&quot;&gt;jQuery.dataTables&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;#jQuery.parallax&quot;&gt;jQuery.parallax&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#bootstrap.transition&quot;&gt;bootstrap.transition&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#bootstrap.modal&quot;&gt;bootstrap.modal&lt;/a&gt;&lt;/li&gt;
@@ -121,10 +172,15 @@
   &lt;li&gt;&lt;a href=&quot;#clockface&quot;&gt;clockface&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#bootstrap-auto-hiding-navbar&quot;&gt;bootstrap-auto-hiding-navbar&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#bootstrap-duallistbox&quot;&gt;bootstrap-duallistbox&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bootstrap-autohidingnavbar&quot;&gt;bootstrap-autohidingnavbar&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#fuelux&quot;&gt;fuelux&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;#bootstrap-autohidingnavbar&quot;&gt;bootstrap-autohidingnavbar&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;#bootstrap-multiselect&quot;&gt;bootstrap-multiselect&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
-  &lt;li&gt;[]&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#PubSubJS&quot;&gt;PubSubJS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#typeahead&quot;&gt;typeahead&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#fullcalendar&quot;&gt;fullcalendar&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#dropzone&quot;&gt;dropzone&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#autosize&quot;&gt;autosize&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#ueditor&quot;&gt;ueditor&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#Web Uploader&quot;&gt;Web Uploader&lt;/a&gt;&lt;/li&gt;
@@ -325,6 +381,141 @@
 
 &lt;p&gt;强大的数据表格插件, 支持定义成bootstrap样式&lt;/p&gt;
 
+&lt;h1 id=&quot;jquerygritter&quot;&gt;jQuery.gritter&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/jboesch/Gritter&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;notification提示插件, 不过太久不更新了…&lt;/p&gt;
+
+&lt;h1 id=&quot;icheck&quot;&gt;icheck&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/fronteed/icheck&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;强大的美化check, radio的插件, 支持jQuery和Zepto&lt;/p&gt;
+
+&lt;h1 id=&quot;ionrangeslider&quot;&gt;ion.rangeSlider&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/IonDen/ion.rangeSlider&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;刻度针选择插件&lt;/p&gt;
+
+&lt;h1 id=&quot;jqueryjcrop&quot;&gt;jQuery.Jcrop&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/tapmodo/Jcrop&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;图案范围裁剪插件, 常用于上传头像的范围裁剪&lt;/p&gt;
+
+&lt;h1 id=&quot;jquerycolor&quot;&gt;jQuery.color&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/jquery/jquery-color&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;cssHook, 能使jQuery animate API 使用骆峰式的颜色动画变化&lt;/p&gt;
+
+&lt;h1 id=&quot;jquerybootpag&quot;&gt;jQuery.bootpag&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/botmonster/jquery-bootpag&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;基于boostrap的简单pagination插件&lt;/p&gt;
+
+&lt;h1 id=&quot;jqueryidletimer&quot;&gt;jQuery.idletimer&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/thorst/jquery-idletimer&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;用于前端页面定时(判断是否超时, 以及后续操作)&lt;/p&gt;
+
+&lt;h1 id=&quot;jqueryinputmask&quot;&gt;jQuery.inputMask&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/RobinHerbots/jquery.inputmask&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;格式化录入的jQuery插件&lt;/p&gt;
+
+&lt;h1 id=&quot;jquery-knob&quot;&gt;jQuery knob&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/aterrien/jQuery-Knob&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;旋钮插件, 圆形把手(可用于百分比显示)&lt;/p&gt;
+
+&lt;h1 id=&quot;jqueryminicolors&quot;&gt;jQuery.minicolors&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/aterrien/jQuery-Knob&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;简单的colorpicker插件&lt;/p&gt;
+
+&lt;h1 id=&quot;mixitup&quot;&gt;mixitup&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/patrickkunka/mixitup&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;无刷新动画排序插件&lt;/p&gt;
+
+&lt;h1 id=&quot;nestable&quot;&gt;Nestable&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/dbushell/Nestable&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;拖放分层项&lt;/p&gt;
+
+&lt;h1 id=&quot;jquerynotific8&quot;&gt;jQuery.notific8&lt;/h1&gt;
+
+&lt;p&gt;win8的notification插件&lt;/p&gt;
+
+&lt;h1 id=&quot;jqueryslimscroll-1&quot;&gt;jQuery.slimScroll&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/rochal/jQuery-slimScroll&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;自定义滚动条插件&lt;/p&gt;
+
+&lt;h1 id=&quot;jquerytagsinput&quot;&gt;jQuery.tagsinput&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/xoxco/jQuery-Tags-Input&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;inputtext输入项展现时是一个个标签&lt;/p&gt;
+
+&lt;h1 id=&quot;nouislider&quot;&gt;noUiSlider&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/leongersen/noUiSlider&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;刻度范围选择rangeSlider&lt;/p&gt;
+
+&lt;h1 id=&quot;jqueryzoom&quot;&gt;jQuery.zoom&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/fat/zoom.js&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;图片放大插件&lt;/p&gt;
+
+&lt;h1 id=&quot;jqueryeasing&quot;&gt;jQuery.easing&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/gdsmith/jquery.easing&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;扩展jQuery动画效果插件&lt;/p&gt;
+
+&lt;h1 id=&quot;jqueryinput-ip-address-control&quot;&gt;jQuery.input-ip-address-control&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/gdsmith/jquery.easing&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;让input变成ip地址格式输入&lt;/p&gt;
+
+&lt;h1 id=&quot;jqueryparallax&quot;&gt;jQuery.parallax&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/IanLunn/jQuery-Parallax&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;视差插件&lt;/p&gt;
+
+&lt;h1 id=&quot;jqueryscrollto&quot;&gt;jQuery.ScrollTo&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/flesler/jquery.scrollTo&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;控制滚动条渐变滚动插件&lt;/p&gt;
+
+&lt;h1 id=&quot;jquerysparkline&quot;&gt;jQuery.sparkline&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/gwatts/jquery.sparkline&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;迷你线图(反应数据趋势)&lt;/p&gt;
+
+&lt;h1 id=&quot;jquery-migrate&quot;&gt;jquery-migrate&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/jquery/jquery-migrate&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;用于兼容旧版本比如1.9以下的移除的API&lt;/p&gt;
+
 &lt;h2 id=&quot;bootstraptransition&quot;&gt;bootstrap.transition&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://v3.bootcss.com&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
@@ -427,13 +618,13 @@
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/jschr/bootstrap-modal&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;强化了boostrap源生的modal, 增加了居中显示, 远程ajax加载, 加载时显示进度条等功能&lt;/p&gt;
+&lt;p&gt;强化了bootstrap源生的modal, 增加了居中显示, 远程ajax加载, 加载时显示进度条等功能&lt;/p&gt;
 
 &lt;h2 id=&quot;bootstrap-confirmation&quot;&gt;bootstrap-confirmation&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/ethaizone/Bootstrap-Confirmation&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;依赖于boostrap的tooltip组件, 在用户交互后, 弹出工具确认框, 引导用户进行确认或取消操作&lt;/p&gt;
+&lt;p&gt;依赖于bootstrap的tooltip组件, 在用户交互后, 弹出工具确认框, 引导用户进行确认或取消操作&lt;/p&gt;
 
 &lt;h2 id=&quot;bootstrap-contextmenu&quot;&gt;bootstrap-contextmenu&lt;/h2&gt;
 
@@ -549,6 +740,54 @@
 &lt;p&gt;&lt;a href=&quot;https://github.com/istvan-ujjmeszaros/bootstrap-autohidingnavbar&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;页面滚动条下拉后, 自动隐藏顶部navbar(一般电商需求是, 下拉到一定位置后navbar自动sticky…)&lt;/p&gt;
+
+&lt;h2 id=&quot;fuelux&quot;&gt;fuelux&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/ExactTarget/fuelux&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;美化了各种控件, 比如常见的表单控件, 基于bootstrap3(使用机会不大)&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-multiselect&quot;&gt;bootstrap-multiselect&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/davidstutz/bootstrap-multiselect&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;多选插件&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-tagsinput&quot;&gt;bootstrap-tagsinput&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/bootstrap-tagsinput/bootstrap-tagsinput&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;input输入项变成标签&lt;/p&gt;
+
+&lt;h2 id=&quot;respond&quot;&gt;respond&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/scottjehl/Respond&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;让ie9以下支持media query&lt;/p&gt;
+
+&lt;h2 id=&quot;moment&quot;&gt;moment&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/moment/moment&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;强大的日期API库(格式化日期首选)&lt;/p&gt;
+
+&lt;h2 id=&quot;pubsubjs&quot;&gt;PubSubJS&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/mroderick/PubSubJS&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;强大的订阅/发布模式实现的js库, 常用于模块间通信, 以解决业务模块的耦合问题&lt;/p&gt;
+
+&lt;h2 id=&quot;typeahead&quot;&gt;typeahead&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/twitter/typeahead.js&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;强大的自动补全/搜索推荐插件&lt;/p&gt;
+
+&lt;h2 id=&quot;fullcalendar&quot;&gt;fullcalendar&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/fullcalendar/fullcalendar&quot;&gt;了解更多&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;强大的日历组件&lt;/p&gt;
 
 &lt;h2 id=&quot;dropzone&quot;&gt;dropzone&lt;/h2&gt;
 
