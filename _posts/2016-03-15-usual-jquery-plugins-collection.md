@@ -108,6 +108,11 @@ tags:
 1. [Web Uploader](#Web Uploader)
 1. [echarts](#echarts)
 
+## jQuery.jsonp
+
+jquery强化jsonp支持的api, 允许定义返回错误的处理
+
+[了解更多](https://github.com/jaubourg/jquery-jsonp)
 
 ## jquery.blockui
 

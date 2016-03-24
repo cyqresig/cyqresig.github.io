@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于前端开发,架构,动漫 | 绯雨闲丸，Web & Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。">
+    <meta name="keyword"  content="绯雨闲丸, HISAME SHIZUMARU绯雨闲丸, HISAME SHIZUMARU, 绯雨闲丸的博客, HISAME SHIZUMARU Blog, 博客, 个人网站, 互联网, 前端, 动漫">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>常用jquery组件的整理 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
+
+    <link rel="canonical" href="http://www.vanadis.cn/2016/03/15/usual-jquery-plugins-collection/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/HISAME-SHIZUMARU-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- cyqresig change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- cyqresig Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">绯雨闲丸 Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="blog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">主页</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">关于</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">分类标签</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#blog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __Nav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __Nav__.close()
+        }else{
+            __Nav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close Nav.
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __Nav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-2016-03-15.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post-bg-2016-03-15.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#javascript" title="javascript">javascript</a>
+                        
+                    </div>
+                    <h1>常用jquery组件的整理</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by 绯雨闲丸 on March 15, 2016</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<blockquote>
+  <p>未完待续</p>
+</blockquote>
+
+<p>在做敏捷开发时, 除了公司自己造的轮子外, js组件是会被经常使用到的轮子, 下面就项目(电商项目, 管理类项目)中经常使用到的js组件做一个整理.</p>
+
+<h1 id="section">目录</h1>
+<ol>
+  <li><a href="#jquery.blockui">jquery.blockui</a></li>
+  <li><a href="#jquery.uniform">jquery.uniform</a></li>
+  <li><a href="#jquery.layout">jquery.layout</a></li>
+  <li><a href="#jquery.cookie">jquery.cookie</a></li>
+  <li><a href="#jquery.validate">jquery.validate</a></li>
+  <li><a href="#jquery.form">jquery.form</a></li>
+  <li><a href="#jquery.transit">jquery.transit</a></li>
+  <li><a href="#jquery.bxslider">jquery.bxslider</a></li>
+  <li><a href="#jquery.qrcode">jquery.qrcode</a></li>
+  <li><a href="#jquery.chosen">jquery.chosen</a></li>
+  <li><a href="#select2">jquery.select2</a></li>
+  <li><a href="#jquery.backstretch">jquery.backstretch</a></li>
+  <li><a href="#jquery-siderbar">jquery-siderbar</a></li>
+  <li><a href="#jquery-autocomplete">jquery-autocomplete</a></li>
+  <li><a href="#jquery.slimscroll">jquery.slimscroll</a></li>
+  <li><a href="#jquery.jqzoom">jquery.jqzoom</a></li>
+  <li><a href="#jquery.imgScroll">jquery.imgScroll</a></li>
+  <li><a href="#jquery.metadata">jquery.metadata</a></li>
+  <li><a href="#jquery.lazyload">jquery.lazyload</a></li>
+  <li><a href="#jquery.fancybox">jquery.fancybox</a></li>
+  <li><a href="#jquery.poshytip">jquery.poshytip</a></li>
+  <li><a href="#jquery.raty">jquery.raty</a></li>
+  <li><a href="#OwlCarousel">OwlCarousel</a></li>
+  <li><a href="#jQuery-contextMenu">jQuery-contextMenu</a></li>
+  <li><a href="#jQuery-timeago">jQuery-timeago</a></li>
+  <li><a href="#jQuery-sessionTimeout">jQuery-sessionTimeout</a></li>
+  <li><a href="#jQuery.toastr">jQuery.toastr</a></li>
+  <li><a href="#jQuery.cubeportfolio">jQuery.cubeportfolio</a></li>
+  <li><a href="#jQuery.countdown">jQuery.countdown</a></li>
+  <li><a href="#jQuery.dataTables">jQuery.dataTables</a></li>
+  <li><a href="#jQuery.gritter">jQuery.gritter</a></li>
+  <li><a href="#icheck">icheck</a></li>
+  <li><a href="#ion.rangeSlider">ion.rangeSlider</a></li>
+  <li><a href="#jQuery.Jcrop">jQuery.Jcrop</a></li>
+  <li><a href="#jQuery.color">jQuery.color</a></li>
+  <li><a href="#jQuery.bootpag">jQuery.bootpag</a></li>
+  <li><a href="#jQuery.idletimer">jQuery.idletimer</a></li>
+  <li><a href="#jQuery.inputMask">jQuery.inputMask</a></li>
+  <li><a href="#jQuery knob">jQuery knob</a></li>
+  <li><a href="#jQuery.minicolors">jQuery.minicolors</a></li>
+  <li><a href="#mixitup">mixitup</a></li>
+  <li><a href="#Nestable">Nestable</a></li>
+  <li><a href="#jQuery.notific8">jQuery.notific8</a></li>
+  <li><a href="#jQuery.slimScroll">jQuery.slimScroll</a></li>
+  <li><a href="#jQuery.tagsinput">jQuery.tagsinput</a></li>
+  <li><a href="#noUiSlider">noUiSlider</a></li>
+  <li><a href="#jQuery.zoom">jQuery.zoom</a></li>
+  <li><a href="#jQuery.easing">jQuery.easing</a></li>
+  <li><a href="#jQuery.input-ip-address-control">jQuery.input-ip-address-contro</a></li>
+  <li>
+    <p><a href="#jQuery.parallax">jQuery.parallax</a></p>
+  </li>
+  <li><a href="#bootstrap.transition">bootstrap.transition</a></li>
+  <li><a href="#bootstrap.modal">bootstrap.modal</a></li>
+  <li><a href="#bootstrap.scrollspy">bootstrap.scrollspy</a></li>
+  <li><a href="#bootstrap.tab">bootstrap.tab</a></li>
+  <li><a href="#bootstrap.tooltip">bootstrap.tooltip</a></li>
+  <li><a href="#bootstrap.popover">bootstrap.popover</a></li>
+  <li><a href="#bootstrap.collapse">bootstrap.collapse</a></li>
+  <li><a href="#bootstrap.carousel">bootstrap.carousel</a></li>
+  <li><a href="#bootstrap-hover-dropdown">bootstrap-hover-dropdown</a></li>
+  <li><a href="#bootstrap-switch">bootstrap-switch</a></li>
+  <li><a href="#bootstrap-colorpicker">bootstrap-colorpicker</a></li>
+  <li><a href="#bootstrap-star-rating">bootstrap-star-rating</a></li>
+  <li><a href="#bootstrap-modal">bootstrap-modal</a></li>
+  <li><a href="#bootstrap-confirmation">bootstrap-confirmation</a></li>
+  <li><a href="#bootstrap-contextmenu">bootstrap-contextmenu</a></li>
+  <li><a href="#bootstrap-datepicker">bootstrap-datepicker</a></li>
+  <li><a href="#bootstrap-datetimepicker">bootstrap-datetimepicker</a></li>
+  <li><a href="#bootstrap-daterangepicker">bootstrap-daterangepicker</a></li>
+  <li><a href="#bootstrap-timepicker">bootstrap-timepicker</a></li>
+  <li><a href="#x-editable">x-editable</a></li>
+  <li><a href="#bootstrap-growl">bootstrap-growl</a></li>
+  <li><a href="#bootstrap-markdown">bootstrap-markdown</a></li>
+  <li><a href="#bootstrap-maxlength">bootstrap-maxlength</a></li>
+  <li><a href="#bootstrap-select">bootstrap-select</a></li>
+  <li><a href="#bootstrap-selectsplitter">bootstrap-selectsplitter</a></li>
+  <li><a href="#bootstrap-tabdrop">bootstrap-tabdrop</a></li>
+  <li><a href="#bootstrap-touchspin">bootstrap-touchspin</a></li>
+  <li><a href="#bootstrap-wizard">bootstrap-wizard</a></li>
+  <li><a href="#clockface">clockface</a></li>
+  <li><a href="#bootstrap-auto-hiding-navbar">bootstrap-auto-hiding-navbar</a></li>
+  <li><a href="#bootstrap-duallistbox">bootstrap-duallistbox</a></li>
+  <li><a href="#bootstrap-autohidingnavbar">bootstrap-autohidingnavbar</a></li>
+  <li><a href="#fuelux">fuelux</a></li>
+  <li>
+    <p><a href="#bootstrap-multiselect">bootstrap-multiselect</a></p>
+  </li>
+  <li><a href="#PubSubJS">PubSubJS</a></li>
+  <li><a href="#typeahead">typeahead</a></li>
+  <li><a href="#fullcalendar">fullcalendar</a></li>
+  <li><a href="#dropzone">dropzone</a></li>
+  <li><a href="#autosize">autosize</a></li>
+  <li><a href="#ueditor">ueditor</a></li>
+  <li><a href="#Web Uploader">Web Uploader</a></li>
+  <li><a href="#echarts">echarts</a></li>
+</ol>
+
+<h2 id="jqueryjsonp">jQuery.jsonp</h2>
+
+<p>jquery强化jsonp支持的api, 允许定义返回错误的处理</p>
+
+<p><a href="https://github.com/jaubourg/jquery-jsonp">了解更多</a></p>
+
+<h2 id="jqueryblockui">jquery.blockui</h2>
+
+<p>这个插件可以轻松实现模拟锁屏, 遮罩效果, 在做弹出层效果, 以及做操作提示时非常有用</p>
+
+<p><a href="http://malsup.com/jquery/block/">了解更多</a></p>
+
+<h2 id="jqueryuniform">jquery.uniform</h2>
+<p>Web表单是一个网站的重要方面，但在视觉方面往往被忽视。这个插件可以帮助你增加一个华丽的外观和视觉效果。
+例如单选按钮或选择下拉菜单，这些资源只能用简单的CSS，这通常是一件痛苦的事情</p>
+
+<p><a href="http://uniformjs.com">了解更多</a></p>
+
+<h2 id="jquerylayout">jquery.layout</h2>
+
+<p>这个插件是一种基于jQuery的布局框架，其核心是一个大小自适应的中心面板，面板的上下左右四个方向可以放置可折叠、可缩放的面板,
+在做管理类的系统时特别有用</p>
+
+<p><a href="http://layout.jquery-dev.com/index.cfm">了解更多</a></p>
+
+<h2 id="jquerycookie">jquery.cookie</h2>
+
+<p><a href="https://plugins.jquery.com/cookie/">了解更多</a></p>
+
+<p>这个插件是对原生cookie的api的封装, 适合存放小数据</p>
+
+<h2 id="jqueryvalidate">jquery.validate</h2>
+
+<p><a href="http://jqueryvalidation.org/">了解更多</a></p>
+
+<p>老版jquery表单验证插件, 功能也十分强大, 除了能做本地验证之外, 还可以轻松实现远程请求验证, 支持扩展, 自定义</p>
+
+<h2 id="jqueryform">jquery.form</h2>
+
+<p><a href="http://malsup.com/jquery/form/">了解更多</a></p>
+
+<p>这个插件API提供了几个方法，让你轻松管理表单数据和进行表单提交。</p>
+
+<h2 id="jquerytransit">jquery.transit</h2>
+
+<p><a href="http://ricostacruz.com/jquery.transit/">了解更多</a></p>
+
+<p>这个插件可以通过js api的方式实现css过渡效果, 而不用手动编写css</p>
+
+<h2 id="jquerybxslider">jquery.bxslider</h2>
+
+<p><a href="http://bxslider.com/">了解更多</a></p>
+
+<p>走马灯插件</p>
+
+<h2 id="jqueryqrcode">jquery.qrcode</h2>
+
+<p><a href="http://jeromeetienne.github.io/jquery-qrcode/">了解更多</a></p>
+
+<p>生成二维码插件</p>
+
+<h1 id="jquerychosen">jquery.chosen</h1>
+
+<p><a href="http://plugins.jquery.com/chosen/">了解更多</a></p>
+
+<p>jquery chosen一款强化原生select的插件,支持检索,多选,但不支持输入效果,</p>
+
+<h1 id="select2">select2</h1>
+
+<p><a href="http://select2.github.io/">了解更多</a></p>
+
+<p>强化原生select的功能强大的组件, 支持搜索, 远程加载等</p>
+
+<h1 id="jquerybackstretch">jquery.backstretch</h1>
+
+<p><a href="https://github.com/srobbin/jquery-backstretch">了解更多</a></p>
+
+<p>响应式背景图轮换, 可以设置页面背景图片, 也可以让背景图片动态切换, 缺点是图片可能太大会导致加载速度变慢</p>
+
+<h1 id="jquery-siderbar">jquery-siderbar</h1>
+
+<p><a href="https://github.com/jillix/jQuery-sidebar">了解更多</a></p>
+
+<p>一个简易的侧边栏组件</p>
+
+<h1 id="jquery-autocomplete">jquery-autocomplete</h1>
+
+<p><a href="https://github.com/devbridge/jQuery-Autocomplete">了解更多</a></p>
+
+<p>一个功能强大的自动填充/搜索推荐组件</p>
+
+<h1 id="jqueryslimscroll">jquery.slimscroll</h1>
+
+<p><a href="http://plugins.jquery.com/slimScroll/">了解更多</a></p>
+
+<p>实用jQuery滚动条特效插件jQuery slimScroll</p>
+
+<h1 id="jqueryvmap">jquery.vmap</h1>
+
+<p><a href="http://plugins.jquery.com/slimScroll/">了解更多</a></p>
+
+<p>JQVAMP是一款jquery矢量地图生成插件, 不过没有热点功能</p>
+
+<h1 id="jqueryjqzoom">jquery.jqzoom</h1>
+
+<p><a href="https://github.com/mindprojects/jqzoom">了解更多</a></p>
+
+<p>jqzoom是一款图片放大镜插件, 常用于电商的商品详情页面</p>
+
+<h1 id="jqueryimgscroll">jquery.imgScroll</h1>
+
+<p><a href="https://github.com/tabooc/imgScroll">了解更多</a></p>
+
+<p>这个插件比较简单, 多是自定义版本</p>
+
+<h1 id="jquerymetadata">jquery.metadata</h1>
+
+<p><a href="https://github.com/jquery-archive/jquery-metadata">了解更多</a></p>
+
+<p>元数据插件, 在html标签属性里传对象值使用</p>
+
+<h1 id="jquerylazyload">jquery.lazyload</h1>
+
+<p><a href="https://github.com/tuupola/jquery_lazyload">了解更多</a></p>
+
+<p>延迟加载图片插件, 如果要实现自定义的延迟加载内容, 可以在插件基础上进行扩展</p>
+
+<h1 id="jqueryad-gallery">jquery.ad-gallery</h1>
+
+<p><a href="https://github.com/dodoroy/ad-gallery">了解更多</a>
+<a href="http://adgallery.codeplex.com/">了解更多</a></p>
+
+<p>使用AD Gallery可以制作出强大的相册画廊</p>
+
+<h1 id="jqueryfancybox">jquery.fancybox</h1>
+
+<p><a href="http://fancybox.net/">了解更多</a></p>
+
+<p>强大的弹出层插件, 支持静态内容, 远程请求ajax内容, iframe, 图片切换等加载方式</p>
+
+<h1 id="jqueryposhytip">jquery.poshytip</h1>
+
+<p><a href="https://github.com/vadikom/poshytip">了解更多</a></p>
+
+<p>类似原生的工具条tooltip插件</p>
+
+<h1 id="jqueryraty">jquery.raty</h1>
+
+<p><a href="https://github.com/wbotelhos/raty">了解更多</a></p>
+
+<p>打星评分插件</p>
+
+<h1 id="owlcarousel">OwlCarousel</h1>
+
+<p><a href="https://github.com/OwlFonk/OwlCarousel">了解更多</a></p>
+
+<p>强大的旋转木马(传送带)插件</p>
+
+<h1 id="jquery-contextmenu">jQuery-contextMenu</h1>
+
+<p><a href="https://github.com/swisnl/jQuery-contextMenu">了解更多</a></p>
+
+<p>强大的右键菜单插件</p>
+
+<h1 id="jquery-timeago">jQuery-timeago</h1>
+
+<p><a href="https://github.com/rmm5t/jquery-timeago">了解更多</a></p>
+
+<p>将时间戳显示为多少时间前的强大插件</p>
+
+<h1 id="jquery-sessiontimeout">jQuery-sessionTimeout</h1>
+
+<p><a href="https://github.com/travishorn/jquery-sessionTimeout">了解更多</a></p>
+
+<p>让页面在经过一段时间后, 会弹出提示框, 让用户确认是否要登出还是继续保持连接, 超时后自动跳转至登出(阿里云邮箱有使用)</p>
+
+<h1 id="jquerytoastr">jQuery.toastr</h1>
+
+<p><a href="https://github.com/CodeSeven/toastr">了解更多</a></p>
+
+<p>类似android里源生的toast的效果</p>
+
+<h1 id="jquerycubeportfolio">jquery.cubeportfolio</h1>
+
+<p><a href="http://scriptpie.com/cubeportfolio/live-preview/templates/projects/">了解更多</a></p>
+
+<p>收费插件, 做各种类型的grid展现, 图文并茂(样子很不错, 交互可以借鉴, 并没有特别的功能, 只是功能集+炫)</p>
+
+<h1 id="jquerycountdown">jQuery.countdown</h1>
+
+<p><a href="https://github.com/hilios/jQuery.countdown">了解更多</a></p>
+
+<p>倒计时插件</p>
+
+<h1 id="jquerydatatables">jQuery.dataTables</h1>
+
+<p><a href="https://github.com/DataTables/DataTables">了解更多</a></p>
+
+<p>强大的数据表格插件, 支持定义成bootstrap样式</p>
+
+<h1 id="jquerygritter">jQuery.gritter</h1>
+
+<p><a href="https://github.com/jboesch/Gritter">了解更多</a></p>
+
+<p>notification提示插件, 不过太久不更新了…</p>
+
+<h1 id="icheck">icheck</h1>
+
+<p><a href="https://github.com/fronteed/icheck">了解更多</a></p>
+
+<p>强大的美化check, radio的插件, 支持jQuery和Zepto</p>
+
+<h1 id="ionrangeslider">ion.rangeSlider</h1>
+
+<p><a href="https://github.com/IonDen/ion.rangeSlider">了解更多</a></p>
+
+<p>刻度针选择插件</p>
+
+<h1 id="jqueryjcrop">jQuery.Jcrop</h1>
+
+<p><a href="https://github.com/tapmodo/Jcrop">了解更多</a></p>
+
+<p>图案范围裁剪插件, 常用于上传头像的范围裁剪</p>
+
+<h1 id="jquerycolor">jQuery.color</h1>
+
+<p><a href="https://github.com/jquery/jquery-color">了解更多</a></p>
+
+<p>cssHook, 能使jQuery animate API 使用骆峰式的颜色动画变化</p>
+
+<h1 id="jquerybootpag">jQuery.bootpag</h1>
+<p><a href="https://github.com/botmonster/jquery-bootpag">了解更多</a></p>
+
+<p>基于boostrap的简单pagination插件</p>
+
+<h1 id="jqueryidletimer">jQuery.idletimer</h1>
+
+<p><a href="https://github.com/thorst/jquery-idletimer">了解更多</a></p>
+
+<p>用于前端页面定时(判断是否超时, 以及后续操作)</p>
+
+<h1 id="jqueryinputmask">jQuery.inputMask</h1>
+
+<p><a href="https://github.com/RobinHerbots/jquery.inputmask">了解更多</a></p>
+
+<p>格式化录入的jQuery插件</p>
+
+<h1 id="jquery-knob">jQuery knob</h1>
+
+<p><a href="https://github.com/aterrien/jQuery-Knob">了解更多</a></p>
+
+<p>旋钮插件, 圆形把手(可用于百分比显示)</p>
+
+<h1 id="jqueryminicolors">jQuery.minicolors</h1>
+
+<p><a href="https://github.com/aterrien/jQuery-Knob">了解更多</a></p>
+
+<p>简单的colorpicker插件</p>
+
+<h1 id="mixitup">mixitup</h1>
+
+<p><a href="https://github.com/patrickkunka/mixitup">了解更多</a></p>
+
+<p>无刷新动画排序插件</p>
+
+<h1 id="nestable">Nestable</h1>
+
+<p><a href="https://github.com/dbushell/Nestable">了解更多</a></p>
+
+<p>拖放分层项</p>
+
+<h1 id="jquerynotific8">jQuery.notific8</h1>
+
+<p>win8的notification插件</p>
+
+<h1 id="jqueryslimscroll-1">jQuery.slimScroll</h1>
+
+<p><a href="https://github.com/rochal/jQuery-slimScroll">了解更多</a></p>
+
+<p>自定义滚动条插件</p>
+
+<h1 id="jquerytagsinput">jQuery.tagsinput</h1>
+
+<p><a href="https://github.com/xoxco/jQuery-Tags-Input">了解更多</a></p>
+
+<p>inputtext输入项展现时是一个个标签</p>
+
+<h1 id="nouislider">noUiSlider</h1>
+
+<p><a href="https://github.com/leongersen/noUiSlider">了解更多</a></p>
+
+<p>刻度范围选择rangeSlider</p>
+
+<h1 id="jqueryzoom">jQuery.zoom</h1>
+
+<p><a href="https://github.com/fat/zoom.js">了解更多</a></p>
+
+<p>图片放大插件</p>
+
+<h1 id="jqueryeasing">jQuery.easing</h1>
+
+<p><a href="https://github.com/gdsmith/jquery.easing">了解更多</a></p>
+
+<p>扩展jQuery动画效果插件</p>
+
+<h1 id="jqueryinput-ip-address-control">jQuery.input-ip-address-control</h1>
+
+<p><a href="https://github.com/gdsmith/jquery.easing">了解更多</a></p>
+
+<p>让input变成ip地址格式输入</p>
+
+<h1 id="jqueryparallax">jQuery.parallax</h1>
+
+<p><a href="https://github.com/IanLunn/jQuery-Parallax">了解更多</a></p>
+
+<p>视差插件</p>
+
+<h1 id="jqueryscrollto">jQuery.ScrollTo</h1>
+
+<p><a href="https://github.com/flesler/jquery.scrollTo">了解更多</a></p>
+
+<p>控制滚动条渐变滚动插件</p>
+
+<h1 id="jquerysparkline">jQuery.sparkline</h1>
+
+<p><a href="https://github.com/gwatts/jquery.sparkline">了解更多</a></p>
+
+<p>迷你线图(反应数据趋势)</p>
+
+<h1 id="jquery-migrate">jquery-migrate</h1>
+
+<p><a href="https://github.com/jquery/jquery-migrate">了解更多</a></p>
+
+<p>用于兼容旧版本比如1.9以下的移除的API</p>
+
+<h2 id="bootstraptransition">bootstrap.transition</h2>
+
+<p><a href="http://v3.bootcss.com">了解更多</a></p>
+
+<p>用以支持bootstrap的组件的过渡效果</p>
+
+<h2 id="bootstrapmodal">bootstrap.modal</h2>
+
+<p><a href="http://v3.bootcss.com">了解更多</a></p>
+
+<p>用以支持bootstrap的组件的模态框, 支持静态方式使用, 也支持弹出方式</p>
+
+<h2 id="bootstrapdropdown">bootstrap.dropdown</h2>
+
+<p><a href="http://v3.bootcss.com">了解更多</a></p>
+
+<p>用以支持bootstrap的下拉菜单组件</p>
+
+<h2 id="bootstrapscrollspy">bootstrap.scrollspy</h2>
+
+<p><a href="http://v3.bootcss.com">了解更多</a></p>
+
+<p>滚动监听插件依赖 Bootstrap 的导航组件 用于高亮显示当前激活的链接。</p>
+
+<h2 id="bootstraptab">bootstrap.tab</h2>
+
+<p><a href="http://v3.bootcss.com">了解更多</a></p>
+
+<p>标签页组件依赖 Bootstrap 的导航组件</p>
+
+<h2 id="bootstraptooltip">bootstrap.tooltip</h2>
+
+<p><a href="http://v3.bootcss.com">了解更多</a></p>
+
+<p>类似原生浏览器的工具条提示</p>
+
+<h2 id="bootstrappopover">bootstrap.popover</h2>
+
+<p><a href="http://v3.bootcss.com">了解更多</a></p>
+
+<p>弹出框依赖 工具提示插件</p>
+
+<h2 id="bootstrapbutton">bootstrap.button</h2>
+
+<p><a href="http://v3.bootcss.com">了解更多</a></p>
+
+<p>按钮的功能很丰富。通过控制按钮的状态或创建一组按钮并形成一些新的组件，例如工具条。</p>
+
+<p>也可以自定义按钮点击后的状态, 例如设置按钮正在loading</p>
+
+<h2 id="bootstrapcollapse">bootstrap.collapse</h2>
+
+<p><a href="http://v3.bootcss.com">了解更多</a></p>
+
+<p>实现内容展开, 以及缩回的功能, 支持according</p>
+
+<h2 id="bootstrapcarousel">bootstrap.carousel</h2>
+
+<p><a href="http://v3.bootcss.com">了解更多</a></p>
+
+<p>走马灯, 但是动画效果不支持ie8,9</p>
+
+<h2 id="bootstrapaffix">bootstrap.affix</h2>
+
+<p><a href="http://v3.bootcss.com">了解更多</a></p>
+
+<p>模拟将元素变成sticky效果</p>
+
+<h2 id="bootstrap-hover-dropdown">bootstrap-hover-dropdown</h2>
+
+<p><a href="https://github.com/CWSpear/bootstrap-hover-dropdown">了解更多</a></p>
+
+<p>bootstrap中的dropdown组件扩展hover事件</p>
+
+<h2 id="bootstrap-switch">bootstrap-switch</h2>
+
+<p><a href="http://www.bootstrap-switch.org/">了解更多</a></p>
+
+<p>Bootstrap 开关（switch）控件</p>
+
+<h2 id="bootstrap-colorpicker">bootstrap-colorpicker</h2>
+
+<p><a href="http://www.bootstrap-switch.org/">了解更多</a></p>
+
+<p>一个定制化的颜色拾取器插件, 依赖于Bootstrap 2 &amp; 3</p>
+
+<h2 id="bootstrap-star-rating">bootstrap-star-rating</h2>
+
+<p><a href="https://github.com/kartik-v/bootstrap-star-rating">了解更多</a></p>
+
+<p>打星评分插件</p>
+
+<h2 id="bootbox">bootbox</h2>
+
+<p><a href="https://github.com/makeusabrew/bootbox">了解更多</a></p>
+
+<p>不用事先写死html代码就能使用bootstrap的各种弹出模态框</p>
+
+<h2 id="bootstrap-modal">bootstrap-modal</h2>
+
+<p><a href="https://github.com/jschr/bootstrap-modal">了解更多</a></p>
+
+<p>强化了bootstrap源生的modal, 增加了居中显示, 远程ajax加载, 加载时显示进度条等功能</p>
+
+<h2 id="bootstrap-confirmation">bootstrap-confirmation</h2>
+
+<p><a href="https://github.com/ethaizone/Bootstrap-Confirmation">了解更多</a></p>
+
+<p>依赖于bootstrap的tooltip组件, 在用户交互后, 弹出工具确认框, 引导用户进行确认或取消操作</p>
+
+<h2 id="bootstrap-contextmenu">bootstrap-contextmenu</h2>
+
+<p><a href="https://github.com/sydcanem/bootstrap-contextmenu">了解更多</a></p>
+
+<p>右键菜单插件</p>
+
+<h2 id="bootstrap-datepicker">bootstrap-datepicker</h2>
+
+<p><a href="https://github.com/eternicode/bootstrap-datepicker">了解更多</a></p>
+
+<p>强大的日期插件, 但需要自己扩展中文的支持</p>
+
+<h2 id="bootstrap-datetimepicker">bootstrap-datetimepicker</h2>
+
+<p><a href="https://github.com/smalot/bootstrap-datetimepicker">了解更多</a></p>
+
+<p>支持时分秒的日期插件, 需要自己扩展中文的支持</p>
+
+<h2 id="bootstrap-daterangepicker">bootstrap-daterangepicker</h2>
+
+<p><a href="https://github.com/dangrossman/bootstrap-daterangepicker">了解更多</a></p>
+
+<p>日期范围选择插件, 但在选取日期时存在二个文本框值相同的bug, 并且ie8上样式也存在问题</p>
+
+<h2 id="x-editable">x-editable</h2>
+
+<p><a href="https://github.com/vitalets/x-editable">了解更多</a></p>
+
+<p>任意处都可以弹出工具层, 进行编辑, 支持客户端与服务端验证, 支持提交数据至远程</p>
+
+<h2 id="bootstrap-growl">bootstrap-growl</h2>
+
+<p><a href="https://github.com/ifightcrime/bootstrap-growl">了解更多</a></p>
+
+<p>notification提示操作信息插件</p>
+
+<h2 id="bootstrap-gtreetable">bootstrap-gtreetable</h2>
+
+<p><a href="https://github.com/gilek/bootstrap-gtreetable">了解更多</a></p>
+
+<p>树形数据表格插件, 在后台管理系统中做层级少的配置项操作中可以考虑使用(这样用不需要使用tree插件了)</p>
+
+<h2 id="bootstrap-markdown">bootstrap-markdown</h2>
+
+<p><a href="https://github.com/toopay/bootstrap-markdown">了解更多</a></p>
+
+<p>markdown编辑器, 如果程序员使用的话, 可以考虑使用该编辑器进行文章发布</p>
+
+<h2 id="bootstrap-maxlength">bootstrap-maxlength</h2>
+
+<p><a href="https://github.com/mimo84/bootstrap-maxlength">了解更多</a></p>
+
+<p>单行或多行文本框在输入时给予友好提示(在元素附近小工具层提示), 当前输入了多少个字, 最大能输入多少个字</p>
+
+<h2 id="bootstrap-pwstrength">bootstrap-pwstrength</h2>
+
+<p><a href="https://github.com/ablanco/jquery.pwstrength.bootstrap">了解更多</a></p>
+
+<p>提示密码强度的插件</p>
+
+<h2 id="bootstrap-select">bootstrap-select</h2>
+
+<p><a href="https://github.com/silviomoreto/bootstrap-select">了解更多</a></p>
+
+<p>美化select插件, 功能类同chosen</p>
+
+<h2 id="bootstrap-selectsplitter">bootstrap-selectsplitter</h2>
+
+<p><a href="https://github.com/xavierfaucon/bootstrap-selectsplitter">了解更多</a></p>
+
+<p>能把一个分组的select变成二个select, 一个选择分组, 另外一个级联选择分组下的内容(使用机会不多)</p>
+
+<h2 id="bootstrap-tabdrop">bootstrap-tabdrop</h2>
+
+<p><a href="https://github.com/jmschabdach/bootstrap-tabdrop">了解更多</a></p>
+
+<p>水平显示tab标签时, 如显示不下了, 这个插件可以把显示不下的tab自动并入右方一处下拉选项中, 可以自适应(只有resize事件).
+要做到像各种IDE那样又能左右切换, 又有drop菜单, 并且在drop菜单中选择一项会智能定位到那一项等, 还需要自定义</p>
+
+<h2 id="bootstrap-timepicker">bootstrap-timepicker</h2>
+
+<p><a href="https://github.com/jdewit/bootstrap-timepicker">了解更多</a></p>
+
+<p>简单的日期选择插件</p>
+
+<h2 id="bootstrap-touchspin">bootstrap-touchspin</h2>
+
+<p><a href="https://github.com/istvan-ujjmeszaros/bootstrap-touchspin">了解更多</a></p>
+
+<p>加减数字以方便输入数字值的插件(三个部件, 文本框, 减按钮, 加按钮)</p>
+
+<h2 id="bootstrap-wizard">bootstrap-wizard</h2>
+
+<p><a href="https://github.com/VinceG/twitter-bootstrap-wizard">了解更多</a></p>
+
+<p>标签+步骤插件, 比如注册环节步骤, 比如下订单环境步骤(要注意, 区别是传统做法, 插件使用的步骤都是在同一个页面, 输入项最终一起提交)</p>
+
+<h2 id="clockface">clockface</h2>
+
+<p><a href="https://github.com/vitalets/clockface">了解更多</a></p>
+
+<p>长的像时钟的时间选择控件</p>
+
+<h2 id="bootstrap-duallistbox">bootstrap-duallistbox</h2>
+
+<p><a href="https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox">了解更多</a></p>
+
+<p>左右ListBox选项互选插件</p>
+
+<h2 id="bootstrap-autohidingnavbar">bootstrap-autohidingnavbar</h2>
+
+<p><a href="https://github.com/istvan-ujjmeszaros/bootstrap-autohidingnavbar">了解更多</a></p>
+
+<p>页面滚动条下拉后, 自动隐藏顶部navbar(一般电商需求是, 下拉到一定位置后navbar自动sticky…)</p>
+
+<h2 id="fuelux">fuelux</h2>
+
+<p><a href="https://github.com/ExactTarget/fuelux">了解更多</a></p>
+
+<p>美化了各种控件, 比如常见的表单控件, 基于bootstrap3(使用机会不大)</p>
+
+<h2 id="bootstrap-multiselect">bootstrap-multiselect</h2>
+
+<p><a href="https://github.com/davidstutz/bootstrap-multiselect">了解更多</a></p>
+
+<p>多选插件</p>
+
+<h2 id="bootstrap-tagsinput">bootstrap-tagsinput</h2>
+
+<p><a href="https://github.com/bootstrap-tagsinput/bootstrap-tagsinput">了解更多</a></p>
+
+<p>input输入项变成标签</p>
+
+<h2 id="respond">respond</h2>
+
+<p><a href="https://github.com/scottjehl/Respond">了解更多</a></p>
+
+<p>让ie9以下支持media query</p>
+
+<h2 id="moment">moment</h2>
+
+<p><a href="https://github.com/moment/moment">了解更多</a></p>
+
+<p>强大的日期API库(格式化日期首选)</p>
+
+<h2 id="pubsubjs">PubSubJS</h2>
+
+<p><a href="https://github.com/mroderick/PubSubJS">了解更多</a></p>
+
+<p>强大的订阅/发布模式实现的js库, 常用于模块间通信, 以解决业务模块的耦合问题</p>
+
+<h2 id="typeahead">typeahead</h2>
+
+<p><a href="https://github.com/twitter/typeahead.js">了解更多</a></p>
+
+<p>强大的自动补全/搜索推荐插件</p>
+
+<h2 id="fullcalendar">fullcalendar</h2>
+
+<p><a href="https://github.com/fullcalendar/fullcalendar">了解更多</a></p>
+
+<p>强大的日历组件</p>
+
+<h2 id="dropzone">dropzone</h2>
+
+<p><a href="https://github.com/enyo/dropzone">了解更多</a></p>
+
+<p>拖放的范围内允许上传文件, 有进度条等支持</p>
+
+<h2 id="autosize">autosize</h2>
+
+<p><a href="https://github.com/jackmoore/autosize">了解更多</a></p>
+
+<p>使textarea能根据文字输入自适应高度</p>
+
+<h2 id="ueditor">ueditor</h2>
+
+<p><a href="http://ueditor.baidu.com/">了解更多</a></p>
+
+<p>百度编辑器插件</p>
+
+<h2 id="web-uploader">Web Uploader</h2>
+
+<p><a href="http://fex.baidu.com/webuploader/">了解更多</a></p>
+
+<p>百度上传文件插件</p>
+
+<h2 id="echarts">echarts</h2>
+
+<p><a href="http://echarts.baidu.com/">了解更多</a></p>
+
+<p>百度生成数据分析图形插件</p>
+
+
+                <hr>
+
+                
+                <!-- 多说 Share start -->
+                </style>
+                <div class="ds-share"
+                    style="text-align: right"
+                    data-thread-key="/2016/03/15/usual-jquery-plugins-collection"
+                    data-title="常用jquery组件的整理"
+                    data-url="http://www.vanadis.cn/2016/03/15/usual-jquery-plugins-collection/"
+                    data-images="http://www.vanadis.cn/img/post-bg-2016-03-15.jpg"
+                    data-content="
+  未完待续
+
+
+在做敏捷开发时, 除了公司自己造的轮子外, js组件是会被经常使用到的轮子, 下面就项目(电商项目, 管理类项目)中经常使用到的js组... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- 多说 Share end-->
+                
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/03/09/front-end-Test/" data-toggle="tooltip" data-placement="top" title="关于前端开发谈谈单元测试">
+                        上一篇<br>
+                        <span>关于前端开发谈谈单元测试</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/03/17/frontEnd-workflow/" data-toggle="tooltip" data-placement="top" title="前端开发流程整理">
+                        下一篇<br>
+                        <span>前端开发流程整理</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/2016/03/15/usual-jquery-plugins-collection"
+                        data-title="常用jquery组件的整理"
+                        data-url="http://www.vanadis.cn/2016/03/15/usual-jquery-plugins-collection/" >
+                    </div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+
+            </div>
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">分类标签</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#生活" title="生活" rel="1">
+                                    生活
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#文档" title="文档" rel="1">
+                                    文档
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#javascript组件" title="javascript组件" rel="2">
+                                    javascript组件
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#javascript" title="javascript" rel="5">
+                                    javascript
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>友情链接</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://rockychen.me">RockyChen的博客</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by cyqresig
+    var _user = 'vanadis';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by cyqresig, add target = "_blank" to <a> by cyqresig -->
+                    
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cyqresig">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 绯雨闲丸 Blog 2016
+                    <br>
+                    Theme © <a href="http://vanadis.cn">HISAME SHIZUMARU</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=cyqresig&repo=cyqresig.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/HISAME-SHIZUMARU-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- Highlight.js -->
+<script>
+    async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+        hljs.initHighlightingOnLoad();
+    })
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+<link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        // var $nav = document.querySelector("nav");
+        // if($nav) FastClick.attach($nav);
+
+        // global FastClick!!
+        FastClick.attach(document.body);    
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by cyqresig
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'vanadis.cn';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by cyqresig
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
