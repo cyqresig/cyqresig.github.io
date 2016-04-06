@@ -10,9 +10,9 @@
     <meta name="keyword"  content="绯雨闲丸, HISAME SHIZUMARU绯雨闲丸, HISAME SHIZUMARU, 绯雨闲丸的博客, HISAME SHIZUMARU Blog, 博客, 个人网站, 互联网, 前端, 动漫">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>嗨 2016 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
+    <title>nodejs国际化实现 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
 
-    <link rel="canonical" href="http://www.vanadis.cn/2016/03/02/Hi-2016/">
+    <link rel="canonical" href="http://www.vanadis.cn/2016/04/06/nodejs-i18n/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -144,13 +144,13 @@
 
     <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/post-bg-2016.jpg" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-2016-04-06.jpg" width="0" height="0"> -->
 
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/post-bg-2016.jpg')
+        background-image: url('/img/post-bg-2016-04-06.jpg')
     }
 
     
@@ -163,15 +163,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#生活" title="生活">生活</a>
+                        <a class="tag" href="/tags/#javascript" title="javascript">javascript</a>
                         
                     </div>
-                    <h1>嗨 2016</h1>
+                    <h1>nodejs国际化实现</h1>
                     
                     
-                    <h2 class="subheading"> "终于见到你了, 我的博客"</h2>
+                    <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by 绯雨闲丸 on March 2, 2016</span>
+                    <span class="meta">Posted by 绯雨闲丸 on April 6, 2016</span>
                 </div>
             </div>
         </div>
@@ -189,71 +189,148 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<blockquote>
-  <p>“现在可以用啦! ”</p>
-</blockquote>
+				<p>国际化是做跨境站点经常会碰到的需求, 下面就nodejs中如何实现国际化进行整理</p>
 
-<h2 id="section">前言</h2>
-
-<p>终于把个人 Blog 开通了.</p>
-
-<p><a href="#build">直接看如何在github上开通个人博客 </a></p>
-
-<p>2016 年前, 一直想开通个人博客, 但国内的各种博客程序的UI大多不敢恭维, wordpress又被墙,
-自己买个主机放个定制程序吧, 部署维护也很麻烦.
-早就听说github上面可以放定制blog, 无限流量, 无须维护, 不过之前因为太懒没去折腾,
-结果就一直连个写 Blog 的地方都没有.</p>
-
-<p>过年时, 被一名好友吐槽说, 作为一名程序员, 竟然在互联网上没有展现自我的空间(没有blog, github也长年没有更新),
-实在是太low. 然后我竟然悲剧的无言以对… -_-!!!</p>
-
-<p>一不做二不休, 花了一个周末搞掉!!!</p>
-
-<p id="build"></p>
-<hr />
-
-<h2 id="section-1">正文</h2>
-
-<p>在github上开通个人博客很简单,</p>
-
-<p>最佳的方式是查看官网引导的 <a href="https://pages.github.com/">GitHub Pages</a> + <a href="http://jekyllrb.com/">Jekyll</a> 快速创建 Blog 的技术方案.</p>
-
-<p>优点非常明显：</p>
+<h2 id="section">依赖环境与包</h2>
 
 <ul>
-  <li><strong>Markdown</strong> 优雅的编写语法</li>
-  <li><strong>Git Commit</strong> 进行 Blog 文章发布</li>
-  <li><strong>GitHub Pages</strong> 的域名和免费无限空间，不用自己折腾主机
-    <ul>
-      <li>并且提供了简单的自定义域名的方法</li>
-    </ul>
-  </li>
-  <li><strong>Jekyll</strong> 的定制非常容易，基本就是个模版引擎</li>
+  <li>nodeJS 5.5+</li>
+  <li>express 4+</li>
+  <li>i18n 0.8+</li>
 </ul>
 
-<p>唯一的缺点是github是国外的域名, 访问速度在国内有时不太稳定</p>
+<h2 id="section-1">国际化实现原理</h2>
 
-<hr />
+<p>简单的说, 国际化是在服务端请求处判断客户端的默认语言版本,
+然后服务端渲染时切换不同的语言(注: 国际化只适合静态内容, 动态内容如数据库中的数据并不适应于国际化)</p>
 
-<p>由于之前没有在mac系统上很好的用过命令, 在配置的时候没少遇坑,</p>
+<h2 id="section-2">实现步骤</h2>
 
-<p>包括安装gem, 切换使用taobao的仓库, mac系统安装时权限不够的问题等等,</p>
+<ol>
+  <li>
+    <p>npm install i18n –save
+安装i18n包<a href="https://github.com/mashpie/i18n-node">github</a></p>
+  </li>
+  <li>
+    <p>在nodejs项目根目录创建locales目录, 目录下可以放置不同语言的文字定义文件, 默认.json
+例如:zh-CN.json示例</p>
 
-<p>不过在强大的度娘的支持下, 最终还是一一解决.</p>
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span>
+     <span class="s2">"loginTitle"</span><span class="err">:</span> <span class="s2">"'会员登录|跨境供应链"</span><span class="p">,</span>
+     <span class="s2">"forgetPwdTitle"</span><span class="err">:</span> <span class="s2">"找回密码|跨境供应链"</span><span class="p">,</span>
+     <span class="s2">"loginSubTitle"</span><span class="err">:</span> <span class="s2">"会员登录"</span>
 
-<p>这里Jekyll的主题使用了国人基于 <a href="https://github.com/BlackrockDigital/startbootstrap-clean-blog-jekyll">IronSummitMedia/startbootstrap-clean-blog-jekyll · GitHub</a> 修改的方案 <a href="https://github.com/Huxpro/huxpro.github.io">Huxpro/huxpro.github.io · GitHub</a></p>
+     <span class="p">...</span>
 
-<p>(不得不感叹下后生可畏)</p>
+ <span class="p">}</span>
+</code></pre>
+    </div>
 
-<h2 id="section-2">后记</h2>
+    <p>zh-TW.json示例</p>
 
-<p>回顾这个博客的诞生，纯粹是因为被好友low了下-_-!!!.</p>
+    <div class="highlighter-rouge"><pre class="highlight"><code> <span class="p">{</span>
+      <span class="s2">"loginTitle"</span><span class="err">:</span> <span class="s2">"'會員登錄|跨境供應鏈"</span><span class="p">,</span>
+        <span class="s2">"forgetPwdTitle"</span><span class="err">:</span> <span class="s2">"找回密碼|跨境供應鏈"</span><span class="p">,</span>
+        <span class="s2">"loginSubTitle"</span><span class="err">:</span> <span class="s2">"會員登錄"</span>
 
-<p>不过既然开始写, 就继续坚持写下去.</p>
+        <span class="p">...</span>
 
-<p>github上也会开始频繁提交代码, 作为个人展示部分作品集, 同时也是对之前经历的生涯的记忆与回顾</p>
+  <span class="p">}</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>nodejs的入口文件app.js(或是其他名字)里加入如下配置</p>
 
-<p>—— HISAME SHIZUMARU 后记于 2016.3.2</p>
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'express'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">i18n</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'i18n'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+
+<span class="p">...</span>
+
+<span class="c1">//添加setLocale中间件，注意必须在配置session之后</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">setLocale</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">languages</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'zh-CN'</span><span class="p">,</span> <span class="s1">'zh-TW'</span><span class="p">];</span>
+
+<span class="c1">// 定义setLocale中间件</span>
+<span class="kd">function</span> <span class="nx">setLocale</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">locale</span><span class="p">;</span>
+  <span class="c1">//配置i18n</span>
+  <span class="nx">i18n</span><span class="p">.</span><span class="nx">configure</span><span class="p">({</span>
+    <span class="na">locales</span><span class="p">:</span> <span class="nx">languages</span><span class="p">,</span>  <span class="c1">//声明包含的语言</span>
+    <span class="na">register</span><span class="p">:</span> <span class="nx">res</span><span class="p">,</span>
+    <span class="na">directory</span><span class="p">:</span> <span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">'/locales'</span><span class="p">,</span>  <span class="c1">//翻译json文件的路径</span>
+    <span class="na">defaultLocale</span><span class="p">:</span> <span class="s1">'zh-CN'</span><span class="p">,</span>   <span class="c1">//默认的语言，即为上述标准4</span>
+    <span class="na">indent</span><span class="p">:</span> <span class="s2">"\t"</span><span class="p">,</span>
+    <span class="c1">//extension: '.js'  // 由于 JSON 不允许注释，所以用 js 会方便一点，也可以写成其他的，不过文件格式是 JSON</span>
+  <span class="p">});</span>
+
+ <span class="c1">//客户端可以通过修改cookie进行语言切换控制</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">cookies</span><span class="p">[</span><span class="s1">'locale'</span><span class="p">]){</span>
+    <span class="nx">locale</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">cookies</span><span class="p">[</span><span class="s1">'locale'</span><span class="p">];</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">acceptsLanguages</span><span class="p">()){</span>
+    <span class="nx">locale</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">acceptsLanguages</span><span class="p">()[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="p">}</span>
+  <span class="k">if</span><span class="p">(</span><span class="o">!~</span><span class="nx">languages</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">locale</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">locale</span> <span class="o">=</span> <span class="s1">'zh-CN'</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">// 设置i18n对这个请求所使用的语言</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">setLocale</span><span class="p">(</span><span class="nx">locale</span><span class="p">);</span>
+  <span class="nx">next</span><span class="p">();</span>
+<span class="p">};</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>在路由router里输出国际化文字</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'express'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">router</span> <span class="o">=</span> <span class="nx">express</span><span class="p">.</span><span class="nx">Router</span><span class="p">();</span>
+
+<span class="p">...</span>
+
+<span class="c1">//跳转登录页</span>
+   <span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/login'</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">){</span>
+       <span class="c1">//1) @todo 少获取logo图接口 需要获取后传值给view</span>
+       <span class="c1">//2) @todo 少获取登录界面背景图接口 需要获取后传值给view</span>
+       <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'login/login'</span><span class="p">,</span> <span class="p">{</span>
+           <span class="na">title</span><span class="p">:</span> <span class="nx">res</span><span class="p">.</span><span class="nx">__</span><span class="p">(</span><span class="s1">'loginTitle'</span><span class="p">),</span>
+           <span class="na">layout</span><span class="p">:</span> <span class="s1">'layouts/layout_login'</span><span class="p">,</span>
+           <span class="na">systemTime</span><span class="p">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span>
+           <span class="na">errorMsg</span><span class="p">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">cookies</span><span class="p">.</span><span class="nx">errorMsg</span>
+       <span class="p">});</span>
+   <span class="p">});</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>在ejs模板里输出国际化文字</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">"J-login-form"</span> <span class="na">method=</span><span class="s">"post"</span> <span class="na">action=</span><span class="s">"/login"</span> <span class="na">novalidate=</span><span class="s">"novalidate"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-title "</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span><span class="err">&lt;</span>%=__('loginSubTitle')%&gt;<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"alert alert-danger alert-dismissible display-hide"</span> <span class="na">role=</span><span class="s">"alert"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"iconfont icon-del-error"</span><span class="nt">&gt;&lt;/i&gt;</span>
+            <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"alert-text"</span><span class="nt">&gt;</span><span class="err">&lt;</span>%=__('loginAlertText')%&gt;<span class="nt">&lt;/span&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-group form-group-lg"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"iconfont icon-head"</span><span class="nt">&gt;&lt;/span&gt;</span>
+        <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"username"</span> <span class="na">class=</span><span class="s">"hidden"</span><span class="nt">&gt;</span><span class="err">&lt;</span>%=__('loginUserLabel')%&gt;<span class="nt">&lt;/label&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"username"</span> <span class="na">name=</span><span class="s">"username"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">maxlength=</span><span class="s">"32"</span> <span class="na">class=</span><span class="s">"form-control txt-show"</span> <span class="na">placeholder=</span><span class="s">"&lt;%=__('loginUserLabel')%&gt;"</span> <span class="na">value=</span><span class="s">""</span> <span class="na">autocomplete=</span><span class="s">"off"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"close-wrapper"</span><span class="nt">&gt;</span>
+           <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">class=</span><span class="s">"J-close-btn close display-hide"</span> <span class="na">aria-label=</span><span class="s">"Close"</span><span class="nt">&gt;</span>
+               <span class="nt">&lt;span</span> <span class="na">aria-hidden=</span><span class="s">"true"</span><span class="nt">&gt;</span>×<span class="nt">&lt;/span&gt;</span>
+           <span class="nt">&lt;/button&gt;</span>
+        <span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre>
+    </div>
+  </li>
+</ol>
 
 
 
@@ -264,21 +341,17 @@
                 </style>
                 <div class="ds-share"
                     style="text-align: right"
-                    data-thread-key="/2016/03/02/Hi-2016"
-                    data-title="嗨 2016"
-                    data-url="http://www.vanadis.cn/2016/03/02/Hi-2016/"
-                    data-images="http://www.vanadis.cn/img/post-bg-2016.jpg"
-                    data-content="
-  “现在可以用啦! ”
+                    data-thread-key="/2016/04/06/nodejs-i18n"
+                    data-title="nodejs国际化实现"
+                    data-url="http://www.vanadis.cn/2016/04/06/nodejs-i18n/"
+                    data-images="http://www.vanadis.cn/img/post-bg-2016-04-06.jpg"
+                    data-content="国际化是做跨境站点经常会碰到的需求, 下面就nodejs中如何实现国际化进行整理
+
+依赖环境与包
 
 
-前言
-
-终于把个人 Blog 开通了.
-
-直接看如何在github上开通个人博客 
-
-2016 年前, 一直想开通个人博客... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
+  nodeJS 5.5+
+  express 4+... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
                         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
@@ -297,13 +370,13 @@
 
                 <ul class="pager">
                     
-                    
-                    <li class="next">
-                        <a href="/2016/03/03/markdown-welcome/" data-toggle="tooltip" data-placement="top" title="请使用Markdown写文档">
-                        下一篇<br>
-                        <span>请使用Markdown写文档</span>
+                    <li class="previous">
+                        <a href="/2016/03/17/frontEnd-workflow/" data-toggle="tooltip" data-placement="top" title="前端开发流程整理">
+                        上一篇<br>
+                        <span>前端开发流程整理</span>
                         </a>
                     </li>
+                    
                     
                 </ul>
 
@@ -312,9 +385,9 @@
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/2016/03/02/Hi-2016"
-                        data-title="嗨 2016"
-                        data-url="http://www.vanadis.cn/2016/03/02/Hi-2016/" >
+                        data-thread-key="/2016/04/06/nodejs-i18n"
+                        data-title="nodejs国际化实现"
+                        data-url="http://www.vanadis.cn/2016/04/06/nodejs-i18n/" >
                     </div>
                 </div>
                 <!-- 多说评论框 end -->
