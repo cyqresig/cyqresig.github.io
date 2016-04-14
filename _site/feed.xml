@@ -5,9 +5,33 @@
     <description>关于前端开发,架构,动漫 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 06 Apr 2016 17:22:53 +0800</pubDate>
-    <lastBuildDate>Wed, 06 Apr 2016 17:22:53 +0800</lastBuildDate>
+    <pubDate>Thu, 14 Apr 2016 13:58:37 +0800</pubDate>
+    <lastBuildDate>Thu, 14 Apr 2016 13:58:37 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
+    
+      <item>
+        <title>nodejs国际化实现</title>
+        <description>&lt;p&gt;在做开发时, 经常会发现一些值得封装成组件的地方, 这里做一个整理, 以便之后自定义用reactjs实现&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;目录&lt;/h2&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;内容&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;按钮&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;发送短信获取验证码按钮&lt;/li&gt;
+  &lt;li&gt;点击后展示加载的按钮&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Wed, 06 Apr 2016 00:00:00 +0800</pubDate>
+        <link>http://www.vanadis.cn/2016/04/06/reactjs-custom-component/</link>
+        <guid isPermaLink="true">http://www.vanadis.cn/2016/04/06/reactjs-custom-component/</guid>
+        
+        <category>reactjs</category>
+        
+        
+      </item>
     
       <item>
         <title>nodejs国际化实现</title>
@@ -3916,84 +3940,6 @@ _   底线
         <guid isPermaLink="true">http://www.vanadis.cn/2016/03/03/markdown-welcome/</guid>
         
         <category>文档</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>嗨 2016</title>
-        <description>&lt;blockquote&gt;
-  &lt;p&gt;“现在可以用啦! ”&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;前言&lt;/h2&gt;
-
-&lt;p&gt;终于把个人 Blog 开通了.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;#build&quot;&gt;直接看如何在github上开通个人博客 &lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;2016 年前, 一直想开通个人博客, 但国内的各种博客程序的UI大多不敢恭维, wordpress又被墙,
-自己买个主机放个定制程序吧, 部署维护也很麻烦.
-早就听说github上面可以放定制blog, 无限流量, 无须维护, 不过之前因为太懒没去折腾,
-结果就一直连个写 Blog 的地方都没有.&lt;/p&gt;
-
-&lt;p&gt;过年时, 被一名好友吐槽说, 作为一名程序员, 竟然在互联网上没有展现自我的空间(没有blog, github也长年没有更新),
-实在是太low. 然后我竟然悲剧的无言以对… -_-!!!&lt;/p&gt;
-
-&lt;p&gt;一不做二不休, 花了一个周末搞掉!!!&lt;/p&gt;
-
-&lt;p id=&quot;build&quot;&gt;&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;正文&lt;/h2&gt;
-
-&lt;p&gt;在github上开通个人博客很简单,&lt;/p&gt;
-
-&lt;p&gt;最佳的方式是查看官网引导的 &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt; + &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; 快速创建 Blog 的技术方案.&lt;/p&gt;
-
-&lt;p&gt;优点非常明显：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Markdown&lt;/strong&gt; 优雅的编写语法&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Git Commit&lt;/strong&gt; 进行 Blog 文章发布&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;GitHub Pages&lt;/strong&gt; 的域名和免费无限空间，不用自己折腾主机
-    &lt;ul&gt;
-      &lt;li&gt;并且提供了简单的自定义域名的方法&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Jekyll&lt;/strong&gt; 的定制非常容易，基本就是个模版引擎&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;唯一的缺点是github是国外的域名, 访问速度在国内有时不太稳定&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;由于之前没有在mac系统上很好的用过命令, 在配置的时候没少遇坑,&lt;/p&gt;
-
-&lt;p&gt;包括安装gem, 切换使用taobao的仓库, mac系统安装时权限不够的问题等等,&lt;/p&gt;
-
-&lt;p&gt;不过在强大的度娘的支持下, 最终还是一一解决.&lt;/p&gt;
-
-&lt;p&gt;这里Jekyll的主题使用了国人基于 &lt;a href=&quot;https://github.com/BlackrockDigital/startbootstrap-clean-blog-jekyll&quot;&gt;IronSummitMedia/startbootstrap-clean-blog-jekyll · GitHub&lt;/a&gt; 修改的方案 &lt;a href=&quot;https://github.com/Huxpro/huxpro.github.io&quot;&gt;Huxpro/huxpro.github.io · GitHub&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;(不得不感叹下后生可畏)&lt;/p&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;后记&lt;/h2&gt;
-
-&lt;p&gt;回顾这个博客的诞生，纯粹是因为被好友low了下-_-!!!.&lt;/p&gt;
-
-&lt;p&gt;不过既然开始写, 就继续坚持写下去.&lt;/p&gt;
-
-&lt;p&gt;github上也会开始频繁提交代码, 作为个人展示部分作品集, 同时也是对之前经历的生涯的记忆与回顾&lt;/p&gt;
-
-&lt;p&gt;—— HISAME SHIZUMARU 后记于 2016.3.2&lt;/p&gt;
-
-</description>
-        <pubDate>Wed, 02 Mar 2016 00:00:00 +0800</pubDate>
-        <link>http://www.vanadis.cn/2016/03/02/Hi-2016/</link>
-        <guid isPermaLink="true">http://www.vanadis.cn/2016/03/02/Hi-2016/</guid>
-        
-        <category>生活</category>
         
         
       </item>
