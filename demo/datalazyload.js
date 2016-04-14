@@ -5,6 +5,8 @@
  * Created on 16/3/24.
  */
 
+
+
 var DataLazyLoad = require('./../src/datalazyload');
 
 var instance = new DataLazyLoad({
@@ -18,4 +20,7 @@ var instance = new DataLazyLoad({
 
 instance.init($('.lazyload'));
 
+if(module.hot) {
+  module.hot.accept();
+}
 
