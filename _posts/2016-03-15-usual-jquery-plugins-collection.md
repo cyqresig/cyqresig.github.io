@@ -101,8 +101,12 @@ tags:
 1. [bootstrap-autohidingnavbar](#bootstrap-autohidingnavbar)
 1. [fuelux](#fuelux)
 1. [bootstrap-multiselect](#bootstrap-multiselect)
+1. [bootstrap-tagsinput](#bootstrap-tagsinput)
 
+1. [respond](#respond)
+1. [moment](#moment)
 1. [PubSubJS](#PubSubJS)
+1. [stickUp](#stickUp)
 1. [typeahead](#typeahead)
 1. [fullcalendar](#fullcalendar)
 1. [dropzone](#dropzone)
@@ -827,6 +831,14 @@ input输入项变成标签
 
 强大的日期API库(格式化日期首选)
 
+<p id="stickUp"></p>
+
+## stickUp
+
+[了解更多](https://github.com/LiranCohen/stickUp)
+
+这是一个简单的jQuery插件，它能让页面目标元素 “固定” 在浏览器窗口的顶部，即便页面在滚动，
+目标元素仍然能出现在设定的位置。此插件可以在多页面的网站上工作，也能在单页面上面实现导航功能。滚动当前页面看看导航条的效果吧。
 
 <p id="PubSubJS"></p>
 
