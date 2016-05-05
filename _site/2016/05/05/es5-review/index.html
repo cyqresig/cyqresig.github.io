@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于前端开发,架构,动漫 | 绯雨闲丸，Web & Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。">
+    <meta name="keyword"  content="绯雨闲丸, HISAME SHIZUMARU绯雨闲丸, HISAME SHIZUMARU, 绯雨闲丸的博客, HISAME SHIZUMARU Blog, 博客, 个人网站, 互联网, 前端, 动漫">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>es5复习 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
+
+    <link rel="canonical" href="http://www.vanadis.cn/2016/05/05/es5-review/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/HISAME-SHIZUMARU-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- cyqresig change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- cyqresig Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">绯雨闲丸 Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="blog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">主页</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">关于</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">分类标签</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#blog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __Nav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __Nav__.close()
+        }else{
+            __Nav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close Nav.
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __Nav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-2016.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post-bg-2016.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#生活" title="生活">生活</a>
+                        
+                    </div>
+                    <h1>es5复习</h1>
+                    
+                    
+                    <h2 class="subheading"> "准备es6"</h2>
+                    
+                    <span class="meta">Posted by 绯雨闲丸 on May 5, 2016</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<blockquote>
+  <p>“”</p>
+</blockquote>
+
+<h2 id="es5">ES5新增的内容</h2>
+
+<p>近期在开发React &amp; React Native项目时, 经常有用到es6,
+准备整理一下常用的es6内容, 在这之前先整理并复习一下es5的内容.</p>
+
+<p>es5 各浏览器兼容性请参考<a href="http://kangax.github.io/compat-table/es5/">http://kangax.github.io/compat-table/es5/</a></p>
+
+<p>es5新增的内容并不多, 主要有:</p>
+
+<h3 id="section">严格模式</h3>
+
+<p>(注:在es6中并不需要使用严格模式)</p>
+
+<p>可以在文件首行, 或函数体内首行加入’use strict’来把整个作用域变成严格模式</p>
+
+<p>在严格模式下，会有如下一些限制：</p>
+
+<ul>
+  <li>禁止使用 with 语句</li>
+  <li>重名的属性会报错，重名的函数参数会报错</li>
+  <li>未声明的变量赋值直接报错，而不是变成全局变量</li>
+  <li>函数默认的 this 将变成 undefined 而不是默认指向 window</li>
+  <li>对只读属性进行写操作，删除不可删除属性，对不可拓展的对象添加属性均会抛出异常</li>
+</ul>
+
+<h3 id="json-api">JSON API支持</h3>
+
+<p>原生支持JSON.parse与JSON.stringify</p>
+
+<h3 id="api">对象 API扩展</h3>
+
+<h4 id="getter-setter">定义getter setter:</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">get</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">name</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span>
+    <span class="p">},</span>
+  <span class="na">set</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">name</span><span class="o">=</span><span class="nx">n</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<h4 id="section-1">定义一个对象的属性是否可以修改、是否可以删除、是否可以配置, 是否可以添加</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span> <span class="nx">obj</span><span class="p">,</span> <span class="s2">"value"</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">value</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="na">writable</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">enumerable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="na">configurable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="na">extensible</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<h4 id="section-2">冻结一个对象，冻结分两种：</h4>
+
+<ul>
+  <li>Object.seal(obj), 使对象的属性配置无法修改, 属性不能添加，等价于给每一个属性都设置成 configurale=false</li>
+  <li>Object.freeze(obj)，除了 seal 之外，它还会是属性值本身无法被修改，相当于对每个属性同时进行了 configurable=false 和 writable=false</li>
+</ul>
+
+<h4 id="objectgetprototypeofobject">调用对象父类原型上的方法: Object.getPrototypeOf(object):</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Person</span><span class="p">(){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">method1</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span><span class="nx">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)}</span>
+<span class="p">}</span>
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">method2</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span><span class="nx">alert</span><span class="p">(</span><span class="mi">2</span><span class="p">);}</span>
+
+<span class="kd">function</span> <span class="nx">Man</span><span class="p">(){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">m1</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="nb">Object</span><span class="p">.</span><span class="nx">getPrototypeOf</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">method1</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">Man</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+
+<span class="nx">Man</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">m2</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nb">Object</span><span class="p">.</span><span class="nx">getPrototypeOf</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">method2</span><span class="p">();</span>
+<span class="p">}</span>
+
+
+<span class="kd">var</span> <span class="nx">man</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Man</span><span class="p">();</span>
+<span class="nx">man</span><span class="p">.</span><span class="nx">m1</span><span class="p">();</span>
+<span class="nx">man</span><span class="p">.</span><span class="nx">m2</span><span class="p">();</span>
+</code></pre>
+</div>
+
+<h4 id="ecmascript--objectgetownpropertydescriptorobject-propertyname">获取对象中属性的ECMAScript对象:  Object.getOwnPropertyDescriptor(object, propertyname)</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{};</span>
+
+<span class="nx">obj</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="s2">"abc"</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">descriptor</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">getOwnPropertyDescriptor</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">);</span>
+
+<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">prop</span> <span class="k">in</span> <span class="nx">descriptor</span><span class="p">){</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">prop</span> <span class="o">+</span> <span class="s1">': '</span> <span class="o">+</span> <span class="nx">descriptor</span><span class="p">[</span><span class="nx">prop</span><span class="p">]);</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">"&lt;br /&gt;"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/*
+configurable: true
+enumerable: true
+value: abc
+writable: true
+*/</span>
+</code></pre>
+</div>
+
+<h4 id="ecmascript-object-objectdefinepropertiesobject-descriptors">用 ECMAScript对象 设置为object中多个属性的值: object.defineProperties(object, descriptors):</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{};</span>
+
+<span class="nx">obj</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="s2">"abc"</span><span class="p">;</span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperties</span><span class="p">(</span><span class="nx">obj</span><span class="p">,{</span>
+    <span class="na">a</span><span class="p">:{</span>
+        <span class="na">configurable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">enumerable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">value</span><span class="p">:</span> <span class="s1">'aaa'</span><span class="p">,</span>
+        <span class="na">writable</span><span class="p">:</span> <span class="kc">false</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="kd">var</span> <span class="nx">descriptor</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">getOwnPropertyDescriptor</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">);</span>
+<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">prop</span> <span class="k">in</span> <span class="nx">descriptor</span><span class="p">){</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">prop</span> <span class="o">+</span> <span class="s1">': '</span> <span class="o">+</span> <span class="nx">descriptor</span><span class="p">[</span><span class="nx">prop</span><span class="p">]);</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">"&lt;br /&gt;"</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="cm">/*
+configurable: true
+enumerable: true
+value: aaa
+writable: false
+*/</span>
+</code></pre>
+</div>
+
+<h4 id="extensiblefalse-objectpreventextensionsobject">避免加新属性加入对象(Extensible设置为false): Object.preventExtensions(object):</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">};</span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nx">preventExtensions</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">isExtensible</span><span class="p">(</span><span class="nx">obj</span><span class="p">));</span><span class="c1">//false</span>
+
+<span class="nx">obj</span><span class="p">.</span><span class="nx">newProp</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">newProp</span><span class="p">);</span><span class="c1">//undefined</span>
+</code></pre>
+</div>
+
+<h4 id="prototypenulldescriptorsecmascript-objectcreateprototype-descriptors">建立一个原型为<a href="必需,可为NULL">prototype</a>,<a href="可选">descriptors</a>为ECMAScript对象的对象: Object.create(prototype, descriptors):</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span><span class="na">a</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="na">b</span><span class="p">:</span><span class="mi">2</span><span class="p">},</span> <span class="p">{</span>
+            <span class="na">c</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">value</span><span class="p">:</span> <span class="s2">"large"</span><span class="p">,</span>
+                <span class="na">enumerable</span><span class="p">:</span> <span class="kc">true</span>
+            <span class="p">},</span>
+            <span class="na">d</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">value</span><span class="p">:</span> <span class="s2">"round"</span><span class="p">,</span>
+                <span class="na">enumerable</span><span class="p">:</span> <span class="kc">true</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+</code></pre>
+</div>
+
+<h4 id="section-3">判断对象是否为锁定,冻结,不可扩展的:</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nb">Object</span><span class="p">.</span><span class="nx">isSealed</span><span class="p">(</span><span class="nx">object</span><span class="p">);</span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nx">isFrozen</span><span class="p">(</span><span class="nx">object</span><span class="p">);</span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nx">isExtensible</span><span class="p">(</span><span class="nx">object</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<h4 id="section-4">遍历对象属性:</h4>
+
+<ul>
+  <li>Object.getOwnPropertyNames  返回一个由对象属性名组成的数组(包含不可枚举的)</li>
+  <li>Object.keys                 返回一个由对象可枚举的属性组成的数组.</li>
+</ul>
+
+<h3 id="array-api-">Array API 增强</h3>
+
+<ul>
+  <li>indexOf 返回某项内容在数组中的下标, 类同String.indexOf, 还有lastIndexOf</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'apple'</span><span class="p">,</span><span class="s1">'orange'</span><span class="p">,</span><span class="s1">'pear'</span><span class="p">];</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"found:"</span><span class="p">,</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">"orange"</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>filter  遍历数组, 根据每次回调的return值, true保留, false过滤, 最终返回一个新数组</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"apple"</span><span class="p">,</span> <span class="s2">"count"</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+  <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"orange"</span><span class="p">,</span> <span class="s2">"count"</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>
+  <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"pear"</span><span class="p">,</span> <span class="s2">"count"</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span>
+  <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"orange"</span><span class="p">,</span> <span class="s2">"count"</span><span class="p">:</span> <span class="mi">16</span><span class="p">},</span>
+<span class="p">];</span>
+
+<span class="kd">var</span> <span class="nx">newArr</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">){</span>
+  <span class="k">return</span> <span class="nx">item</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s2">"orange"</span><span class="p">;</span>
+<span class="p">});</span>
+
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Filter results:"</span><span class="p">,</span><span class="nx">newArr</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>forEach 遍历数组, 每次回调中可以做一些操作</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">];</span>
+
+<span class="c1">// Uses the usual "for" loop to iterate</span>
+<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">l</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span> <span class="nx">l</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"========================"</span><span class="p">);</span>
+
+<span class="c1">//Uses forEach to iterate</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span><span class="nx">index</span><span class="p">){</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>map     遍历数组, 根据每次回调的return值, 最终返回一个新数组</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">oldArr</span> <span class="o">=</span> <span class="p">[{</span><span class="na">first_name</span><span class="p">:</span><span class="s2">"Colin"</span><span class="p">,</span><span class="na">last_name</span><span class="p">:</span><span class="s2">"Toh"</span><span class="p">},{</span><span class="na">first_name</span><span class="p">:</span><span class="s2">"Addy"</span><span class="p">,</span><span class="na">last_name</span><span class="p">:</span><span class="s2">"Osmani"</span><span class="p">},{</span><span class="na">first_name</span><span class="p">:</span><span class="s2">"Yehuda"</span><span class="p">,</span><span class="na">last_name</span><span class="p">:</span><span class="s2">"Katz"</span><span class="p">}];</span>
+
+<span class="kd">function</span> <span class="nx">getNewArr</span><span class="p">(){</span>
+
+  <span class="k">return</span> <span class="nx">oldArr</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span><span class="nx">index</span><span class="p">){</span>
+    <span class="nx">item</span><span class="p">.</span><span class="nx">full_name</span> <span class="o">=</span> <span class="p">[</span><span class="nx">item</span><span class="p">.</span><span class="nx">first_name</span><span class="p">,</span><span class="nx">item</span><span class="p">.</span><span class="nx">last_name</span><span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="s2">" "</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">item</span><span class="p">;</span>
+  <span class="p">});</span>
+
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getNewArr</span><span class="p">());</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>every   遍历数组, 根据每次回调的return值, 如果都为true, 则最终返回true, 反之最终返回false</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">every</span><span class="p">(</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">item</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">array</span> <span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">item</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">array</span> <span class="p">);</span>
+    <span class="k">return</span> <span class="nx">item</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span>
+<span class="p">});</span>
+
+ <span class="mi">1</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+ <span class="mi">2</span> <span class="mi">1</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+ <span class="mi">3</span> <span class="mi">2</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+
+ <span class="nx">result</span> <span class="o">-&gt;</span> <span class="kc">false</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>some    遍历数组, 根据每次回调的return值, 如果都为false, 则最终返回false, 反之最终返回true</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">some</span><span class="p">(</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">item</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">array</span> <span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">item</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">array</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">item</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="o">-&gt;</span>
+ <span class="mi">1</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+ <span class="mi">2</span> <span class="mi">1</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+ <span class="mi">3</span> <span class="mi">2</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+
+ <span class="nx">restule</span> <span class="o">-&gt;</span> <span class="kc">true</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>reduce</li>
+</ul>
+
+<p>reduce在这里有<code class="highlighter-rouge">减少</code>的意思，那reduce到底是干什么用的呢？说实话我也不太理解，看看比较官方的解释：The method  applies  a  function  against  an accumulator and each  value  of the array (from  left -to- right ) to reduce it to  a  single  value . 自己慢慢的理解吧，我们先看看怎么使用吧，用的多了自然就明白了：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">newArr</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">reduce</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">previousValue</span><span class="p">,</span> <span class="nx">currentValue</span><span class="p">,</span> <span class="nx">currentIndex</span><span class="p">,</span> <span class="nx">array</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">previousValue</span><span class="p">,</span> <span class="nx">currentValue</span><span class="p">,</span><span class="nx">currentIndex</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">previousValue</span> <span class="o">+</span> <span class="nx">currentValue</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="mi">1</span> <span class="mi">2</span> <span class="mi">1</span>
+<span class="mi">3</span> <span class="mi">3</span> <span class="mi">2</span>
+<span class="mi">6</span> <span class="mi">4</span> <span class="mi">3</span>
+
+<span class="nx">newArr</span> <span class="o">-&gt;</span> <span class="mi">10</span>
+</code></pre>
+</div>
+<p>从运行结果看，initialValue参数指定了previousValue的初始值，更重要的是，这次数组是从第1个位置开始遍历，而不再是从第2个位置开始了。 现在回过头来，对照这两个例子，我相信你一定能够理解reduce的作用了。下面对于reduce的扩展会巩固你对reduce的理解：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">reduce</span><span class="p">)</span> <span class="p">{</span>
+   <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">reduce</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">initialValue</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">previousValue</span> <span class="o">=</span> <span class="nx">initialValue</span> <span class="o">||</span> <span class="k">this</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="c1">//如果不指定intialValue,则默认为数组的第一个元素</span>
+        <span class="c1">//如果不指定initialValue，i从1开始遍历，否则就从0开始遍历</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">initialValue</span><span class="p">?</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">//previousValue 累加每一次返回的结果</span>
+            <span class="nx">previousValue</span> <span class="o">+=</span> <span class="nx">callback</span><span class="p">(</span><span class="nx">previousValue</span><span class="p">,</span> <span class="k">this</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span><span class="nx">i</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">previousValue</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>reduceRight</li>
+</ul>
+
+<p>reduce的作用完全相同，唯一的不同是，reduceRight是从右至左遍历数组的元素。</p>
+
+
+
+                <hr>
+
+                
+                <!-- 多说 Share start -->
+                </style>
+                <div class="ds-share"
+                    style="text-align: right"
+                    data-thread-key="/2016/05/05/es5-review"
+                    data-title="es5复习"
+                    data-url="http://www.vanadis.cn/2016/05/05/es5-review/"
+                    data-images="http://www.vanadis.cn/img/post-bg-2016.jpg"
+                    data-content="
+  “”
+
+
+ES5新增的内容
+
+近期在开发React &amp; React Native项目时, 经常有用到es6,
+准备整理一下常用的es6内容,... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- 多说 Share end-->
+                
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/04/06/nodejs-i18n/" data-toggle="tooltip" data-placement="top" title="nodejs国际化实现">
+                        上一篇<br>
+                        <span>nodejs国际化实现</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/05/05/es6-class/" data-toggle="tooltip" data-placement="top" title="es6-类的用法">
+                        下一篇<br>
+                        <span>es6-类的用法</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/2016/05/05/es5-review"
+                        data-title="es5复习"
+                        data-url="http://www.vanadis.cn/2016/05/05/es5-review/" >
+                    </div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+
+            </div>
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">分类标签</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#生活" title="生活" rel="9">
+                                    生活
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#文档" title="文档" rel="1">
+                                    文档
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#javascript组件" title="javascript组件" rel="1">
+                                    javascript组件
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#javascript" title="javascript" rel="5">
+                                    javascript
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#nodejs" title="nodejs" rel="1">
+                                    nodejs
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>友情链接</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://rockychen.me">RockyChen的博客</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by cyqresig
+    var _user = 'vanadis';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by cyqresig, add target = "_blank" to <a> by cyqresig -->
+                    
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cyqresig">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 绯雨闲丸 Blog 2016
+                    <br>
+                    Theme © <a href="http://vanadis.cn">HISAME SHIZUMARU</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=cyqresig&repo=cyqresig.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/HISAME-SHIZUMARU-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- Highlight.js -->
+<script>
+    async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+        hljs.initHighlightingOnLoad();
+    })
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+<link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        // var $nav = document.querySelector("nav");
+        // if($nav) FastClick.attach($nav);
+
+        // global FastClick!!
+        FastClick.attach(document.body);    
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by cyqresig
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'vanadis.cn';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by cyqresig
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

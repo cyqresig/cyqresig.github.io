@@ -10,9 +10,9 @@
     <meta name="keyword"  content="绯雨闲丸, HISAME SHIZUMARU绯雨闲丸, HISAME SHIZUMARU, 绯雨闲丸的博客, HISAME SHIZUMARU Blog, 博客, 个人网站, 互联网, 前端, 动漫">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>嗨 2016 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
+    <title>es6-WeakMap的用法 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
 
-    <link rel="canonical" href="http://www.vanadis.cn/2016/03/02/Hi-2016/">
+    <link rel="canonical" href="http://www.vanadis.cn/2016/05/05/es6-weakmap/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -166,12 +166,12 @@
                         <a class="tag" href="/tags/#生活" title="生活">生活</a>
                         
                     </div>
-                    <h1>嗨 2016</h1>
+                    <h1>es6-WeakMap的用法</h1>
                     
                     
-                    <h2 class="subheading"> "终于见到你了, 我的博客"</h2>
+                    <h2 class="subheading"> ""</h2>
                     
-                    <span class="meta">Posted by 绯雨闲丸 on March 2, 2016</span>
+                    <span class="meta">Posted by 绯雨闲丸 on May 5, 2016</span>
                 </div>
             </div>
         </div>
@@ -190,70 +190,26 @@
                 post-container">
 
 				<blockquote>
-  <p>“现在可以用啦! ”</p>
+  <p>“”</p>
 </blockquote>
 
-<h2 id="section">前言</h2>
+<p>Map 和 Set 就不说了，很常规的概念，不过Map和Object有点区别的，比如Map可以用一个object作为key。</p>
 
-<p>终于把个人 Blog 开通了.</p>
+<p>这里重点说一下WeakMap。 WeakMap和Map主要有如下几个区别：</p>
 
-<p><a href="#build">直接看如何在github上开通个人博客 </a></p>
+<ol>
+  <li>WeakMap 只能用Object作为key，不能用基本数据类型比如字符串作为key</li>
+  <li>WeakMap 中的key是弱引用</li>
+  <li>WeakMap 没有size</li>
+</ol>
 
-<p>2016 年前, 一直想开通个人博客, 但国内的各种博客程序的UI大多不敢恭维, wordpress又被墙,
-自己买个主机放个定制程序吧, 部署维护也很麻烦.
-早就听说github上面可以放定制blog, 无限流量, 无须维护, 不过之前因为太懒没去折腾,
-结果就一直连个写 Blog 的地方都没有.</p>
+<p>其中1和3非常好理解，重点就是第2点，也是WeakMap名字的由来。</p>
 
-<p>过年时, 被一名好友吐槽说, 作为一名程序员, 竟然在互联网上没有展现自我的空间(没有blog, github也长年没有更新),
-实在是太low. 然后我竟然悲剧的无言以对… -_-!!!</p>
+<p>无论任何GA，最重要的一点都是要通过对象引用来判断对象是否存活，不过Node中具体实现比较复杂，可以参见《深入浅出Nodejs》第五章。</p>
 
-<p>一不做二不休, 花了一个周末搞掉!!!</p>
+<p>Map 的一个最大弊端就是它会导致作为key的对象增加一个引用，因此导致GA无法回收这个对象，如果大量使用object作为Map的key会导致大量的内存泄露。</p>
 
-<p id="build"></p>
-<hr />
-
-<h2 id="section-1">正文</h2>
-
-<p>在github上开通个人博客很简单,</p>
-
-<p>最佳的方式是查看官网引导的 <a href="https://pages.github.com/">GitHub Pages</a> + <a href="http://jekyllrb.com/">Jekyll</a> 快速创建 Blog 的技术方案.</p>
-
-<p>优点非常明显：</p>
-
-<ul>
-  <li><strong>Markdown</strong> 优雅的编写语法</li>
-  <li><strong>Git Commit</strong> 进行 Blog 文章发布</li>
-  <li><strong>GitHub Pages</strong> 的域名和免费无限空间，不用自己折腾主机
-    <ul>
-      <li>并且提供了简单的自定义域名的方法</li>
-    </ul>
-  </li>
-  <li><strong>Jekyll</strong> 的定制非常容易，基本就是个模版引擎</li>
-</ul>
-
-<p>唯一的缺点是github是国外的域名, 访问速度在国内有时不太稳定</p>
-
-<hr />
-
-<p>由于之前没有在mac系统上很好的用过命令, 在配置的时候没少遇坑,</p>
-
-<p>包括安装gem, 切换使用taobao的仓库, mac系统安装时权限不够的问题等等,</p>
-
-<p>不过在强大的度娘的支持下, 最终还是一一解决.</p>
-
-<p>这里Jekyll的主题使用了国人基于 <a href="https://github.com/BlackrockDigital/startbootstrap-clean-blog-jekyll">IronSummitMedia/startbootstrap-clean-blog-jekyll · GitHub</a> 修改的方案 <a href="https://github.com/Huxpro/huxpro.github.io">Huxpro/huxpro.github.io · GitHub</a></p>
-
-<p>(不得不感叹下后生可畏)</p>
-
-<h2 id="section-2">后记</h2>
-
-<p>回顾这个博客的诞生，纯粹是因为被好友low了下-_-!!!.</p>
-
-<p>不过既然开始写, 就继续坚持写下去.</p>
-
-<p>github上也会开始频繁提交代码, 作为个人展示部分作品集, 同时也是对之前经历的生涯的记忆与回顾</p>
-
-<p>—— HISAME SHIZUMARU 后记于 2016.3.2</p>
+<p>WeakMap就是为了解决这个问题，在WeakMap中对作为key的对象是一个弱引用，也就是说，GA在计算对象引用数量的时候并不会把弱引用计算进去。这样当一个对象除了WeakMap没有其他引用的时候就会被GA回收掉。</p>
 
 
 
@@ -264,21 +220,17 @@
                 </style>
                 <div class="ds-share"
                     style="text-align: right"
-                    data-thread-key="/2016/03/02/Hi-2016"
-                    data-title="嗨 2016"
-                    data-url="http://www.vanadis.cn/2016/03/02/Hi-2016/"
+                    data-thread-key="/2016/05/05/es6-weakmap"
+                    data-title="es6-WeakMap的用法"
+                    data-url="http://www.vanadis.cn/2016/05/05/es6-weakmap/"
                     data-images="http://www.vanadis.cn/img/post-bg-2016.jpg"
                     data-content="
-  “现在可以用啦! ”
+  “”
 
 
-前言
+Map 和 Set 就不说了，很常规的概念，不过Map和Object有点区别的，比如Map可以用一个object作为key。
 
-终于把个人 Blog 开通了.
-
-直接看如何在github上开通个人博客 
-
-2016 年前, 一直想开通个人博客... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
+这里重点说... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
                         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
@@ -297,13 +249,13 @@
 
                 <ul class="pager">
                     
-                    
-                    <li class="next">
-                        <a href="/2016/03/03/markdown-welcome/" data-toggle="tooltip" data-placement="top" title="请使用Markdown写文档">
-                        下一篇<br>
-                        <span>请使用Markdown写文档</span>
+                    <li class="previous">
+                        <a href="/2016/05/05/es6-symbol/" data-toggle="tooltip" data-placement="top" title="es6-Symbol的用法">
+                        上一篇<br>
+                        <span>es6-Symbol的用法</span>
                         </a>
                     </li>
+                    
                     
                 </ul>
 
@@ -312,9 +264,9 @@
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/2016/03/02/Hi-2016"
-                        data-title="嗨 2016"
-                        data-url="http://www.vanadis.cn/2016/03/02/Hi-2016/" >
+                        data-thread-key="/2016/05/05/es6-weakmap"
+                        data-title="es6-WeakMap的用法"
+                        data-url="http://www.vanadis.cn/2016/05/05/es6-weakmap/" >
                     </div>
                 </div>
                 <!-- 多说评论框 end -->

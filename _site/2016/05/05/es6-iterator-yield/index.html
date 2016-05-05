@@ -10,9 +10,9 @@
     <meta name="keyword"  content="绯雨闲丸, HISAME SHIZUMARU绯雨闲丸, HISAME SHIZUMARU, 绯雨闲丸的博客, HISAME SHIZUMARU Blog, 博客, 个人网站, 互联网, 前端, 动漫">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>嗨 2016 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
+    <title>es6-iterator-yield的用法 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
 
-    <link rel="canonical" href="http://www.vanadis.cn/2016/03/02/Hi-2016/">
+    <link rel="canonical" href="http://www.vanadis.cn/2016/05/05/es6-iterator-yield/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -166,12 +166,12 @@
                         <a class="tag" href="/tags/#生活" title="生活">生活</a>
                         
                     </div>
-                    <h1>嗨 2016</h1>
+                    <h1>es6-iterator-yield的用法</h1>
                     
                     
-                    <h2 class="subheading"> "终于见到你了, 我的博客"</h2>
+                    <h2 class="subheading"> ""</h2>
                     
-                    <span class="meta">Posted by 绯雨闲丸 on March 2, 2016</span>
+                    <span class="meta">Posted by 绯雨闲丸 on May 5, 2016</span>
                 </div>
             </div>
         </div>
@@ -190,70 +190,70 @@
                 post-container">
 
 				<blockquote>
-  <p>“现在可以用啦! ”</p>
+  <p>“”</p>
 </blockquote>
 
-<h2 id="section">前言</h2>
+<p>只要一个对象实现了正确的 Symbol.iterator 方法，那么它就可以被 for in 所遍历</p>
 
-<p>终于把个人 Blog 开通了.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">students</span> <span class="o">=</span> <span class="p">{}</span>
 
-<p><a href="#build">直接看如何在github上开通个人博客 </a></p>
+<span class="nx">students</span><span class="p">[</span><span class="nx">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">]</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">next</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">{</span><span class="na">done</span><span class="p">:</span> <span class="nx">index</span><span class="o">&gt;</span><span class="mi">100</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="nx">index</span><span class="o">++</span><span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 
-<p>2016 年前, 一直想开通个人博客, 但国内的各种博客程序的UI大多不敢恭维, wordpress又被墙,
-自己买个主机放个定制程序吧, 部署维护也很麻烦.
-早就听说github上面可以放定制blog, 无限流量, 无须维护, 不过之前因为太懒没去折腾,
-结果就一直连个写 Blog 的地方都没有.</p>
+<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="nx">of</span> <span class="nx">students</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+</div>
 
-<p>过年时, 被一名好友吐槽说, 作为一名程序员, 竟然在互联网上没有展现自我的空间(没有blog, github也长年没有更新),
-实在是太low. 然后我竟然悲剧的无言以对… -_-!!!</p>
+<p>仔细看上面的代码就会明白迭代器是如何工作的。当执行 for(var i of students) 的时候，其实是调用了 students<a href="">Symbol.iterator</a> 方法，这个方法返回了一个iterator（迭代器）。迭代器有一个next方法，for循环会不断调用这个 iterator.next方法来获取下一个值，直到返回值中的 done 属性为true的时候结束循环。</p>
 
-<p>一不做二不休, 花了一个周末搞掉!!!</p>
+<p>知道原理之后，我们可以自己来调用iterator.next来实现循环：</p>
 
-<p id="build"></p>
-<hr />
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">students</span> <span class="o">=</span> <span class="p">{}</span>
 
-<h2 id="section-1">正文</h2>
+<span class="nx">students</span><span class="p">[</span><span class="nx">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">]</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">next</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">{</span><span class="na">done</span><span class="p">:</span> <span class="nx">index</span><span class="o">&gt;</span><span class="mi">100</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="nx">index</span><span class="o">++</span><span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 
-<p>在github上开通个人博客很简单,</p>
+<span class="kd">var</span> <span class="nx">iterator</span> <span class="o">=</span> <span class="nx">students</span><span class="p">[</span><span class="nx">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">]();</span>
 
-<p>最佳的方式是查看官网引导的 <a href="https://pages.github.com/">GitHub Pages</a> + <a href="http://jekyllrb.com/">Jekyll</a> 快速创建 Blog 的技术方案.</p>
+<span class="kd">var</span> <span class="nx">s</span><span class="o">=</span><span class="nx">iterator</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
+<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="nx">s</span><span class="p">.</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+  <span class="nx">s</span><span class="o">=</span><span class="nx">iterator</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre>
+</div>
 
-<p>优点非常明显：</p>
+<p>上例中使用 iterator.next 和 while 结合实现了 for循环。</p>
 
-<ul>
-  <li><strong>Markdown</strong> 优雅的编写语法</li>
-  <li><strong>Git Commit</strong> 进行 Blog 文章发布</li>
-  <li><strong>GitHub Pages</strong> 的域名和免费无限空间，不用自己折腾主机
-    <ul>
-      <li>并且提供了简单的自定义域名的方法</li>
-    </ul>
-  </li>
-  <li><strong>Jekyll</strong> 的定制非常容易，基本就是个模版引擎</li>
-</ul>
+<p>除了使用iterator 之外，我们还可以使用 yield 语法来实现循环，yield相对简单一些，只要通过 yield 语句把值返回即可：</p>
 
-<p>唯一的缺点是github是国外的域名, 访问速度在国内有时不太稳定</p>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">students</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">]:</span> <span class="kd">function</span><span class="o">*</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;=</span><span class="mi">100</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">yield</span> <span class="nx">i</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 
-<hr />
-
-<p>由于之前没有在mac系统上很好的用过命令, 在配置的时候没少遇坑,</p>
-
-<p>包括安装gem, 切换使用taobao的仓库, mac系统安装时权限不够的问题等等,</p>
-
-<p>不过在强大的度娘的支持下, 最终还是一一解决.</p>
-
-<p>这里Jekyll的主题使用了国人基于 <a href="https://github.com/BlackrockDigital/startbootstrap-clean-blog-jekyll">IronSummitMedia/startbootstrap-clean-blog-jekyll · GitHub</a> 修改的方案 <a href="https://github.com/Huxpro/huxpro.github.io">Huxpro/huxpro.github.io · GitHub</a></p>
-
-<p>(不得不感叹下后生可畏)</p>
-
-<h2 id="section-2">后记</h2>
-
-<p>回顾这个博客的诞生，纯粹是因为被好友low了下-_-!!!.</p>
-
-<p>不过既然开始写, 就继续坚持写下去.</p>
-
-<p>github上也会开始频繁提交代码, 作为个人展示部分作品集, 同时也是对之前经历的生涯的记忆与回顾</p>
-
-<p>—— HISAME SHIZUMARU 后记于 2016.3.2</p>
+<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">s</span> <span class="nx">of</span> <span class="nx">students</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+</div>
 
 
 
@@ -264,21 +264,17 @@
                 </style>
                 <div class="ds-share"
                     style="text-align: right"
-                    data-thread-key="/2016/03/02/Hi-2016"
-                    data-title="嗨 2016"
-                    data-url="http://www.vanadis.cn/2016/03/02/Hi-2016/"
+                    data-thread-key="/2016/05/05/es6-iterator-yield"
+                    data-title="es6-iterator-yield的用法"
+                    data-url="http://www.vanadis.cn/2016/05/05/es6-iterator-yield/"
                     data-images="http://www.vanadis.cn/img/post-bg-2016.jpg"
                     data-content="
-  “现在可以用啦! ”
+  “”
 
 
-前言
+只要一个对象实现了正确的 Symbol.iterator 方法，那么它就可以被 for in 所遍历
 
-终于把个人 Blog 开通了.
-
-直接看如何在github上开通个人博客 
-
-2016 年前, 一直想开通个人博客... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
+var students = {}... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
                         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
@@ -297,11 +293,18 @@
 
                 <ul class="pager">
                     
+                    <li class="previous">
+                        <a href="/2016/05/05/es6-instruction/" data-toggle="tooltip" data-placement="top" title="es6新增内容简介">
+                        上一篇<br>
+                        <span>es6新增内容简介</span>
+                        </a>
+                    </li>
+                    
                     
                     <li class="next">
-                        <a href="/2016/03/03/markdown-welcome/" data-toggle="tooltip" data-placement="top" title="请使用Markdown写文档">
+                        <a href="/2016/05/05/es6-module/" data-toggle="tooltip" data-placement="top" title="es6-module的用法">
                         下一篇<br>
-                        <span>请使用Markdown写文档</span>
+                        <span>es6-module的用法</span>
                         </a>
                     </li>
                     
@@ -312,9 +315,9 @@
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/2016/03/02/Hi-2016"
-                        data-title="嗨 2016"
-                        data-url="http://www.vanadis.cn/2016/03/02/Hi-2016/" >
+                        data-thread-key="/2016/05/05/es6-iterator-yield"
+                        data-title="es6-iterator-yield的用法"
+                        data-url="http://www.vanadis.cn/2016/05/05/es6-iterator-yield/" >
                     </div>
                 </div>
                 <!-- 多说评论框 end -->

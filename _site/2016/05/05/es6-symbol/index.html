@@ -10,9 +10,9 @@
     <meta name="keyword"  content="绯雨闲丸, HISAME SHIZUMARU绯雨闲丸, HISAME SHIZUMARU, 绯雨闲丸的博客, HISAME SHIZUMARU Blog, 博客, 个人网站, 互联网, 前端, 动漫">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>嗨 2016 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
+    <title>es6-Symbol的用法 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
 
-    <link rel="canonical" href="http://www.vanadis.cn/2016/03/02/Hi-2016/">
+    <link rel="canonical" href="http://www.vanadis.cn/2016/05/05/es6-symbol/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -166,12 +166,12 @@
                         <a class="tag" href="/tags/#生活" title="生活">生活</a>
                         
                     </div>
-                    <h1>嗨 2016</h1>
+                    <h1>es6-Symbol的用法</h1>
                     
                     
-                    <h2 class="subheading"> "终于见到你了, 我的博客"</h2>
+                    <h2 class="subheading"> ""</h2>
                     
-                    <span class="meta">Posted by 绯雨闲丸 on March 2, 2016</span>
+                    <span class="meta">Posted by 绯雨闲丸 on May 5, 2016</span>
                 </div>
             </div>
         </div>
@@ -190,71 +190,113 @@
                 post-container">
 
 				<blockquote>
-  <p>“现在可以用啦! ”</p>
+  <p>“”</p>
 </blockquote>
 
-<h2 id="section">前言</h2>
+<h2 id="symbol">为什么要用Symbol</h2>
 
-<p>终于把个人 Blog 开通了.</p>
+<p>Symbol的目的就是为了实现一个唯一不重复不可变的值，任何一个Symbol都是唯一的，不会和其他任何Symbol相等。</p>
 
-<p><a href="#build">直接看如何在github上开通个人博客 </a></p>
+<p>很多时候其实我们都需要用到唯一不重复的值。比如我们给一个DOM节点做动画，那么我们需要判断动画是否正在执行。</p>
 
-<p>2016 年前, 一直想开通个人博客, 但国内的各种博客程序的UI大多不敢恭维, wordpress又被墙,
-自己买个主机放个定制程序吧, 部署维护也很麻烦.
-早就听说github上面可以放定制blog, 无限流量, 无须维护, 不过之前因为太懒没去折腾,
-结果就一直连个写 Blog 的地方都没有.</p>
+<p>这个时候一般的做法是给DOM节点加上一个属性（或者classname之类的）做一个标记，比如下面这样：</p>
 
-<p>过年时, 被一名好友吐槽说, 作为一名程序员, 竟然在互联网上没有展现自我的空间(没有blog, github也长年没有更新),
-实在是太low. 然后我竟然悲剧的无言以对… -_-!!!</p>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">d</span><span class="p">.</span><span class="nx">isMoving</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>  <span class="c1">//正在执行动画</span>
+</code></pre>
+</div>
 
-<p>一不做二不休, 花了一个周末搞掉!!!</p>
+<p>然后问题就来了，这样做很容易产生冲突，万一你用了一个三方动画库，人家也是用 <code class="highlighter-rouge">isMoving</code> 来进行标记的怎么办。或者万一DOM规范以后添加了一个 <code class="highlighter-rouge">isMoving</code> 接口怎么办。</p>
 
-<p id="build"></p>
-<hr />
+<p>这个时候我们就需要一个唯一不重复的值来做标记：</p>
 
-<h2 id="section-1">正文</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">isMoving</span> <span class="o">=</span> <span class="nx">Symbol</span><span class="p">(</span><span class="s2">"is moving"</span><span class="p">);</span>
+<span class="nx">d</span><span class="p">[</span><span class="nx">isMoving</span><span class="p">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre>
+</div>
 
-<p>在github上开通个人博客很简单,</p>
+<p>因为每次创建的 Symbol 都是唯一不重复的，所以别人即使再次创建一个Symbol 也不会和你的Symbol冲突。</p>
 
-<p>最佳的方式是查看官网引导的 <a href="https://pages.github.com/">GitHub Pages</a> + <a href="http://jekyllrb.com/">Jekyll</a> 快速创建 Blog 的技术方案.</p>
+<h2 id="section">基本用法</h2>
 
-<p>优点非常明显：</p>
+<p>Symbol 有两种用法，一种是创建局部的Symbol：</p>
 
-<ul>
-  <li><strong>Markdown</strong> 优雅的编写语法</li>
-  <li><strong>Git Commit</strong> 进行 Blog 文章发布</li>
-  <li><strong>GitHub Pages</strong> 的域名和免费无限空间，不用自己折腾主机
-    <ul>
-      <li>并且提供了简单的自定义域名的方法</li>
-    </ul>
-  </li>
-  <li><strong>Jekyll</strong> 的定制非常容易，基本就是个模版引擎</li>
-</ul>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">Symbol</span><span class="p">(</span><span class="s2">"description"</span><span class="p">);</span>
+</code></pre>
+</div>
 
-<p>唯一的缺点是github是国外的域名, 访问速度在国内有时不太稳定</p>
+<p>另一种是创建全局的 Symbol:</p>
 
-<hr />
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">Symbol</span><span class="p">.</span><span class="k">for</span><span class="p">(</span><span class="s2">"description"</span><span class="p">);</span>
+</code></pre>
+</div>
 
-<p>由于之前没有在mac系统上很好的用过命令, 在配置的时候没少遇坑,</p>
+<p>当然我们一般用的都是局部的。</p>
 
-<p>包括安装gem, 切换使用taobao的仓库, mac系统安装时权限不够的问题等等,</p>
+<p>一定要区分 Symbol 和 String，他们完全是两码事，事实上Symbol是一种新的数据类型，也就是JS中的第七种数据类型-Symbol。创建 Symbol 时传入的一个字符串只是对 Symbol 的一个说明，参见MDN的说明：A description of the symbol which can be used for debugging but not to access the symbol itself.</p>
 
-<p>不过在强大的度娘的支持下, 最终还是一一解决.</p>
+<p>这个说明只是为了方便调试，免得你不知道这个Symbol是干嘛的。虽然可以不用传，但是为了调试方便以及代码的可读性，建议还是带上这个参数.</p>
 
-<p>这里Jekyll的主题使用了国人基于 <a href="https://github.com/BlackrockDigital/startbootstrap-clean-blog-jekyll">IronSummitMedia/startbootstrap-clean-blog-jekyll · GitHub</a> 修改的方案 <a href="https://github.com/Huxpro/huxpro.github.io">Huxpro/huxpro.github.io · GitHub</a></p>
+<p>直接使用 <code class="highlighter-rouge">Symbol("xx")</code>，每一次都会创建一个不同的 Symbol，不管传入的描述符是否一样：</p>
 
-<p>(不得不感叹下后生可畏)</p>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span><span class="o">=</span><span class="nx">Symbol</span><span class="p">(</span><span class="s2">"a"</span><span class="p">),</span> <span class="nx">b</span><span class="o">=</span><span class="nx">Symbol</span><span class="p">(</span><span class="s2">"a"</span><span class="p">);</span>
+<span class="nx">a</span> <span class="o">===</span> <span class="nx">b</span><span class="p">;</span>    <span class="c1">//false</span>
+</code></pre>
+</div>
 
-<h2 id="section-2">后记</h2>
+<p>但是如果用 <code class="highlighter-rouge">Symbol.for</code> 创建全局Symbol，那么当描述符和以前的一个全局Symbol相同的时候，会返回之前的Symbol，所以他们是相等的，如果没有则创建一个新的：</p>
 
-<p>回顾这个博客的诞生，纯粹是因为被好友low了下-_-!!!.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">Symbol</span><span class="p">.</span><span class="k">for</span><span class="p">(</span><span class="s2">"a"</span><span class="p">),</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">Symbol</span><span class="p">.</span><span class="k">for</span><span class="p">(</span><span class="s2">"a"</span><span class="p">);</span>
+<span class="nx">a</span> <span class="o">===</span> <span class="nx">b</span><span class="p">;</span>    <span class="c1">//true</span>
+</code></pre>
+</div>
 
-<p>不过既然开始写, 就继续坚持写下去.</p>
+<h2 id="symboliterator">Symbol.iterator</h2>
 
-<p>github上也会开始频繁提交代码, 作为个人展示部分作品集, 同时也是对之前经历的生涯的记忆与回顾</p>
+<p>iterator 是一种设计模式，很多语言（比如java）通过iterator 实现遍历功能，如果一个值支持遍历，那么它只需要实现 iterator 接口即可。</p>
 
-<p>—— HISAME SHIZUMARU 后记于 2016.3.2</p>
+<p>在JS中其实也是，只是在Symbol出现之前这是一个隐藏的特性，我们只能想下面这样通过 for 来实现数组遍历：</p>
 
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">];</span>
+<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">a</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//xxxx}</span>
+</code></pre>
+</div>
+
+<p>其实for语句就是通过隐藏的 iterator 来实现遍历的，现在我们可以通过 <code class="highlighter-rouge">Symbol.iterator</code> 来取到这个 iterator 对象，并且自己调用 <code class="highlighter-rouge">iterator.next()</code> 来实现遍历：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">a</span><span class="p">[</span><span class="nx">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">]();</span>
+<span class="nx">i</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span> <span class="c1">//1</span>
+<span class="nx">i</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>   <span class="c1">//2</span>
+<span class="nx">i</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>   <span class="c1">//3</span>
+</code></pre>
+</div>
+
+<p>并且 <code class="highlighter-rouge">Symbol.iterator</code> 是一个全局唯一的值，可以保证不会和 a 上面的任何属性方法有冲突。</p>
+
+<h2 id="symbol-1">结合闭包和Symbol实现私有属性</h2>
+
+<p>Symbol 的初衷其实就是实现私有属性，不过由于 <code class="highlighter-rouge">Object.getOwnPropertySymbols()</code> 接口的出现，导致即使是用 Symbol 作为key也可以被遍历出来，因此不能做到私有。</p>
+
+<p>不过，排除这一点，我们可以基本上可以认为使用 Symbol 的属性是私有属性。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">People</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">Symbol</span><span class="p">(</span><span class="s2">"name"</span><span class="p">);</span>
+  <span class="kr">class</span> <span class="nx">People</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//构造函数</span>
+    <span class="k">this</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">n</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nx">sayName</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">[</span><span class="nx">name</span><span class="p">]);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">People</span><span class="p">;</span>
+<span class="p">})();</span>
+</code></pre>
+</div>
+
+<p>参见上面的例子，我们使用闭包主要是保护这个 Symbol ，它无法直接在闭包外面访问。这样除了使用 <code class="highlighter-rouge">Object.getOwnPropertySymbols()</code> 之外我们无法访问 <code class="highlighter-rouge">this[name]</code> 属性，基本可以认为是私有的。</p>
+
+<p>至少这种做法比使用 <code class="highlighter-rouge">this._name</code> 要好很多，因为Symbol不会污染<code class="highlighter-rouge">keys</code>， <code class="highlighter-rouge">for ... in</code>之类的用法不会受到影响。</p>
 
 
                 <hr>
@@ -264,21 +306,17 @@
                 </style>
                 <div class="ds-share"
                     style="text-align: right"
-                    data-thread-key="/2016/03/02/Hi-2016"
-                    data-title="嗨 2016"
-                    data-url="http://www.vanadis.cn/2016/03/02/Hi-2016/"
+                    data-thread-key="/2016/05/05/es6-symbol"
+                    data-title="es6-Symbol的用法"
+                    data-url="http://www.vanadis.cn/2016/05/05/es6-symbol/"
                     data-images="http://www.vanadis.cn/img/post-bg-2016.jpg"
                     data-content="
-  “现在可以用啦! ”
+  “”
 
 
-前言
+为什么要用Symbol
 
-终于把个人 Blog 开通了.
-
-直接看如何在github上开通个人博客 
-
-2016 年前, 一直想开通个人博客... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
+Symbol的目的就是为了实现一个唯一不重复不可变的值，任何一个Symbol都是唯一的，不会和其他任何Symbo... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
                         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
@@ -297,11 +335,18 @@
 
                 <ul class="pager">
                     
+                    <li class="previous">
+                        <a href="/2016/05/05/es6-module/" data-toggle="tooltip" data-placement="top" title="es6-module的用法">
+                        上一篇<br>
+                        <span>es6-module的用法</span>
+                        </a>
+                    </li>
+                    
                     
                     <li class="next">
-                        <a href="/2016/03/03/markdown-welcome/" data-toggle="tooltip" data-placement="top" title="请使用Markdown写文档">
+                        <a href="/2016/05/05/es6-weakmap/" data-toggle="tooltip" data-placement="top" title="es6-WeakMap的用法">
                         下一篇<br>
-                        <span>请使用Markdown写文档</span>
+                        <span>es6-WeakMap的用法</span>
                         </a>
                     </li>
                     
@@ -312,9 +357,9 @@
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/2016/03/02/Hi-2016"
-                        data-title="嗨 2016"
-                        data-url="http://www.vanadis.cn/2016/03/02/Hi-2016/" >
+                        data-thread-key="/2016/05/05/es6-symbol"
+                        data-title="es6-Symbol的用法"
+                        data-url="http://www.vanadis.cn/2016/05/05/es6-symbol/" >
                     </div>
                 </div>
                 <!-- 多说评论框 end -->

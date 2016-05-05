@@ -173,33 +173,266 @@
             ">
     			
 <div class="post-preview">
-    <a href="/2016/04/06/reactjs-custom-component/">
+    <a href="/2016/05/05/es6-weakmap/">
         <h2 class="post-title">
-            nodejs国际化实现
+            es6-WeakMap的用法
         </h2>
         
         <h3 class="post-subtitle">
-            
+             ""
         </h3>
         
         <div class="post-content-preview">
-            在做开发时, 经常会发现一些值得封装成组件的地方, 这里做一个整理, 以便之后自定义用reactjs实现
-
-目录
-
-内容
-
-按钮
-
-  发送短信获取验证码按钮
-  点击后展示加载的按钮
+            
+  “”
 
 
+Map 和 Set 就不说了，很常规的概念，不过Map和Object有点区别的，比如Map可以用一个object作为key。
 
+这里重点说一下WeakMap。 WeakMap和Map主要有如下几个区别：
+
+
+  WeakMap 只能用Object作为key，不能用基本数据类型比如字符串作为key
+  WeakMap 中的key是弱引用
+  WeakMap 没有size
+
+
+其...
         </div>
     </a>
     <p class="post-meta">
-        Posted by 绯雨闲丸 on April 6, 2016
+        Posted by 绯雨闲丸 on May 5, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2016/05/05/es6-symbol/">
+        <h2 class="post-title">
+            es6-Symbol的用法
+        </h2>
+        
+        <h3 class="post-subtitle">
+             ""
+        </h3>
+        
+        <div class="post-content-preview">
+            
+  “”
+
+
+为什么要用Symbol
+
+Symbol的目的就是为了实现一个唯一不重复不可变的值，任何一个Symbol都是唯一的，不会和其他任何Symbol相等。
+
+很多时候其实我们都需要用到唯一不重复的值。比如我们给一个DOM节点做动画，那么我们需要判断动画是否正在执行。
+
+这个时候一般的做法是给DOM节点加上一个属性（或者classname之类的）做一个标记，比如下面这样：
+
+d.isM...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by 绯雨闲丸 on May 5, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2016/05/05/es6-module/">
+        <h2 class="post-title">
+            es6-module的用法
+        </h2>
+        
+        <h3 class="post-subtitle">
+             ""
+        </h3>
+        
+        <div class="post-content-preview">
+            
+  “”
+
+
+modules是ES6引入的最重要一个特性。
+主要分为二部分，一部分是如何导出，一部分是如何导入。
+
+命名导出(named exports)
+
+可以直接在任何变量或者函数前面加上一个 export 关键字，就可以将它导出。
+这种写法非常简洁，和平时几乎没有区别，唯一的区别就是在需要导出的地方加上一个 export 关键字。
+比如：
+
+export const sqrt = M...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by 绯雨闲丸 on May 5, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2016/05/05/es6-iterator-yield/">
+        <h2 class="post-title">
+            es6-iterator-yield的用法
+        </h2>
+        
+        <h3 class="post-subtitle">
+             ""
+        </h3>
+        
+        <div class="post-content-preview">
+            
+  “”
+
+
+只要一个对象实现了正确的 Symbol.iterator 方法，那么它就可以被 for in 所遍历
+
+var students = {}
+
+students[Symbol.iterator] = function() {
+  let index = 1;
+  return {
+    next() {
+      return {done: index&gt;100, va...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by 绯雨闲丸 on May 5, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2016/05/05/es6-instruction/">
+        <h2 class="post-title">
+            es6新增内容简介
+        </h2>
+        
+        <h3 class="post-subtitle">
+             ""
+        </h3>
+        
+        <div class="post-content-preview">
+            
+  “”
+
+
+ES6新增的内容
+
+ES6新增了大量的内容。
+
+这里可以查看es6中文详细教程http://es6.ruanyifeng.com/#docs/intro
+
+这可以查看主流浏览器和自己当前浏览器的兼容性 https://kangax.github.io/compat-table/es6/
+
+一般在开发时,都使用 babel 来把 es6 的代码编译成 es5。它支持绝大部分的特...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by 绯雨闲丸 on May 5, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2016/05/05/es6-destructing-spread/">
+        <h2 class="post-title">
+            es6-destructing-spread的用法
+        </h2>
+        
+        <h3 class="post-subtitle">
+             ""
+        </h3>
+        
+        <div class="post-content-preview">
+            
+  “”
+
+
+解构
+
+简单来说就是通过析构表达式的右边值来同时对左边的多个值进行赋值, 可以看下示例进行理解:
+
+var [a,b,c]=[1,2,3];    //通过数组给多个变量赋值
+var {name, age} = {name: "Tom", age:12} //通过一个对象来给多个变量赋值
+
+
+
+上面两个例子分别用一个数组和一个对象对多个变量进行赋值。而且并用严格一一对应，可以...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by 绯雨闲丸 on May 5, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2016/05/05/es6-class/">
+        <h2 class="post-title">
+            es6-类的用法
+        </h2>
+        
+        <h3 class="post-subtitle">
+             ""
+        </h3>
+        
+        <div class="post-content-preview">
+            
+  “”
+
+
+类class是es6引入的最重要特性之一。在没有class之前，我们只能通过原型链来模拟类。
+
+类(class)
+
+如果你用过java这样的纯面向对象语言，那么你会对class的语法非常熟悉。
+
+class People {
+    constructor(name) { //构造函数
+          this.name = name;
+    }
+    sayName...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by 绯雨闲丸 on May 5, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2016/05/05/es5-review/">
+        <h2 class="post-title">
+            es5复习
+        </h2>
+        
+        <h3 class="post-subtitle">
+             "准备es6"
+        </h3>
+        
+        <div class="post-content-preview">
+            
+  “”
+
+
+ES5新增的内容
+
+近期在开发React &amp; React Native项目时, 经常有用到es6,
+准备整理一下常用的es6内容, 在这之前先整理并复习一下es5的内容.
+
+es5 各浏览器兼容性请参考http://kangax.github.io/compat-table/es5/
+
+es5新增的内容并不多, 主要有:
+
+严格模式
+
+(注:在es6中并不需要使用严格...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by 绯雨闲丸 on May 5, 2016
     </p>
 </div>
 <hr>
@@ -268,241 +501,17 @@
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/2016/03/15/usual-jquery-plugins-collection/">
-        <h2 class="post-title">
-            常用jquery组件的整理
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-  未完待续
-
-
-在做敏捷开发时, 除了公司自己造的轮子外, js组件是会被经常使用到的轮子, 下面就项目(电商项目, 管理类项目)中经常使用到的js组件做一个整理.
-
-目录
-
-  jquery.jsonp
-  jquery.blockui
-  jquery.uniform
-  jquery.layout
-  jquery.cookie
-  jquery.validate
-  jquery...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by 绯雨闲丸 on March 15, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2016/03/09/front-end-Test/">
-        <h2 class="post-title">
-            关于前端开发谈谈单元测试
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-  文章来源：segmentfault.com
-
-
-单元测试Unit Test
-
-很早就知道单元测试这样一个概念，但直到几个月前，我真正开始接触和使用它。究竟什么是单元测试？我想也许很多使用了很久的人也不一定能描述的十分清楚，所以写了这篇文章来尝试描述它的特征和原则，以帮助更多人。
-####    什么是单元测试？
-
-先来看看单元测试的定义，在维基百科英文版中可以找到Kolawa Adam...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by 绯雨闲丸 on March 9, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2016/03/08/front-end-development-history/">
-        <h2 class="post-title">
-            近几年前端技术盘点以及 2016 年技术发展方向
-        </h2>
-        
-        <h3 class="post-subtitle">
-             ""
-        </h3>
-        
-        <div class="post-content-preview">
-            
-  文章来源：taobaofed.org
-
-
-Web 发展了几十个春秋，风起云涌，千变万化。Web 技术发展的速度让人感觉那几乎不是继承式的迭代，而是一次又一次的变革，一次又一次的创造。这几年的前端，更为之甚！
-
-我从 12 年底开始接触前端，本文会盘点从 09 年开始到 15 年间前端技术的革新，同时也会从多个角度，解读近几年前端技术发展的潜在因素，其中穿插了若干对前端演进的拙见，难免会...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by 绯雨闲丸 on March 8, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2016/03/08/You-might-not-need-jquery-for-ie10+/">
-        <h2 class="post-title">
-            你可能并不需要使用jQuery了
-        </h2>
-        
-        <h3 class="post-subtitle">
-             "使用原生api代替jQuery"
-        </h3>
-        
-        <div class="post-content-preview">
-            
-  文章来源：github
-
-
-你可能并不需要使用jQuery了
-
-现代浏览器原生 API 已经越来越好用了。
-在很多情况下，我们已经不用依赖jQuery来操作DOM，绑定事件了
-同时由于 React、Angular 等框架的流行，直接操作 DOM 不再是好的模式，jQuery 使用场景大大减少。
-本文总结了大部分 jQuery API 替代的方法，支持 IE10+ 以上浏览器。
-
-目录
-...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by 绯雨闲丸 on March 8, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2016/03/04/plugin-jquery-autocomplete/">
-        <h2 class="post-title">
-            autocomplete组件分析与实现
-        </h2>
-        
-        <h3 class="post-subtitle">
-             "实现任何功能前都应先分析"
-        </h3>
-        
-        <div class="post-content-preview">
-            
-  “”
-
-
-由于项目中有急需用到搜索推荐+自动填充的功能, 但是github上找的jquery-autocomplete又不能完全满足需求,
-  并且由于jquery插件编写方式的格式, 修改起来不是很方便, 还不如自己实现一个,
-  故开始自己造轮子
-
-autocomplete 功能实现分析
-
-
-  一般说来, 一个组件内抽象着很多具体的实现, 想要全面控制这些实现,
-   需要先分析...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by 绯雨闲丸 on March 4, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2016/03/03/markdown-welcome/">
-        <h2 class="post-title">
-            请使用Markdown写文档
-        </h2>
-        
-        <h3 class="post-subtitle">
-             "程序员快速优雅的写文档方式"
-        </h3>
-        
-        <div class="post-content-preview">
-            
-  “尝试使用一下markdown吧”
-
-
-Markdown语法说明
-
-
-  概述
-    
-      宗旨
-      兼容 HTML
-      特殊字符自动转换
-    
-  
-  区块元素
-    
-      段落和换行
-      标题
-      区块引用
-      列表
-      代码区块
-      分隔线
-    
-  
-  区段元素
-    
-      链接
-...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by 绯雨闲丸 on March 3, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2016/03/02/Hi-2016/">
-        <h2 class="post-title">
-            嗨 2016
-        </h2>
-        
-        <h3 class="post-subtitle">
-             "终于见到你了, 我的博客"
-        </h3>
-        
-        <div class="post-content-preview">
-            
-  “现在可以用啦! ”
-
-
-前言
-
-终于把个人 Blog 开通了.
-
-直接看如何在github上开通个人博客 
-
-2016 年前, 一直想开通个人博客, 但国内的各种博客程序的UI大多不敢恭维, wordpress又被墙,
-自己买个主机放个定制程序吧, 部署维护也很麻烦.
-早就听说github上面可以放定制blog, 无限流量, 无须维护, 不过之前因为太懒没去折腾,
-结果就一直连个写 ...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by 绯雨闲丸 on March 2, 2016
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
+
+<ul class="pager">
+    
+    
+    <li class="next">
+        <a href="/page2">Older Posts &rarr;</a>
+    </li>
+    
+</ul>
 
 
     		</div>
@@ -522,7 +531,7 @@ Markdown语法说明
                     <div class="tags">
                         
                             
-                                <a href="/tags/#生活" title="生活" rel="1">
+                                <a href="/tags/#生活" title="生活" rel="9">
                                     生活
                                 </a>
                             
@@ -548,12 +557,6 @@ Markdown语法说明
                             
                                 <a href="/tags/#nodejs" title="nodejs" rel="1">
                                     nodejs
-                                </a>
-                            
-                        
-                            
-                                <a href="/tags/#reactjs" title="reactjs" rel="1">
-                                    reactjs
                                 </a>
                             
                         
