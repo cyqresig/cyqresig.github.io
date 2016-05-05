@@ -5,8 +5,8 @@
     <description>关于前端开发,架构,动漫 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 05 May 2016 17:57:11 +0800</pubDate>
-    <lastBuildDate>Thu, 05 May 2016 17:57:11 +0800</lastBuildDate>
+    <pubDate>Thu, 05 May 2016 17:59:24 +0800</pubDate>
+    <lastBuildDate>Thu, 05 May 2016 17:59:24 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -38,7 +38,7 @@
         <link>http://www.vanadis.cn/2016/05/05/es6-weakmap/</link>
         <guid isPermaLink="true">http://www.vanadis.cn/2016/05/05/es6-weakmap/</guid>
         
-        <category>生活</category>
+        <category>es6</category>
         
         
       </item>
@@ -158,7 +158,7 @@
         <link>http://www.vanadis.cn/2016/05/05/es6-symbol/</link>
         <guid isPermaLink="true">http://www.vanadis.cn/2016/05/05/es6-symbol/</guid>
         
-        <category>生活</category>
+        <category>es6</category>
         
         
       </item>
@@ -355,7 +355,7 @@
         <link>http://www.vanadis.cn/2016/05/05/es6-module/</link>
         <guid isPermaLink="true">http://www.vanadis.cn/2016/05/05/es6-module/</guid>
         
-        <category>生活</category>
+        <category>es6</category>
         
         
       </item>
@@ -433,7 +433,7 @@
         <link>http://www.vanadis.cn/2016/05/05/es6-iterator-yield/</link>
         <guid isPermaLink="true">http://www.vanadis.cn/2016/05/05/es6-iterator-yield/</guid>
         
-        <category>生活</category>
+        <category>es6</category>
         
         
       </item>
@@ -713,7 +713,7 @@
         <link>http://www.vanadis.cn/2016/05/05/es6-instruction/</link>
         <guid isPermaLink="true">http://www.vanadis.cn/2016/05/05/es6-instruction/</guid>
         
-        <category>生活</category>
+        <category>es6</category>
         
         
       </item>
@@ -799,7 +799,7 @@
         <link>http://www.vanadis.cn/2016/05/05/es6-destructing-spread/</link>
         <guid isPermaLink="true">http://www.vanadis.cn/2016/05/05/es6-destructing-spread/</guid>
         
-        <category>生活</category>
+        <category>es6</category>
         
         
       </item>
@@ -993,7 +993,7 @@
         <link>http://www.vanadis.cn/2016/05/05/es6-class/</link>
         <guid isPermaLink="true">http://www.vanadis.cn/2016/05/05/es6-class/</guid>
         
-        <category>生活</category>
+        <category>es6</category>
         
         
       </item>
@@ -1340,7 +1340,7 @@ writable: false
         <link>http://www.vanadis.cn/2016/05/05/es5-review/</link>
         <guid isPermaLink="true">http://www.vanadis.cn/2016/05/05/es5-review/</guid>
         
-        <category>生活</category>
+        <category>es5</category>
         
         
       </item>

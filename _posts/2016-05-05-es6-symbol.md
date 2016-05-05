@@ -5,7 +5,7 @@ subtitle:   " \"\""
 author:     "绯雨闲丸"
 header-img: "img/post-bg-2016.jpg"
 tags:
-    - 生活
+    - es6
 ---
 
 > “”
