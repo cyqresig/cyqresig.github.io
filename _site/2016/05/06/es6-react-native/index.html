@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于前端开发,架构,动漫 | 绯雨闲丸，Web & Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。">
+    <meta name="keyword"  content="绯雨闲丸, HISAME SHIZUMARU绯雨闲丸, HISAME SHIZUMARU, 绯雨闲丸的博客, HISAME SHIZUMARU Blog, 博客, 个人网站, 互联网, 前端, 动漫">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>react-native中es5对照es6的写法 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
+
+    <link rel="canonical" href="http://www.vanadis.cn/2016/05/06/es6-react-native/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/HISAME-SHIZUMARU-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- cyqresig change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- cyqresig Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">绯雨闲丸 Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="blog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">主页</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">关于</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">分类标签</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#blog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __Nav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __Nav__.close()
+        }else{
+            __Nav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close Nav.
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __Nav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-2016.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post-bg-2016.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#es6" title="es6">es6</a>
+                        
+                    </div>
+                    <h1>react-native中es5对照es6的写法</h1>
+                    
+                    
+                    <h2 class="subheading"> ""</h2>
+                    
+                    <span class="meta">Posted by 绯雨闲丸 on May 6, 2016</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<blockquote>
+  <p>“”</p>
+</blockquote>
+
+<p>转载： <a href="http://bbs.reactnative.cn/topic/15/react-react-native-%E7%9A%84es5-es6%E5%86%99%E6%B3%95%E5%AF%B9%E7%85%A7%E8%A1%A8">http://bbs.reactnative.cn/topic/15/react-react-native-%E7%9A%84es5-es6%E5%86%99%E6%B3%95%E5%AF%B9%E7%85%A7%E8%A1%A8</a></p>
+
+<p>英文版: <a href="https://babeljs.io/blog/2015/06/07/react-on-es6-plus">https://babeljs.io/blog/2015/06/07/react-on-es6-plus</a></p>
+
+<p>很多React/React Native的初学者都被ES6的问题迷惑：各路大神都建议我们直接学习ES6的语法(class Foo extends React.Component)，然而网上搜到的很多教程和例子都是ES5版本的，所以很多人在学习的时候连照猫画虎都不知道怎么做。今天在此整理了一些ES5和ES6的写法对照表，希望大家以后读到ES5的代码，也能通过对照，在ES6下实现相同的功能。</p>
+
+<h1 id="section">模块</h1>
+
+<h2 id="section-1">引用</h2>
+
+<p>在ES5里，如果使用CommonJS标准，引入React包基本通过require进行，代码类似这样：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">//ES5</span>
+<span class="kd">var</span> <span class="nx">React</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"react-native"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="p">{</span>
+    <span class="nx">Image</span><span class="p">,</span>
+    <span class="nx">Text</span><span class="p">,</span>
+    <span class="nx">PropTypes</span>
+<span class="p">}</span> <span class="o">=</span> <span class="nx">React</span><span class="p">;</span>  <span class="c1">//引用不同的React Native组件</span>
+</code></pre>
+</div>
+
+<p>在ES6里，import写法更为标准</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">//ES6</span>
+<span class="kr">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">Image</span><span class="p">,</span>
+    <span class="nx">Text</span><span class="p">,</span>
+    <span class="nx">PropTypes</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s1">'react-native'</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>注意在React Native里，import直到0.12+才能正常运作。</p>
+
+<h2 id="section-2">导出单个类</h2>
+
+<p>在ES5里，要导出一个类给别的模块用，一般通过module.exports来导出</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">//ES5</span>
+<span class="kd">var</span> <span class="nx">MyComponent</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+    <span class="p">...</span>
+<span class="p">});</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">MyComponent</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>在ES6里，通常用export default来实现相同的功能：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">//ES6</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">MyComponent</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>引用的时候也类似：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">//ES5</span>
+<span class="kd">var</span> <span class="nx">MyComponent</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./MyComponent.js'</span><span class="p">);</span>
+
+<span class="c1">//ES6</span>
+<span class="kr">import</span> <span class="nx">MyComponent</span> <span class="nx">from</span> <span class="s1">'./MyComponent.js'</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<h1 id="section-3">定义组件</h1>
+
+<p>在ES5里，通常通过React.createClass来定义一个组件类，像这样：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">//ES5</span>
+<span class="kd">var</span> <span class="nx">Photo</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">Image</span> <span class="nx">source</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">source</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="p">);</span>
+    <span class="p">},</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>在ES6里，我们通过定义一个继承自React.Component的class来定义一个组件类，像这样：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">//ES6</span>
+<span class="kr">class</span> <span class="nx">Photo</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+    <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">Image</span> <span class="nx">source</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">source</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h2 id="section-4">给组件定义方法</h2>
+
+<p>从上面的例子里可以看到，给组件定义方法不再用 名字: function()的写法，而是直接用名字()，在方法的最后也不能有逗号了。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">//ES5</span>
+<span class="kd">var</span> <span class="nx">Photo</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+    <span class="na">componentWillMount</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
+
+    <span class="p">},</span>
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">Image</span> <span class="nx">source</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">source</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="p">);</span>
+    <span class="p">},</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">//ES6</span>
+<span class="kr">class</span> <span class="nx">Photo</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+    <span class="nx">componentWillMount</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="p">}</span>
+    <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">Image</span> <span class="nx">source</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">source</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h2 id="section-5">定义组件的属性类型和默认属性</h2>
+
+<p>在ES5里，属性类型和默认属性分别通过propTypes成员和getDefaultProps方法来实现</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">//ES5</span>
+<span class="kd">var</span> <span class="nx">Video</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+    <span class="na">getDefaultProps</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="na">autoPlay</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="na">maxLoops</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="p">};</span>
+    <span class="p">},</span>
+    <span class="na">propTypes</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">autoPlay</span><span class="p">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">bool</span><span class="p">.</span><span class="nx">isRequired</span><span class="p">,</span>
+        <span class="na">maxLoops</span><span class="p">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">number</span><span class="p">.</span><span class="nx">isRequired</span><span class="p">,</span>
+        <span class="na">posterFrameSrc</span><span class="p">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span><span class="p">.</span><span class="nx">isRequired</span><span class="p">,</span>
+        <span class="na">videoSrc</span><span class="p">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span><span class="p">.</span><span class="nx">isRequired</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">View</span> <span class="o">/&gt;</span>
+        <span class="p">);</span>
+    <span class="p">},</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>在ES6里，可以统一使用static成员来实现</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">//ES6</span>
+<span class="kr">class</span> <span class="nx">Video</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+    <span class="kr">static</span> <span class="nx">defaultProps</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">autoPlay</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">maxLoops</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="p">};</span>  <span class="c1">// 注意这里有分号</span>
+    <span class="kr">static</span> <span class="nx">propTypes</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">autoPlay</span><span class="p">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">bool</span><span class="p">.</span><span class="nx">isRequired</span><span class="p">,</span>
+        <span class="na">maxLoops</span><span class="p">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">number</span><span class="p">.</span><span class="nx">isRequired</span><span class="p">,</span>
+        <span class="na">posterFrameSrc</span><span class="p">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span><span class="p">.</span><span class="nx">isRequired</span><span class="p">,</span>
+        <span class="na">videoSrc</span><span class="p">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span><span class="p">.</span><span class="nx">isRequired</span><span class="p">,</span>
+    <span class="p">};</span>  <span class="c1">// 注意这里有分号</span>
+    <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">View</span> <span class="o">/&gt;</span>
+        <span class="p">);</span>
+    <span class="p">}</span> <span class="c1">// 注意这里既没有分号也没有逗号</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>也有人这么写，虽然不推荐，但读到代码的时候你应当能明白它的意思：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">//ES6</span>
+<span class="kr">class</span> <span class="nx">Video</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+    <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">View</span> <span class="o">/&gt;</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">Video</span><span class="p">.</span><span class="nx">defaultProps</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">autoPlay</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">maxLoops</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="nx">Video</span><span class="p">.</span><span class="nx">propTypes</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">autoPlay</span><span class="p">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">bool</span><span class="p">.</span><span class="nx">isRequired</span><span class="p">,</span>
+    <span class="na">maxLoops</span><span class="p">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">number</span><span class="p">.</span><span class="nx">isRequired</span><span class="p">,</span>
+    <span class="na">posterFrameSrc</span><span class="p">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span><span class="p">.</span><span class="nx">isRequired</span><span class="p">,</span>
+    <span class="na">videoSrc</span><span class="p">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span><span class="p">.</span><span class="nx">isRequired</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<p>注意: 对React开发者而言，static成员在IE10及之前版本不能被继承，而在IE11和其它浏览器上可以，这有时候会带来一些问题。React Native开发者可以不用担心这个问题。</p>
+
+<h2 id="state">初始化STATE</h2>
+
+<p>ES5下情况类似，</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">//ES5</span>
+<span class="kd">var</span> <span class="nx">Video</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+    <span class="na">getInitialState</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="na">loopsRemaining</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">maxLoops</span><span class="p">,</span>
+        <span class="p">};</span>
+    <span class="p">},</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<p>ES6下，有两种写法：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">//ES6</span>
+<span class="kr">class</span> <span class="nx">Video</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+    <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">loopsRemaining</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">maxLoops</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>不过我们推荐更易理解的在构造函数中初始化（这样你还可以根据需要做一些计算）：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">//ES6</span>
+<span class="kr">class</span> <span class="nx">Video</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">){</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="na">loopsRemaining</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">maxLoops</span><span class="p">,</span>
+        <span class="p">};</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h1 id="section-6">把方法作为回调提供</h1>
+
+<p>很多习惯于ES6的用户反而不理解在ES5下可以这么做：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">//ES5</span>
+<span class="kd">var</span> <span class="nx">PostInfo</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+    <span class="na">handleOptionsButtonClick</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Here, 'this' refers to the component instance.</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="na">showOptionsModal</span><span class="p">:</span> <span class="kc">true</span><span class="p">});</span>
+    <span class="p">},</span>
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">TouchableHighlight</span> <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleOptionsButtonClick</span><span class="p">}</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">Text</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">label</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="sr">/TouchableHighlight</span><span class="err">&gt;
+</span>        <span class="p">)</span>
+    <span class="p">},</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>在ES5下，React.createClass会把所有的方法都bind一遍，这样可以提交到任意的地方作为回调函数，而this不会变化。但官方现在逐步认为这反而是不标准、不易理解的。</p>
+
+<p>在ES6下，你需要通过bind来绑定this引用，或者使用箭头函数（它会绑定当前scope的this引用）来调用</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">//ES6</span>
+<span class="kr">class</span> <span class="nx">PostInfo</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span>
+<span class="p">{</span>
+    <span class="nx">handleOptionsButtonClick</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="na">showOptionsModal</span><span class="p">:</span> <span class="kc">true</span><span class="p">});</span>
+    <span class="p">}</span>
+    <span class="nx">render</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">TouchableHighlight</span>
+                <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleOptionsButtonClick</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">)}</span>
+                <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">e</span><span class="o">=&gt;</span><span class="k">this</span><span class="p">.</span><span class="nx">handleOptionsButtonClick</span><span class="p">(</span><span class="nx">e</span><span class="p">)}</span>
+                <span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">Text</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">label</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="sr">/TouchableHighlight</span><span class="err">&gt;
+</span>        <span class="p">)</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>箭头函数实际上是在这里定义了一个临时的函数，箭头函数的箭头=&gt;之前是一个空括号、单个的参数名、或用括号括起的多个参数名，而箭头之后可以是一个表达式（作为函数的返回值），或者是用花括号括起的函数体（需要自行通过return来返回值，否则返回的是undefined）。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// 箭头函数的例子</span>
+<span class="p">()</span><span class="o">=&gt;</span><span class="mi">1</span>
+<span class="nx">v</span><span class="o">=&gt;</span><span class="nx">v</span><span class="o">+</span><span class="mi">1</span>
+<span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span><span class="o">=&gt;</span><span class="nx">a</span><span class="o">+</span><span class="nx">b</span>
+<span class="p">()</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"foo"</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">e</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">e</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">1000</span><span class="o">/</span><span class="nx">e</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>需要注意的是，不论是bind还是箭头函数，每次被执行都返回的是一个新的函数引用，因此如果你还需要函数的引用去做一些别的事情（譬如卸载监听器），那么你必须自己保存这个引用</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// 错误的做法</span>
+<span class="kr">class</span> <span class="nx">PauseMenu</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+    <span class="nx">componentWillMount</span><span class="p">(){</span>
+        <span class="nx">AppStateIOS</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'change'</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">onAppPaused</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="nx">componentDidUnmount</span><span class="p">(){</span>
+        <span class="nx">AppStateIOS</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">'change'</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">onAppPaused</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="nx">onAppPaused</span><span class="p">(</span><span class="nx">event</span><span class="p">){</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// 正确的做法</span>
+<span class="kr">class</span> <span class="nx">PauseMenu</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">){</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_onAppPaused</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">onAppPaused</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">componentWillMount</span><span class="p">(){</span>
+        <span class="nx">AppStateIOS</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'change'</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onAppPaused</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">componentDidUnmount</span><span class="p">(){</span>
+        <span class="nx">AppStateIOS</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">'change'</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onAppPaused</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">onAppPaused</span><span class="p">(</span><span class="nx">event</span><span class="p">){</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>从这个帖子中我们还学习到一种新的做法：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// 正确的做法</span>
+<span class="kr">class</span> <span class="nx">PauseMenu</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+    <span class="nx">componentWillMount</span><span class="p">(){</span>
+        <span class="nx">AppStateIOS</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'change'</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">onAppPaused</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">componentDidUnmount</span><span class="p">(){</span>
+        <span class="nx">AppStateIOS</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">'change'</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">onAppPaused</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">onAppPaused</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">//把方法直接作为一个arrow function的属性来定义，初始化的时候就绑定好了this指针</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h2 id="mixins">Mixins</h2>
+
+<p>在ES5下，我们经常使用mixin来为我们的类添加一些新的方法，譬如PureRenderMixin</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">PureRenderMixin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'react-addons-pure-render-mixin'</span><span class="p">);</span>
+<span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+  <span class="na">mixins</span><span class="p">:</span> <span class="p">[</span><span class="nx">PureRenderMixin</span><span class="p">],</span>
+
+  <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">className</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">foo</span><span class="o">&lt;</span><span class="sr">/div&gt;</span><span class="err">;
+</span>  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>然而现在官方已经不再打算在ES6里继续推行Mixin，他们说：Mixins Are Dead. Long Live Composition。</p>
+
+<p>尽管如果要继续使用mixin，还是有一些第三方的方案可以用，譬如这个方案</p>
+
+<p>不过官方推荐，对于库编写者而言，应当尽快放弃Mixin的编写方式，上文中提到Sebastian Markbåge的一段代码推荐了一种新的编码方式：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">//Enhance.js</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">"React"</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="kd">var</span> <span class="nx">Enhance</span> <span class="o">=</span> <span class="nx">ComposedComponent</span> <span class="o">=&gt;</span> <span class="kr">class</span> <span class="kr">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="na">data</span><span class="p">:</span> <span class="kc">null</span> <span class="p">};</span>
+    <span class="p">}</span>
+    <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="na">data</span><span class="p">:</span> <span class="s1">'Hello'</span> <span class="p">});</span>
+    <span class="p">}</span>
+    <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">&lt;</span><span class="nx">ComposedComponent</span> <span class="p">{...</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">}</span> <span class="nx">data</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">data</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="err">;
+</span>    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">//HigherOrderComponent.js</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">Enhance</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">"./Enhance"</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">MyComponent</span> <span class="p">{</span>
+    <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="nx">Waiting</span><span class="p">...</span><span class="o">&lt;</span><span class="sr">/div&gt;</span><span class="err">;
+</span>        <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/div&gt;</span><span class="err">;
+</span>    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">Enhance</span><span class="p">(</span><span class="nx">MyComponent</span><span class="p">);</span> <span class="c1">// Enhanced component</span>
+</code></pre>
+</div>
+
+<p>用一个“增强函数”，来某个类增加一些方法，并且返回一个新类，这无疑能实现mixin所实现的大部分需求。
+# ES6+带来的其它好处</p>
+
+<h2 id="section-7">解构&amp;属性延展　</h2>
+
+<p>结合使用ES6+的解构和属性延展，我们给孩子传递一批属性更为方便了。这个例子把className以外的所有属性传递给div标签：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kr">class</span> <span class="nx">AutoloadingPostsGrid</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+    <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="p">{</span>
+            <span class="nx">className</span><span class="p">,</span>
+            <span class="p">...</span><span class="nx">others</span><span class="p">,</span>  <span class="c1">// contains all properties of this.props except for className</span>
+        <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">;</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="nx">className</span><span class="p">}</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">PostsGrid</span> <span class="p">{...</span><span class="nx">others</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleLoadMoreClick</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Load</span> <span class="nx">more</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>下面这种写法，则是传递所有属性的同时，用覆盖新的className值：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">div</span> <span class="p">{...</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">}</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"override"</span><span class="o">&gt;</span>
+    <span class="err">…</span>
+<span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span></code></pre>
+</div>
+
+<p>这个例子则相反，如果属性中没有包含className，则提供默认的值，而如果属性中已经包含了，则使用属性中的值</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"base"</span> <span class="p">{...</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">}</span><span class="o">&gt;</span>
+    <span class="err">…</span>
+<span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span></code></pre>
+</div>
+
+
+                <hr>
+
+                
+                <!-- 多说 Share start -->
+                </style>
+                <div class="ds-share"
+                    style="text-align: right"
+                    data-thread-key="/2016/05/06/es6-react-native"
+                    data-title="react-native中es5对照es6的写法"
+                    data-url="http://www.vanadis.cn/2016/05/06/es6-react-native/"
+                    data-images="http://www.vanadis.cn/img/post-bg-2016.jpg"
+                    data-content="
+  “”
+
+
+转载： http://bbs.reactnative.cn/topic/15/react-react-native-%E7%9A%84es... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- 多说 Share end-->
+                
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/05/05/es6-weakmap/" data-toggle="tooltip" data-placement="top" title="es6-WeakMap的用法">
+                        上一篇<br>
+                        <span>es6-WeakMap的用法</span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+
+
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/2016/05/06/es6-react-native"
+                        data-title="react-native中es5对照es6的写法"
+                        data-url="http://www.vanadis.cn/2016/05/06/es6-react-native/" >
+                    </div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+
+            </div>
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">分类标签</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#生活" title="生活" rel="1">
+                                    生活
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#文档" title="文档" rel="1">
+                                    文档
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#javascript组件" title="javascript组件" rel="1">
+                                    javascript组件
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#javascript" title="javascript" rel="5">
+                                    javascript
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#nodejs" title="nodejs" rel="1">
+                                    nodejs
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#es5" title="es5" rel="1">
+                                    es5
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#es6" title="es6" rel="8">
+                                    es6
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>友情链接</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://rockychen.me">RockyChen的博客</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by cyqresig
+    var _user = 'vanadis';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by cyqresig, add target = "_blank" to <a> by cyqresig -->
+                    
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cyqresig">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 绯雨闲丸 Blog 2016
+                    <br>
+                    Theme © <a href="http://vanadis.cn">HISAME SHIZUMARU</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=cyqresig&repo=cyqresig.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/HISAME-SHIZUMARU-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- Highlight.js -->
+<script>
+    async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+        hljs.initHighlightingOnLoad();
+    })
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+<link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        // var $nav = document.querySelector("nav");
+        // if($nav) FastClick.attach($nav);
+
+        // global FastClick!!
+        FastClick.attach(document.body);    
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by cyqresig
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'vanadis.cn';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by cyqresig
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

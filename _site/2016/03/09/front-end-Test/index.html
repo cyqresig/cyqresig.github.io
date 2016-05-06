@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于前端开发,架构,动漫 | 绯雨闲丸，Web & Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。">
+    <meta name="keyword"  content="绯雨闲丸, HISAME SHIZUMARU绯雨闲丸, HISAME SHIZUMARU, 绯雨闲丸的博客, HISAME SHIZUMARU Blog, 博客, 个人网站, 互联网, 前端, 动漫">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>关于前端开发谈谈单元测试 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
+
+    <link rel="canonical" href="http://www.vanadis.cn/2016/03/09/front-end-Test/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/HISAME-SHIZUMARU-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- cyqresig change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- cyqresig Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">绯雨闲丸 Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="blog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">主页</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">关于</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">分类标签</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#blog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __Nav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __Nav__.close()
+        }else{
+            __Nav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close Nav.
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __Nav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-2016-03-09.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post-bg-2016-03-09.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#javascript" title="javascript">javascript</a>
+                        
+                    </div>
+                    <h1>关于前端开发谈谈单元测试</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by 绯雨闲丸 on March 9, 2016</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<blockquote>
+  <p>文章来源：segmentfault.com</p>
+</blockquote>
+
+<h3 id="unit-test">单元测试Unit Test</h3>
+
+<p>很早就知道单元测试这样一个概念，但直到几个月前，我真正开始接触和使用它。究竟什么是单元测试？我想也许很多使用了很久的人也不一定能描述的十分清楚，所以写了这篇文章来尝试描述它的特征和原则，以帮助更多人。
+####    什么是单元测试？</p>
+
+<p>先来看看单元测试的定义，在维基百科英文版中可以找到Kolawa Adam在 Automated Defect Prevention: Best Practices in Software Management 一书中对单元测试的定义：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>In computer programming, unit testing is a method by which individual units of source code,
+sets of one or more computer program modules together with associated control data, usage procedures,
+and operating procedures are tested to determine if they are fit for use.
+</code></pre>
+</div>
+
+<p>重点在于最后，单元测试的目的显而易见，用来确定是否适合使用。而测试的方法则包括控制数据，使用和操作过程。那么以我的理解，每个单元测试就是一段用于测试一个模块或接口是否能达到预期结果的代码。开发人员需要使用代码来定义一个可用的衡量标准，并且可以快速检验。</p>
+
+<p>很快我发现有一个误区，许多人认为单元测试必须是一个runner集中运行所有单元的测试，并一目了然。不，这仅仅是一种自动化单元测试的最佳实践，在一些小型项目中单元测试可能仅仅是一组去除其他特性的接口调用。甚至在一些图形处理或布局的项目中单元测试可以结合自身特性变的十分有趣，比如Masonry，一个网格布局库，在它的单元测试中不是一个红或绿的条目，而是一行一行的小格布局用以说明布局被完成的事实，这样比代码检查布局是否正确再以颜色显示结果来得更直观高效，也避免了测试程序本身的bug导致的失误。</p>
+
+<p>打个比方，单元测试就像一把尺子，当测量的对象是一个曲面时，也许可以花费大力气去将它抽象成平面，但我更提倡量身定做一把弯曲的尺子去适应这个曲面。无论怎样，单元测试是为了生产代码而写，它应当足够的自由奔放，去适应各种各样的生产代码。
+#### 为什么要单元测试？</p>
+
+<p>也许定义中已经很清楚的指明了其意义，确认某段代码或模块或接口是否适合使用，但我想会有更多的人认为，直接在测试环境中使用软件可以更加确保软件是否可用。不，在实际使用过程中会伴随着一大批的附带操作大量增加测试时间，并且无法保证其测试覆盖率。所以我认为单元测试的目的并不仅仅是确认是否可用，而是更高效更稳定的确认其是否可用。</p>
+
+<p>随着项目规模的增加，函数、方法、变量都在递增，尤其是进度的不足，来自产品经理的压力，还有QA所带来的各种Bug报告会让原本整洁的代码变得一片混乱。我甚至见过同一个接口以不同的名称出现在8个不同的控制器中。这时也许我们首先想到的是重构，可是等等，在重构结束时我们如何确定项目仅仅是被重构了，而不是被改写了？此时单元测试将是一根救命稻草，它是一个衡量标准，告诉开发人员这么做是否将改变结果。</p>
+
+<p>不仅仅是这样。许多人认为单元测试，甚至整个测试都是在编码结束后的一道工序，而修复bug也不过是在做垃圾掩埋一类的工作。但测试应该伴随整个编码或软件周期进行，还有将在后面提到的TDD这样有趣的东西，单元测试将超前于编码。我的意思是，单元测试应该是一个框架、标准，经常被形容被脚手架，像建筑一样，脚手架的高度至少应该和大楼高度不相上下，甚至一开始就搭好脚手架。
+#### 如何做单元测试？</p>
+
+<p>弄清了单元测试的目的和意义，但如何开始？很简单，首先它是一个检验，所以应该只有pass或fail两种情况。而检验的对象应该是某个接口或模块，所以应该调用它获得一个结果。检验这个结果就是单元测试的基本动作，就拿一个除法函数来做例子：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">division</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">a</span> <span class="o">/</span> <span class="nx">b</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">division</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">result</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s1">'pass'</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s1">'fail'</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>显然，将会提示pass通过。但是问题来了，这个测试的用例太单一和普通了，如果使用0做除数呢？是NaN？还是Infinity？或者在实际使用时，产品需要一个0来代替这样一个不符合数学概念的结果去适应必须为数字类型的某种计算，于是division出现了一个bug。另外当覆盖率增加，也意味着用例的增加，我们需要把if条件语句提出来做成一个函数多次调用。还有alert方法，如果用例太多，我相信你会点确认点到手软，也许可以直接显示在页面上。</p>
+
+<p>所以我添加了一个关于除数为0的用例，并重构了代码：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">division</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">b</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">a</span> <span class="o">/</span> <span class="nx">b</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">matcher</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">result</span><span class="p">,</span> <span class="nx">expect</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">result</span> <span class="o">===</span> <span class="nx">expect</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">_print</span><span class="p">(</span><span class="nx">name</span> <span class="o">+</span> <span class="s1">'- pass'</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">_print</span><span class="p">(</span><span class="nx">name</span> <span class="o">+</span> <span class="s1">'- fail'</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kd">function</span> <span class="nx">_print</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">_bar</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'p'</span><span class="p">);</span>
+        <span class="nx">_bar</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="nx">str</span><span class="p">;</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">_bar</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">matcher</span><span class="p">(</span><span class="s1">'normal'</span><span class="p">,</span> <span class="nx">division</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="p">);</span>
+<span class="nx">matcher</span><span class="p">(</span><span class="s1">'zero'</span><span class="p">,</span> <span class="nx">division</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">0</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p>现在可以使用matcher方法添加许多测试用例，并且还能为该用例命名，在页面中直接显示每个用例是否通过。这样一个基本的单元测试就完成了，当然它的覆盖率还远远不够，这里仅作为一个例子。另外为了提高效率还应该使用颜色来标记是否通过，可以一目了然。
+#### 测试驱动开发</p>
+
+<p>TDD是Test Driven Development 的缩写，也就是测试驱动开发。</p>
+
+<p>通常传统软件工程将测试描述为软件生命周期的一个环节，并且是在编码之后。但敏捷开发大师Kent Beck在2003年出版了 Test Driven Development By Example 一书，从而确立了测试驱动开发这个领域。</p>
+
+<p>TDD需要遵循如下规则：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>写一个单元测试去描述程序的一个方面。
+运行它应该会失败，因为程序还缺少这个特性。
+为这个程序添加一些尽可能简单的代码保证测试通过。
+重构这部分代码，直到代码没有重复、代码责任清晰并且结构简单。
+持续重复这样做，积累代码。
+</code></pre>
+</div>
+
+<p>另外，衡量是否使用了TDD的一个重要标准是测试对代码的覆盖率，覆盖率在80%以下说明一个团队没有充分掌握TDD，当然高覆盖率也不能说一定使用了TDD，这仅仅是一个参考指标。</p>
+
+<p>在我看来，TDD是一种开发技术，而非测试技术，所以它对于代码构建的意义远大于代码测试。也许最终的代码和先开发再测试写的测试代码基本一致，但它们仍然是有很大不同的。TDD具有很强的目的性，在直接结果的指导下开发生产代码，然后不断围绕这个目标去改进代码，其优势是高效和去冗余的。所以其特点应该是由需求得出测试，由测试代码得出生产代码。打个比方就像是自行车的两个轮子，虽然都是在向同一个方向转动，但是后轮是施力的，带动车子向前，而前轮是受力的，被向前的车子带动而转。
+#### 行为驱动开发</p>
+
+<p>所谓的BDD行为驱动开发，即Behaviour Driven Development，是一种新的敏捷开发方法。它更趋向于需求，需要共同利益者的参与，强调用户故事（User Story）和行为。2009年，在伦敦发表的“敏捷规格，BDD和极限测试交流”[3]中，Dan North对BDD给出了如下定义：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>BDD是第二代的、由外及内的、基于拉(pull)的、多方利益相关者的(stakeholder)、多种可扩展的、高自动化的敏捷方法。它描述了一个交互循环，可以具有带有良好定义的输出（即工作中交付的结果）：已测试过的软件。
+</code></pre>
+</div>
+
+<p>另外最主观的区别就是用词，‘example’取代了‘test’，‘describe’取代了‘class’，‘behaviour’取代了‘method’等等。这正是其特征之一，自然语言的加入，使得非程序人员也能参与到测试用例的编写中来，也大大降低了客户、用户、项目管理者与开发者之间来回翻译的成本。</p>
+
+<p>简单来说，我认为BDD更加注重业务需求而不是技术，虽然看起来BDD确实是比ATDD做的更好，但这是一种误导，这仅仅是就某种环境下而言的。而且以国内的现状来看TDD要比BDD更适合，因为它不需要所有人员的理解和加入。
+## 单元测试框架</p>
+
+<p>无论如何，单元测试永远是少不了的。其实在单元测试中测试代码和生产代码应该是等量的，正如Robert C. Martin在其 Clean Code: A Handbook of Agile Software Craftsmanship 一书中所写：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>测试必须随生产代码的演进而修改，测试越脏就越难修改
+</code></pre>
+</div>
+
+<p>于是新的测试很难被加入其中，测试代码的维护变得异常困难，最终在各种压力之中只有扔掉测试代码组。但是没有了测试代码，就失去了确保对代码的改动能如愿以偿的能力，各种问题随之而来。因此，单元测试也需要一种行之有效的实践来确保其质量和可维护性。</p>
+
+<p>所以正如生产代码一样，测试代码也有框架，下面介绍几种主流的Javascript的单元测试框架。
+###    Jasmine</p>
+
+<p>有一类框架叫做xUnit，来源于著名的JAVA测试框架JUnit，xUnit则代表了一种模式，并且使用这样的命名。在Javascript中也有这样的一个老牌框架JsUnit，他的作者是Edward Hieatt来自Pivotal Labs，但在几年前JsUnit就已经停止维护了，他们带来了新的BDD框架Jasmine。</p>
+
+<p>Jasmine不依赖于任何框架，所以适用于所有的Javascript代码。使用一个全局函数 describe 来描述每个测试，并且可以嵌套。describe函数有2个参数，一个是字符串用于描述，一个是函数用于测试。在该函数中可以使用全局函数 it 来定义Specs，也就是单元测试的主要内容， 使用 expect 函数来测试：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">describe</span><span class="p">(</span><span class="s1">'A suite'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">it</span><span class="p">(</span><span class="s1">'is a spec'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="nx">expect</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>另外如果想去掉某个describe，无须注释掉整段代码，只需要在describe前面加上x即可忽略该describe。
+####    Matcher</p>
+
+<p>toBe方法是一个基本的 matcher 用来定义判断规则，可以看得出来Jasmine的方法是非常语义化的，“expect ‘a’ to be true”，如果想判断否定条件，则只需要在toBe前调用 not 方法：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">expect</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nx">not</span><span class="p">().</span><span class="nx">toBe</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p>除了toBe这样基本的还有许多其他的Matcher，比如 toEqual 。很多初学Jasmine会弄不清和toBe的区别，一个简单的例子就能明白它们的区别：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    <span class="nx">expect</span><span class="p">({}).</span><span class="nx">not</span><span class="p">().</span><span class="nx">toBe</span><span class="p">({});</span>
+    <span class="nx">expect</span><span class="p">({}).</span><span class="nx">toEqual</span><span class="p">({});</span>
+</code></pre>
+</div>
+
+<p>一个新建的Object不是（not to be）另一个新建的Object，但是它们是相等（to equal）的。还有 toMatch 可以使用字符串或者正则表达式来验证，以及其他一些特殊验证，比如undefined或者boolean的判断， toThrow 可以检查函数所抛出的异常。另外Jasmine还支持自定义Matcher，以NaN的检查为例，像这样使用beforeEach方法在每个测试执行前添加一个matcher：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">addMatchers</span><span class="p">({</span>
+            <span class="na">toBeNaN</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">expected</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nb">isNaN</span><span class="p">(</span><span class="nx">expected</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+</code></pre>
+</div>
+
+<p>可以想到，其参数expected是传入的一个期望的字面量，而在expect方法中传入的参数，可以通过 this.acturl 获取，是否调用了 not 方法则可以通过 this.isNot 获取，这是一个boolean值。最后测试输出的失败信息应该使用 this.message 来定义，不过它是一个function，然后在其中返回一个信息。所以继续增进toBeNaN：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">addMatchers</span><span class="p">({</span>
+            <span class="na">toBeNaN</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">expected</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">actual</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">actual</span><span class="p">;</span>
+                <span class="kd">var</span> <span class="nx">not</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">isNot</span> <span class="p">?</span> <span class="s1">' not'</span> <span class="p">:</span> <span class="s1">''</span><span class="p">;</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="s1">'Expected '</span> <span class="o">+</span> <span class="nx">actual</span> <span class="o">+</span> <span class="nx">not</span> <span class="o">+</span> <span class="s1">' to be NaN '</span> <span class="o">+</span> <span class="nx">expected</span><span class="p">;</span>
+                <span class="p">};</span>
+                <span class="k">return</span> <span class="nb">isNaN</span><span class="p">(</span><span class="nx">expected</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+</code></pre>
+</div>
+
+<p>这样一个完整的matcher就创建成了。</p>
+
+<p>另外需要说明的是对应beforeEach是在每个spec之前执行， afterEach 方法则是在每个spec之后执行。这是一种AOP，即面向方面的编程（Aspect Oriented Programming）。比如有时候为了测试一个对象，可能需要多次创建和销毁它，所以为了避免冗余代码，使用它们是最佳选择。</p>
+
+<p>还可以使用 jasmine.any 方法来代表一类数据传入matcher中，比如</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    <span class="nx">expect</span><span class="p">(</span><span class="mi">123</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nx">jasmine</span><span class="p">.</span><span class="nx">any</span><span class="p">(</span><span class="nb">Number</span><span class="p">));</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{}).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nx">jasmine</span><span class="p">.</span><span class="nx">any</span><span class="p">(</span><span class="nb">Function</span><span class="p">));</span>
+</code></pre>
+</div>
+
+<h4 id="spy">Spy方法</h4>
+
+<p>一个Spy能监测任何function的调用和获取其参数。这里有2个特殊的Matcher， toHaveBeenCalled 可以检查function是否被调用过，还有 toHaveBeenCalledWith 可以传入参数检查是否和这些参数一起被调用过，像这样使用 spyOn 来注册一个对象中的方法：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>        <span class="kd">var</span> <span class="nx">foo</span><span class="p">,</span> <span class="nx">a</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="na">set</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">a</span> <span class="o">=</span> <span class="nx">str</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="nx">spyOn</span><span class="p">(</span><span class="nx">foo</span><span class="p">,</span> <span class="s1">'set'</span><span class="p">);</span>
+            <span class="nx">foo</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+        <span class="p">});</span>
+        <span class="nx">it</span><span class="p">(</span><span class="s1">'tracks calls'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">set</span><span class="p">).</span><span class="nx">toHaveBeenCalled</span><span class="p">();</span>
+            <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">set</span><span class="p">).</span><span class="nx">toHaveBeenCalled</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+            <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">set</span><span class="p">.</span><span class="nx">calls</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+            <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">set</span><span class="p">.</span><span class="nx">mostRecentCall</span><span class="p">.</span><span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+            <span class="nx">expect</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nx">toBeNull</span><span class="p">();</span>
+        <span class="p">});</span>
+</code></pre>
+</div>
+
+<p>在测试时该function将带有一个被调用的数组 calls ，而 args 数组就是调用时传入的参数，另外特殊属性 mostRencentCall 则代表最后一次调用，和calls[calls.length]一致。需要特别注意的是，这些调用将不会对变量产生作用，所以 a 仍为null。</p>
+
+<p>如果需要调用产生实际的作用，可以在spyOn方法后调用 andCallThrough 方法。还可以通过调用 andReturn 方法设定一个返回值给function。 andCallFake 则可以传入一个function作为参数去代替原本的function。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">spyOn</span><span class="p">(</span><span class="nx">foo</span><span class="p">,</span> <span class="s1">'set'</span><span class="p">).</span><span class="nx">andCallThrough</span><span class="p">();</span>
+</code></pre>
+</div>
+
+<p>甚至在没有function的时候可以使用Jasmine的 createSpy 和 createSpyObj 创建一个spy：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    <span class="nx">foo</span> <span class="o">=</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">createSpy</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">);</span>
+    <span class="nx">obj</span> <span class="o">=</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">createSpyObj</span><span class="p">(</span><span class="s1">'obj'</span><span class="p">,</span> <span class="p">[</span><span class="nx">set</span><span class="p">,</span> <span class="k">do</span><span class="p">]);</span>
+
+    <span class="nx">foo</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+    <span class="nx">obj</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+    <span class="nx">obj</span><span class="p">.</span><span class="k">do</span><span class="p">();</span>
+</code></pre>
+</div>
+
+<p>其效果相当于spyOn使用在了已存在的function上。
+####    时间控制</p>
+
+<p>上面的方法都在程序顺序执行的前提下执行，但 setTimeout 以及 setInterval 两个方法会使代码分离在时间轴上。所以Jasmine提供了 Clock 方法来模拟时间，以获取setTimeout的不同状态。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="nx">jasmine</span><span class="p">.</span><span class="nx">Clock</span><span class="p">.</span><span class="nx">useMock</span><span class="p">();</span>
+    <span class="p">});</span>
+    <span class="nx">it</span><span class="p">(</span><span class="s1">'set time'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="nx">str</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">},</span> <span class="mi">100</span><span class="p">);</span>
+        <span class="nx">expect</span><span class="p">(</span><span class="nx">str</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="nx">jasmine</span><span class="p">.</span><span class="nx">Click</span><span class="p">.</span><span class="nx">tick</span><span class="p">(</span><span class="mi">101</span><span class="p">);</span>
+        <span class="nx">expect</span><span class="p">(</span><span class="nx">str</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+        <span class="nx">jasmine</span><span class="p">.</span><span class="nx">Click</span><span class="p">.</span><span class="nx">tick</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+        <span class="nx">expect</span><span class="p">(</span><span class="nx">str</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+    <span class="p">});</span>
+</code></pre>
+</div>
+
+<p>使用Clock的方法 useMock 来开始时间控制，然后在it中使用 tick 方法来推进时间。
+####    异步</p>
+
+<p>Javascript最大的特色之一就是异步，之前介绍的方法如果存在异步调用，大部分测试时可能会不通过。因此，需要等异步回调之后再进行测试。</p>
+
+<p>Jasmine提供了 runs 和 waitsFor 两个方法来完成这个异步的等待。需要将waitsFor方法夹在多个runs方法中，runs方法中的语句会按顺序直接执行，然后进入waitsFor方法，如果waitsFor返回false，则继续执行waitsFor，直到返回true才执行后面的runs方法。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    <span class="kd">var</span> <span class="nx">cb</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">ajax</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">success</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="nx">cb</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+    <span class="nx">spyOn</span><span class="p">(</span><span class="nx">ajax</span><span class="p">,</span> <span class="s1">'success'</span><span class="p">);</span>
+    <span class="nx">it</span><span class="p">(</span><span class="s1">'async callback'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="nx">runs</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="nx">_toAjax</span><span class="p">(</span><span class="nx">ajax</span><span class="p">);</span>
+        <span class="p">});</span>
+        <span class="nx">waitsFor</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">ajax</span><span class="p">.</span><span class="nx">success</span><span class="p">.</span><span class="nx">callCount</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">});</span>
+        <span class="nx">runs</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="nx">expect</span><span class="p">(</span><span class="nx">cb</span><span class="p">).</span><span class="nx">toBeTruthy</span><span class="p">();</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+</code></pre>
+</div>
+
+<p>如此，只要在waitsFor中判断回调函数是否被调用了即可完成异步测试。上面代码中我使用一个方法名直接代替了ajax请求方法来缩减不必要的代码。在第一个runs方法中发出了一个ajax请求，然后在waitsFor中等待其被调用，当第二个runs执行时说明回调函数已经被调用了，进行测试。
+### Qunit</p>
+
+<p>它是由jQuery团队开发的一款测试套件，最初依赖于jQuery库，在2009年时脱离jQuery的依赖，变成了一个真正的测试框架，适用于所有Javascript代码。</p>
+
+<p>Qunit采用断言（Assert）来进行测试，相比于Jasmine的matcher更加多的类型，Qunit更集中在测试的度上。 deepEqual 用于比较一些纵向数据，比如Object或者Function等。而最常用的 ok 则直接判断是否为true。异步方面Qunit也很有趣，通过 stop 来停止测试等待异步返回，然后使用 start 继续测试，这要比Jasmine的过程化的等待更自由一些，不过有时也许会更难写一些。Qunit还拥有3组AOP的方法( done 和 ‘begin’ )来对应于整个测试，测试和模块。</p>
+
+<p>对于Function的跟踪测试，Qunit似乎完全没有考虑。不过可以使用另外一个测试框架为Qunit带来的插件 sinon-qunit。这样就可以在test中使用 spy 方法了。
+### Sinon</p>
+
+<p>Sinon并不是一个典型的单元测试框架，更像一个库，最主要的是对Function的测试，包括 Spy 和 Stub 两个部分，Spy用于侦测Function，而Stub更像是一个Spy的插件或者助手，在Function调用前后做一些特殊的处理，比如修改配置或者回调。它正好极大的弥补了Qunit的不足，所以通常会使用Qunit+Sinon来进行单元测试。</p>
+
+<p>值得一提的是，Sinon的作者Christian Johansen就是 Test-Driven JavaScript Development 一书的作者，这本书针对Javascript很详细的描述了单元测试的每个环节。
+Mocha</p>
+
+<p>它的作者就是在Github上粉丝6K的超级Jser TJ Holowaychuk，可以在他的页面上看到过去一年的提交量是5700多，拥有300多个项目，无论是谁都难以想象他是如何进行coding的。</p>
+
+<p>理所当然的，Mocha充满了Geek感，不但可以在bash中进行测试，而且还拥有一整套命令对测试进行操作。甚至使用 diff 可以查看当前测试与上一次成功测试的代码不一致。</p>
+
+<p>不仅仅是这样，Mocha非常得自由。Mocha将更多的方法集中在了describe和it中，比如异步的测试就非常棒，在it的回调函数中会获取一个参数 done ，类型是function，用于异步回调，当执行这个函数时就会继续测试。还可以使用 only 和 skip 去选择测试时需要的部分。Mocha的接口也一样自由，除了 BDD 风格和Jasmine类似的接口，还有 TDD 风格的 （suite test setup teardown suiteSetup suiteTeardown），还有AMD风格的 exports，Qunit风格等。同时测试报告也可以任意组织，无论是列表、进度条、还是飞机跑道这样奇特的样式都可以在bash中显示。
+##前端测试工具
+###  Client/Server 测试</p>
+
+<p>相比于服务端开发，前端开发在测试方面始终面临着一个严峻的问题，那就是浏览器兼容性。Paul Irish曾发表文章Browser Market Pollution: IE[x] Is the New IE6阐述了一个奇怪的设想，未来你可能需要在76个浏览器上开发，因为每次IE的新版本都是一个特别的浏览器，而且还有它对之前所有版本的兼容模式也是一样。虽然没人认为微软会继续如此愚蠢，不过这也说明了一个问题，前端开发中浏览器兼容性是一个永远的问题，而且我认为即使解决了浏览器的兼容性问题，未来在移动开发方面，设备兼容性也是一个问题。</p>
+
+<p>所以在自动化测试方面也是如此，即使所有的单元测试集中在了一个runner中，前端测试仍然要面对至少4个浏览器内核以及3个电脑操作系统加2个或更多移动操作系统，何况还有令移动开发人员头疼的Android的碎片化问题。不过可以安心的是，早已存在这样的工具可以捕获不同设备上的不同浏览器，并使之随时更新测试结果，甚至可以在一个终端上看到所有结果。
+#### 工具介绍</p>
+
+<p>JSTD（Javascript Test Driver）是一个最早的C/S测试工具，来自Google，基于JAVA编写，跨平台，使用命令行控制，还有很好的编辑器支持，最常用于eclipse。不过它无法显示测试对象的设备及浏览器版本，只有浏览器名是不够的。另外JSTD已经慢慢不再活跃，它的早正如它的老。</p>
+
+<p>Google的新贵Karma出现了，它使用Nodejs构建，因此跨平台，还支持PhantomJS浏览器，还支持多种框架，包括以上介绍的Jasmine、Qunit和Mocha。一次可以在多个浏览器及设备中进行测试，并控制浏览器行为和测试报告。虽然它不支持Nodejs的测试，不过没什么影响，因为Nodejs并不依赖于浏览器。</p>
+
+<p>还有TestSwarm，出自jQuery之父John Resig之手，看来jQuery的强大果然不是偶然的，在测试方面非常到位，各种工具齐全。它最特别的地方在于所有测试环境由服务器提供，包括各种版本的主流浏览器以及iOS5的iphone设备，不过目前加入已经受限。</p>
+
+<p>最受瞩目的当属Buster，其作者之一就是Christian Johansen。和Karma很像，也使用Nodejs编写跨平台并且支持PhantomJS，一次测试所有客户端。更重要的是支持Nodejs的测试，同样支持各种主流测试框架。不过目前还在Beta测试中，很多bug而且不能很好的兼容Windows系统。它的目标还包括整合Browser Stack。
+基于网页的测试</p>
+
+<p>到目前为止我们的测试看起来十分的完美了，但是别忘了，在前端开发中存在交互问题，不能期待QA玩了命的点击某个按钮或者刷新一个页面并输入一句乱码之类的东西来测试代码。即使是开发者本身也会受不了，如果产品本身拥有一堆复杂的表单和逻辑的话。</p>
+
+<p>Selenium是一个测试工具集，由Thoughtworks开发，分为两部分。Selenium IDE是一个Firefox浏览器的插件，可以录制用户行为，并快速测试。</p>
+
+<p>而Selenium WebDriver是一个多语言的驱动浏览器的工具，支持Python、Java、Ruby、Perl、PHP或.Net。并且可以操作IE、Firefox、Safari和Chrome等主流浏览器。通过 open , type , click , waitForxxx 等指令来模拟用户行为，比如用Java测试：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kr">public</span> <span class="k">void</span> <span class="nx">testNew</span><span class="p">()</span> <span class="kr">throws</span> <span class="nx">Exception</span> <span class="p">{</span>
+    <span class="nx">selenium</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">"/"</span><span class="p">);</span>
+    <span class="nx">selenium</span><span class="p">.</span><span class="nx">type</span><span class="p">(</span><span class="s2">"q"</span><span class="p">,</span> <span class="s2">"selenium rc"</span><span class="p">);</span>
+    <span class="nx">selenium</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="s2">"btnG"</span><span class="p">);</span>
+    <span class="nx">selenium</span><span class="p">.</span><span class="nx">waitForPageToLoad</span><span class="p">(</span><span class="s2">"30000"</span><span class="p">);</span>
+    <span class="nx">assertTrue</span><span class="p">(</span><span class="nx">selenium</span><span class="p">.</span><span class="nx">isTextPresent</span><span class="p">(</span><span class="s2">"Results * for selenium rc"</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>首先跳转到跟目录，然后选择类型，点击按钮G，并等待页面载入30秒，然后使用断言测试。这样就完成了一次用户基本行为的模拟，不过复杂的模拟以及在一些非链接的操作还需要格外注意，比如Ajax请求或者Pjax的无刷新等等。</p>
+
+<p>另外还有一款可以模拟用户行为的网页测试工具WATIR，是Web Application Testing in Ruby的缩写，显然它只支持Ruby语言来操作浏览器模拟用户行为。官方声称它是一个简单而灵活的工具，无论怎样至少就官方网站的设计来看要比Selenium简约多了。同样支持模拟链接点击，按钮点击，还有表单的填写等行为。不过WATIR不支持Ajax的测试。和其他Ruby库一样需要gem来安装它：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">gem</span> <span class="nx">install</span> <span class="nx">watir</span> <span class="o">--</span><span class="nx">no</span><span class="o">-</span><span class="nx">rdoc</span> <span class="o">--</span><span class="nx">no</span><span class="o">-</span><span class="nx">ri</span>
+</code></pre>
+</div>
+
+<p>然后使用它</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">require</span> <span class="s1">'rubygems'</span>
+<span class="nx">require</span> <span class="s1">'watir'</span>
+<span class="nx">require</span> <span class="s1">'watir-webdriver'</span>
+<span class="nx">browser</span> <span class="o">=</span> <span class="nx">Watir</span><span class="err">::</span><span class="nx">Browser</span><span class="p">.</span><span class="k">new</span>
+<span class="nx">browser</span><span class="p">.</span><span class="kr">goto</span> <span class="s1">'http://www.example.com/form'</span>
+<span class="nx">browser</span><span class="p">.</span><span class="nx">test_field</span><span class="p">(</span><span class="err">:</span><span class="nx">name</span> <span class="o">=&gt;</span> <span class="s1">'entry.0.single'</span><span class="p">).</span><span class="nx">set</span> <span class="s1">'Watir'</span>
+<span class="nx">browser</span><span class="p">.</span><span class="nx">radio</span><span class="p">(</span><span class="err">:</span><span class="nx">value</span> <span class="o">=&gt;</span> <span class="s1">'Watir'</span><span class="p">).</span><span class="nx">set</span>
+<span class="nx">browser</span><span class="p">.</span><span class="nx">radio</span><span class="p">(</span><span class="err">:</span><span class="nx">value</span> <span class="o">=&gt;</span> <span class="s1">'Watir'</span><span class="p">).</span><span class="nx">clear</span>
+<span class="nx">browser</span><span class="p">.</span><span class="nx">checkbox</span><span class="p">(</span><span class="err">:</span><span class="nx">value</span> <span class="o">=&gt;</span> <span class="s1">'Ruby'</span><span class="p">).</span><span class="nx">set</span>
+<span class="nx">browser</span><span class="p">.</span><span class="nx">checkbox</span><span class="p">(</span><span class="err">:</span><span class="nx">value</span> <span class="o">=&gt;</span> <span class="s1">'Javascript'</span><span class="p">).</span><span class="nx">clear</span>
+<span class="nx">browser</span><span class="p">.</span><span class="nx">button</span><span class="p">(</span><span class="err">:</span><span class="nx">name</span> <span class="o">=&gt;</span> <span class="s1">'submit'</span><span class="p">).</span><span class="nx">click</span>
+</code></pre>
+</div>
+
+<p>这样就使用watir完成了一次表单填写。
+####    持续集成测试</p>
+
+<p>持续集成就是通常所谓的CI(Continuous integration)，持续不断的自动化测试新加入代码后的项目。它并不属于单元测试，而是另外的范畴，不过通过使用CI服务可以很容易的在Github上测试项目，而这也就是持续集成的意义。</p>
+
+<p>下面以我的jQ小插件Dialog为例介绍一下Travis-CI的使用方法，注册Travis，然后链接自己的Github，选择要进行持续集成的项目。此时会显示build failing，那是因为还没有在项目中进行相关配置。</p>
+
+<p>首先需要使用Grunt等工具配置好测试框架的自动化测试，细节可以参考我之前的文章改进我的Workflow。然后在 package.json 中添加一下代码来指定执行的脚本：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s2">"scripts"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"test"</span><span class="err">:</span> <span class="s2">"grunt jasmine:test"</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>接着添加一个文件 .travis.yml 来配置travis：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">language</span><span class="err">:</span> <span class="nx">node_js</span>
+<span class="nl">node_js</span><span class="p">:</span>
+  <span class="o">-</span> <span class="s2">"0.8"</span>
+<span class="nl">before_script</span><span class="p">:</span>
+  <span class="o">-</span> <span class="nx">npm</span> <span class="nx">install</span> <span class="o">-</span><span class="nx">g</span> <span class="nx">grunt</span><span class="o">-</span><span class="nx">cli</span>
+</code></pre>
+</div>
+
+<p>language 是集成测试所使用的语言，这里前端开发当然是使用Nodejs，在 node_js 中指定版本即可。当然Travis还支持其他多种语言，以及后端数据库等。</p>
+
+<p>before_script 则是在测试前执行的脚本程序，这里在全局安装Grunt-cli即可，因为默认的Travis会执行 npm install 将package.json中指定的Node包安装到项目。</p>
+
+<p>最后在Github中还需要在项目的Setting中的Service Hooks中配置Travis，输入Token并保存。或者直接在Travis中点击该项目条目中的扳手图标进入Github，会自动配置好。</p>
+
+<p>另外，如果在Github上为README文件添加一行</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="o">!</span><span class="p">[</span><span class="nx">Build</span> <span class="nx">Status</span><span class="p">](</span><span class="nx">https</span><span class="err">:</span><span class="c1">//travis-ci.org/tychio/dialog.png?branch=master)](https://travis-ci.org/tychio/dialog)</span>
+</code></pre>
+</div>
+
+<p>就可以持续直观的显示其测试结果。</p>
+
+
+                <hr>
+
+                
+                <!-- 多说 Share start -->
+                </style>
+                <div class="ds-share"
+                    style="text-align: right"
+                    data-thread-key="/2016/03/09/front-end-Test"
+                    data-title="关于前端开发谈谈单元测试"
+                    data-url="http://www.vanadis.cn/2016/03/09/front-end-Test/"
+                    data-images="http://www.vanadis.cn/img/post-bg-2016-03-09.jpg"
+                    data-content="
+  文章来源：segmentfault.com
+
+
+单元测试Unit Test
+
+很早就知道单元测试这样一个概念，但直到几个月前，我真正开始接触和使用它... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- 多说 Share end-->
+                
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/03/08/front-end-development-history/" data-toggle="tooltip" data-placement="top" title="近几年前端技术盘点以及 2016 年技术发展方向">
+                        上一篇<br>
+                        <span>近几年前端技术盘点以及 2016 年技术发展方向</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/03/15/usual-jquery-plugins-collection/" data-toggle="tooltip" data-placement="top" title="常用jquery组件的整理">
+                        下一篇<br>
+                        <span>常用jquery组件的整理</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/2016/03/09/front-end-Test"
+                        data-title="关于前端开发谈谈单元测试"
+                        data-url="http://www.vanadis.cn/2016/03/09/front-end-Test/" >
+                    </div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+
+            </div>
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">分类标签</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#生活" title="生活" rel="1">
+                                    生活
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#文档" title="文档" rel="1">
+                                    文档
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#javascript组件" title="javascript组件" rel="1">
+                                    javascript组件
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#javascript" title="javascript" rel="5">
+                                    javascript
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#nodejs" title="nodejs" rel="1">
+                                    nodejs
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#es5" title="es5" rel="1">
+                                    es5
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#es6" title="es6" rel="8">
+                                    es6
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>友情链接</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://rockychen.me">RockyChen的博客</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by cyqresig
+    var _user = 'vanadis';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by cyqresig, add target = "_blank" to <a> by cyqresig -->
+                    
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cyqresig">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 绯雨闲丸 Blog 2016
+                    <br>
+                    Theme © <a href="http://vanadis.cn">HISAME SHIZUMARU</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=cyqresig&repo=cyqresig.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/HISAME-SHIZUMARU-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- Highlight.js -->
+<script>
+    async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+        hljs.initHighlightingOnLoad();
+    })
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+<link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        // var $nav = document.querySelector("nav");
+        // if($nav) FastClick.attach($nav);
+
+        // global FastClick!!
+        FastClick.attach(document.body);    
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by cyqresig
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'vanadis.cn';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by cyqresig
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
