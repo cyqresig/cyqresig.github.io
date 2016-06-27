@@ -97,5 +97,5 @@ React Native的开发流程也是继承了React的部分流程, 如下图:
 [1]: http://www.reactnative.com/
 [2]: http://phonegap.com/
 [3]: http://www.html5plus.org/
-[4]: http://cyqresig.github.io/img/react-native-design.jpg
-[5]: http://cyqresig.github.io/img/react-native-dev.jpg
+[4]: http://cyqresig.github.io/img/react-native-design.png
+[5]: http://cyqresig.github.io/img/react-native-dev.png
