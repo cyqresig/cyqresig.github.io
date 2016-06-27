@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>datalazyload demo</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <style>
+        .container {
+            margin: 0 auto;
+            width: 1212px;
+        }
+        .lazyload {
+            height: 300px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container center-block">
+    <div class="lazyload" data-src="jsonp/floor-1.js" data-cache-key="floor-1" data-cache-time="20160501120909123">
+        loading...
+    </div>
+    <div class="lazyload" data-src="jsonp/floor-2.js" data-cache-key="floor-2" data-cache-time="20160501120909124">
+        loading...
+    </div>
+    <div class="lazyload" data-src="jsonp/floor-3.js" data-cache-key="floor-3" data-cache-time="20160501120909125">
+        loading...
+    </div>
+    <div class="lazyload" data-src="jsonp/floor-4.js" data-cache-key="floor-4" data-cache-time="20160501120909126">
+        loading...
+    </div>
+    <div class="lazyload" data-src="jsonp/floor-5.js" data-cache-key="floor-5" data-cache-time="20160501120909127">
+        loading...
+    </div>
+</div>
+
+<script src="../js/es5-shim.min.js"></script>
+<script src="../js/jquery-1.12.min.js"></script>
+<script src="../js/jquery.jsonp.js"></script>
+
+<script src="datalazyload.bundle.js"></script>
+</body>
+</html>

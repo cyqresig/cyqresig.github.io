@@ -10,8 +10,6 @@ tags:
 
 > “”
 
-转载： [http://bbs.reactnative.cn/topic/15/react-react-native-%E7%9A%84es5-es6%E5%86%99%E6%B3%95%E5%AF%B9%E7%85%A7%E8%A1%A8](http://bbs.reactnative.cn/topic/15/react-react-native-%E7%9A%84es5-es6%E5%86%99%E6%B3%95%E5%AF%B9%E7%85%A7%E8%A1%A8)
-
 英文版: [https://babeljs.io/blog/2015/06/07/react-on-es6-plus](https://babeljs.io/blog/2015/06/07/react-on-es6-plus)
 
 很多React/React Native的初学者都被ES6的问题迷惑：各路大神都建议我们直接学习ES6的语法(class Foo extends React.Component)，然而网上搜到的很多教程和例子都是ES5版本的，所以很多人在学习的时候连照猫画虎都不知道怎么做。今天在此整理了一些ES5和ES6的写法对照表，希望大家以后读到ES5的代码，也能通过对照，在ES6下实现相同的功能。
