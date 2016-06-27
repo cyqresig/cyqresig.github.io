@@ -27,7 +27,7 @@ Facebook已经在多项产品中使用了React Native，并且将持续地投入
 
 
 
-[1]: http://cyqresig.github.io/2016/06/27/react-native-nav/
+[1]: http://cyqresig.github.io/2016/06/27/react-native-intro/
 
 
 
