@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "react-native入门系列教程"
-subtitle:   "引领了新一代移动源生开发"
+subtitle:   "干货满满的入门指引"
 author:     "绯雨闲丸"
 header-img: "img/react-native-bg.jpg"
 tags:
@@ -22,12 +22,17 @@ Facebook已经在多项产品中使用了React Native，并且将持续地投入
 # react-native入门系列教程目录
 
 *   [简介][1]
+*   搭建开发环境
+        * [ios][2]
+        * [android][3]
 
 
 
 
 
 [1]: http://cyqresig.github.io/2016/06/27/react-native-intro/
+[2]: http://cyqresig.github.io/2016/06/27/react-native-requirement/
+[3]: http://cyqresig.github.io/2016/06/27/react-native-requirement-android/
 
 
 

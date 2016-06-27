@@ -92,6 +92,7 @@ React Native的开发流程也是继承了React的部分流程, 如下图:
 *   React Native版本发布: https://github.com/facebook/react-native/releases。
 *   React Native GitHub地址: https://github.com/facebook/react-native。
 *   疑难问题搜索: https://github.com/facebook/react-native/issues。
+*   React Native中文网: http://reactnative.cn
 
 
 [1]: http://www.reactnative.com/
@@ -99,3 +100,4 @@ React Native的开发流程也是继承了React的部分流程, 如下图:
 [3]: http://www.html5plus.org/
 [4]: http://cyqresig.github.io/img/react-native-design.png
 [5]: http://cyqresig.github.io/img/react-native-dev.png
+[6]: http://reactnative.cn

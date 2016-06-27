@@ -173,6 +173,73 @@
             ">
     			
 <div class="post-preview">
+    <a href="/2016/05/05/es6-destructing-spread/">
+        <h2 class="post-title">
+            es6-destructing-spread的用法
+        </h2>
+        
+        <h3 class="post-subtitle">
+             ""
+        </h3>
+        
+        <div class="post-content-preview">
+            
+  “”
+
+
+解构
+
+简单来说就是通过析构表达式的右边值来同时对左边的多个值进行赋值, 可以看下示例进行理解:
+
+var [a,b,c]=[1,2,3];    //通过数组给多个变量赋值
+var {name, age} = {name: "Tom", age:12} //通过一个对象来给多个变量赋值
+
+
+
+上面两个例子分别用一个数组和一个对象对多个变量进行赋值。而且并用严格一一对应，可以...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by 绯雨闲丸 on May 5, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2016/05/05/es6-class/">
+        <h2 class="post-title">
+            es6-类的用法
+        </h2>
+        
+        <h3 class="post-subtitle">
+             ""
+        </h3>
+        
+        <div class="post-content-preview">
+            
+  “”
+
+
+类class是es6引入的最重要特性之一。在没有class之前，我们只能通过原型链来模拟类。
+
+类(class)
+
+如果你用过java这样的纯面向对象语言，那么你会对class的语法非常熟悉。
+
+class People {
+    constructor(name) { //构造函数
+          this.name = name;
+    }
+    sayName...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by 绯雨闲丸 on May 5, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/2016/05/05/es5-review/">
         <h2 class="post-title">
             es5复习
@@ -424,86 +491,6 @@ autocomplete 功能实现分析
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/2016/03/03/markdown-welcome/">
-        <h2 class="post-title">
-            请使用Markdown写文档
-        </h2>
-        
-        <h3 class="post-subtitle">
-             "程序员快速优雅的写文档方式"
-        </h3>
-        
-        <div class="post-content-preview">
-            
-  “尝试使用一下markdown吧”
-
-
-Markdown语法说明
-
-
-  概述
-    
-      宗旨
-      兼容 HTML
-      特殊字符自动转换
-    
-  
-  区块元素
-    
-      段落和换行
-      标题
-      区块引用
-      列表
-      代码区块
-      分隔线
-    
-  
-  区段元素
-    
-      链接
-...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by 绯雨闲丸 on March 3, 2016
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2016/03/02/Hi-2016/">
-        <h2 class="post-title">
-            嗨 2016
-        </h2>
-        
-        <h3 class="post-subtitle">
-             "终于见到你了, 我的博客"
-        </h3>
-        
-        <div class="post-content-preview">
-            
-  “现在可以用啦! ”
-
-
-前言
-
-终于把个人 Blog 开通了.
-
-直接看如何在github上开通个人博客 
-
-2016 年前, 一直想开通个人博客, 但国内的各种博客程序的UI大多不敢恭维, wordpress又被墙,
-自己买个主机放个定制程序吧, 部署维护也很麻烦.
-早就听说github上面可以放定制blog, 无限流量, 无须维护, 不过之前因为太懒没去折腾,
-结果就一直连个写 ...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by 绯雨闲丸 on March 2, 2016
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -513,6 +500,10 @@ Markdown语法说明
         <a href="/">&larr; 最新文章</a>
     </li>
     
+    
+    <li class="next">
+        <a href="/page3">历史文章 &rarr;</a>
+    </li>
     
 </ul>
 
@@ -576,7 +567,7 @@ Markdown语法说明
                             
                         
                             
-                                <a href="/tags/#react-native" title="react-native" rel="2">
+                                <a href="/tags/#react-native" title="react-native" rel="4">
                                     react-native
                                 </a>
                             
