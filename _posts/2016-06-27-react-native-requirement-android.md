@@ -10,7 +10,6 @@ tags:
 
 >
 
-# MAC IOS
 ## 环境需求
 1. 一台mac电脑(笔记本, 台式机不限), 操作系统OS X及以上
 
@@ -94,7 +93,8 @@ tags:
     你可以把`Android SDK`的tools和`platform-tools`目录添加到PATH变量中，以便在终端中运行一些Android工具，
     例如`android avd`或是`adb logcat`等。具体做法仍然是在`~/.bash_profile`中添加：
 
-        # 注意：你的SDK的具体路径可能不同
+     注意：你的SDK的具体路径可能不同
+
         PATH="~/Library/Android/sdk/tools:~/Library/Android/sdk/platform-tools:${PATH}"
         export PATH
 

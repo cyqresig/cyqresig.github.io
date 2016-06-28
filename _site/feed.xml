@@ -5,8 +5,8 @@
     <description>关于前端开发,架构,动漫 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 27 Jun 2016 17:32:33 +0800</pubDate>
-    <lastBuildDate>Mon, 27 Jun 2016 17:32:33 +0800</lastBuildDate>
+    <pubDate>Tue, 28 Jun 2016 09:46:43 +0800</pubDate>
+    <lastBuildDate>Tue, 28 Jun 2016 09:46:43 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -15,11 +15,11 @@
 
 &lt;/blockquote&gt;
 
-&lt;h1 id=&quot;mac-ios&quot;&gt;MAC IOS&lt;/h1&gt;
-&lt;p&gt;## 环境需求
-1. 一台mac电脑(笔记本, 台式机不限), 操作系统OS X及以上&lt;/p&gt;
-
+&lt;h2 id=&quot;section&quot;&gt;环境需求&lt;/h2&gt;
 &lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;一台mac电脑(笔记本, 台式机不限), 操作系统OS X及以上&lt;/p&gt;
+  &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;安装&lt;a href=&quot;http://brew.sh/&quot;&gt;HomeBrew&lt;/a&gt;&lt;/p&gt;
 
@@ -57,7 +57,7 @@
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;推荐安装&lt;/h2&gt;
+&lt;h2 id=&quot;section-1&quot;&gt;推荐安装&lt;/h2&gt;
 &lt;ol&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;a href=&quot;https://facebook.github.io/watchman/docs/install.html&quot;&gt;Watchman&lt;/a&gt;是由Facebook提供的监视文件系统变更的工具。安装此工具可以提高开发时的性能（packager可以快速捕捉文件的变化从而实现实时刷新）。&lt;/p&gt;
@@ -74,7 +74,7 @@
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;调试&lt;/h2&gt;
+&lt;h2 id=&quot;section-2&quot;&gt;调试&lt;/h2&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
   react-native init AwesomeProject
@@ -84,7 +84,7 @@
   你也可以直接在双击&lt;code class=&quot;highlighter-rouge&quot;&gt;ios/AwesomeProject.xcodeproj&lt;/code&gt;文件然后在Xcode中点击Run按钮,
    或者先在WebStorm中打开AwesomeProject文件夹 然后在Terminal中执行&lt;code class=&quot;highlighter-rouge&quot;&gt;npm start&lt;/code&gt;，再在Xcode中点击Run按钮&lt;/p&gt;
 
-&lt;h2 id=&quot;section-2&quot;&gt;修改项目&lt;/h2&gt;
+&lt;h2 id=&quot;section-3&quot;&gt;修改项目&lt;/h2&gt;
 
 &lt;p&gt;现在你已经成功运行了项目，我们可以开始尝试动手改一改了：&lt;/p&gt;
 
@@ -111,11 +111,11 @@
 
 &lt;/blockquote&gt;
 
-&lt;h1 id=&quot;mac-ios&quot;&gt;MAC IOS&lt;/h1&gt;
-&lt;p&gt;## 环境需求
-1. 一台mac电脑(笔记本, 台式机不限), 操作系统OS X及以上&lt;/p&gt;
-
+&lt;h2 id=&quot;section&quot;&gt;环境需求&lt;/h2&gt;
 &lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;一台mac电脑(笔记本, 台式机不限), 操作系统OS X及以上&lt;/p&gt;
+  &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;安装&lt;a href=&quot;http://brew.sh/&quot;&gt;HomeBrew&lt;/a&gt;&lt;/p&gt;
 
@@ -212,20 +212,21 @@
     &lt;p&gt;可以使用&lt;code class=&quot;highlighter-rouge&quot;&gt;echo $ANDROID_HOME&lt;/code&gt;检查此变量是否已正确设置&lt;/p&gt;
 
     &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;将&lt;code class=&quot;highlighter-rouge&quot;&gt;Android SDK&lt;/code&gt;的Tools目录添加到&lt;code class=&quot;highlighter-rouge&quot;&gt;PATH&lt;/code&gt;变量中
+      &lt;li&gt;将&lt;code class=&quot;highlighter-rouge&quot;&gt;Android SDK&lt;/code&gt;的Tools目录添加到&lt;code class=&quot;highlighter-rouge&quot;&gt;PATH&lt;/code&gt;变量中
  你可以把&lt;code class=&quot;highlighter-rouge&quot;&gt;Android SDK&lt;/code&gt;的tools和&lt;code class=&quot;highlighter-rouge&quot;&gt;platform-tools&lt;/code&gt;目录添加到PATH变量中，以便在终端中运行一些Android工具，
- 例如&lt;code class=&quot;highlighter-rouge&quot;&gt;android avd&lt;/code&gt;或是&lt;code class=&quot;highlighter-rouge&quot;&gt;adb logcat&lt;/code&gt;等。具体做法仍然是在&lt;code class=&quot;highlighter-rouge&quot;&gt;~/.bash_profile&lt;/code&gt;中添加：&lt;/p&gt;
-
-        &lt;h1 id=&quot;sdk&quot;&gt;注意：你的SDK的具体路径可能不同&lt;/h1&gt;
-        &lt;p&gt;PATH=”~/Library/Android/sdk/tools:~/Library/Android/sdk/platform-tools:${PATH}”
-export PATH&lt;/p&gt;
-      &lt;/li&gt;
+ 例如&lt;code class=&quot;highlighter-rouge&quot;&gt;android avd&lt;/code&gt;或是&lt;code class=&quot;highlighter-rouge&quot;&gt;adb logcat&lt;/code&gt;等。具体做法仍然是在&lt;code class=&quot;highlighter-rouge&quot;&gt;~/.bash_profile&lt;/code&gt;中添加：&lt;/li&gt;
     &lt;/ul&gt;
+
+    &lt;p&gt;注意：你的SDK的具体路径可能不同&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; PATH=&quot;~/Library/Android/sdk/tools:~/Library/Android/sdk/platform-tools:${PATH}&quot;
+ export PATH
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;推荐安装&lt;/h2&gt;
+&lt;h2 id=&quot;section-1&quot;&gt;推荐安装&lt;/h2&gt;
 &lt;ol&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;a href=&quot;https://facebook.github.io/watchman/docs/install.html&quot;&gt;Watchman&lt;/a&gt;是由Facebook提供的监视文件系统变更的工具。安装此工具可以提高开发时的性能（packager可以快速捕捉文件的变化从而实现实时刷新）。&lt;/p&gt;
@@ -247,7 +248,7 @@ export PATH&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;常见问题&lt;/h2&gt;
+&lt;h2 id=&quot;section-2&quot;&gt;常见问题&lt;/h2&gt;
 &lt;p&gt;### 安装Android Studio时无法创建虚拟设备&lt;/p&gt;
 
 &lt;p&gt;某些版本的Android Studio可能存在一个&lt;a href=&quot;https://code.google.com/p/android/issues/detail?id=207563&quot;&gt;已知的bug&lt;/a&gt;，导致在安装时无法创建虚拟设备。安装过程中可能看到如下报错：&lt;/p&gt;
@@ -275,7 +276,7 @@ Unable to create a virtual device: Unable to create Android virtual device
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;h2 id=&quot;section-2&quot;&gt;调试&lt;/h2&gt;
+&lt;h2 id=&quot;section-3&quot;&gt;调试&lt;/h2&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
   react-native init AwesomeProject
@@ -283,7 +284,7 @@ Unable to create a virtual device: Unable to create Android virtual device
   react-native run-android
  &lt;/code&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;section-3&quot;&gt;修改项目&lt;/h2&gt;
+&lt;h2 id=&quot;section-4&quot;&gt;修改项目&lt;/h2&gt;
 
 &lt;p&gt;现在你已经成功运行了项目，我们可以开始尝试动手改一改了：&lt;/p&gt;
 
