@@ -5,8 +5,8 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 03 Jul 2016 22:22:06 +0800</pubDate>
-    <lastBuildDate>Sun, 03 Jul 2016 22:22:06 +0800</lastBuildDate>
+    <pubDate>Sun, 03 Jul 2016 22:23:51 +0800</pubDate>
+    <lastBuildDate>Sun, 03 Jul 2016 22:23:51 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -225,7 +225,7 @@
 
 &lt;/blockquote&gt;
 
-&lt;p&gt;众所周知, 图片是有诸多优点的，然而目前在网站以及APp设计这行业面临各种各样的挑战。
+&lt;p&gt;众所周知, 图片是有诸多优点的，然而目前在网站以及APP设计这行业面临各种各样的挑战。
 图片不但增加了总文件的大小，还增加了很多额外的”http请求”，这都会大大降低性能的。
 图片还有一个缺点就是不能很好的进行“缩放”，
 因此，有时候在“响应式设计”中需要使用图像的最好解决方案就是不去使用图片。&lt;/p&gt;
