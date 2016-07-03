@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web & Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。">
+    <meta name="keyword"  content="绯雨闲丸, HISAME SHIZUMARU绯雨闲丸, HISAME SHIZUMARU, 绯雨闲丸的博客, HISAME SHIZUMARU Blog, 博客, 个人网站, 互联网, 前端, 大前端, 前后端分离, 前端工程化, 前端构建, 网站优化, js, javascript, html, css, html5, css3, react-native, ios, android, nodejs, webpack, gulp">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>react-native搭建开发环境 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
+
+    <link rel="canonical" href="http://www.vanadis.cn/2016/06/27/react-native-requirement-android/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/HISAME-SHIZUMARU-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- cyqresig change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- cyqresig Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- baidu statistics -->
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?8dfb6cc1516e024cd8b22be139b285fc";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">绯雨闲丸 Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="blog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">主页</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">关于</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">分类标签</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#blog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __Nav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __Nav__.close()
+        }else{
+            __Nav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close Nav.
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __Nav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/react-native-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/react-native-bg.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#react-native" title="react-native">react-native</a>
+                        
+                    </div>
+                    <h1>react-native搭建开发环境</h1>
+                    
+                    
+                    <h2 class="subheading">android版</h2>
+                    
+                    <span class="meta">绯雨闲丸 发布于 </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-10 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<blockquote>
+
+</blockquote>
+
+<h2 id="section">环境需求</h2>
+<ol>
+  <li>
+    <p>一台mac电脑(笔记本, 台式机不限), 操作系统OS X及以上</p>
+  </li>
+  <li>
+    <p>安装<a href="http://brew.sh/">HomeBrew</a></p>
+
+    <ul>
+      <li>点击桌面左下角”Finder” -&gt; 点击顶部菜单栏”前往” -&gt; 选择”实用工具” -&gt; 双击”终端”</li>
+      <li>
+        <p>执行如下命令</p>
+
+        <p><code class="highlighter-rouge">/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</code></p>
+
+        <p>注: 在Max OS X 10.11（El Capitan)版本中，homebrew在安装软件时可能会碰到/usr/local目录不可写的权限问题。可以使用下面的命令修复：</p>
+
+        <p><code class="highlighter-rouge">sudo chown -R </code><code class="highlighter-rouge">whoami</code><code class="highlighter-rouge"> /usr/local</code></p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>使用Homebrew来安装Node.js.</p>
+
+    <p><code class="highlighter-rouge">brew install node</code></p>
+  </li>
+  <li>
+    <p>安装React Native的命令行工具（react-native-cli）</p>
+
+    <p>React Native的命令行工具用于执行创建、初始化、更新项目、运行打包服务（packager）等任务。</p>
+
+    <p><code class="highlighter-rouge">npm install -g react-native-cli</code></p>
+
+    <p>注：由于众所周知的网络原因，react-native命令行从npm官方源拖代码时会遇上麻烦。请将npm仓库源替换为国内镜像：</p>
+
+    <p><code class="highlighter-rouge">
+ npm config set registry https://registry.npm.taobao.org --global
+ npm config set disturl https://npm.taobao.org/dist --global
+</code></p>
+  </li>
+  <li>
+    <p>安装Android Studio</p>
+
+    <p>React Native目前需要<a href="http://reactnative.cn/static/docs/0.27/img/react-native-android-studio-custom-install.png">Android Studio</a>2.0或更高版本。</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> Android Studio需要Java Development Kit [JDK] 1.8或更高版本。
+ 你可以在命令行中输入`javac -version`来查看你当前安装的JDK版本。
+ 如果版本不合要求，则可以到 官网上下载。
+</code></pre>
+    </div>
+
+    <p>Android Studio包含了运行和测试React Native应用所需的Android SDK和模拟器。</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> 除非特别注明，请不要改动安装过程中的选项。
+ 比如Android Studio默认安装了`Android Support Repository`，而这也是React Native必须的
+ （否则在react-native run-android时会报appcompat-v7包找不到的错误）。
+</code></pre>
+    </div>
+
+    <p>安装过程中有一些需要改动的选项：</p>
+
+    <ul>
+      <li>
+        <p>选择Custom选项：
+ <img src="http://reactnative.cn/static/docs/0.27/img/react-native-android-studio-custom-install.png" alt="选择Custom选项" /></p>
+      </li>
+      <li>
+        <p>勾选<code class="highlighter-rouge">Performance</code>和<code class="highlighter-rouge">Android Virtual Device</code>
+ <img src="http://reactnative.cn/static/docs/0.27/img/react-native-android-studio-additional-installs.png" alt="勾选`Performance`和`Android Virtual Device`" /></p>
+      </li>
+      <li>
+        <p>安装完成后，在Android Studio的启动欢迎界面中选择<code class="highlighter-rouge">Configure | SDK Manager</code>。
+ <img src="http://reactnative.cn/static/docs/0.27/img/react-native-android-studio-configure-sdk.png" alt="勾选`Performance`和`Android Virtual Device`" /></p>
+      </li>
+      <li>
+        <p>在<code class="highlighter-rouge">SDK Platforms</code>窗口中，选择<code class="highlighter-rouge">Show Package Details</code>，然后在<code class="highlighter-rouge">Android 6.0 (Marshmallow)</code>中勾选<code class="highlighter-rouge">Google APIs</code>、<code class="highlighter-rouge">Intel x86 Atom System Image</code>、<code class="highlighter-rouge">Intel x86 Atom_64 System Image</code>以及<code class="highlighter-rouge">Google APIs Intel x86 Atom_64 System Image</code>。
+ <img src="http://reactnative.cn/static/docs/0.27/img/react-native-android-studio-android-sdk-platforms.png" alt="在`SDK Platforms`窗口中" /></p>
+      </li>
+      <li>
+        <p>在<code class="highlighter-rouge">SDK Tools</code>窗口中，选择<code class="highlighter-rouge">Show Package Details</code>，然后在<code class="highlighter-rouge">Android SDK Build Tools</code>中勾选<code class="highlighter-rouge">Android SDK Build-Tools 23.0.1</code>。（必须是这个版本）
+ <img src="http://reactnative.cn/static/docs/0.27/img/react-native-android-studio-android-sdk-build-tools.png" alt="在`SDK Tools`窗口中" /></p>
+      </li>
+      <li>
+        <p>配置ANDROID_HOME环境变量
+ 确保<code class="highlighter-rouge">ANDROID_HOME</code>环境变量正确地指向了你安装的Android SDK的路径。
+ 具体的做法是把下面的命令加入到<code class="highlighter-rouge">~/.bash_profile</code>文件中：
+ (注：<code class="highlighter-rouge">~</code>表示用户目录，即<code class="highlighter-rouge">/Users/你的用户名/</code>，而小数点开头的文件在Finder中是隐藏的，并且这个文件有可能并不存在。
+ 请在终端下使用<code class="highlighter-rouge">sudo vi ~/.bash_profile</code>命令创建或编辑。如不熟悉vi操作，请点击<a href="http://cyqresig.github.io/2016/06/27/vi">这里</a>学习）</p>
+
+        <p># 如果你不是通过Android Studio安装的sdk，则其路径可能不同，请自行确定清楚。
+ export ANDROID_HOME=~/Library/Android/sdk</p>
+      </li>
+    </ul>
+
+    <p>然后使用下列命令使其立即生效（否则重启后才生效）：</p>
+
+    <p><code class="highlighter-rouge">source ~/.bash_profile</code></p>
+
+    <p>可以使用<code class="highlighter-rouge">echo $ANDROID_HOME</code>检查此变量是否已正确设置</p>
+
+    <ul>
+      <li>将<code class="highlighter-rouge">Android SDK</code>的Tools目录添加到<code class="highlighter-rouge">PATH</code>变量中
+ 你可以把<code class="highlighter-rouge">Android SDK</code>的tools和<code class="highlighter-rouge">platform-tools</code>目录添加到PATH变量中，以便在终端中运行一些Android工具，
+ 例如<code class="highlighter-rouge">android avd</code>或是<code class="highlighter-rouge">adb logcat</code>等。具体做法仍然是在<code class="highlighter-rouge">~/.bash_profile</code>中添加：</li>
+    </ul>
+
+    <p>注意：你的SDK的具体路径可能不同</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> PATH="~/Library/Android/sdk/tools:~/Library/Android/sdk/platform-tools:${PATH}"
+ export PATH
+</code></pre>
+    </div>
+  </li>
+</ol>
+
+<h2 id="section-1">推荐安装</h2>
+<ol>
+  <li>
+    <p><a href="https://facebook.github.io/watchman/docs/install.html">Watchman</a>是由Facebook提供的监视文件系统变更的工具。安装此工具可以提高开发时的性能（packager可以快速捕捉文件的变化从而实现实时刷新）。</p>
+
+    <p><code class="highlighter-rouge">brew install watchman</code></p>
+  </li>
+  <li>
+    <p><a href="https://www.flowtype.org/">Flow</a>是一个静态的JS类型检查工具。译注：你在很多示例中看到的奇奇怪怪的冒号问号，以及方法参数中像类型一样的写法，都是属于这个flow工具的语法。这一语法并不属于ES标准，只是Facebook自家的代码规范。所以新手可以直接跳过（即不需要安装这一工具，也不建议去费力学习flow相关语法）。</p>
+  </li>
+  <li>
+    <p><a href="http://www.jetbrains.com/webstorm/">WebStorm</a>强大的前端开发IDE, 可集成很多实用插件, 包括<a href="http://cyqresig.github.io/2016/06/27/webstorm-react-native-grammer-plugin">react-native语法智能提醒插件</a>, 可用于编写React Native应用</p>
+
+    <p>安装破解版请参阅<a href="http://cyqresig.github.io/2016/06/27/webstorm-crack">这里</a></p>
+  </li>
+  <li>
+    <p><a href="https://docs.gradle.org/2.9/userguide/gradle_daemon.html">Gradle Daemon</a></p>
+
+    <p>开启Gradle Daemon可以极大地提升java代码的增量编译速度。</p>
+  </li>
+</ol>
+
+<h2 id="section-2">常见问题</h2>
+<p>### 安装Android Studio时无法创建虚拟设备</p>
+
+<p>某些版本的Android Studio可能存在一个<a href="https://code.google.com/p/android/issues/detail?id=207563">已知的bug</a>，导致在安装时无法创建虚拟设备。安装过程中可能看到如下报错：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Creating Android virtual device
+Unable to create a virtual device: Unable to create Android virtual device
+</code></pre>
+</div>
+
+<p>如果你碰到了这个问题，可以运行<code class="highlighter-rouge">android avd</code>来手工创建虚拟设备。
+<img src="http://reactnative.cn/static/docs/0.27/img/react-native-android-studio-avd.png" alt="手工创建虚拟设备" />
+然后在AVD管理器（AVD Manager）窗口中选择新设备并点击<code class="highlighter-rouge">Start...</code>来启动。</p>
+
+<h3 id="shell">Shell命令无响应的异常</h3>
+<p>如果你碰到了下面这样的异常：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Execution failed for task ':app:installDebug'.
+  com.android.builder.testing.api.DeviceException: com.android.ddmlib.ShellCommandUnresponsiveException
+</code></pre>
+</div>
+
+<p>试着将项目目录<code class="highlighter-rouge">/android/build.gradle</code>中的Gradle版本改为1.2.3。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>touch ~/.gradle/gradle.properties &amp;&amp; echo "org.gradle.daemon=true" &gt;&gt; ~/.gradle/gradle.properties
+</code></pre>
+</div>
+
+<h2 id="section-3">调试</h2>
+
+<p><code class="highlighter-rouge">
+  react-native init AwesomeProject
+  cd AwesomeProject
+  react-native run-android
+ </code></p>
+
+<h2 id="section-4">修改项目</h2>
+
+<p>现在你已经成功运行了项目，我们可以开始尝试动手改一改了：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>使用你喜欢的编辑器打开index.ios.js并随便改上几行。
+在iOS Emulator中按下⌘-R就可以刷新APP并看到你的最新修改！
+</code></pre>
+</div>
+
+
+
+                <hr>
+
+                
+                <!-- 多说 Share start -->
+                </style>
+                <div class="ds-share"
+                    style="text-align: right"
+                    data-thread-key="/2016/06/27/react-native-requirement-android"
+                    data-title="react-native搭建开发环境"
+                    data-url="http://www.vanadis.cn/2016/06/27/react-native-requirement-android/"
+                    data-images="http://www.vanadis.cn/img/react-native-bg.jpg"
+                    data-content="
+
+
+
+环境需求
+
+  
+    一台mac电脑(笔记本, 台式机不限), 操作系统OS X及以上
+  
+  
+    安装HomeBrew
+
+    
+... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- 多说 Share end-->
+                
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/06/27/react-native-nav/" data-toggle="tooltip" data-placement="top" title="react-native入门系列教程">
+                        上一篇<br>
+                        <span>react-native入门系列教程</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/06/27/react-native-requirement/" data-toggle="tooltip" data-placement="top" title="react-native搭建开发环境">
+                        下一篇<br>
+                        <span>react-native搭建开发环境</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/2016/06/27/react-native-requirement-android"
+                        data-title="react-native搭建开发环境"
+                        data-url="http://www.vanadis.cn/2016/06/27/react-native-requirement-android/" >
+                    </div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+
+            </div>
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">分类标签</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#生活" title="生活" rel="1">
+                                    生活
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#文档" title="文档" rel="1">
+                                    文档
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#javascript组件" title="javascript组件" rel="1">
+                                    javascript组件
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#javascript" title="javascript" rel="5">
+                                    javascript
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#nodejs" title="nodejs" rel="1">
+                                    nodejs
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#es5" title="es5" rel="1">
+                                    es5
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#es6" title="es6" rel="8">
+                                    es6
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#react-native" title="react-native" rel="10">
+                                    react-native
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>友情链接</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://rockychen.me">RockyChen的博客</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by cyqresig
+    var _user = 'vanadis';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by cyqresig, add target = "_blank" to <a> by cyqresig -->
+                    
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cyqresig">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 绯雨闲丸 Blog 2016
+                    <br>
+                    Theme © <a href="http://vanadis.cn">HISAME SHIZUMARU</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=cyqresig&repo=cyqresig.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/HISAME-SHIZUMARU-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- Highlight.js -->
+<script>
+    async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+        hljs.initHighlightingOnLoad();
+    })
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+<link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        // var $nav = document.querySelector("nav");
+        // if($nav) FastClick.attach($nav);
+
+        // global FastClick!!
+        FastClick.attach(document.body);    
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by cyqresig
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'vanadis.cn';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by cyqresig
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

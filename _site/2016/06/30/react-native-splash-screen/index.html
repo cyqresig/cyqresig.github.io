@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web & Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。">
+    <meta name="keyword"  content="绯雨闲丸, HISAME SHIZUMARU绯雨闲丸, HISAME SHIZUMARU, 绯雨闲丸的博客, HISAME SHIZUMARU Blog, 博客, 个人网站, 互联网, 前端, 大前端, 前后端分离, 前端工程化, 前端构建, 网站优化, js, javascript, html, css, html5, css3, react-native, ios, android, nodejs, webpack, gulp">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>react-native实现launchImage和splash-screen - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
+
+    <link rel="canonical" href="http://www.vanadis.cn/2016/06/30/react-native-splash-screen/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/HISAME-SHIZUMARU-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- cyqresig change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- cyqresig Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- baidu statistics -->
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?8dfb6cc1516e024cd8b22be139b285fc";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">绯雨闲丸 Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="blog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">主页</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">关于</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">分类标签</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#blog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __Nav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __Nav__.close()
+        }else{
+            __Nav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close Nav.
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __Nav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/react-native-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/react-native-bg.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#react-native" title="react-native">react-native</a>
+                        
+                    </div>
+                    <h1>react-native实现launchImage和splash-screen</h1>
+                    
+                    
+                    <h2 class="subheading">ios/anroid</h2>
+                    
+                    <span class="meta">绯雨闲丸 发布于 </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-10 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<blockquote>
+
+</blockquote>
+
+<h2 id="splashscreen">为什么实现splashScreen</h2>
+<ol>
+  <li>
+    <p>对于ios版本, 点击桌面的app icon后, 自动加载launchImage, launchImage加载完毕后就会进入应用首屏,
+虽然launchImage加载持续时间可以手动设置, 但是却没有关闭launchImage的api, 如果希望在加载首屏前执行一
+些逻辑(例如, 网络请求一些数据), 在这些逻辑执行完毕之前用户看不见首屏, 仍然只能看到lauchImage展现的部分,
+是无法实现的. 因此, ios需要自行实现类似android的splashScreen.</p>
+  </li>
+  <li>
+    <p>对于android版本, 源生支持实现splashScreen, 但要实现类似ios的launchImage效果, 需要对AndroidManifest.
+xml文件进行微调.</p>
+  </li>
+</ol>
+
+<h2 id="ioslaunchimage">ios实现launchImage</h2>
+<p>ios源生支持实现launchImage, 可以点<a href="http://cyqresig.github.io/2016/06/30/ios-launch-image">这里</a>了解, 这里就不展开了.</p>
+
+<h2 id="iossplashscreen">ios实现splashScreen</h2>
+<ol>
+  <li>
+    <p>安装组件<code class="highlighter-rouge">react-native-splashscreen</code>
+<code class="highlighter-rouge">npm install @remobile/react-native-splashscreen --save</code></p>
+  </li>
+  <li>
+    <p>将<code class="highlighter-rouge">RCTSplashScreen.xcodeproj</code>拖入你的Xode工程的<code class="highlighter-rouge">Libraries</code>下.</p>
+  </li>
+  <li>
+    <p>点击你的主工程文件, 选择<code class="highlighter-rouge">Build Phases</code>, 并在工程Products目录下找到<code class="highlighter-rouge">RCTSplashScreen.xcodeproj</code>, 将其中包含的<code class="highlighter-rouge">libRCTSplashScreen.a</code>拖入.</p>
+  </li>
+  <li>
+    <p>在<code class="highlighter-rouge">Builder Settings</code>中找到<code class="highlighter-rouge">Header Search Paths</code>, 确认其中包含<code class="highlighter-rouge">$(SRCROOT)/../../../react-native/React</code>(recursive).</p>
+  </li>
+  <li>
+    <p>在<code class="highlighter-rouge">Builder Settings</code>中找到<code class="highlighter-rouge">Header Search Paths</code>,  确认其中包含<code class="highlighter-rouge">$(SRCROOT)/../node_modules/@remobile/react-native-splashscreen/ios/RCTSplashScreen</code></p>
+  </li>
+  <li>
+    <p>删除工程里的LaunchScreen.xib</p>
+  </li>
+  <li>
+    <p>将组件中的<code class="highlighter-rouge">SplashScreenResource</code>目录拖入工程, 确认类型是<code class="highlighter-rouge">groups</code>, 并且<code class="highlighter-rouge">Add Targets</code>选中, 如果希望使用不同的splash图片, 可以替换<code class="highlighter-rouge">splash.png</code></p>
+  </li>
+  <li>
+    <p>工程里找到AppDelegate.m</p>
+  </li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>...
+#import "RCTSplashScreen.h" //&lt;--- 新增导入
+...
+RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
+                                                      moduleName:@"KitchenSink"
+                                               initialProperties:nil
+                                                   launchOptions:launchOptions];
+
+  [RCTSplashScreen show:rootView]; //&lt;--- 新增显示splashScreen
+
+  self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+  UIViewController *rootViewController = [[UIViewController alloc] init];
+  rootViewController.view = rootView;
+  self.window.rootViewController = rootViewController;
+  [self.window makeKeyAndVisible];
+  return YES;
+</code></pre>
+</div>
+
+<h2 id="androidlaunchimage">android实现launchImage</h2>
+<ol>
+  <li>
+    <p>准备一张背景图片, 自定义命名(比如命名为splash), 自己选择图片格式, 放在drawable目录下</p>
+  </li>
+  <li>
+    <p>配置strings.xml</p>
+  </li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;resources&gt;
+
+    &lt;!--&amp;lt;!&amp;ndash; Base application theme. &amp;ndash;&amp;gt;--&gt;
+    &lt;!--&lt;style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar"&gt;--&gt;
+        &lt;!--&amp;lt;!&amp;ndash; Customize your theme here. &amp;ndash;&amp;gt;--&gt;
+    &lt;!--&lt;/style&gt;--&gt;
+
+    &lt;style name="AppTheme" parent="@android:style/Theme.Black"&gt;
+        &lt;item name="android:windowBackground"&gt;@drawable/splash&lt;/item&gt;
+        &lt;item name="android:windowNoTitle"&gt;true&lt;/item&gt;
+        &lt;item name="android:windowFullscreen"&gt;true&lt;/item&gt;
+        &lt;item name="android:windowContentOverlay"&gt;@null&lt;/item&gt;
+    &lt;/style&gt;
+&lt;/resources&gt;
+
+</code></pre>
+</div>
+
+<ol>
+  <li>配置AndroidManifest.xml</li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.helloreactnative"
+    android:versionCode="1"
+    android:versionName="1.0"&gt;
+
+    &lt;uses-permission android:name="android.permission.INTERNET" /&gt;
+    &lt;uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/&gt;
+
+    &lt;uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="22" /&gt;
+
+    &lt;application
+      android:allowBackup="true"
+      android:label="@string/app_name"
+      android:icon="@mipmap/ic_launcher"&gt;
+      &lt;activity
+        android:name=".MainActivity"
+        android:label="@string/app_name"
+        android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+          android:theme="@style/AppTheme"&gt;
+        &lt;intent-filter&gt;
+            &lt;action android:name="android.intent.action.MAIN" /&gt;
+            &lt;category android:name="android.intent.category.LAUNCHER" /&gt;
+        &lt;/intent-filter&gt;
+      &lt;/activity&gt;
+      &lt;activity android:name="com.facebook.react.devsupport.DevSettingsActivity" /&gt;
+    &lt;/application&gt;
+
+&lt;/manifest&gt;
+</code></pre>
+</div>
+
+<h2 id="androidsplashscreen">android实现splashScreen</h2>
+
+<ol>
+  <li>
+    <p>安装组件<code class="highlighter-rouge">react-native-splashscreen</code>
+<code class="highlighter-rouge">npm install @remobile/react-native-splashscreen --save</code></p>
+  </li>
+  <li>
+    <p>在工程中找到<code class="highlighter-rouge">android/settings.gradle</code>, 加入如下:</p>
+  </li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>...
+include ':react-native-splashscreen'
+project(':react-native-splashscreen').projectDir = new File(rootProject.projectDir, '../node_modules/@remobile/react-native-splashscreen/android')
+</code></pre>
+</div>
+
+<ol>
+  <li>在工程中找到<code class="highlighter-rouge">android/app/build.gradle</code>, 加入如下:</li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>...
+dependencies {
+    ...
+    compile project(':react-native-splashscreen')
+}
+</code></pre>
+</div>
+
+<ol>
+  <li>
+    <p>如果希望使用不同的splash图片, 替换<code class="highlighter-rouge">res/drawable/splash.png</code></p>
+  </li>
+  <li>
+    <p>在MainActivity.java中注册模块</p>
+  </li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>import com.remobile.splashscreen.*;  // &lt;--- 导入包
+
+public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
+  ......
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    mReactInstanceManager = ReactInstanceManager.builder()
+      .setApplication(getApplication())
+      .setBundleAssetName("index.android.bundle")
+      .setJSMainModuleName("index.android")
+      .addPackage(new MainReactPackage())
+      .addPackage(new RCTSplashScreenPackage(this))              // &lt;------ 加入splashScreen的package
+      .setUseDeveloperSupport(BuildConfig.DEBUG)
+      .setInitialLifecycleState(LifecycleState.RESUMED)
+      .build();
+
+    mReactRootView.startReactApplication(mReactInstanceManager, "ExampleRN", null);
+
+    setContentView(mReactRootView);
+  }
+
+  ......
+}
+</code></pre>
+</div>
+
+<h2 id="section">效果展示</h2>
+
+<p><img src="http://cyqresig.github.io/img/ios-splash-screen.gif" alt="ios-splash-screen" /></p>
+
+<p><img src="http://cyqresig.github.io/img/android-splash-screen.gif" alt="android-splash-screen" /></p>
+
+<h2 id="react-nativesplashscreen">react-native中关闭splashScreen</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>'use strict';
+var React = require('react-native');
+var {
+    AppRegistry,
+    View,
+    Text,
+} = React;
+
+var SplashScreen = require('@remobile/react-native-splashscreen');  //导入包
+
+var KitchenSink = React.createClass({
+    componentDidMount: function() {
+        SplashScreen.hide();    //调用api隐藏splashScreen
+    },
+    render() {
+        return(
+            &lt;View&gt;
+                &lt;Text&gt;
+                    fangyunjiang is a good developer!
+                &lt;/Text&gt;
+            &lt;/View&gt;
+        );
+    }
+});
+
+AppRegistry.registerComponent('KitchenSink', () =&gt; KitchenSink);
+</code></pre>
+</div>
+
+
+
+                <hr>
+
+                
+                <!-- 多说 Share start -->
+                </style>
+                <div class="ds-share"
+                    style="text-align: right"
+                    data-thread-key="/2016/06/30/react-native-splash-screen"
+                    data-title="react-native实现launchImage和splash-screen"
+                    data-url="http://www.vanadis.cn/2016/06/30/react-native-splash-screen/"
+                    data-images="http://www.vanadis.cn/img/react-native-bg.jpg"
+                    data-content="
+
+
+
+为什么实现splashScreen
+
+  
+    对于ios版本, 点击桌面的app icon后, 自动加载launchImage, launc... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- 多说 Share end-->
+                
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/06/30/react-native-pt-px-translation/" data-toggle="tooltip" data-placement="top" title="react-native的尺寸pt与psd设计稿中的px的转换规则">
+                        上一篇<br>
+                        <span>react-native的尺寸pt与psd设计稿中的px的转换规则</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/07/01/react-native-iconfont/" data-toggle="tooltip" data-placement="top" title="react-native使用iconfont来替代icon图片">
+                        下一篇<br>
+                        <span>react-native使用iconfont来替代icon图片</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/2016/06/30/react-native-splash-screen"
+                        data-title="react-native实现launchImage和splash-screen"
+                        data-url="http://www.vanadis.cn/2016/06/30/react-native-splash-screen/" >
+                    </div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+
+            </div>
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">分类标签</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#生活" title="生活" rel="1">
+                                    生活
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#文档" title="文档" rel="1">
+                                    文档
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#javascript组件" title="javascript组件" rel="1">
+                                    javascript组件
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#javascript" title="javascript" rel="5">
+                                    javascript
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#nodejs" title="nodejs" rel="1">
+                                    nodejs
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#es5" title="es5" rel="1">
+                                    es5
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#es6" title="es6" rel="8">
+                                    es6
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#react-native" title="react-native" rel="10">
+                                    react-native
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>友情链接</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://rockychen.me">RockyChen的博客</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by cyqresig
+    var _user = 'vanadis';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by cyqresig, add target = "_blank" to <a> by cyqresig -->
+                    
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cyqresig">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 绯雨闲丸 Blog 2016
+                    <br>
+                    Theme © <a href="http://vanadis.cn">HISAME SHIZUMARU</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=cyqresig&repo=cyqresig.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/HISAME-SHIZUMARU-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- Highlight.js -->
+<script>
+    async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+        hljs.initHighlightingOnLoad();
+    })
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+<link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        // var $nav = document.querySelector("nav");
+        // if($nav) FastClick.attach($nav);
+
+        // global FastClick!!
+        FastClick.attach(document.body);    
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by cyqresig
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'vanadis.cn';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by cyqresig
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
