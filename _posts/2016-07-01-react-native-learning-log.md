@@ -136,7 +136,13 @@ tags:
 
 ### 2016-7-3
 
-查看了, touch
+查看了TouchOpacity及相关源码
+
+### 2016-7-5
+
+完成编写react-native-smart-button初版, 支持opacity, highlight, 并实现了blur(ios)点击模糊效果
+了解了npm发布package
+
 
 
 ### 待办事项速记
