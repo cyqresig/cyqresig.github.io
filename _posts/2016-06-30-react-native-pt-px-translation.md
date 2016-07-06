@@ -41,7 +41,11 @@ react-native中设置宽高, 以及字号所用的尺寸单位是pt, 是针对�
 因此, 假设你拿到的psd设计稿(注: ps的屏幕分辨率需设置为72像素/英寸)是基于iphone6的分辨率来做的,
 则react-native中设置对象的尺寸 = 设计稿对应对象的尺寸(px) / 2.
 
+另外, 也可以[通过chrome浏览器的开发者工具查看常用移动设备的缩放比][2].
+
 ### 最终的转换公式为:
 react-native中设置对象的尺寸 = 设计稿对应对象的尺寸(px) / 设备缩放比
 
+
 [1]: http://cyqresig.github.io/img/ios-device-dpi.jpg
+[2]: http://www.vanadis.cn/2016/07/06/how-to-find-mobile-device-pixel-radio/

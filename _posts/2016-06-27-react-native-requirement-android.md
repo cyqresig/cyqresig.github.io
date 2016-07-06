@@ -145,19 +145,19 @@ touch ~/.gradle/gradle.properties && echo "org.gradle.daemon=true" >> ~/.gradle/
 
 ## 调试
 
-  ```
-  react-native init AwesomeProject
-  cd AwesomeProject
-  react-native run-android
-  ```
+```
+react-native init AwesomeProject
+cd AwesomeProject
+react-native run-android
+```
 
 ## 修改项目
 
 现在你已经成功运行了项目，我们可以开始尝试动手改一改了：
 
 ```
-使用你喜欢的编辑器打开index.ios.js并随便改上几行。
-在iOS Emulator中按下⌘-R就可以刷新APP并看到你的最新修改！
+使用你喜欢的编辑器打开index.android.js并随便改上几行。
+在Android Emulator中按下⌘-R就可以刷新APP并看到你的最新修改！
 ```
 
 [1]: http://brew.sh/

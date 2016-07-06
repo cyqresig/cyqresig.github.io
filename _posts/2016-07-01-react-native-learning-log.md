@@ -144,11 +144,10 @@ tags:
 了解了npm发布package
 
 
-
-### 待办事项速记
+### 组件生态列表
 
 #### UI
-1. react-native-button
+1. @react-native-component/react-native-button
 1. react-native-numberbox
 1. react-native-parabola
 1. react-native-calculator

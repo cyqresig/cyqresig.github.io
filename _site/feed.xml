@@ -5,9 +5,27 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 05 Jul 2016 23:28:13 +0800</pubDate>
-    <lastBuildDate>Tue, 05 Jul 2016 23:28:13 +0800</lastBuildDate>
+    <pubDate>Wed, 06 Jul 2016 11:56:08 +0800</pubDate>
+    <lastBuildDate>Wed, 06 Jul 2016 11:56:08 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
+    
+      <item>
+        <title>nodejs中package.json中的字段说明</title>
+        <description>&lt;blockquote&gt;
+
+&lt;/blockquote&gt;
+
+&lt;p&gt;待编辑&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 06 Jul 2016 00:00:00 +0800</pubDate>
+        <link>http://www.vanadis.cn/2016/07/06/explaination-for-package.json/</link>
+        <guid isPermaLink="true">http://www.vanadis.cn/2016/07/06/explaination-for-package.json/</guid>
+        
+        <category>react-native</category>
+        
+        
+      </item>
     
       <item>
         <title>如何在npm上发布一个包</title>
@@ -15,15 +33,61 @@
 
 &lt;/blockquote&gt;
 
-&lt;p&gt;由于众所周知的网络原因，react-native命令行从npm官方源拖代码时会遇上麻烦。请将npm仓库源替换为国内镜像：&lt;/p&gt;
+&lt;p&gt;我们可以从npm仓库上安装含有package.json文件的目录作为一个包,
+当然也可以将一个含有package.json文件的目录作为一个包发布至npm仓库.&lt;/p&gt;
+
+&lt;p&gt;下面就介绍一下如何发布包至npm仓库&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;发布前的必要步骤&lt;/h3&gt;
+
+&lt;h4 id=&quot;npm&quot;&gt;创建一个npm用户&lt;/h4&gt;
+
+&lt;p&gt;想要发布包, 你必须在npm仓库上有一个用户.
+如果你还没有创建过, 执行&lt;code class=&quot;highlighter-rouge&quot;&gt;npm adduser&lt;/code&gt;, 或者可以在&lt;a href=&quot;https://www.npmjs.com/&quot;&gt;npm仓库的网站&lt;/a&gt;上创建.&lt;/p&gt;
+
+&lt;h4 id=&quot;npm-1&quot;&gt;登录你的npm帐号&lt;/h4&gt;
+
+&lt;p&gt;通过&lt;code class=&quot;highlighter-rouge&quot;&gt;npm login&lt;/code&gt;登录,
+登录后可以通过&lt;code class=&quot;highlighter-rouge&quot;&gt;npm whoami&lt;/code&gt;以及&lt;code class=&quot;highlighter-rouge&quot;&gt;npm config ls&lt;/code&gt;来查看你的用户和权限信息&lt;/p&gt;
+
+&lt;h3 id=&quot;npm-2&quot;&gt;发布npm包&lt;/h3&gt;
+
+&lt;p&gt;通过&lt;code class=&quot;highlighter-rouge&quot;&gt;npm publish&lt;/code&gt;发布你的包, 包的名称在package.json的name里定义, &lt;a href=&quot;http://cyqresig.github.io/2016/07/06/2016-07-06-explaination-for-package.json&quot;&gt;点这里查看package.json中各字段的含义&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;需要注意, 除了&lt;em&gt;.gitignore&lt;/em&gt;或者&lt;em&gt;.npmignore&lt;/em&gt;中定义的忽略, 目录中所有的文件都会被发布&lt;/p&gt;
+
+&lt;p&gt;发布完后, 可以去https://npmjs.com/package/&lt;package&gt;查看你新发布的包的信息&lt;/package&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;npm-3&quot;&gt;更新npm包&lt;/h3&gt;
+
+&lt;p&gt;修改你的包中的package.json中的&lt;em&gt;version&lt;/em&gt;版本号, &lt;a href=&quot;http://cyqresig.github.io/2016/07/06/2016-07-06-explaination-for-package.json&quot;&gt;点这里查看版本号的含义&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;通过&lt;code class=&quot;highlighter-rouge&quot;&gt;npm publish&lt;/code&gt;发布你的更新包&lt;/p&gt;
+
+&lt;p&gt;发布完后, 可以去https://npmjs.com/package/&lt;package&gt;查看你新发布的包的信息, 可以看到版本号的变化&lt;/package&gt;&lt;/p&gt;
+
+&lt;p&gt;需要注意, 在npm仓库网站上你发布的包中, 显示的readme中的内容只有在版本号更新的发布操作下才会更新&lt;/p&gt;
+
+&lt;h3 id=&quot;npm-4&quot;&gt;下架npm包&lt;/h3&gt;
+
+&lt;p&gt;通过 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm unpublish&lt;/code&gt;下架你的包&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;注意事项&lt;/h3&gt;
+
+&lt;p&gt;由于众所周知的网络原因，react-native命令行从npm官方源拖代码时会遇上麻烦。
+一般开发时需要npm仓库源替换为国内镜像：&lt;/p&gt;
 
 &lt;p&gt;npm config set registry https://registry.npm.taobao.org –global
 npm config set disturl https://npm.taobao.org/dist –global&lt;/p&gt;
 
-&lt;p&gt;但是发布包的时候需要将仓库源替换回默认源&lt;/p&gt;
+&lt;p&gt;但是发布包的时候如果不切换回默认配置, 在发布时会报错,&lt;/p&gt;
+
+&lt;p&gt;故需要将仓库源替换回默认源&lt;/p&gt;
 
 &lt;p&gt;npm config set registry http://registry.npmjs.org –global
 npm config set disturl http://npmjs.org/dist –global&lt;/p&gt;
+
+&lt;p&gt;更详细的内容, 可以查阅&lt;a href=&quot;https://docs.npmjs.com/&quot;&gt;npm官方文档&lt;/a&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Tue, 05 Jul 2016 00:00:00 +0800</pubDate>
@@ -174,11 +238,11 @@ npm config set disturl http://npmjs.org/dist –global&lt;/p&gt;
 &lt;p&gt;完成编写react-native-smart-button初版, 支持opacity, highlight, 并实现了blur(ios)点击模糊效果
 了解了npm发布package&lt;/p&gt;
 
-&lt;h3 id=&quot;section-33&quot;&gt;待办事项速记&lt;/h3&gt;
+&lt;h3 id=&quot;section-33&quot;&gt;组件生态列表&lt;/h3&gt;
 
 &lt;h4 id=&quot;ui&quot;&gt;UI&lt;/h4&gt;
 &lt;ol&gt;
-  &lt;li&gt;react-native-button&lt;/li&gt;
+  &lt;li&gt;@react-native-component/react-native-button&lt;/li&gt;
   &lt;li&gt;react-native-numberbox&lt;/li&gt;
   &lt;li&gt;react-native-parabola&lt;/li&gt;
   &lt;li&gt;react-native-calculator&lt;/li&gt;
@@ -570,6 +634,8 @@ AppRegistry.registerComponent(&#39;KitchenSink&#39;, () =&amp;gt; KitchenSink);
 &lt;p&gt;因此, 假设你拿到的psd设计稿(注: ps的屏幕分辨率需设置为72像素/英寸)是基于iphone6的分辨率来做的,
 则react-native中设置对象的尺寸 = 设计稿对应对象的尺寸(px) / 2.&lt;/p&gt;
 
+&lt;p&gt;另外, 也可以&lt;a href=&quot;http://www.vanadis.cn/2016/07/06/how-to-find-mobile-device-pixel-radio/&quot;&gt;通过chrome浏览器的开发者工具查看常用移动设备的缩放比&lt;/a&gt;.&lt;/p&gt;
+
 &lt;h3 id=&quot;section-1&quot;&gt;最终的转换公式为:&lt;/h3&gt;
 &lt;p&gt;react-native中设置对象的尺寸 = 设计稿对应对象的尺寸(px) / 设备缩放比&lt;/p&gt;
 
@@ -684,22 +750,21 @@ AppRegistry.registerComponent(&#39;KitchenSink&#39;, () =&amp;gt; KitchenSink);
 
 &lt;h2 id=&quot;section-2&quot;&gt;调试&lt;/h2&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
-  react-native init AwesomeProject
-  cd AwesomeProject
-  react-native run-ios
- &lt;/code&gt;
-  你也可以直接在双击&lt;code class=&quot;highlighter-rouge&quot;&gt;ios/AwesomeProject.xcodeproj&lt;/code&gt;文件然后在Xcode中点击Run按钮,
-   或者先在WebStorm中打开AwesomeProject文件夹 然后在Terminal中执行&lt;code class=&quot;highlighter-rouge&quot;&gt;npm start&lt;/code&gt;，再在Xcode中点击Run按钮&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;react-native init AwesomeProject
+cd AwesomeProject
+react-native run-ios
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;你也可以直接在双击&lt;code class=&quot;highlighter-rouge&quot;&gt;ios/AwesomeProject.xcodeproj&lt;/code&gt;文件然后在Xcode中点击Run按钮,
+或者先在WebStorm中打开AwesomeProject文件夹 然后在Terminal中执行&lt;code class=&quot;highlighter-rouge&quot;&gt;npm start&lt;/code&gt;，再在Xcode中点击Run按钮&lt;/p&gt;
 
 &lt;h2 id=&quot;section-3&quot;&gt;修改项目&lt;/h2&gt;
 
 &lt;p&gt;现在你已经成功运行了项目，我们可以开始尝试动手改一改了：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;```
-使用你喜欢的编辑器打开index.ios.js并随便改上几行。
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;使用你喜欢的编辑器打开index.ios.js并随便改上几行。
 在iOS Emulator中按下⌘-R就可以刷新APP并看到你的最新修改！
-```
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -886,18 +951,18 @@ Unable to create a virtual device: Unable to create Android virtual device
 
 &lt;h2 id=&quot;section-3&quot;&gt;调试&lt;/h2&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
-  react-native init AwesomeProject
-  cd AwesomeProject
-  react-native run-android
- &lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;react-native init AwesomeProject
+cd AwesomeProject
+react-native run-android
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;h2 id=&quot;section-4&quot;&gt;修改项目&lt;/h2&gt;
 
 &lt;p&gt;现在你已经成功运行了项目，我们可以开始尝试动手改一改了：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;使用你喜欢的编辑器打开index.ios.js并随便改上几行。
-在iOS Emulator中按下⌘-R就可以刷新APP并看到你的最新修改！
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;使用你喜欢的编辑器打开index.android.js并随便改上几行。
+在Android Emulator中按下⌘-R就可以刷新APP并看到你的最新修改！
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -905,42 +970,6 @@ Unable to create a virtual device: Unable to create Android virtual device
         <pubDate>Mon, 27 Jun 2016 00:00:00 +0800</pubDate>
         <link>http://www.vanadis.cn/2016/06/27/react-native-requirement-android/</link>
         <guid isPermaLink="true">http://www.vanadis.cn/2016/06/27/react-native-requirement-android/</guid>
-        
-        <category>react-native</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>react-native入门系列教程</title>
-        <description>&lt;blockquote&gt;
-
-&lt;/blockquote&gt;
-
-&lt;p&gt;React Native使你能够在Javascript和React的基础上获得完全一致的开发体验，构建世界一流的原生APP。&lt;/p&gt;
-
-&lt;p&gt;React Native着力于提高多平台开发的开发效率 —— 仅需学习一次，编写任何平台。(Learn once, write anywhere)&lt;/p&gt;
-
-&lt;p&gt;Facebook已经在多项产品中使用了React Native，并且将持续地投入建设React Native。&lt;/p&gt;
-
-&lt;p&gt;想学习React Native却苦于换不到循序渐进的入门教程? 下面的内容可以完全满足你:)&lt;/p&gt;
-
-&lt;h1 id=&quot;react-native&quot;&gt;react-native入门系列教程目录&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://cyqresig.github.io/2016/06/27/react-native-intro/&quot;&gt;react-native简介&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;react-native搭建开发环境
-    * &lt;a href=&quot;http://cyqresig.github.io/2016/06/27/react-native-requirement/&quot;&gt;ios&lt;/a&gt;
-    * &lt;a href=&quot;http://cyqresig.github.io/2016/06/27/react-native-requirement-android/&quot;&gt;android&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://cyqresig.github.io/2016/06/30/react-native-splash-screen/&quot;&gt;react-native实现launchImage和splash-screen&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://cyqresig.github.io/2016/07/01/react-native-iconfont/&quot;&gt;react-native使用iconfont替代icon图片&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://cyqresig.github.io/2016/06/30/react-native-pt-px-translation/&quot;&gt;react-native尺寸pt与psd设计稿中的px的转换规则&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Mon, 27 Jun 2016 00:00:00 +0800</pubDate>
-        <link>http://www.vanadis.cn/2016/06/27/react-native-nav/</link>
-        <guid isPermaLink="true">http://www.vanadis.cn/2016/06/27/react-native-nav/</guid>
         
         <category>react-native</category>
         

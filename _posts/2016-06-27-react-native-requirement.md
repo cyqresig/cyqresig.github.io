@@ -55,22 +55,23 @@ tags:
 
 ## 调试
 
-  ```
-  react-native init AwesomeProject
-  cd AwesomeProject
-  react-native run-ios
-  ```
-  你也可以直接在双击`ios/AwesomeProject.xcodeproj`文件然后在Xcode中点击Run按钮,
-   或者先在WebStorm中打开AwesomeProject文件夹 然后在Terminal中执行`npm start`，再在Xcode中点击Run按钮
+```
+react-native init AwesomeProject
+cd AwesomeProject
+react-native run-ios
+```
+
+你也可以直接在双击`ios/AwesomeProject.xcodeproj`文件然后在Xcode中点击Run按钮,
+或者先在WebStorm中打开AwesomeProject文件夹 然后在Terminal中执行`npm start`，再在Xcode中点击Run按钮
 
 ## 修改项目
 
 现在你已经成功运行了项目，我们可以开始尝试动手改一改了：
 
-    ```
-    使用你喜欢的编辑器打开index.ios.js并随便改上几行。
-    在iOS Emulator中按下⌘-R就可以刷新APP并看到你的最新修改！
-    ```
+```
+使用你喜欢的编辑器打开index.ios.js并随便改上几行。
+在iOS Emulator中按下⌘-R就可以刷新APP并看到你的最新修改！
+```
 
 [1]: http://brew.sh/
 [2]: https://facebook.github.io/watchman/docs/install.html
