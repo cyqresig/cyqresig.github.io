@@ -136,18 +136,23 @@ tags:
 
 ### 2016-7-3
 
-查看了TouchOpacity及相关源码
+查看了TouchOpacity及相关的部分源码
 
 ### 2016-7-5
 
 完成编写react-native-smart-button初版, 支持opacity, highlight, 并实现了blur(ios)点击模糊效果
 了解了npm发布package
 
+## 2016-7-6
+
+查看了react-native-tab-navigator源码, 准备自行编写react-native-smart-tab-navigator
+
+
 
 ### 组件生态列表
 
 #### UI
-1. @react-native-component/react-native-button
+1. @react-native-component/react-native-smart-button
 1. react-native-numberbox
 1. react-native-parabola
 1. react-native-calculator

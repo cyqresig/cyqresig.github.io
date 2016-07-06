@@ -5,8 +5,8 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 06 Jul 2016 11:56:08 +0800</pubDate>
-    <lastBuildDate>Wed, 06 Jul 2016 11:56:08 +0800</lastBuildDate>
+    <pubDate>Wed, 06 Jul 2016 17:45:46 +0800</pubDate>
+    <lastBuildDate>Wed, 06 Jul 2016 17:45:46 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -15,7 +15,28 @@
 
 &lt;/blockquote&gt;
 
-&lt;p&gt;待编辑&lt;/p&gt;
+&lt;h2 id=&quot;packagejson&quot;&gt;package.json中的字段说明&lt;/h2&gt;
+
+&lt;p&gt;package.json文件可以通过&lt;code class=&quot;highlighter-rouge&quot;&gt;npm init&lt;/code&gt;创建&lt;/p&gt;
+
+&lt;p&gt;一个package.json文件通常有以下字段：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;name —— 包的名称，必须是唯一的，由小写英文字母、数字和下划线组成，不能包含空格&lt;/li&gt;
+  &lt;li&gt;description —— 包的简要说明&lt;/li&gt;
+  &lt;li&gt;version —— 包的版本&lt;/li&gt;
+  &lt;li&gt;author —— 包的作者&lt;/li&gt;
+  &lt;li&gt;contributors —— 贡献者数组，数组每一项为一个包含一个贡献者资料的对象&lt;/li&gt;
+  &lt;li&gt;dependencies —— 包的依赖，为一个对象，对象的属性为包名称，属性值为版本号&lt;/li&gt;
+  &lt;li&gt;devDependencies —— 开发环境下的包依赖，为一个对象，对象的属性为包名称，属性值为版本号&lt;/li&gt;
+  &lt;li&gt;keywords —— 关键字数组，通常用于搜索&lt;/li&gt;
+  &lt;li&gt;repository —— 仓库托管地址，通常为一个包含type（仓库的类型，如：git）和 url（仓库的地址）的对象&lt;/li&gt;
+  &lt;li&gt;main —— 包的入口文件，如不指定，则默认为根目录下的index.js或index.node&lt;/li&gt;
+  &lt;li&gt;bin —— 可执行文件的路径&lt;/li&gt;
+  &lt;li&gt;bugs —— 提交bug的地址&lt;/li&gt;
+  &lt;li&gt;maintainers —— 维护者数组，数组每一项为一个包含一个维护者资料的对象&lt;/li&gt;
+  &lt;li&gt;licenses —— 许可证数组，数组每一项为一个包含type（许可证的名称）和url（链接到许可证文本的地址）的对象&lt;/li&gt;
+&lt;/ul&gt;
 
 </description>
         <pubDate>Wed, 06 Jul 2016 00:00:00 +0800</pubDate>
@@ -231,18 +252,22 @@ npm config set disturl http://npmjs.org/dist –global&lt;/p&gt;
 
 &lt;h3 id=&quot;section-31&quot;&gt;2016-7-3&lt;/h3&gt;
 
-&lt;p&gt;查看了TouchOpacity及相关源码&lt;/p&gt;
+&lt;p&gt;查看了TouchOpacity及相关的部分源码&lt;/p&gt;
 
 &lt;h3 id=&quot;section-32&quot;&gt;2016-7-5&lt;/h3&gt;
 
 &lt;p&gt;完成编写react-native-smart-button初版, 支持opacity, highlight, 并实现了blur(ios)点击模糊效果
 了解了npm发布package&lt;/p&gt;
 
-&lt;h3 id=&quot;section-33&quot;&gt;组件生态列表&lt;/h3&gt;
+&lt;h2 id=&quot;section-33&quot;&gt;2016-7-6&lt;/h2&gt;
+
+&lt;p&gt;查看了react-native-tab-navigator源码, 准备自行编写react-native-smart-tab-navigator&lt;/p&gt;
+
+&lt;h3 id=&quot;section-34&quot;&gt;组件生态列表&lt;/h3&gt;
 
 &lt;h4 id=&quot;ui&quot;&gt;UI&lt;/h4&gt;
 &lt;ol&gt;
-  &lt;li&gt;@react-native-component/react-native-button&lt;/li&gt;
+  &lt;li&gt;@react-native-component/react-native-smart-button&lt;/li&gt;
   &lt;li&gt;react-native-numberbox&lt;/li&gt;
   &lt;li&gt;react-native-parabola&lt;/li&gt;
   &lt;li&gt;react-native-calculator&lt;/li&gt;
@@ -271,7 +296,7 @@ npm config set disturl http://npmjs.org/dist –global&lt;/p&gt;
   &lt;li&gt;react-native-animated-tabs&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h4 id=&quot;section-34&quot;&gt;原生能力&lt;/h4&gt;
+&lt;h4 id=&quot;section-35&quot;&gt;原生能力&lt;/h4&gt;
 &lt;ol&gt;
   &lt;li&gt;react-native-life-cycle&lt;/li&gt;
   &lt;li&gt;react-native-splashscreen&lt;/li&gt;
