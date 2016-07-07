@@ -5,8 +5,8 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 07 Jul 2016 09:57:02 +0800</pubDate>
-    <lastBuildDate>Thu, 07 Jul 2016 09:57:02 +0800</lastBuildDate>
+    <pubDate>Thu, 07 Jul 2016 09:57:27 +0800</pubDate>
+    <lastBuildDate>Thu, 07 Jul 2016 09:57:27 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -73,7 +73,7 @@
 
 &lt;h3 id=&quot;npm-2&quot;&gt;发布npm包&lt;/h3&gt;
 
-&lt;p&gt;通过&lt;code class=&quot;highlighter-rouge&quot;&gt;npm publish&lt;/code&gt;发布你的包, 包的名称在package.json的name里定义, &lt;a href=&quot;http://cyqresig.github.io/2016/07/06/2016-07-06-explaination-for-package.json&quot;&gt;点这里查看package.json中各字段的含义&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;通过&lt;code class=&quot;highlighter-rouge&quot;&gt;npm publish&lt;/code&gt;发布你的包, 包的名称在package.json的name里定义, &lt;a href=&quot;http://cyqresig.github.io/2016/07/06/2016-07-06-explaination-for-package-json&quot;&gt;点这里查看package.json中各字段的含义&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;需要注意, 除了&lt;em&gt;.gitignore&lt;/em&gt;或者&lt;em&gt;.npmignore&lt;/em&gt;中定义的忽略, 目录中所有的文件都会被发布&lt;/p&gt;
 
@@ -81,7 +81,7 @@
 
 &lt;h3 id=&quot;npm-3&quot;&gt;更新npm包&lt;/h3&gt;
 
-&lt;p&gt;修改你的包中的package.json中的&lt;em&gt;version&lt;/em&gt;版本号, &lt;a href=&quot;http://cyqresig.github.io/2016/07/06/2016-07-06-explaination-for-package.json&quot;&gt;点这里查看版本号的含义&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;修改你的包中的package.json中的&lt;em&gt;version&lt;/em&gt;版本号, &lt;a href=&quot;http://cyqresig.github.io/2016/07/06/2016-07-06-explaination-for-package-json&quot;&gt;点这里查看版本号的含义&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;通过&lt;code class=&quot;highlighter-rouge&quot;&gt;npm publish&lt;/code&gt;发布你的更新包&lt;/p&gt;
 

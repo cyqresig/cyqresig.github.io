@@ -72,7 +72,7 @@ tags:
 
 [1]: https://docs.npmjs.com/
 [2]: https://www.npmjs.com/
-[3]: http://cyqresig.github.io/2016/07/06/2016-07-06-explaination-for-package.json
+[3]: http://cyqresig.github.io/2016/07/06/2016-07-06-explaination-for-package-json
 
 
 
