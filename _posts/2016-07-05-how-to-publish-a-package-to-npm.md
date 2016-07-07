@@ -33,7 +33,7 @@ tags:
 
 需要注意, 除了*.gitignore*或者*.npmignore*中定义的忽略, 目录中所有的文件都会被发布
 
-发布完后, 可以去https://npmjs.com/package/<package>查看你新发布的包的信息
+发布完后, 可以去`https://npmjs.com/package/<package>`查看你新发布的包的信息
 
 ### 更新npm包
 
@@ -41,7 +41,7 @@ tags:
 
 通过`npm publish`发布你的更新包
 
-发布完后, 可以去https://npmjs.com/package/<package>查看你新发布的包的信息, 可以看到版本号的变化
+发布完后, 可以去`https://npmjs.com/package/<package>`查看你新发布的包的信息, 可以看到版本号的变化
 
 需要注意, 在npm仓库网站上你发布的包中, 显示的readme中的内容只有在版本号更新的发布操作下才会更新
 
@@ -54,8 +54,9 @@ tags:
 由于众所周知的网络原因，react-native命令行从npm官方源拖代码时会遇上麻烦。
 一般开发时需要npm仓库源替换为国内镜像：
 
-npm config set registry https://registry.npm.taobao.org --global
-npm config set disturl https://npm.taobao.org/dist --global
+`npm config set registry https://registry.npm.taobao.org --global`
+
+`npm config set disturl https://npm.taobao.org/dist --global`
 
 但是发布包的时候如果不切换回默认配置, 在发布时会报错,
 
@@ -63,8 +64,9 @@ npm config set disturl https://npm.taobao.org/dist --global
 
 故需要将仓库源替换回默认源
 
-npm config set registry http://registry.npmjs.org --global
-npm config set disturl http://npmjs.org/dist --global
+`npm config set registry http://registry.npmjs.org --global`
+
+`npm config set disturl http://npmjs.org/dist --global`
 
 更详细的内容, 可以查阅[npm官方文档][1]
 
