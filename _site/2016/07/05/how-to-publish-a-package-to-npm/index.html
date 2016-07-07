@@ -10,9 +10,9 @@
     <meta name="keyword"  content="绯雨闲丸, HISAME SHIZUMARU绯雨闲丸, HISAME SHIZUMARU, 绯雨闲丸的博客, HISAME SHIZUMARU Blog, 博客, 个人网站, 互联网, 前端, 大前端, 前后端分离, 前端工程化, 前端构建, 网站优化, js, javascript, html, css, html5, css3, react-native, ios, android, nodejs, webpack, gulp">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
+    <title>如何在npm上发布一个包 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
 
-    <link rel="canonical" href="http://www.vanadis.cn/">
+    <link rel="canonical" href="http://www.vanadis.cn/2016/07/05/how-to-publish-a-package-to-npm/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -153,474 +153,251 @@
 </script>
 
 
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/react-native-etc.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/react-native-etc.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>绯雨闲丸 Blog</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">极客: 是每一个程序员的目标</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#react-native" title="react-native">react-native</a>
+                        
+                    </div>
+                    <h1>如何在npm上发布一个包</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">绯雨闲丸 发布于 </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-	<div class="row">
-        
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-<!-- USE SIDEBAR -->
-    <!-- PostList Container -->
-    		<div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                postlist-container
-            ">
-    			
-<div class="post-preview">
-    <a href="/2016/07/06/explaination-for-package-json/">
-        <h2 class="post-title">
-            nodejs中package.json中的字段说明
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
+    <!-- Post Container -->
+            <div class="
+                col-lg-10 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<blockquote>
+
+</blockquote>
+
+<p>我们可以从npm仓库上安装含有package.json文件的目录作为一个包,
+当然也可以将一个含有package.json文件的目录作为一个包发布至npm仓库.</p>
+
+<p>下面就介绍一下如何发布包至npm仓库</p>
+
+<h3 id="section">发布前的必要步骤</h3>
+
+<h4 id="npm">创建一个npm用户</h4>
+
+<p>想要发布包, 你必须在npm仓库上有一个用户.
+如果你还没有创建过, 执行<code class="highlighter-rouge">npm adduser</code>, 或者可以在<a href="https://www.npmjs.com/">npm仓库的网站</a>上创建.</p>
+
+<h4 id="npm-1">登录你的npm帐号</h4>
+
+<p>通过<code class="highlighter-rouge">npm login</code>登录,
+登录后可以通过<code class="highlighter-rouge">npm whoami</code>以及<code class="highlighter-rouge">npm config ls</code>来查看你的用户和权限信息</p>
+
+<h3 id="npm-2">发布npm包</h3>
+
+<p>通过<code class="highlighter-rouge">npm publish</code>发布你的包, 包的名称在package.json的name里定义, <a href="http://cyqresig.github.io/2016/07/06/2016-07-06-explaination-for-package.json">点这里查看package.json中各字段的含义</a></p>
+
+<p>需要注意, 除了<em>.gitignore</em>或者<em>.npmignore</em>中定义的忽略, 目录中所有的文件都会被发布</p>
+
+<p>发布完后, 可以去<code class="highlighter-rouge">https://npmjs.com/package/&lt;package&gt;</code>查看你新发布的包的信息</p>
+
+<h3 id="npm-3">更新npm包</h3>
+
+<p>修改你的包中的package.json中的<em>version</em>版本号, <a href="http://cyqresig.github.io/2016/07/06/2016-07-06-explaination-for-package.json">点这里查看版本号的含义</a></p>
+
+<p>通过<code class="highlighter-rouge">npm publish</code>发布你的更新包</p>
+
+<p>发布完后, 可以去<code class="highlighter-rouge">https://npmjs.com/package/&lt;package&gt;</code>查看你新发布的包的信息, 可以看到版本号的变化</p>
+
+<p>需要注意, 在npm仓库网站上你发布的包中, 显示的readme中的内容只有在版本号更新的发布操作下才会更新</p>
+
+<h3 id="npm-4">下架npm包</h3>
+
+<p>通过 <code class="highlighter-rouge">npm unpublish</code>下架你的包</p>
+
+<h3 id="section-1">注意事项</h3>
+
+<p>由于众所周知的网络原因，react-native命令行从npm官方源拖代码时会遇上麻烦。
+一般开发时需要npm仓库源替换为国内镜像：</p>
+
+<p><code class="highlighter-rouge">npm config set registry https://registry.npm.taobao.org --global</code></p>
+
+<p><code class="highlighter-rouge">npm config set disturl https://npm.taobao.org/dist --global</code></p>
+
+<p>但是发布包的时候如果不切换回默认配置, 在发布时会报错,</p>
+
+<p>故需要将仓库源替换回默认源</p>
+
+<p><code class="highlighter-rouge">npm config set registry http://registry.npmjs.org --global</code></p>
+
+<p><code class="highlighter-rouge">npm config set disturl http://npmjs.org/dist --global</code></p>
+
+<p>更详细的内容, 可以查阅<a href="https://docs.npmjs.com/">npm官方文档</a></p>
 
 
 
-package.json中的字段说明
+                <hr>
 
-package.json文件可以通过npm init创建
-
-一个package.json文件通常有以下字段：
-
-
-  name —— 包的名称，必须是唯一的，由小写英文字母、数字和下划线组成，不能包含空格
-  description —— 包的简要说明
-  version —— 包的版本
-  author —— 包的作者
-  contribut...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2016-07-06
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2016/07/05/how-to-publish-a-package-to-npm/">
-        <h2 class="post-title">
-            如何在npm上发布一个包
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
+                
+                <!-- 多说 Share start -->
+                </style>
+                <div class="ds-share"
+                    style="text-align: right"
+                    data-thread-key="/2016/07/05/how-to-publish-a-package-to-npm"
+                    data-title="如何在npm上发布一个包"
+                    data-url="http://www.vanadis.cn/2016/07/05/how-to-publish-a-package-to-npm/"
+                    data-images="http://www.vanadis.cn/img/react-native-etc.jpg"
+                    data-content="
 
 
 
 我们可以从npm仓库上安装含有package.json文件的目录作为一个包,
-当然也可以将一个含有package.json文件的目录作为一个包发布至npm仓库.
+当然也可以将一个含有package.json文件的目录作为一个包发布... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- 多说 Share end-->
+                
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/07/01/react-native-learning-log/" data-toggle="tooltip" data-placement="top" title="全栈(js向)相关内容学习日志">
+                        上一篇<br>
+                        <span>全栈(js向)相关内容学习日志</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/07/06/explaination-for-package-json/" data-toggle="tooltip" data-placement="top" title="nodejs中package.json中的字段说明">
+                        下一篇<br>
+                        <span>nodejs中package.json中的字段说明</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/2016/07/05/how-to-publish-a-package-to-npm"
+                        data-title="如何在npm上发布一个包"
+                        data-url="http://www.vanadis.cn/2016/07/05/how-to-publish-a-package-to-npm/" >
+                    </div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+
+            </div>
 
-下面就介绍一下如何发布包至npm仓库
-
-发布前的必要步骤
-
-创建一个npm用户
-
-想要发布包, 你必须在npm仓库上有一个用户.
-如果你还没有创建过, 执行npm adduser, 或者可以在npm仓库的网站上创建.
-
-登...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2016-07-05
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2016/07/01/react-native-learning-log/">
-        <h2 class="post-title">
-            全栈(js向)相关内容学习日志
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-2016-2-16
-
-开始学习nodejs, 深入理解了nodejs机制, 以及npm命令
-
-2016-2-17
-
-安装了nodejs, 并搭建了nodejs express 4.x框架web工程
-
-2016-2-20
-
-加入了log4js日志, 并调整了各文件目录位置
-
-2016-2-22
-
-开始学习并实践gulp命令及插件
-
-2016-3-2
-
-在搭建的nodejs expres...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2016-07-01
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2016/07/01/react-native-iconfont/">
-        <h2 class="post-title">
-            react-native使用iconfont来替代icon图片
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-众所周知, 图片是有诸多优点的，然而目前在网站以及APP设计这行业面临各种各样的挑战。
-图片不但增加了总文件的大小，还增加了很多额外的”http请求”，这都会大大降低性能的。
-图片还有一个缺点就是不能很好的进行“缩放”，
-因此，有时候在“响应式设计”中需要使用图像的最好解决方案就是不去使用图片。
-
-为什么要使用iconfont(字体图标)
-
-点击这里或[这里]了解使用iconfont...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2016-07-01
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2016/06/30/react-native-splash-screen/">
-        <h2 class="post-title">
-            react-native实现launchImage和splash-screen
-        </h2>
-        
-        <h3 class="post-subtitle">
-            ios/anroid
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-为什么实现splashScreen
-
-  
-    对于ios版本, 点击桌面的app icon后, 自动加载launchImage, launchImage加载完毕后就会进入应用首屏,
-虽然launchImage加载持续时间可以手动设置, 但是却没有关闭launchImage的api, 如果希望在加载首屏前执行一
-些逻辑(例如, 网络请求一些数据), 在这些逻辑执行完毕之前用户看不...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2016-06-30
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2016/06/30/react-native-pt-px-translation/">
-        <h2 class="post-title">
-            react-native的尺寸pt与psd设计稿中的px的转换规则
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-pt (point，磅)：
-是一个物理长度单位，指的是72分之一英寸。
-
-px (pixel，像素)：
-是一个虚拟长度单位，是计算机系统的数字化图像长度单位，如果px要换算成物理长度，需要指定精度DPI(Dots Per Inch，每英寸像素数)，在扫描打印时一般都有DPI可选。Windows系统默认是96dpi，Apple系统默认是72dpi。
-
-em(相对长度单位，相对于当前对象...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2016-06-30
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2016/06/30/markman/">
-        <h2 class="post-title">
-            前端图片标注神器-MarkMan
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-待编辑
-
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2016-06-30
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2016/06/30/font-creator/">
-        <h2 class="post-title">
-            前端iconfont字库编辑工具-font creator
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-待编辑
-
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2016-06-30
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2016/06/27/react-native-requirement/">
-        <h2 class="post-title">
-            react-native搭建开发环境
-        </h2>
-        
-        <h3 class="post-subtitle">
-            ios版
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-环境需求
-
-  
-    一台mac电脑(笔记本, 台式机不限), 操作系统OS X及以上
-  
-  
-    安装HomeBrew
-
-    
-      点击桌面左下角”Finder” -&gt; 点击顶部菜单栏”前往” -&gt; 选择”实用工具” -&gt; 双击”终端”
-      
-        执行如下命令
-
-        /usr/bin/ruby -e "$(c...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2016-06-27
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2016/06/27/react-native-requirement-android/">
-        <h2 class="post-title">
-            react-native搭建开发环境
-        </h2>
-        
-        <h3 class="post-subtitle">
-            android版
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-环境需求
-
-  
-    一台mac电脑(笔记本, 台式机不限), 操作系统OS X及以上
-  
-  
-    安装HomeBrew
-
-    
-      点击桌面左下角”Finder” -&gt; 点击顶部菜单栏”前往” -&gt; 选择”实用工具” -&gt; 双击”终端”
-      
-        执行如下命令
-
-        /usr/bin/ruby -e "$(c...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2016-06-27
-    </p>
-</div>
-<hr>
-
-
-<!-- Pager -->
-
-<ul class="pager">
-    
-    
-    <li class="next">
-        <a href="/page2">历史文章 &rarr;</a>
-    </li>
-    
-</ul>
-
-
-    		</div>
     <!-- Sidebar Container -->
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
                 <section>
                     <hr class="hidden-sm hidden-xs">
-                    <h5><a href="">分类标签</a></h5>
+                    <h5><a href="/tags/">分类标签</a></h5>
                     <div class="tags">
-                        
+        				
                             
-                                <a href="/tags/#生活" title="生活" rel="1">
+                				<a href="/tags/#生活" title="生活" rel="1">
                                     生活
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#文档" title="文档" rel="1">
+                				<a href="/tags/#文档" title="文档" rel="1">
                                     文档
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#javascript组件" title="javascript组件" rel="1">
+                				<a href="/tags/#javascript组件" title="javascript组件" rel="1">
                                     javascript组件
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#javascript" title="javascript" rel="5">
+                				<a href="/tags/#javascript" title="javascript" rel="5">
                                     javascript
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#nodejs" title="nodejs" rel="1">
+                				<a href="/tags/#nodejs" title="nodejs" rel="1">
                                     nodejs
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#es5" title="es5" rel="1">
+                				<a href="/tags/#es5" title="es5" rel="1">
                                     es5
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#es6" title="es6" rel="8">
+                				<a href="/tags/#es6" title="es6" rel="8">
                                     es6
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#react-native" title="react-native" rel="12">
+                				<a href="/tags/#react-native" title="react-native" rel="12">
                                     react-native
                                 </a>
                             
-                        
-                    </div>
+        				
+        			</div>
                 </section>
                 
 
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-                    <hr><h5><a href="">关于博主</a></h5>
-                    <div class="short-about">
-                        
-                            <img src="/img/avatar-cyqresig.jpg" />
-                        
-                        
-                            <p>前端工程师, 擅长App(react-native),手机web(h5),PC大前端(reactjs, angularjs2),服务端(nodejs)开发, 目前仍在向全栈修行中...</p>
-                        
-                        <!-- SNS Link -->
-                        <ul class="list-inline">
-                            
-                            
-                            
-                            
-                            
-                            
-                            <li>
-                                <a target="_blank" href="https://github.com/cyqresig">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            
-                        </ul>
-                    </div>
-                </section>
                 <!-- Friends Blog -->
                 
                 <hr>
@@ -631,10 +408,70 @@ em(相对长度单位，相对于当前对象...
                     
                 </ul>
                 
-    		</div>
-        
-	</div>
-</div>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by cyqresig
+    var _user = 'vanadis';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->
