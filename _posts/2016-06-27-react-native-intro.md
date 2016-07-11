@@ -88,6 +88,7 @@ React Native的开发流程也是继承了React的部分流程, 如下图:
 如果开发一款小型的App, 掌握React Native的组件和API就已经足够了。
 如果学习和实践中遇到问题, 可以到 React Native GitHub issues上搜索, 其中有很多解决方法。
 下面是关于React Native的4个比较重要的地址。
+
 *   React Native官方网站: http://facebook.github.io/react-native/。
 *   React Native版本发布: https://github.com/facebook/react-native/releases。
 *   React Native GitHub地址: https://github.com/facebook/react-native。
