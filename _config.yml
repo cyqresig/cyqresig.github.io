@@ -68,7 +68,7 @@ ga_domain: vanadis.cn
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "前端工程师, 擅长手机App(react-native),手机web(h5),大前端,服务端(nodejs)开发, 目前专注于手机App领域, 同时也在进行全栈修行中."
+sidebar-about-description: "前端工程师, 擅长手机App(react-native),手机web(h5),大前端,服务端(nodejs)开发, 目前专注于手机App领域, 同时也在进行全栈修行."
 sidebar-avatar: /img/avatar-cyqresig.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
