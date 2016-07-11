@@ -3,7 +3,7 @@ layout:     post
 title:      "react-native使用iconfont来替代icon图片"
 subtitle:   ""
 author:     "绯雨闲丸"
-header-img: "img/markman-bg.jpg"
+header-img: "img/iconfont-bg.jpg"
 tags:
     - react-native
 ---
