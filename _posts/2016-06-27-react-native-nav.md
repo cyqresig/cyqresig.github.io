@@ -25,6 +25,7 @@ Facebook已经在多项产品中使用了React Native，并且将持续地投入
 *   react-native搭建开发环境
         * [ios][2]
         * [android][3]
+*   [react-native使用es6][7]
 *   [react-native实现launchImage和splash-screen][5]
 *   [react-native使用iconfont替代icon图片][6]
 *   [react-native尺寸pt与psd设计稿中的px的转换规则][4]
@@ -39,6 +40,7 @@ Facebook已经在多项产品中使用了React Native，并且将持续地投入
 [4]: http://cyqresig.github.io/2016/06/30/react-native-pt-px-translation/
 [5]: http://cyqresig.github.io/2016/06/30/react-native-splash-screen/
 [6]: http://cyqresig.github.io/2016/07/01/react-native-iconfont/
+[7]: http://cyqresig.github.io/2016/05/06/es6-react-native/
 
 
 
