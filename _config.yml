@@ -4,7 +4,7 @@ SEOTitle: 绯雨闲丸的博客 | HISAME SHIZUMARU Blog
 header-img: img/home-bg.jpg
 email: moonsunfall@aliyun.com
 description: "关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web & Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。"
-keyword: "绯雨闲丸, HISAME SHIZUMARU绯雨闲丸, HISAME SHIZUMARU, 绯雨闲丸的博客, HISAME SHIZUMARU Blog, 博客, 个人网站, 互联网, 前端, 大前端, 前后端分离, 前端工程化, 前端构建, 网站优化, js, javascript, html, css, html5, css3, react-native, ios, android, nodejs, webpack, gulp"
+keyword: "绯雨闲丸, HISAME SHIZUMARU绯雨闲丸, HISAME SHIZUMARU, 绯雨闲丸的博客, HISAME SHIZUMARU Blog, 博客, 个人网站, 互联网, 移动, 手机, APP, h5, 前端, 大前端, 前后端分离, 工程化, 构建, 自动化, 网站优化, js, javascript, html, css, html5, css3, react-native, ios, android, nodejs, webpack, gulp, reactjs, angularjs"
 url: "http://www.vanadis.cn"                # your host, for absolute URL
 baseurl: ""                                 # for example, '/blog' if your blog hosted on 'host/blog'
 
@@ -68,7 +68,7 @@ ga_domain: vanadis.cn
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "前端工程师, 擅长App(react-native),手机web(h5),PC大前端(reactjs, angularjs2),服务端(nodejs)开发, 目前仍在向全栈修行中..."
+sidebar-about-description: "前端工程师, 擅长手机App(react-native),手机web(h5),PC大前端,服务端(nodejs)开发, 目前专注于手机App领域, 同时也在进行全栈修行中..."
 sidebar-avatar: /img/avatar-cyqresig.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
