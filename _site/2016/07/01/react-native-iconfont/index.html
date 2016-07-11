@@ -215,11 +215,159 @@
 
 <h3 id="iosiconfont">ios实现iconfont</h3>
 
+<ol>
+  <li>
+    <p>安装第三方组件react-native-vector-icons <code class="highlighter-rouge">$ npm install react-native-vector-icons --save</code></p>
+
+    <p>组件内置了如下字库:</p>
+
+    <ul>
+      <li>Entypo by Daniel Bruce (411 icons)</li>
+      <li>EvilIcons by Alexander Madyankin &amp; Roman Shamin (v1.8.0, 70 icons)</li>
+      <li>FontAwesome by Dave Gandy (v4.6.3, 634 icons)</li>
+      <li>Foundation by ZURB, Inc. (v3.0, 283 icons)</li>
+      <li>Ionicons by Ben Sperry (v3.0.0, 859 icons)</li>
+      <li>MaterialIcons by Google, Inc. (v2.2.3, 932 icons)</li>
+      <li>Octicons by Github, Inc. (v3.5.0, 166 icons)</li>
+      <li>Zocial by Sam Collins (v1.0, 100 icons)</li>
+    </ul>
+
+    <p>也可以使用自定义的字库</p>
+  </li>
+  <li>
+    <p>如果需要使用组件内置字库, 需要执行如下步骤:</p>
+
+    <ul>
+      <li>
+        <p>找到<code class="highlighter-rouge">node_modules/react-native-vector-icons</code>目录, 并将<code class="highlighter-rouge">Fonts</code>目录(或者只是你需要的一个字库文件)拖至Xcode中的工程里.
+需要注意的是加入时需要保证勾选<code class="highlighter-rouge">Add to targets</code>和<code class="highlighter-rouge">Create groups</code></p>
+      </li>
+      <li>
+        <p>修改<code class="highlighter-rouge">Info.plist</code>, 新增一个<code class="highlighter-rouge">Fonts provided by application</code>属性, 值设置为加入的字库文件, 如下图所示:</p>
+      </li>
+    </ul>
+
+    <p><a href="https://cloud.githubusercontent.com/assets/378279/12421498/2db1f93a-be88-11e5-89c8-2e563ba6251a.png">Fonts provided by application</a></p>
+  </li>
+  <li>
+    <p>如果需要使用自定义字库, 需要执行如下步骤:</p>
+
+    <ul>
+      <li>
+        <p>需要自行生成一个*.ttf字库文件, <a href="http://www.iconfont.cn/">点这里查看如何快速获取自定义字库</a>,</p>
+
+        <p>字库文件中的内容, 包含字库名称, 每项icon矢量图等都可以自定义(下面的示例中定义为’iconfont’), <a href="http://cyqresig.github.io/2016/06/30/font-creator/">点这里查看如何快速修改字库</a></p>
+      </li>
+      <li>
+        <p>将自定义生成的字库文件(假设文件名为font.ttf)拖至Xcode中的工程里,</p>
+
+        <p>需要注意的是加入时需要保证勾选<code class="highlighter-rouge">Add to targets</code>和<code class="highlighter-rouge">Create groups</code></p>
+      </li>
+      <li>
+        <p>修改<code class="highlighter-rouge">Info.plist</code>, 新增一个<code class="highlighter-rouge">Fonts provided by application</code>属性, 值设置为加入的字库文件, 同步骤2</p>
+      </li>
+    </ul>
+  </li>
+</ol>
+
 <h3 id="androidiconfont">android实现iconfont</h3>
+
+<ol>
+  <li>
+    <p>安装第三方组件react-native-vector-icons <code class="highlighter-rouge">$ npm install react-native-vector-icons --save</code></p>
+
+    <p>组件内置了如下字库:</p>
+
+    <ul>
+      <li>Entypo by Daniel Bruce (411 icons)</li>
+      <li>EvilIcons by Alexander Madyankin &amp; Roman Shamin (v1.8.0, 70 icons)</li>
+      <li>FontAwesome by Dave Gandy (v4.6.3, 634 icons)</li>
+      <li>Foundation by ZURB, Inc. (v3.0, 283 icons)</li>
+      <li>Ionicons by Ben Sperry (v3.0.0, 859 icons)</li>
+      <li>MaterialIcons by Google, Inc. (v2.2.3, 932 icons)</li>
+      <li>Octicons by Github, Inc. (v3.5.0, 166 icons)</li>
+      <li>Zocial by Sam Collins (v1.0, 100 icons)</li>
+    </ul>
+
+    <p>也可以使用自定义的字库</p>
+  </li>
+  <li>
+    <p>如果需要使用组件内置字库, 需要执行如下步骤:</p>
+  </li>
+</ol>
+
+<ul>
+  <li>找到<code class="highlighter-rouge">node_modules/react-native-vector-icons</code>目录, 并将<code class="highlighter-rouge">Fonts</code>目录中的字库文件拖至<code class="highlighter-rouge">android/app/src/main/assets/fonts</code>里.</li>
+</ul>
+
+<ol>
+  <li>
+    <p>如果需要使用自定义字库, 需要执行如下步骤:</p>
+
+    <ul>
+      <li>
+        <p>需要自行生成一个*.ttf字库文件, <a href="http://www.iconfont.cn/">点这里查看如何快速获取自定义字库</a>,</p>
+
+        <p>字库文件中的内容, 包含字库名称, 每项icon矢量图等都可以自定义(下面的示例中定义为’iconfont’), <a href="http://cyqresig.github.io/2016/06/30/font-creator/">点这里查看如何快速修改字库</a></p>
+      </li>
+      <li>
+        <p>将自定义生成的字库文件(假设文件名为font.ttf)拖至<code class="highlighter-rouge">android/app/src/main/assets/fonts</code>里,</p>
+      </li>
+    </ul>
+  </li>
+</ol>
 
 <h3 id="section">效果展示</h3>
 
 <h3 id="react-native">react-native代码示例</h3>
+
+<h4 id="section-1">使用内置字库</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>import Icon from 'react-native-vector-icons/Ionicons';
+
+function ExampleView(props) {
+  return (&lt;Icon name="ios-person" size={30} color="#4F8EF7" /&gt;);
+}
+</code></pre>
+</div>
+
+<h4 id="section-2">使用自定义字库</h4>
+
+<h4 id="ios">ios</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>import { createIconSet } from 'react-native-vector-icons';
+const glyphMap = {
+  'mui-nav-right': 58755,
+  'mui-nav-left': 58481,
+};
+const MuiIcon = createIconSet(glyphMap, 'iconfont');
+
+function ExampleView(props) {
+    return (&lt;MuiIcon size={20} name={'mui-nav-left'} color={'#E5E5E5'}/&gt;);
+}
+</code></pre>
+</div>
+
+<h4 id="android">android</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>import { createIconSet } from 'react-native-vector-icons';
+const glyphMap = {
+  'mui-nav-right': 58755,
+  'mui-android-nav-left': 58481,
+  'mui-voicer': 58162,
+};
+const MuiIcon = createIconSet(glyphMap, 'iconfont', 'mui.ttf');
+
+function ExampleView(props) {
+    return (&lt;MuiIcon size={20} name={'mui-android-nav-left'} color={'#E5E5E5'}/&gt;);
+}
+</code></pre>
+</div>
+
+<h3 id="section-3">注意事项</h3>
+
+<p>示例中的<code class="highlighter-rouge">'mui-nav-right': 58755</code>, <em>mui-nav-right</em>为icon的名称, 可以自定义, 使用时赋值给<em>name</em>,
+58755为这个字库文件中对应icon的16进制表示.</p>
 
 
 
