@@ -145,11 +145,22 @@ tags:
 
 ## 2016-7-6
 
-查看了react-native-tab-navigator源码, 准备自行编写react-native-smart-tab-navigator
+查看了react-native-tab-navigator源码
+
+## 2016-7-7
+
+查看了react-native-splash-screen源码
+
+## 2016-7-11
+
+编写实现了自定义反馈效果按钮组件react-native-smart-button
+
+## 2016-7-12
+
+开始阅读ios9应用开发入门经典, 补充ios原生开发(swift)的知识, 为之后编写与原生模块交互的自定义组件作准备
 
 
-
-### 组件生态列表
+### 关注组件生态列表
 
 #### UI
 1. @react-native-component/react-native-smart-button

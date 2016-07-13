@@ -5,7 +5,7 @@ subtitle:   ""
 author:     "绯雨闲丸"
 header-img: "img/react-native-etc.jpg"
 tags:
-    - nodejs
+    - npm nodejs
 ---
 
 >

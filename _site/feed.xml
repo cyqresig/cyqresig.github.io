@@ -5,8 +5,8 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 13 Jul 2016 09:19:18 +0800</pubDate>
-    <lastBuildDate>Wed, 13 Jul 2016 09:19:18 +0800</lastBuildDate>
+    <pubDate>Wed, 13 Jul 2016 13:59:24 +0800</pubDate>
+    <lastBuildDate>Wed, 13 Jul 2016 13:59:24 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -43,7 +43,7 @@
         <link>http://www.vanadis.cn/2016/07/06/explaination-for-package-json/</link>
         <guid isPermaLink="true">http://www.vanadis.cn/2016/07/06/explaination-for-package-json/</guid>
         
-        <category>nodejs</category>
+        <category>npm nodejs</category>
         
         
       </item>
@@ -117,7 +117,7 @@
         <link>http://www.vanadis.cn/2016/07/05/how-to-publish-a-package-to-npm/</link>
         <guid isPermaLink="true">http://www.vanadis.cn/2016/07/05/how-to-publish-a-package-to-npm/</guid>
         
-        <category>react-native</category>
+        <category>npm nodejs</category>
         
         
       </item>
@@ -263,9 +263,21 @@
 
 &lt;h2 id=&quot;section-33&quot;&gt;2016-7-6&lt;/h2&gt;
 
-&lt;p&gt;查看了react-native-tab-navigator源码, 准备自行编写react-native-smart-tab-navigator&lt;/p&gt;
+&lt;p&gt;查看了react-native-tab-navigator源码&lt;/p&gt;
 
-&lt;h3 id=&quot;section-34&quot;&gt;组件生态列表&lt;/h3&gt;
+&lt;h2 id=&quot;section-34&quot;&gt;2016-7-7&lt;/h2&gt;
+
+&lt;p&gt;查看了react-native-splash-screen源码&lt;/p&gt;
+
+&lt;h2 id=&quot;section-35&quot;&gt;2016-7-11&lt;/h2&gt;
+
+&lt;p&gt;编写实现了自定义反馈效果按钮组件react-native-smart-button&lt;/p&gt;
+
+&lt;h2 id=&quot;section-36&quot;&gt;2016-7-12&lt;/h2&gt;
+
+&lt;p&gt;开始阅读ios9应用开发入门经典, 补充ios原生开发(swift)的知识, 为之后编写与原生模块交互的自定义组件作准备&lt;/p&gt;
+
+&lt;h3 id=&quot;section-37&quot;&gt;关注组件生态列表&lt;/h3&gt;
 
 &lt;h4 id=&quot;ui&quot;&gt;UI&lt;/h4&gt;
 &lt;ol&gt;
@@ -298,7 +310,7 @@
   &lt;li&gt;react-native-animated-tabs&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h4 id=&quot;section-35&quot;&gt;原生能力&lt;/h4&gt;
+&lt;h4 id=&quot;section-38&quot;&gt;原生能力&lt;/h4&gt;
 &lt;ol&gt;
   &lt;li&gt;react-native-life-cycle&lt;/li&gt;
   &lt;li&gt;react-native-splashscreen&lt;/li&gt;
