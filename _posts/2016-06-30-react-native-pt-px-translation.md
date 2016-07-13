@@ -47,5 +47,5 @@ react-native中设置宽高, 以及字号所用的尺寸单位是pt, 是针对�
 react-native中设置对象的尺寸 = 设计稿对应对象的尺寸(px) / 设备缩放比
 
 
-[1]: http://cyqresig.github.io/img/ios-device-dpi.jpg
+[1]: http://www.vanadis.cn/img/ios-device-dpi.jpg
 [2]: http://www.vanadis.cn/2016/07/06/how-to-find-mobile-device-pixel-radio/

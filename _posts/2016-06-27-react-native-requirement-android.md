@@ -164,14 +164,14 @@ react-native run-android
 [2]: https://facebook.github.io/watchman/docs/install.html
 [3]: https://www.flowtype.org/
 [4]: http://www.jetbrains.com/webstorm/
-[5]: http://cyqresig.github.io/2016/06/27/webstorm-crack
-[6]: http://cyqresig.github.io/2016/06/27/webstorm-react-native-grammer-plugin
+[5]: http://www.vanadis.cn/2016/06/27/webstorm-crack
+[6]: http://www.vanadis.cn/2016/06/27/webstorm-react-native-grammer-plugin
 [7]: http://reactnative.cn/static/docs/0.27/img/react-native-android-studio-custom-install.png
 [8]: http://reactnative.cn/static/docs/0.27/img/react-native-android-studio-additional-installs.png
 [9]: http://reactnative.cn/static/docs/0.27/img/react-native-android-studio-configure-sdk.png
 [10]: http://reactnative.cn/static/docs/0.27/img/react-native-android-studio-android-sdk-platforms.png
 [11]: http://reactnative.cn/static/docs/0.27/img/react-native-android-studio-android-sdk-build-tools.png
-[12]: http://cyqresig.github.io/2016/06/27/vi
+[12]: http://www.vanadis.cn/2016/06/27/vi
 [13]: https://docs.gradle.org/2.9/userguide/gradle_daemon.html
 [14]: https://code.google.com/p/android/issues/detail?id=207563
 [15]: http://reactnative.cn/static/docs/0.27/img/react-native-android-studio-avd.png

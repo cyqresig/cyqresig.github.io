@@ -145,4 +145,4 @@ function ExampleView(props) {
 [2]: http://www.vanseodesign.com/web-design/icon-fonts/
 [3]: https://cloud.githubusercontent.com/assets/378279/12421498/2db1f93a-be88-11e5-89c8-2e563ba6251a.png
 [4]: http://www.iconfont.cn/
-[5]: http://cyqresig.github.io/2016/06/30/font-creator/
+[5]: http://www.vanadis.cn/2016/06/30/font-creator/

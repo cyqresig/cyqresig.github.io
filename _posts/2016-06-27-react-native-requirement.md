@@ -77,5 +77,5 @@ react-native run-ios
 [2]: https://facebook.github.io/watchman/docs/install.html
 [3]: https://www.flowtype.org/
 [4]: http://www.jetbrains.com/webstorm/
-[5]: http://cyqresig.github.io/2016/06/27/webstorm-crack
-[6]: http://cyqresig.github.io/2016/06/27/webstorm-react-native-grammer-plugin
+[5]: http://www.vanadis.cn/2016/06/27/webstorm-crack
+[6]: http://www.vanadis.cn/2016/06/27/webstorm-react-native-grammer-plugin

@@ -34,13 +34,13 @@ Facebook已经在多项产品中使用了React Native，并且将持续地投入
 
 
 
-[1]: http://cyqresig.github.io/2016/06/27/react-native-intro/
-[2]: http://cyqresig.github.io/2016/06/27/react-native-requirement/
-[3]: http://cyqresig.github.io/2016/06/27/react-native-requirement-android/
-[4]: http://cyqresig.github.io/2016/06/30/react-native-pt-px-translation/
-[5]: http://cyqresig.github.io/2016/06/30/react-native-splash-screen/
-[6]: http://cyqresig.github.io/2016/07/01/react-native-iconfont/
-[7]: http://cyqresig.github.io/2016/05/06/es6-react-native/
+[1]: http://www.vanadis.cn/2016/06/27/react-native-intro/
+[2]: http://www.vanadis.cn/2016/06/27/react-native-requirement/
+[3]: http://www.vanadis.cn/2016/06/27/react-native-requirement-android/
+[4]: http://www.vanadis.cn/2016/06/30/react-native-pt-px-translation/
+[5]: http://www.vanadis.cn/2016/06/30/react-native-splash-screen/
+[6]: http://www.vanadis.cn/2016/07/01/react-native-iconfont/
+[7]: http://www.vanadis.cn/2016/05/06/es6-react-native/
 
 
 

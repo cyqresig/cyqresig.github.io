@@ -213,6 +213,6 @@ AppRegistry.registerComponent('KitchenSink', () => KitchenSink);
 
 
 
-[1]: http://cyqresig.github.io/2016/06/30/ios-launch-image
-[2]: http://cyqresig.github.io/img/ios-splash-screen.gif
-[3]: http://cyqresig.github.io/img/android-splash-screen.gif
+[1]: http://www.vanadis.cn/2016/06/30/ios-launch-image
+[2]: http://www.vanadis.cn/img/ios-splash-screen.gif
+[3]: http://www.vanadis.cn/img/android-splash-screen.gif
