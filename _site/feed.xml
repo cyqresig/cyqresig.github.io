@@ -5,8 +5,8 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 21 Jul 2016 15:38:37 +0800</pubDate>
-    <lastBuildDate>Thu, 21 Jul 2016 15:38:37 +0800</lastBuildDate>
+    <pubDate>Thu, 21 Jul 2016 16:35:32 +0800</pubDate>
+    <lastBuildDate>Thu, 21 Jul 2016 16:35:32 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -277,7 +277,35 @@
 
 &lt;p&gt;开始阅读ios9应用开发入门经典, 补充ios原生开发(swift)的知识, 为之后编写与原生模块交互的自定义组件作准备&lt;/p&gt;
 
-&lt;h3 id=&quot;section-37&quot;&gt;关注组件生态列表&lt;/h3&gt;
+&lt;h2 id=&quot;section-37&quot;&gt;2016-7-14&lt;/h2&gt;
+
+&lt;p&gt;优化自定义反馈效果按钮组件react-native-smart-button&lt;/p&gt;
+
+&lt;h2 id=&quot;section-38&quot;&gt;2016-7-16&lt;/h2&gt;
+
+&lt;p&gt;开始阅读ios编程(第4版), 补充ios原生开发(objective-c)的知识, 为之后编写与原生模块交互的自定义组件作准备&lt;/p&gt;
+
+&lt;h2 id=&quot;section-39&quot;&gt;2016-7-17&lt;/h2&gt;
+
+&lt;p&gt;编写实现了九宫格组件react-native-smart-sudoku-grid&lt;/p&gt;
+
+&lt;h2 id=&quot;section-40&quot;&gt;2016-7-18&lt;/h2&gt;
+
+&lt;p&gt;开始阅读Android权威指南(第2版), 补充android原生开发的知识, 为之后编写与原生模块交互的自定义组件作准备&lt;/p&gt;
+
+&lt;h2 id=&quot;section-41&quot;&gt;2016-7-19&lt;/h2&gt;
+
+&lt;p&gt;编写实现了徽章组件react-native-smart-badge&lt;/p&gt;
+
+&lt;h2 id=&quot;section-42&quot;&gt;2016-7-20&lt;/h2&gt;
+
+&lt;p&gt;学习并尝试实践编写react-native原生ios组件&lt;/p&gt;
+
+&lt;h2 id=&quot;section-43&quot;&gt;2016-7-21&lt;/h2&gt;
+
+&lt;p&gt;编写实现了touch-id指纹验证组件react-native-smart-touch-id&lt;/p&gt;
+
+&lt;h3 id=&quot;section-44&quot;&gt;关注组件生态列表&lt;/h3&gt;
 
 &lt;h4 id=&quot;ui&quot;&gt;UI&lt;/h4&gt;
 &lt;ol&gt;
@@ -310,7 +338,7 @@
   &lt;li&gt;react-native-animated-tabs&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h4 id=&quot;section-38&quot;&gt;原生能力&lt;/h4&gt;
+&lt;h4 id=&quot;section-45&quot;&gt;原生能力&lt;/h4&gt;
 &lt;ol&gt;
   &lt;li&gt;react-native-life-cycle&lt;/li&gt;
   &lt;li&gt;react-native-splashscreen&lt;/li&gt;

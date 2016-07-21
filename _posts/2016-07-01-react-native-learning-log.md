@@ -159,6 +159,34 @@ tags:
 
 开始阅读ios9应用开发入门经典, 补充ios原生开发(swift)的知识, 为之后编写与原生模块交互的自定义组件作准备
 
+## 2016-7-14
+
+优化自定义反馈效果按钮组件react-native-smart-button
+
+## 2016-7-16
+
+开始阅读ios编程(第4版), 补充ios原生开发(objective-c)的知识, 为之后编写与原生模块交互的自定义组件作准备
+
+## 2016-7-17
+
+编写实现了九宫格组件react-native-smart-sudoku-grid
+
+## 2016-7-18
+
+开始阅读Android权威指南(第2版), 补充android原生开发的知识, 为之后编写与原生模块交互的自定义组件作准备
+
+## 2016-7-19
+
+编写实现了徽章组件react-native-smart-badge
+
+## 2016-7-20
+
+学习并尝试实践编写react-native原生ios组件
+
+## 2016-7-21
+
+编写实现了touch-id指纹验证组件react-native-smart-touch-id
+
 
 ### 关注组件生态列表
 
