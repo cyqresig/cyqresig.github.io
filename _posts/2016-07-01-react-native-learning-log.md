@@ -187,6 +187,10 @@ tags:
 
 编写实现了touch-id指纹验证组件react-native-smart-touch-id
 
+## 2016-7-22
+
+编写实现了角标组件react-native-smart-corner-label
+
 
 ### 关注组件生态列表
 
