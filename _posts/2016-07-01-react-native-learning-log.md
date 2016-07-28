@@ -191,6 +191,9 @@ tags:
 
 编写实现了角标组件react-native-smart-corner-label
 
+## 2016-7-28
+
+编写实现了手势密码组件react-native-smart-gesture-password
 
 ### 关注组件生态列表
 
