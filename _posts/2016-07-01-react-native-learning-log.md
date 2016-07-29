@@ -191,7 +191,18 @@ tags:
 
 编写实现了角标组件react-native-smart-corner-label
 
+## 2016-7-27
+
+修正了按钮组件react-native-smart-button中使用blur模糊阴影功能有机率会报错的问题
+
 ## 2016-7-28
+
+编写实现了手势密码组件react-native-smart-gesture-password
+
+## 2016-7-29
+在角标组件react-native-smart-corner-label中增加了角标可指定显示在左边和右边的功能
+在按钮组件react-native-smart-button中增加了显示加载状态的功能
+
 
 编写实现了手势密码组件react-native-smart-gesture-password
 
