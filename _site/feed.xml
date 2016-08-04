@@ -5,8 +5,8 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 29 Jul 2016 15:35:58 +0800</pubDate>
-    <lastBuildDate>Fri, 29 Jul 2016 15:35:58 +0800</lastBuildDate>
+    <pubDate>Thu, 04 Aug 2016 14:33:56 +0800</pubDate>
+    <lastBuildDate>Thu, 04 Aug 2016 14:33:56 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -323,7 +323,16 @@
 
 &lt;p&gt;编写实现了手势密码组件react-native-smart-gesture-password&lt;/p&gt;
 
-&lt;h3 id=&quot;section-48&quot;&gt;关注组件生态列表&lt;/h3&gt;
+&lt;h2 id=&quot;section-48&quot;&gt;2016-8-1&lt;/h2&gt;
+&lt;p&gt;修改了按钮组件react-native-smart-button, 增加了对onLayout事件的支持&lt;/p&gt;
+
+&lt;h2 id=&quot;section-49&quot;&gt;2016-8-2&lt;/h2&gt;
+&lt;p&gt;修改了徽章组件react-native-smart-badge, 增加了允许限制最长距离, 超长后自定义显示(例如显示…)的支持&lt;/p&gt;
+
+&lt;h2 id=&quot;section-50&quot;&gt;2016-8-4&lt;/h2&gt;
+&lt;p&gt;编写实现了抛物线(主要用于购物车)组件react-native-smart-parabola&lt;/p&gt;
+
+&lt;h3 id=&quot;section-51&quot;&gt;关注组件生态列表&lt;/h3&gt;
 
 &lt;h4 id=&quot;ui&quot;&gt;UI&lt;/h4&gt;
 &lt;ol&gt;
@@ -356,7 +365,7 @@
   &lt;li&gt;react-native-animated-tabs&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h4 id=&quot;section-49&quot;&gt;原生能力&lt;/h4&gt;
+&lt;h4 id=&quot;section-52&quot;&gt;原生能力&lt;/h4&gt;
 &lt;ol&gt;
   &lt;li&gt;react-native-life-cycle&lt;/li&gt;
   &lt;li&gt;react-native-splashscreen&lt;/li&gt;

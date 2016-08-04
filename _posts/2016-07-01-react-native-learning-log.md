@@ -203,8 +203,16 @@ tags:
 在角标组件react-native-smart-corner-label中增加了角标可指定显示在左边和右边的功能
 在按钮组件react-native-smart-button中增加了显示加载状态的功能
 
-
 编写实现了手势密码组件react-native-smart-gesture-password
+
+## 2016-8-1
+修改了按钮组件react-native-smart-button, 增加了对onLayout事件的支持
+
+## 2016-8-2
+修改了徽章组件react-native-smart-badge, 增加了允许限制最长距离, 超长后自定义显示(例如显示...)的支持
+
+## 2016-8-4
+编写实现了抛物线(主要用于购物车)组件react-native-smart-parabola
 
 ### 关注组件生态列表
 
