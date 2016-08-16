@@ -5,8 +5,8 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 16 Aug 2016 15:07:28 +0800</pubDate>
-    <lastBuildDate>Tue, 16 Aug 2016 15:07:28 +0800</lastBuildDate>
+    <pubDate>Tue, 16 Aug 2016 15:10:11 +0800</pubDate>
+    <lastBuildDate>Tue, 16 Aug 2016 15:10:11 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -332,7 +332,19 @@
 &lt;h2 id=&quot;section-50&quot;&gt;2016-8-4&lt;/h2&gt;
 &lt;p&gt;编写实现了抛物线(主要用于购物车)组件react-native-smart-parabola&lt;/p&gt;
 
-&lt;h3 id=&quot;section-51&quot;&gt;关注组件生态列表&lt;/h3&gt;
+&lt;h2 id=&quot;section-51&quot;&gt;2016-8-6&lt;/h2&gt;
+&lt;p&gt;优化了抛物线(主要用于购物车)组件react-native-smart-parabola&lt;/p&gt;
+
+&lt;h2 id=&quot;section-52&quot;&gt;2016-8-10&lt;/h2&gt;
+&lt;p&gt;编写实现了隐私文本组件react-native-smart-security-text&lt;/p&gt;
+
+&lt;h2 id=&quot;section-53&quot;&gt;2016-8-15&lt;/h2&gt;
+&lt;p&gt;编写实现了加载屏组件react-native-smart-splash-screen&lt;/p&gt;
+
+&lt;h2 id=&quot;section-54&quot;&gt;2016-8-16&lt;/h2&gt;
+&lt;p&gt;优化了加载屏组件react-native-smart-splash-screen(android部分)&lt;/p&gt;
+
+&lt;h3 id=&quot;section-55&quot;&gt;关注组件生态列表&lt;/h3&gt;
 
 &lt;h4 id=&quot;ui&quot;&gt;UI&lt;/h4&gt;
 &lt;ol&gt;
@@ -365,7 +377,7 @@
   &lt;li&gt;react-native-animated-tabs&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h4 id=&quot;section-52&quot;&gt;原生能力&lt;/h4&gt;
+&lt;h4 id=&quot;section-56&quot;&gt;原生能力&lt;/h4&gt;
 &lt;ol&gt;
   &lt;li&gt;react-native-life-cycle&lt;/li&gt;
   &lt;li&gt;react-native-splashscreen&lt;/li&gt;

@@ -214,6 +214,18 @@ tags:
 ## 2016-8-4
 编写实现了抛物线(主要用于购物车)组件react-native-smart-parabola
 
+## 2016-8-6
+优化了抛物线(主要用于购物车)组件react-native-smart-parabola
+
+## 2016-8-10
+编写实现了隐私文本组件react-native-smart-security-text
+
+## 2016-8-15
+编写实现了加载屏组件react-native-smart-splash-screen
+
+## 2016-8-16
+优化了加载屏组件react-native-smart-splash-screen(android部分)
+
 ### 关注组件生态列表
 
 #### UI
