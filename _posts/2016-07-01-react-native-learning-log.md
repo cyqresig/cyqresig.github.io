@@ -226,6 +226,9 @@ tags:
 ## 2016-8-16
 优化了加载屏组件react-native-smart-splash-screen(android部分)
 
+## 2016-9-6
+编写实现了下拉刷新, 上拉加载组件
+
 ### 关注组件生态列表
 
 #### UI
