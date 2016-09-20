@@ -5,8 +5,8 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 08 Sep 2016 17:54:49 +0800</pubDate>
-    <lastBuildDate>Thu, 08 Sep 2016 17:54:49 +0800</lastBuildDate>
+    <pubDate>Tue, 20 Sep 2016 17:17:21 +0800</pubDate>
+    <lastBuildDate>Tue, 20 Sep 2016 17:17:21 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -345,16 +345,25 @@
 &lt;p&gt;优化了加载屏组件react-native-smart-splash-screen(android部分)&lt;/p&gt;
 
 &lt;h2 id=&quot;section-55&quot;&gt;2016-9-6&lt;/h2&gt;
-&lt;p&gt;编写实现了下拉刷新, 上拉加载组件&lt;/p&gt;
+&lt;p&gt;编写实现了react-native-smart-pull-to-refresh下拉刷新, 上拉加载组件&lt;/p&gt;
 
 &lt;h2 id=&quot;section-56&quot;&gt;2016-9-7&lt;/h2&gt;
 &lt;p&gt;补充了android遗漏的自动加载更多功能&lt;/p&gt;
 
 &lt;h2 id=&quot;section-57&quot;&gt;2016-9-8&lt;/h2&gt;
-&lt;p&gt;修正了在0.30+版本上下拉刷新, 上拉加载组件的兼容性问题
+&lt;p&gt;修正了在0.30+版本上react-native-smart-pull-to-refresh下拉刷新, 上拉加载组件的兼容性问题
 编写了针对自定义组件集的完整示例&lt;/p&gt;
 
-&lt;h3 id=&quot;section-58&quot;&gt;关注组件生态列表&lt;/h3&gt;
+&lt;h2 id=&quot;section-58&quot;&gt;2016-9-12&lt;/h2&gt;
+&lt;p&gt;兼容支持0.33版本react-native-smart-pull-to-refresh&lt;/p&gt;
+
+&lt;h2 id=&quot;section-59&quot;&gt;2016-9-18&lt;/h2&gt;
+&lt;p&gt;修正了react-native-smart-splash-screen(android部分)背景图在透明View下永远显示的问题&lt;/p&gt;
+
+&lt;h2 id=&quot;section-60&quot;&gt;2016-9-20&lt;/h2&gt;
+&lt;p&gt;编写了react-native-smart-toast帮助信息提示组件&lt;/p&gt;
+
+&lt;h3 id=&quot;section-61&quot;&gt;关注组件生态列表&lt;/h3&gt;
 
 &lt;h4 id=&quot;ui&quot;&gt;UI&lt;/h4&gt;
 &lt;ol&gt;
@@ -387,7 +396,7 @@
   &lt;li&gt;react-native-animated-tabs&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h4 id=&quot;section-59&quot;&gt;原生能力&lt;/h4&gt;
+&lt;h4 id=&quot;section-62&quot;&gt;原生能力&lt;/h4&gt;
 &lt;ol&gt;
   &lt;li&gt;react-native-life-cycle&lt;/li&gt;
   &lt;li&gt;react-native-splashscreen&lt;/li&gt;
