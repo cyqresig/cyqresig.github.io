@@ -226,78 +226,32 @@ tags:
 ## 2016-8-16
 优化了加载屏组件react-native-smart-splash-screen(android部分)
 
+## 2016-8-20
+阅读ListView, ScrollView源码
+
+## 2016-8-24
+对ListView及ScrollView的容器高度, 内容高度以及滚动距离作了验证
+
 ## 2016-9-6
-编写实现了下拉刷新, 上拉加载组件
+编写实现了react-native-smart-pull-to-refresh下拉刷新, 上拉加载组件
 
 ## 2016-9-7
-补充了android遗漏的自动加载更多功能
+补充了react-native-smart-pull-to-refresh android遗漏的自动加载更多功能
 
 ## 2016-9-8
-修正了在0.30+版本上下拉刷新, 上拉加载组件的兼容性问题
+修正了在0.30+版本上react-native-smart-pull-to-refresh下拉刷新, 上拉加载组件的兼容性问题
 编写了针对自定义组件集的完整示例
 
-### 关注组件生态列表
+## 2016-9-12
+实践了react-native版本升级
+兼容支持0.33版本react-native-smart-pull-to-refresh
 
-#### UI
-1. @react-native-component/react-native-smart-button
-1. react-native-numberbox
-1. react-native-parabola
-1. react-native-calculator
-1. react-native-speed-dial
-1. react-native-refresh-infinite
-1. react-native-toast
-1. react-native-date-picker
-1. react-native-datetime-picker
-1. react-native-calendar
-1. react-native-des
-1. react-native-md5
-1. react-native-image-animation
-1. react-native-simple-radio-button
-1. react-native-charts
-1. react-native-scrollable-tab-view
-1. react-native-animatable
-1. react-native-spinkit
-1. react-native-refresher
-1. react-native-progess
-1. react-native-collapsible
-1. react-native-parallax
-1. react-native-floating-label-text-input
-1. react-native-pan-controller
-1. react-native-pan-loader
-1. react-native-radial-menu
-1. react-native-animated-tabs
+## 2016-9-18
+修正了react-native-smart-splash-screen(android部分)背景图在透明View下永远显示的问题
 
+## 2016-9-20
+编写了react-native-smart-toast帮助信息提示组件
 
-#### 原生能力
-1. react-native-life-cycle
-1. react-native-splashscreen
-1. react-native-action-sheet
-1. react-native-datetime-picker
-1. react-native-datetime-picker
-1. react-native-cascading-picker
-1. react-native-toast
-1. react-native-overlay-loading-spinner
-1. react-native-des
-1. react-native-md5
-1. react-native-marquee
-1. react-native-gallery
-1. react-native-update
-1. react-native-camera(cordova)
-1. react-native-contacts(cordova)
-1. react-native-dialogs(cordova)
-1. eact-native-file-transfer(cordova)
-1. react-native-image-picker(cordova)
-1. react-native-sqlite(cordova)
-1. react-native-file(cordova)
-1. react-native-zip(cordova)
-1. react-native-geolocation
-1. react-native-device
-1. react-native-battery-status
-1. react-native-media-capture
-1. react-native-fs
-1. react-native-cache-image(react-native的Image默认就具备永久缓存, 还需要嘛?)
-1. react-native-http-cache
-1. react-native-shimmer
 
 
 
