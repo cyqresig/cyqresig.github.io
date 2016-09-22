@@ -5,8 +5,8 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 20 Sep 2016 17:20:29 +0800</pubDate>
-    <lastBuildDate>Tue, 20 Sep 2016 17:20:29 +0800</lastBuildDate>
+    <pubDate>Thu, 22 Sep 2016 11:24:40 +0800</pubDate>
+    <lastBuildDate>Thu, 22 Sep 2016 11:24:40 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -369,6 +369,12 @@
 
 &lt;h2 id=&quot;section-62&quot;&gt;2016-9-20&lt;/h2&gt;
 &lt;p&gt;编写了react-native-smart-toast帮助信息提示组件&lt;/p&gt;
+
+&lt;h2 id=&quot;section-63&quot;&gt;2016-9-21&lt;/h2&gt;
+&lt;p&gt;优化react-native-smart-toast自定义功能&lt;/p&gt;
+
+&lt;h2 id=&quot;section-64&quot;&gt;2016-9-22&lt;/h2&gt;
+&lt;p&gt;编写了react-native-smart-loading-spinner-overlay加载信息提示组件&lt;/p&gt;
 
 </description>
         <pubDate>Fri, 01 Jul 2016 00:00:00 +0800</pubDate>

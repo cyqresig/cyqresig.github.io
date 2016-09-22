@@ -252,6 +252,12 @@ tags:
 ## 2016-9-20
 编写了react-native-smart-toast帮助信息提示组件
 
+## 2016-9-21
+优化react-native-smart-toast自定义功能
+
+## 2016-9-22
+编写了react-native-smart-loading-spinner-overlay加载信息提示组件
+
 
 
 
