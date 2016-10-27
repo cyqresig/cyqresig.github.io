@@ -258,6 +258,9 @@ tags:
 ## 2016-9-22
 编写了react-native-smart-loading-spinner-overlay加载信息提示组件
 
+## 2016-10-26
+编写了react-native-smart-barcode扫码组件
+
 
 
 
