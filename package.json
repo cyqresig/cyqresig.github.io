@@ -17,6 +17,7 @@
     "grunt-contrib-uglify": "~0.5.1"
   },
   "scripts": {
+    "start": "jekyll serve",
     "preview": "cd _site; python -m SimpleHTTPServer 8020",
     "watch": "grunt watch & npm run preview & jekyll serve -w",
     "boil": "git push boilerplate boilerplate:master",
