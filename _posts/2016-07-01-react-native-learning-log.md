@@ -261,7 +261,11 @@ tags:
 ## 2016-10-26
 编写了react-native-smart-barcode扫码组件
 
+## 2016-11-3
+更新了react-native-smart-pull-to-refresh-listview组件, 增加了可选的, 超出屏幕可视范围的行进行内存回收的功能
 
+## 2016-11-7
+编写了react-native-smart-image-loader图片缓存懒加载组件
 
 
 
