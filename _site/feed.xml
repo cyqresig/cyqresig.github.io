@@ -5,8 +5,8 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 07 Nov 2016 14:40:47 +0800</pubDate>
-    <lastBuildDate>Mon, 07 Nov 2016 14:40:47 +0800</lastBuildDate>
+    <pubDate>Sun, 13 Nov 2016 15:29:46 +0800</pubDate>
+    <lastBuildDate>Sun, 13 Nov 2016 15:29:46 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -350,40 +350,46 @@
 &lt;h2 id=&quot;section-56&quot;&gt;2016-8-24&lt;/h2&gt;
 &lt;p&gt;对ListView及ScrollView的容器高度, 内容高度以及滚动距离作了验证&lt;/p&gt;
 
-&lt;h2 id=&quot;section-57&quot;&gt;2016-9-6&lt;/h2&gt;
+&lt;h2 id=&quot;section-57&quot;&gt;2016-8-30&lt;/h2&gt;
+&lt;p&gt;编写了react-native-smart-timer-enhance生命周期内安全移除timer组件&lt;/p&gt;
+
+&lt;h2 id=&quot;section-58&quot;&gt;2016-9-6&lt;/h2&gt;
 &lt;p&gt;编写实现了react-native-smart-pull-to-refresh下拉刷新, 上拉加载组件&lt;/p&gt;
 
-&lt;h2 id=&quot;section-58&quot;&gt;2016-9-7&lt;/h2&gt;
+&lt;h2 id=&quot;section-59&quot;&gt;2016-9-7&lt;/h2&gt;
 &lt;p&gt;补充了react-native-smart-pull-to-refresh android遗漏的自动加载更多功能&lt;/p&gt;
 
-&lt;h2 id=&quot;section-59&quot;&gt;2016-9-8&lt;/h2&gt;
+&lt;h2 id=&quot;section-60&quot;&gt;2016-9-8&lt;/h2&gt;
 &lt;p&gt;修正了在0.30+版本上react-native-smart-pull-to-refresh下拉刷新, 上拉加载组件的兼容性问题
 编写了针对自定义组件集的完整示例&lt;/p&gt;
 
-&lt;h2 id=&quot;section-60&quot;&gt;2016-9-12&lt;/h2&gt;
+&lt;h2 id=&quot;section-61&quot;&gt;2016-9-12&lt;/h2&gt;
 &lt;p&gt;实践了react-native版本升级
 兼容支持0.33版本react-native-smart-pull-to-refresh&lt;/p&gt;
 
-&lt;h2 id=&quot;section-61&quot;&gt;2016-9-18&lt;/h2&gt;
+&lt;h2 id=&quot;section-62&quot;&gt;2016-9-18&lt;/h2&gt;
 &lt;p&gt;修正了react-native-smart-splash-screen(android部分)背景图在透明View下永远显示的问题&lt;/p&gt;
 
-&lt;h2 id=&quot;section-62&quot;&gt;2016-9-20&lt;/h2&gt;
+&lt;h2 id=&quot;section-63&quot;&gt;2016-9-20&lt;/h2&gt;
 &lt;p&gt;编写了react-native-smart-toast帮助信息提示组件&lt;/p&gt;
 
-&lt;h2 id=&quot;section-63&quot;&gt;2016-9-21&lt;/h2&gt;
+&lt;h2 id=&quot;section-64&quot;&gt;2016-9-21&lt;/h2&gt;
 &lt;p&gt;优化react-native-smart-toast自定义功能&lt;/p&gt;
 
-&lt;h2 id=&quot;section-64&quot;&gt;2016-9-22&lt;/h2&gt;
+&lt;h2 id=&quot;section-65&quot;&gt;2016-9-22&lt;/h2&gt;
 &lt;p&gt;编写了react-native-smart-loading-spinner-overlay加载信息提示组件&lt;/p&gt;
 
-&lt;h2 id=&quot;section-65&quot;&gt;2016-10-26&lt;/h2&gt;
+&lt;h2 id=&quot;section-66&quot;&gt;2016-10-26&lt;/h2&gt;
 &lt;p&gt;编写了react-native-smart-barcode扫码组件&lt;/p&gt;
 
-&lt;h2 id=&quot;section-66&quot;&gt;2016-11-3&lt;/h2&gt;
+&lt;h2 id=&quot;section-67&quot;&gt;2016-11-3&lt;/h2&gt;
 &lt;p&gt;更新了react-native-smart-pull-to-refresh-listview组件, 增加了可选的, 超出屏幕可视范围的行进行内存回收的功能&lt;/p&gt;
 
-&lt;h2 id=&quot;section-67&quot;&gt;2016-11-7&lt;/h2&gt;
+&lt;h2 id=&quot;section-68&quot;&gt;2016-11-7&lt;/h2&gt;
 &lt;p&gt;编写了react-native-smart-image-loader图片缓存懒加载组件&lt;/p&gt;
+
+&lt;h2 id=&quot;section-69&quot;&gt;2016-11-12&lt;/h2&gt;
+&lt;p&gt;编写了react-native-smart-app-event-listener-enhance生命周期内安全移除设备事件组件&lt;/p&gt;
 
 </description>
         <pubDate>Fri, 01 Jul 2016 00:00:00 +0800</pubDate>

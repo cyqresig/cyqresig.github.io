@@ -232,6 +232,9 @@ tags:
 ## 2016-8-24
 对ListView及ScrollView的容器高度, 内容高度以及滚动距离作了验证
 
+## 2016-8-30
+编写了react-native-smart-timer-enhance生命周期内安全移除timer组件
+
 ## 2016-9-6
 编写实现了react-native-smart-pull-to-refresh下拉刷新, 上拉加载组件
 
@@ -266,6 +269,9 @@ tags:
 
 ## 2016-11-7
 编写了react-native-smart-image-loader图片缓存懒加载组件
+
+## 2016-11-12
+编写了react-native-smart-app-event-listener-enhance生命周期内安全移除设备事件组件
 
 
 
