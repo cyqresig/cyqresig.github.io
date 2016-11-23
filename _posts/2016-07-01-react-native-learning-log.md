@@ -273,6 +273,12 @@ tags:
 ## 2016-11-12
 编写了react-native-smart-app-event-listener-enhance生命周期内安全移除设备事件组件
 
+## 2016-11-15
+编写了react-native-smart-amap-location高德地图定位SDK组件
+
+## 2016-11-23
+编写了react-native-smart-amap高德地图SDK组件
+
 
 
 
