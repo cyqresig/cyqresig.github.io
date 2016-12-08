@@ -5,8 +5,8 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 23 Nov 2016 14:55:28 +0800</pubDate>
-    <lastBuildDate>Wed, 23 Nov 2016 14:55:28 +0800</lastBuildDate>
+    <pubDate>Thu, 08 Dec 2016 10:48:23 +0800</pubDate>
+    <lastBuildDate>Thu, 08 Dec 2016 10:48:23 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -396,6 +396,21 @@
 
 &lt;h2 id=&quot;section-71&quot;&gt;2016-11-23&lt;/h2&gt;
 &lt;p&gt;编写了react-native-smart-amap高德地图SDK组件&lt;/p&gt;
+
+&lt;h2 id=&quot;section-72&quot;&gt;2016-11-26&lt;/h2&gt;
+&lt;p&gt;更新react-native-smart-amap-location高德地图定位SDK组件, 加入后台连续定位功能&lt;/p&gt;
+
+&lt;h2 id=&quot;section-73&quot;&gt;2016-11-30&lt;/h2&gt;
+&lt;p&gt;更新react-native-smart-pull-to-refresh-listview, 修正bug&lt;/p&gt;
+
+&lt;h2 id=&quot;section-74&quot;&gt;2016-12-5&lt;/h2&gt;
+&lt;p&gt;更新react-native-smart-pull-to-refresh-listview, 增加android支持sticky header&lt;/p&gt;
+
+&lt;h2 id=&quot;section-75&quot;&gt;2016-12-8&lt;/h2&gt;
+&lt;p&gt;更新react-native-smart-pull-to-refresh-listview,
+增加android支持sticky header与pull to refresh混合使用,
+修正android有时onSwipe返回坐标值不正确的问题,
+修正ios/android在使用autoLoad加载更多模式下, onContentSizeChange中计算容器内容宽度逻辑判断条件不正确的问题&lt;/p&gt;
 
 </description>
         <pubDate>Fri, 01 Jul 2016 00:00:00 +0800</pubDate>

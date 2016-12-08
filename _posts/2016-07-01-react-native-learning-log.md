@@ -279,6 +279,20 @@ tags:
 ## 2016-11-23
 编写了react-native-smart-amap高德地图SDK组件
 
+## 2016-11-26
+更新react-native-smart-amap-location高德地图定位SDK组件, 加入后台连续定位功能
+
+## 2016-11-30
+更新react-native-smart-pull-to-refresh-listview, 修正bug
+
+## 2016-12-5
+更新react-native-smart-pull-to-refresh-listview, 增加android支持sticky header
+
+## 2016-12-8
+更新react-native-smart-pull-to-refresh-listview,
+增加android支持sticky header与pull to refresh混合使用,
+修正android有时onSwipe返回坐标值不正确的问题,
+修正ios/android在使用autoLoad加载更多模式下, onContentSizeChange中计算容器内容宽度逻辑判断条件不正确的问题
 
 
 
