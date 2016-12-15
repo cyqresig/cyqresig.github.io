@@ -294,7 +294,8 @@ tags:
 修正android有时onSwipe返回坐标值不正确的问题,
 修正ios/android在使用autoLoad加载更多模式下, onContentSizeChange中计算容器内容宽度逻辑判断条件不正确的问题
 
-
+## 2016-12-15
+增加了react-native-smart-sortable-sudoku-grid
 
 
 
