@@ -5,8 +5,8 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 23 Dec 2016 15:39:57 +0800</pubDate>
-    <lastBuildDate>Fri, 23 Dec 2016 15:39:57 +0800</lastBuildDate>
+    <pubDate>Sat, 28 Jan 2017 22:15:35 +0800</pubDate>
+    <lastBuildDate>Sat, 28 Jan 2017 22:15:35 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -425,6 +425,15 @@
 
 &lt;h2 id=&quot;section-79&quot;&gt;2016-12-23&lt;/h2&gt;
 &lt;p&gt;新增了react-native-smart-alipay支付宝SDK插件&lt;/p&gt;
+
+&lt;h2 id=&quot;section-80&quot;&gt;2017-1-10&lt;/h2&gt;
+&lt;p&gt;尝试实现了多文件线程控制上传功能模块, 后续考虑封装组件&lt;/p&gt;
+
+&lt;h2 id=&quot;section-81&quot;&gt;2017-1-27&lt;/h2&gt;
+&lt;p&gt;尝试使用react-native-navigation&lt;/p&gt;
+
+&lt;h2 id=&quot;section-82&quot;&gt;2017-1-28&lt;/h2&gt;
+&lt;p&gt;尝试最新版本的源生应用内嵌react-native&lt;/p&gt;
 
 </description>
         <pubDate>Fri, 01 Jul 2016 00:00:00 +0800</pubDate>

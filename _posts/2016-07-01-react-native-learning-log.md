@@ -308,6 +308,17 @@ tags:
 ## 2016-12-23
 新增了react-native-smart-alipay支付宝SDK插件
 
+## 2017-1-10
+尝试实现了多文件线程控制上传功能模块, 后续考虑封装组件
+
+## 2017-1-27
+尝试使用react-native-navigation
+
+## 2017-1-28
+尝试最新版本的源生应用内嵌react-native
+
+
+
 
 
 
