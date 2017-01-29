@@ -10,9 +10,9 @@
     <meta name="keyword"  content="绯雨闲丸, HISAME SHIZUMARU绯雨闲丸, HISAME SHIZUMARU, 绯雨闲丸的博客, HISAME SHIZUMARU Blog, 博客, 个人网站, 互联网, 移动, 手机, APP, h5, 前端, 大前端, 前后端分离, 工程化, 构建, 自动化, 网站优化, js, javascript, html, css, html5, css3, react-native, ios, android, nodejs, webpack, gulp, reactjs, angularjs">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>es6-WeakMap的用法 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
+    <title>react-native-navigation使用小记 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
 
-    <link rel="canonical" href="http://www.vanadis.cn/2016/05/05/es6-weakmap/">
+    <link rel="canonical" href="http://www.vanadis.cn/2017/01/29/react-native-navigation-usage/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -155,13 +155,13 @@
 
     <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/post-bg-2016.jpg" width="0" height="0"> -->
+<!-- <img src="/img/react-native-etc.jpg" width="0" height="0"> -->
 
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/post-bg-2016.jpg')
+        background-image: url('/img/react-native-etc.jpg')
     }
 
     
@@ -174,13 +174,17 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#es6" title="es6">es6</a>
+                        <a class="tag" href="/tags/#react-native" title="react-native">react-native</a>
+                        
+                        <a class="tag" href="/tags/#ios" title="ios">ios</a>
+                        
+                        <a class="tag" href="/tags/#android" title="android">android</a>
                         
                     </div>
-                    <h1>es6-WeakMap的用法</h1>
+                    <h1>react-native-navigation使用小记</h1>
                     
                     
-                    <h2 class="subheading"> ""</h2>
+                    <h2 class="subheading"></h2>
                     
                     <span class="meta">绯雨闲丸 发布于 </span>
                 </div>
@@ -201,26 +205,43 @@
                 post-container">
 
 				<blockquote>
-  <p>“”</p>
+
 </blockquote>
 
-<p>Map 和 Set 就不说了，很常规的概念，不过Map和Object有点区别的，比如Map可以用一个object作为key。</p>
+<h2 id="github">github</h2>
 
-<p>这里重点说一下WeakMap。 WeakMap和Map主要有如下几个区别：</p>
+<p><a href="https://github.com/wix/react-native-navigation/">react-native-navigation</a></p>
+
+<h2 id="section">感受</h2>
+<p>react-native-navigation是目前唯一一款使用原生代码来实现navigator的插件,
+使用后navigator的push/pop的动画将脱离js线程而改由原生的UI线程处理, 切屏效果会和原生态一样流畅, 再也不会出现由于js线程渲染导致的navigator切屏动画的卡顿效果了,
+并且该插件还同时内置实现了原生态版本的tabbar
+但是使用下来发现还是有不少地方需要自行做额外的优化处理.</p>
 
 <ol>
-  <li>WeakMap 只能用Object作为key，不能用基本数据类型比如字符串作为key</li>
-  <li>WeakMap 中的key是弱引用</li>
-  <li>WeakMap 没有size</li>
+  <li>
+    <p>需要自行修改少许ios/android代码实现类似react-native官方的Navigator具备的’willfocus’与’didfocus’事件监听</p>
+  </li>
+  <li>
+    <p>由于navigator的切屏效果由原生的UI线程处理, 使用一些带有原生态动画效果的组件(比如, react-native-swiper, 由scrollView实现动画)时,
+切屏效果会导致组件的动画效果执行到一半时中断, 所以需要在切屏事件上做处理, 重置组件的动画状态</p>
+  </li>
+  <li>
+    <p>由于使用的原生态默认的切屏动画效果, 动画的形态取决于编译的sdk,
+ios默认使用最新版本没有问题,
+但android使用7.1新版时切屏的动画并不是传统的slide-from-right, 效果比较尴尬. 如果要调整, 需要修改插件的android版本代码及编译的sdk版本, 比较麻烦.</p>
+  </li>
+  <li>
+    <p>android部分必须api 25才可以编译, react-native项目默认api 23就可以了, 需要自行更改项目的配置.</p>
+  </li>
+  <li>
+    <p>github上有数以百计的issues, 根据需求情况可能会碰到新的坑, 虽然说理论上可以自行处理, 但, 实在是好麻烦…</p>
+  </li>
 </ol>
 
-<p>其中1和3非常好理解，重点就是第2点，也是WeakMap名字的由来。</p>
-
-<p>无论任何GA，最重要的一点都是要通过对象引用来判断对象是否存活，不过Node中具体实现比较复杂，可以参见《深入浅出Nodejs》第五章。</p>
-
-<p>Map 的一个最大弊端就是它会导致作为key的对象增加一个引用，因此导致GA无法回收这个对象，如果大量使用object作为Map的key会导致大量的内存泄露。</p>
-
-<p>WeakMap就是为了解决这个问题，在WeakMap中对作为key的对象是一个弱引用，也就是说，GA在计算对象引用数量的时候并不会把弱引用计算进去。这样当一个对象除了WeakMap没有其他引用的时候就会被GA回收掉。</p>
+<h2 id="section-1">总结</h2>
+<p>虽然使用react-native-navigation可以使得app在切屏时获得与原生完全一致的体验, 但是完全掌握插件的使用方法代价也不小,
+如对体验要求不是特别高, 建议还是使用官方的Navigator比较实在一点(虽然这玩意儿也有隐藏的坑-_-!!!).</p>
 
 
 
@@ -231,17 +252,20 @@
                 </style>
                 <div class="ds-share"
                     style="text-align: right"
-                    data-thread-key="/2016/05/05/es6-weakmap"
-                    data-title="es6-WeakMap的用法"
-                    data-url="http://www.vanadis.cn/2016/05/05/es6-weakmap/"
-                    data-images="http://www.vanadis.cn/img/post-bg-2016.jpg"
+                    data-thread-key="/2017/01/29/react-native-navigation-usage"
+                    data-title="react-native-navigation使用小记"
+                    data-url="http://www.vanadis.cn/2017/01/29/react-native-navigation-usage/"
+                    data-images="http://www.vanadis.cn/img/react-native-etc.jpg"
                     data-content="
-  “”
 
 
-Map 和 Set 就不说了，很常规的概念，不过Map和Object有点区别的，比如Map可以用一个object作为key。
 
-这里重点说... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
+github
+
+react-native-navigation
+
+感受
+react-native-navigation是目前唯一一款使用原生代码来... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
                         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
@@ -261,19 +285,12 @@ Map 和 Set 就不说了，很常规的概念，不过Map和Object有点区别�
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2016/05/05/es6-symbol/" data-toggle="tooltip" data-placement="top" title="es6-Symbol的用法">
+                        <a href="/2017/01/29/react-native-integration-with-existing-apps-android/" data-toggle="tooltip" data-placement="top" title="react-native整合进已存在的Android原生app">
                         上一篇<br>
-                        <span>es6-Symbol的用法</span>
+                        <span>react-native整合进已存在的Android原生app</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2016/05/06/es6-react-native/" data-toggle="tooltip" data-placement="top" title="react-native中es5对照es6的写法">
-                        下一篇<br>
-                        <span>react-native中es5对照es6的写法</span>
-                        </a>
-                    </li>
                     
                 </ul>
 
@@ -282,9 +299,9 @@ Map 和 Set 就不说了，很常规的概念，不过Map和Object有点区别�
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/2016/05/05/es6-weakmap"
-                        data-title="es6-WeakMap的用法"
-                        data-url="http://www.vanadis.cn/2016/05/05/es6-weakmap/" >
+                        data-thread-key="/2017/01/29/react-native-navigation-usage"
+                        data-title="react-native-navigation使用小记"
+                        data-url="http://www.vanadis.cn/2017/01/29/react-native-navigation-usage/" >
                     </div>
                 </div>
                 <!-- 多说评论框 end -->
