@@ -12,6 +12,10 @@ tags:
 
 >
 
+## 示例
+
+[ReactNativeIntegrationWithExistingApps][1]
+
 ## 步骤
 1. 首先安装好react-native开发环境
 
@@ -143,7 +147,7 @@ tags:
 
 15. 查看模拟器或真机上的运行情况
 
-
+[1]: https://github.com/cyqresig/ReactNativeIntegrationWithExistingApps
 
 
 

@@ -10,9 +10,9 @@
     <meta name="keyword"  content="绯雨闲丸, HISAME SHIZUMARU绯雨闲丸, HISAME SHIZUMARU, 绯雨闲丸的博客, HISAME SHIZUMARU Blog, 博客, 个人网站, 互联网, 移动, 手机, APP, h5, 前端, 大前端, 前后端分离, 工程化, 构建, 自动化, 网站优化, js, javascript, html, css, html5, css3, react-native, ios, android, nodejs, webpack, gulp, reactjs, angularjs">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>react-native简介 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
+    <title>react-native整合进已存在的iOS原生app - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
 
-    <link rel="canonical" href="http://www.vanadis.cn/2016/06/27/react-native-intro/">
+    <link rel="canonical" href="http://www.vanadis.cn/2017/01/28/react-native-integration-with-existing-apps/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -155,13 +155,13 @@
 
     <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/react-native-bg.jpg" width="0" height="0"> -->
+<!-- <img src="/img/react-native-etc.jpg" width="0" height="0"> -->
 
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/react-native-bg.jpg')
+        background-image: url('/img/react-native-etc.jpg')
     }
 
     
@@ -176,11 +176,15 @@
                         
                         <a class="tag" href="/tags/#react-native" title="react-native">react-native</a>
                         
+                        <a class="tag" href="/tags/#ios" title="ios">ios</a>
+                        
+                        <a class="tag" href="/tags/#android" title="android">android</a>
+                        
                     </div>
-                    <h1>react-native简介</h1>
+                    <h1>react-native整合进已存在的iOS原生app</h1>
                     
                     
-                    <h2 class="subheading">引领了新一代移动源生开发</h2>
+                    <h2 class="subheading"></h2>
                     
                     <span class="meta">绯雨闲丸 发布于 </span>
                 </div>
@@ -204,101 +208,163 @@
 
 </blockquote>
 
-<p>2015年3月facebook正式开源了react-native ios版, 同年10月正式开源了react-native android版. 并且倍受广大开发者追捧.</p>
+<h2 id="section">示例</h2>
 
-<p>Facebook对<a href="http://www.reactnative.com/">react-native</a>的宣传为:</p>
+<p><a href="https://github.com/cyqresig/ReactNativeIntegrationWithExistingApps">ReactNativeIntegrationWithExistingApps</a></p>
 
-<ul>
+<h2 id="section-1">步骤</h2>
+<ol>
   <li>
-    <p>React Native使你能够在Javascript和React的基础上获得完全一致的开发体验，构建世界一流的原生APP.</p>
+    <p>首先安装好react-native开发环境</p>
   </li>
   <li>
-    <p>React Native着力于提高多平台开发的开发效率 —— 仅需学习一次，编写任何平台.(Learn once, write anywhere)</p>
+    <p>保证你的ios工程在项目目录的ios目录下<code class="highlighter-rouge">$root/ios</code></p>
   </li>
   <li>
-    <p>已经在多项产品中使用了React Native，并且将持续地投入建设React Native.</p>
+    <p>安装ios包管理器CocoaPods, 我们会使用它将react-native的framework代码安装进当前工程中</p>
+
+    <p><code class="highlighter-rouge">sudo gem install cocoapods</code></p>
   </li>
-</ul>
+  <li>
+    <p>新建一个原生app, 选<code class="highlighter-rouge">Single View Application</code></p>
+  </li>
+  <li>
+    <p>在项目根目录下, 执行<code class="highlighter-rouge">npm init</code>创建<code class="highlighter-rouge">package.json</code>文件, 并加入必要的scripts与dependency</p>
 
-<p>又能大幅提升开发效率, 又能获得源生APP的开发体验, 听起来是不是灰常灰常滴棒?</p>
+    <p><code class="highlighter-rouge">js
+ {
+   "name": "react-native-into-test",
+   "version": "1.0.0",
+   "description": "",
+   "main": "index.js",
+   "scripts": {
+     "start": "node node_modules/react-native/local-cli/cli.js start",
+     "test": "echo \"Error: no test specified\" &amp;&amp; exit 1"
+   },
+   "author": "",
+   "license": "MIT",
+   "dependencies": {
+     "react": "15.4.2",
+     "react-native": "^0.40.0"
+   }
+ }
+</code></p>
+  </li>
+  <li>
+    <p>安装依赖包</p>
 
-<p>肯定有很多同学会不信, 但是别忙着离开, 下面的内容会解答你的疑惑.</p>
+    <p><code class="highlighter-rouge">npm install</code></p>
+  </li>
+  <li>
+    <p>创建cocosPads配置文件<code class="highlighter-rouge">Podfile</code></p>
 
-<h1 id="react-native">为什么要使用react-native</h1>
-<p>众所周知, 当前android和ios开发的各方面都已经很成熟, 但是Facebook为什么非要自己造一套新的开发体系呢?</p>
+    <p><code class="highlighter-rouge">pod init</code></p>
+  </li>
+  <li>
+    <p>打开<code class="highlighter-rouge">Podfile</code>, 编辑内容:</p>
+  </li>
+</ol>
 
-<p>这是因为, 移动设备的环境要比Web环境复杂得多, 并且每次都得开发二套(android和ios各自开发一套, 开发环境,语言等都不同), 也就导致了Native开发的成本非常的高.
-随着前端的发展, 已经拥有了一定的有经验的前端从业人员, 相比之下, 熟练的移动端开发人员相对较少.
-很多公司为了寻求App开发效率、成本、体验之间的平衡,从而选择了Hybird App(基于webview)的开发方案, 比较成熟的有<a href="http://phonegap.com/">phonegap</a>, <a href="http://www.html5plus.org/">h5 plus</a>等.
-这样做的一个好处就是, 既能拥有高效的开发效率和较多的开发人员, 又能快速更新App.
-但是, 在解决了降低开发成本, 提高开发效率的问题后, 另一个问题产生了.
-webview的用户体验与源生app的用户体验相比, 存在明显的缺陷, 并且会造成性能以及耗电等问题.
-这也为技术发展提出了一个新的挑战: 如何既能大幅降低开发成本, 又能保持源生APP的用户体验?</p>
+<p><code class="highlighter-rouge">js
+   target 'reactnativeintotest' do
+       pod 'React', :path =&gt; '../node_modules/react-native', :subspecs =&gt; [
+        'Core',
+        'RCTText',
+        'RCTNetwork',
+        'RCTWebSocket',
+      ]
+    end
+  </code>
+9. 安装cocoapods管理的依赖项<code class="highlighter-rouge">pod install</code></p>
 
-<p>Facebook提出了React Native的解决方案.
-也正是因为React Native的跨平台解决的特性和使用JavaScript作为开发语言而赢得了众多开发者的关注.
-很多时候,前端都有一种乐观的想法:h5+webview应用可以替代原生应用.但是,实际上, h5+webview应用在用户体验和性能上比原生应用会弱很多.
-这就是React Native的切入点.
-React Native不仅可以使用前端开发的模式来开发应用,还能调用原生应用的UI组件和API.
-所以说,React Native兼顾了开发效率,提高了用户体验.这也为前端开发者进入原生开发领域降低了门槛.</p>
+<ol>
+  <li>
+    <p>在项目根目录下创建一个<code class="highlighter-rouge">index.ios.js</code>文件, 并编辑内容:</p>
 
-<h1 id="reactjs-">ReactJS 简介</h1>
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">'react'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span>
+    <span class="nx">AppRegistry</span><span class="p">,</span>
+    <span class="nx">StyleSheet</span><span class="p">,</span>
+    <span class="nx">Text</span><span class="p">,</span>
+    <span class="nx">View</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s1">'react-native'</span><span class="p">;</span>
 
-<p>React Native是基于React设计的,因此,了解React有助于我们开发React Native应用</p>
+<span class="kr">class</span> <span class="nx">HelloWorld</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+    <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">hello</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">It</span> <span class="nx">is</span> <span class="nx">react</span><span class="o">-</span><span class="kr">native</span> <span class="nx">Text</span><span class="o">!&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>    <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+    <span class="na">container</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="na">justifyContent</span><span class="p">:</span> <span class="s1">'center'</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">hello</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">fontSize</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+        <span class="na">textAlign</span><span class="p">:</span> <span class="s1">'center'</span><span class="p">,</span>
+        <span class="na">margin</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">});</span>
 
-<p>目前, React的最新版本是React v0.14.0,其官方的介绍是A JAVASCRIPT LIBRARY FOR BUILDING USER INTERFACES。
-可以看到,React提出的是一个新的开发模式和理念,它强调的 是“用户界面”。</p>
+<span class="nx">AppRegistry</span><span class="p">.</span><span class="nx">registerComponent</span><span class="p">(</span><span class="s1">'HelloWorld'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">HelloWorld</span><span class="p">);</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>在需要打开react-native应用的controller处加入如下代码:</p>
 
-<p>React主要有如下3个特点。
-*   作为UI(Just the UI):React可以只作为视图(View)在MVC中使用。并且在已有项目 中,很容易使用React开发新功能。
-*   虚拟DOM(Virtual DOM):这是React的一个亮点,可以很好地优化视图的渲染和刷新。 当然,它也可以在Node.js服务器端和React Native中使用。虚拟DOM是React最重要的一个 特性。以前,我们更新视图时,需要先清空DOM容器中的内容,然后将最新的DOM和数 据追加到容器中,现在React将这一操作放进了内存。React认为内存的操作远比视图全部 更新来得高效。随着浏览器的迭代,事实情况更是如此,内存相比视图刷新要廉价得多。 React将视图变化放进内存进行比较(就是虚拟DOM的比较),计算出最小更新的视图, 然后将该差异部分进行更新以完成整个组件的渲染。这就是React如此高效的原因。
-*   数据流(Data Flow):React实现了单向的数据流,并且相对于传统的数据绑定而言,React 更加灵活、便捷。</p>
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="err">#</span><span class="kr">import</span> <span class="o">&lt;</span><span class="nx">React</span><span class="o">/</span><span class="nx">RCTBundleURLProvider</span><span class="p">.</span><span class="nx">h</span><span class="o">&gt;</span>
+<span class="err">#</span><span class="kr">import</span> <span class="o">&lt;</span><span class="nx">React</span><span class="o">/</span><span class="nx">RCTRootView</span><span class="p">.</span><span class="nx">h</span><span class="o">&gt;</span>
+</code></pre>
+    </div>
 
-<h1 id="react">学习React需要掌握哪些知识</h1>
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="o">-</span> <span class="p">(</span><span class="nx">IBAction</span><span class="p">)</span><span class="nx">ToReactNativeWorldPressed</span><span class="err">:</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="nx">sender</span> <span class="p">{</span>
+    <span class="nx">NSURL</span> <span class="o">*</span><span class="nx">jsCodeLocation</span><span class="p">;</span>
 
-<ul>
-  <li>JSX语法知识:JSX的官方解释是其语法类似于XML(an XML-like syntax),这也是前端 工程师更容易理解JSX的原因。因为HTML是XML的子集,前端工程师对HTML更为熟悉。</li>
-  <li>ES6相关知识:因为ES6增加了很多语法特性和新功能,可以使用ES6更加快速地进行功能开发。</li>
-  <li>前端基础知识:当然,最为基础的是需要具备基本的前端知识,其中CSS以及JavaScript比较重要。</li>
-</ul>
+    <span class="nx">jsCodeLocation</span> <span class="o">=</span> <span class="p">[[</span><span class="nx">RCTBundleURLProvider</span> <span class="nx">sharedSettings</span><span class="p">]</span> <span class="nx">jsBundleURLForBundleRoot</span><span class="err">:@</span><span class="s2">"index.ios"</span> <span class="nx">fallbackResource</span><span class="err">:</span><span class="nx">nil</span><span class="p">];</span>
 
-<h1 id="react-native-">React Native 简介</h1>
+    <span class="nx">RCTRootView</span> <span class="o">*</span><span class="nx">rootView</span> <span class="o">=</span> <span class="p">[[</span><span class="nx">RCTRootView</span> <span class="nx">alloc</span><span class="p">]</span> <span class="nx">initWithBundleURL</span><span class="err">:</span><span class="nx">jsCodeLocation</span>
+                                                        <span class="nl">moduleName</span><span class="p">:</span><span class="err">@</span><span class="s2">"HelloWorld"</span>
+                                                 <span class="nl">initialProperties</span><span class="p">:</span><span class="err">@</span><span class="p">{</span>
+                                                                     <span class="err">@</span><span class="s2">"scores"</span> <span class="err">:</span> <span class="err">@</span><span class="p">[</span>
+                                                                             <span class="err">@</span><span class="p">{</span>
+                                                                                 <span class="err">@</span><span class="s2">"name"</span> <span class="err">:</span> <span class="err">@</span><span class="s2">"Alex"</span><span class="p">,</span>
+                                                                                 <span class="err">@</span><span class="s2">"value"</span><span class="err">:</span> <span class="err">@</span><span class="s2">"42"</span>
+                                                                                 <span class="p">},</span>
+                                                                             <span class="err">@</span><span class="p">{</span>
+                                                                                 <span class="err">@</span><span class="s2">"name"</span> <span class="err">:</span> <span class="err">@</span><span class="s2">"Joel"</span><span class="p">,</span>
+                                                                                 <span class="err">@</span><span class="s2">"value"</span><span class="err">:</span> <span class="err">@</span><span class="s2">"10"</span>
+                                                                                 <span class="p">}</span>
+                                                                             <span class="p">]</span>
+                                                                     <span class="p">}</span>
 
-<p>React Native的官网介绍是使用React构建Native应用的框架(A FRAMEWORK FOR BUILDING NATIVE APPS USING REACT)。</p>
+                                                     <span class="nl">launchOptions</span><span class="p">:</span><span class="nx">nil</span><span class="p">];</span>
 
-<p>这说明,React Native采用的语法也是React。
-React Native的目标是高效跨平台地开发Native 应用, 同时, 也强调了“一次学习,多个平台编写代码”。
-也就是说, React Native不是“一次编码, 多处运行”。如下图所示, 我们可以清楚地看到React Native是构建在React和JSX基础上的。
-因此,只要基本掌握了React和JSX, 同时补充相关平台(iOS、Android、Web)的知识, 就能开发Native应用.</p>
 
-<p><img src="http://www.vanadis.cn/img/react-native-design.png" alt="react-native 设计思路" /></p>
-
-<p>React Native的开发流程也是继承了React的部分流程, 如下图:</p>
-
-<p><img src="http://www.vanadis.cn/img/react-native-dev.png" alt="react-native 开发流程" /></p>
-
-<h1 id="react-native-1">学习React Native需要掌握哪些知识</h1>
-
-<ul>
-  <li>react相关知识: react-native是基于react的, 不会react直接上手react-native会举步艰难.</li>
-  <li>nodeJS相关知识: 包括如何使用npm进行代码管理, 构建等.</li>
-  <li>react-native相关知识: 包括组件, api, 布局方式, 扩展源生能力, 使用第三方组件, 自定义组件, 配置环境, 打包发布等.</li>
-</ul>
-
-<h1 id="react-native-2">如何获取React Native学习资料</h1>
-
-<p>目前,React Native更新的速度较快, 文档方面还不是很全。
-如果开发一款小型的App, 掌握React Native的组件和API就已经足够了。
-如果学习和实践中遇到问题, 可以到 React Native GitHub issues上搜索, 其中有很多解决方法。
-下面是关于React Native的4个比较重要的地址。</p>
-
-<ul>
-  <li>React Native官方网站: http://facebook.github.io/react-native/。</li>
-  <li>React Native版本发布: https://github.com/facebook/react-native/releases。</li>
-  <li>React Native GitHub地址: https://github.com/facebook/react-native。</li>
-  <li>疑难问题搜索: https://github.com/facebook/react-native/issues。</li>
-  <li>React Native中文网: http://reactnative.cn</li>
-</ul>
+    <span class="nx">UIViewController</span> <span class="o">*</span><span class="nx">vc</span> <span class="o">=</span> <span class="p">[[</span><span class="nx">UIViewController</span> <span class="nx">alloc</span><span class="p">]</span> <span class="nx">init</span><span class="p">];</span>
+    <span class="nx">vc</span><span class="p">.</span><span class="nx">view</span> <span class="o">=</span> <span class="nx">rootView</span><span class="p">;</span>
+    <span class="p">[</span><span class="nx">self</span> <span class="nx">presentViewController</span><span class="err">:</span><span class="nx">vc</span> <span class="nx">animated</span><span class="err">:</span><span class="nx">YES</span> <span class="nx">completion</span><span class="err">:</span><span class="nx">nil</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>在项目根目录下, 运行<code class="highlighter-rouge">npm start</code>, 启动debug server.</p>
+  </li>
+  <li>
+    <p>找到项目根目录下ios工程目录下的.xcworkspace文件(cocoapods配置后生成的新的工程文件), 双击打开</p>
+  </li>
+  <li>
+    <p>打开后, 在Xode的界面上点击Run</p>
+  </li>
+  <li>
+    <p>查看模拟器或真机上的运行情况</p>
+  </li>
+</ol>
 
 
 
@@ -309,15 +375,22 @@ React Native的目标是高效跨平台地开发Native 应用, 同时, 也强调
                 </style>
                 <div class="ds-share"
                     style="text-align: right"
-                    data-thread-key="/2016/06/27/react-native-intro"
-                    data-title="react-native简介"
-                    data-url="http://www.vanadis.cn/2016/06/27/react-native-intro/"
-                    data-images="http://www.vanadis.cn/img/react-native-bg.jpg"
+                    data-thread-key="/2017/01/28/react-native-integration-with-existing-apps"
+                    data-title="react-native整合进已存在的iOS原生app"
+                    data-url="http://www.vanadis.cn/2017/01/28/react-native-integration-with-existing-apps/"
+                    data-images="http://www.vanadis.cn/img/react-native-etc.jpg"
                     data-content="
 
 
 
-2015年3月facebook正式开源了react-native ios版, 同年10月正式开源了react-native android版. 并... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
+示例
+
+ReactNativeIntegrationWithExistingApps
+
+步骤
+
+  
+    首先安装好react-native开... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
                         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
@@ -337,17 +410,17 @@ React Native的目标是高效跨平台地开发Native 应用, 同时, 也强调
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2016/05/06/es6-react-native/" data-toggle="tooltip" data-placement="top" title="react-native中es5对照es6的写法">
+                        <a href="/2017/01/28/cocoapods-installation/" data-toggle="tooltip" data-placement="top" title="Mac上安装安装cocoapods的注意事项">
                         上一篇<br>
-                        <span>react-native中es5对照es6的写法</span>
+                        <span>Mac上安装安装cocoapods的注意事项</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2016/06/27/react-native-nav/" data-toggle="tooltip" data-placement="top" title="react-native入门系列教程">
+                        <a href="/2017/01/29/react-native-integration-with-existing-apps-android/" data-toggle="tooltip" data-placement="top" title="react-native整合进已存在的Android原生app">
                         下一篇<br>
-                        <span>react-native入门系列教程</span>
+                        <span>react-native整合进已存在的Android原生app</span>
                         </a>
                     </li>
                     
@@ -358,9 +431,9 @@ React Native的目标是高效跨平台地开发Native 应用, 同时, 也强调
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/2016/06/27/react-native-intro"
-                        data-title="react-native简介"
-                        data-url="http://www.vanadis.cn/2016/06/27/react-native-intro/" >
+                        data-thread-key="/2017/01/28/react-native-integration-with-existing-apps"
+                        data-title="react-native整合进已存在的iOS原生app"
+                        data-url="http://www.vanadis.cn/2017/01/28/react-native-integration-with-existing-apps/" >
                     </div>
                 </div>
                 <!-- 多说评论框 end -->
