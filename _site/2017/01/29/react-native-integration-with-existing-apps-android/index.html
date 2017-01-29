@@ -226,24 +226,24 @@
   <li>
     <p>在项目根目录下, 执行<code class="highlighter-rouge">npm init</code>创建<code class="highlighter-rouge">package.json</code>文件, 并加入必要的scripts与dependency</p>
 
-    <p><code class="highlighter-rouge">js
- {
-   "name": "react-native-into-test",
-   "version": "1.0.0",
-   "description": "",
-   "main": "index.js",
-   "scripts": {
-     "start": "node node_modules/react-native/local-cli/cli.js start",
-     "test": "echo \"Error: no test specified\" &amp;&amp; exit 1"
-   },
-   "author": "",
-   "license": "MIT",
-   "dependencies": {
-     "react": "15.4.2",
-     "react-native": "^0.40.0"
-   }
- }
-</code></p>
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
+   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"react-native-into-test"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"main"</span><span class="p">:</span><span class="w"> </span><span class="s2">"index.js"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="nt">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node node_modules/react-native/local-cli/cli.js start"</span><span class="p">,</span><span class="w">
+     </span><span class="nt">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"license"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MIT"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="nt">"react"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15.4.2"</span><span class="p">,</span><span class="w">
+     </span><span class="nt">"react-native"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^0.40.0"</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span></code></pre>
+    </div>
   </li>
   <li>
     <p>安装依赖包</p>
@@ -253,16 +253,15 @@
   <li>
     <p>在项目根目录下创建一个<code class="highlighter-rouge">index.android.js</code>文件, 并编辑内容:</p>
 
-    <p>```js
- import React from ‘react’;
+    <div class="highlighter-rouge"><pre class="highlight"><code> import React from 'react';
  import {
      AppRegistry,
      StyleSheet,
      Text,
      View
- } from ‘react-native’;</p>
+ } from 'react-native';
 
-    <p>class HelloWorld extends React.Component {
+ class HelloWorld extends React.Component {
      render() {
          return (
              &lt;View style={styles.container}&gt;
@@ -274,33 +273,33 @@
  var styles = StyleSheet.create({
      container: {
          flex: 1,
-         justifyContent: ‘center’,
+         justifyContent: 'center',
      },
      hello: {
          fontSize: 20,
-         textAlign: ‘center’,
+         textAlign: 'center',
          margin: 10,
      },
- });</p>
+ });
 
-    <p>AppRegistry.registerComponent(‘HelloWorld’, () =&gt; HelloWorld);
- ```</p>
+ AppRegistry.registerComponent('HelloWorld', () =&gt; HelloWorld);
+</code></pre>
+    </div>
   </li>
   <li>
     <p>在app下的<code class="highlighter-rouge">build.gradle</code>下添加React Native依赖配置:</p>
 
-    <p><code class="highlighter-rouge">js
- dependencies {
+    <div class="highlighter-rouge"><pre class="highlight"><code> dependencies {
          ...
          compile "com.facebook.react:react-native:+" // From node_modules.
  }
-</code></p>
+</code></pre>
+    </div>
   </li>
   <li>
     <p>在project下的<code class="highlighter-rouge">build.gradle</code>下, 增加react-native的本地maven入口配置</p>
 
-    <p><code class="highlighter-rouge">js
- allprojects {
+    <div class="highlighter-rouge"><pre class="highlight"><code> allprojects {
      repositories {
          ...
          maven {
@@ -310,95 +309,99 @@
      }
      ...
  }
-</code></p>
+</code></pre>
+    </div>
   </li>
   <li>
     <p>在<code class="highlighter-rouge">AndroidManifest.xml</code>下增加权限与Activity</p>
 
-    <p>```js</p>
-    <uses-permission android:name="android.permission.INTERNET" />
+    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;uses-permission android:name="android.permission.INTERNET" /&gt;
 
-    <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+ &lt;activity android:name="com.facebook.react.devsupport.DevSettingsActivity" /&gt;
 
-    <activity android:name=".MyReactActivity" android:label="@string/app_name" android:theme="@style/Theme.AppCompat.Light.NoActionBar">
- </activity>
-    <p>```</p>
+ &lt;activity
+   android:name=".MyReactActivity"
+   android:label="@string/app_name"
+   android:theme="@style/Theme.AppCompat.Light.NoActionBar"&gt;
+ &lt;/activity&gt;
+</code></pre>
+    </div>
   </li>
   <li>
     <p>增加原生代码</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kr">public</span> <span class="kr">class</span> <span class="nx">MyReactActivity</span> <span class="kr">extends</span> <span class="nx">Activity</span> <span class="kr">implements</span> <span class="nx">DefaultHardwareBackBtnHandler</span> <span class="p">{</span>
-    <span class="kr">private</span> <span class="nx">ReactRootView</span> <span class="nx">mReactRootView</span><span class="p">;</span>
-    <span class="kr">private</span> <span class="nx">ReactInstanceManager</span> <span class="nx">mReactInstanceManager</span><span class="p">;</span>
+    <div class="highlighter-rouge"><pre class="highlight"><code>public class MyReactActivity extends Activity implements DefaultHardwareBackBtnHandler {
+    private ReactRootView mReactRootView;
+    private ReactInstanceManager mReactInstanceManager;
 
-    <span class="err">@</span><span class="nx">Override</span>
-    <span class="kr">protected</span> <span class="k">void</span> <span class="nx">onCreate</span><span class="p">(</span><span class="nx">Bundle</span> <span class="nx">savedInstanceState</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">.</span><span class="nx">onCreate</span><span class="p">(</span><span class="nx">savedInstanceState</span><span class="p">);</span>
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        <span class="nx">mReactRootView</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ReactRootView</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-        <span class="nx">mReactInstanceManager</span> <span class="o">=</span> <span class="nx">ReactInstanceManager</span><span class="p">.</span><span class="nx">builder</span><span class="p">()</span>
-                <span class="p">.</span><span class="nx">setApplication</span><span class="p">(</span><span class="nx">getApplication</span><span class="p">())</span>
-                <span class="p">.</span><span class="nx">setBundleAssetName</span><span class="p">(</span><span class="s2">"index.android.bundle"</span><span class="p">)</span>
-                <span class="p">.</span><span class="nx">setJSMainModuleName</span><span class="p">(</span><span class="s2">"index.android"</span><span class="p">)</span>
-                <span class="p">.</span><span class="nx">addPackage</span><span class="p">(</span><span class="k">new</span> <span class="nx">MainReactPackage</span><span class="p">())</span>
-                <span class="p">.</span><span class="nx">setUseDeveloperSupport</span><span class="p">(</span><span class="nx">BuildConfig</span><span class="p">.</span><span class="nx">DEBUG</span><span class="p">)</span>
-                <span class="p">.</span><span class="nx">setInitialLifecycleState</span><span class="p">(</span><span class="nx">LifecycleState</span><span class="p">.</span><span class="nx">RESUMED</span><span class="p">)</span>
-                <span class="p">.</span><span class="nx">build</span><span class="p">();</span>
-        <span class="nx">mReactRootView</span><span class="p">.</span><span class="nx">startReactApplication</span><span class="p">(</span><span class="nx">mReactInstanceManager</span><span class="p">,</span> <span class="s2">"HelloWorld"</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+        mReactRootView = new ReactRootView(this);
+        mReactInstanceManager = ReactInstanceManager.builder()
+                .setApplication(getApplication())
+                .setBundleAssetName("index.android.bundle")
+                .setJSMainModuleName("index.android")
+                .addPackage(new MainReactPackage())
+                .setUseDeveloperSupport(BuildConfig.DEBUG)
+                .setInitialLifecycleState(LifecycleState.RESUMED)
+                .build();
+        mReactRootView.startReactApplication(mReactInstanceManager, "HelloWorld", null);
 
-        <span class="nx">setContentView</span><span class="p">(</span><span class="nx">mReactRootView</span><span class="p">);</span>
-    <span class="p">}</span>
+        setContentView(mReactRootView);
+    }
 
-    <span class="err">@</span><span class="nx">Override</span>
-    <span class="kr">public</span> <span class="k">void</span> <span class="nx">invokeDefaultOnBackPressed</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">.</span><span class="nx">onBackPressed</span><span class="p">();</span>
-    <span class="p">}</span>
+    @Override
+    public void invokeDefaultOnBackPressed() {
+        super.onBackPressed();
+    }
 
-    <span class="err">@</span><span class="nx">Override</span>
-    <span class="kr">protected</span> <span class="k">void</span> <span class="nx">onPause</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">.</span><span class="nx">onPause</span><span class="p">();</span>
+    @Override
+    protected void onPause() {
+        super.onPause();
 
-        <span class="k">if</span> <span class="p">(</span><span class="nx">mReactInstanceManager</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">mReactInstanceManager</span><span class="p">.</span><span class="nx">onHostPause</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+        if (mReactInstanceManager != null) {
+            mReactInstanceManager.onHostPause(this);
+        }
+    }
 
-    <span class="err">@</span><span class="nx">Override</span>
-    <span class="kr">protected</span> <span class="k">void</span> <span class="nx">onResume</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">.</span><span class="nx">onResume</span><span class="p">();</span>
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-        <span class="k">if</span> <span class="p">(</span><span class="nx">mReactInstanceManager</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">mReactInstanceManager</span><span class="p">.</span><span class="nx">onHostResume</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+        if (mReactInstanceManager != null) {
+            mReactInstanceManager.onHostResume(this, this);
+        }
+    }
 
-    <span class="err">@</span><span class="nx">Override</span>
-    <span class="kr">protected</span> <span class="k">void</span> <span class="nx">onDestroy</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">.</span><span class="nx">onDestroy</span><span class="p">();</span>
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
-        <span class="k">if</span> <span class="p">(</span><span class="nx">mReactInstanceManager</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">mReactInstanceManager</span><span class="p">.</span><span class="nx">onHostDestroy</span><span class="p">();</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+        if (mReactInstanceManager != null) {
+            mReactInstanceManager.onHostDestroy();
+        }
+    }
 
-    <span class="err">@</span><span class="nx">Override</span>
-     <span class="kr">public</span> <span class="k">void</span> <span class="nx">onBackPressed</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">mReactInstanceManager</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">mReactInstanceManager</span><span class="p">.</span><span class="nx">onBackPressed</span><span class="p">();</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="kr">super</span><span class="p">.</span><span class="nx">onBackPressed</span><span class="p">();</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+    @Override
+     public void onBackPressed() {
+        if (mReactInstanceManager != null) {
+            mReactInstanceManager.onBackPressed();
+        } else {
+            super.onBackPressed();
+        }
+    }
 
-    <span class="err">@</span><span class="nx">Override</span>
-    <span class="kr">public</span> <span class="kr">boolean</span> <span class="nx">onKeyUp</span><span class="p">(</span><span class="kr">int</span> <span class="nx">keyCode</span><span class="p">,</span> <span class="nx">KeyEvent</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="nx">KeyEvent</span><span class="p">.</span><span class="nx">KEYCODE_MENU</span> <span class="o">&amp;&amp;</span> <span class="nx">mReactInstanceManager</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">mReactInstanceManager</span><span class="p">.</span><span class="nx">showDevOptionsDialog</span><span class="p">();</span>
-            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="kr">super</span><span class="p">.</span><span class="nx">onKeyUp</span><span class="p">(</span><span class="nx">keyCode</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU &amp;&amp; mReactInstanceManager != null) {
+            mReactInstanceManager.showDevOptionsDialog();
+            return true;
+        }
+        return super.onKeyUp(keyCode, event);
+    }
+}
 </code></pre>
     </div>
   </li>

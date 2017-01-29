@@ -231,24 +231,24 @@
   <li>
     <p>在项目根目录下, 执行<code class="highlighter-rouge">npm init</code>创建<code class="highlighter-rouge">package.json</code>文件, 并加入必要的scripts与dependency</p>
 
-    <p><code class="highlighter-rouge">js
- {
-   "name": "react-native-into-test",
-   "version": "1.0.0",
-   "description": "",
-   "main": "index.js",
-   "scripts": {
-     "start": "node node_modules/react-native/local-cli/cli.js start",
-     "test": "echo \"Error: no test specified\" &amp;&amp; exit 1"
-   },
-   "author": "",
-   "license": "MIT",
-   "dependencies": {
-     "react": "15.4.2",
-     "react-native": "^0.40.0"
-   }
- }
-</code></p>
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
+   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"react-native-into-test"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"main"</span><span class="p">:</span><span class="w"> </span><span class="s2">"index.js"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="nt">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node node_modules/react-native/local-cli/cli.js start"</span><span class="p">,</span><span class="w">
+     </span><span class="nt">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"license"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MIT"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="nt">"react"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15.4.2"</span><span class="p">,</span><span class="w">
+     </span><span class="nt">"react-native"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^0.40.0"</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span></code></pre>
+    </div>
   </li>
   <li>
     <p>安装依赖包</p>
@@ -262,93 +262,90 @@
   </li>
   <li>
     <p>打开<code class="highlighter-rouge">Podfile</code>, 编辑内容:</p>
-  </li>
-</ol>
 
-<p><code class="highlighter-rouge">js
-   target 'reactnativeintotest' do
-       pod 'React', :path =&gt; '../node_modules/react-native', :subspecs =&gt; [
-        'Core',
-        'RCTText',
-        'RCTNetwork',
-        'RCTWebSocket',
+    <p>target ‘reactnativeintotest’ do
+       pod ‘React’, :path =&gt; ‘../node_modules/react-native’, :subspecs =&gt; [
+        ‘Core’,
+        ‘RCTText’,
+        ‘RCTNetwork’,
+        ‘RCTWebSocket’,
       ]
-    end
-  </code>
-9. 安装cocoapods管理的依赖项<code class="highlighter-rouge">pod install</code></p>
-
-<ol>
+    end</p>
+  </li>
+  <li>
+    <p>安装cocoapods管理的依赖项<code class="highlighter-rouge">pod install</code></p>
+  </li>
   <li>
     <p>在项目根目录下创建一个<code class="highlighter-rouge">index.ios.js</code>文件, 并编辑内容:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">'react'</span><span class="p">;</span>
-<span class="kr">import</span> <span class="p">{</span>
-    <span class="nx">AppRegistry</span><span class="p">,</span>
-    <span class="nx">StyleSheet</span><span class="p">,</span>
-    <span class="nx">Text</span><span class="p">,</span>
-    <span class="nx">View</span>
-<span class="p">}</span> <span class="nx">from</span> <span class="s1">'react-native'</span><span class="p">;</span>
+    <div class="highlighter-rouge"><pre class="highlight"><code>import React from 'react';
+import {
+    AppRegistry,
+    StyleSheet,
+    Text,
+    View
+} from 'react-native';
 
-<span class="kr">class</span> <span class="nx">HelloWorld</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
-    <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="p">(</span>
-            <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">hello</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">It</span> <span class="nx">is</span> <span class="nx">react</span><span class="o">-</span><span class="kr">native</span> <span class="nx">Text</span><span class="o">!&lt;</span><span class="sr">/Text</span><span class="err">&gt;
-</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
-</span>    <span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="kd">var</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
-    <span class="na">container</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="na">justifyContent</span><span class="p">:</span> <span class="s1">'center'</span><span class="p">,</span>
-    <span class="p">},</span>
-    <span class="na">hello</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">fontSize</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-        <span class="na">textAlign</span><span class="p">:</span> <span class="s1">'center'</span><span class="p">,</span>
-        <span class="na">margin</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="p">},</span>
-<span class="p">});</span>
+class HelloWorld extends React.Component {
+    render() {
+        return (
+            &lt;View style={styles.container}&gt;
+    &lt;Text style={styles.hello}&gt;It is react-native Text!&lt;/Text&gt;
+        &lt;/View&gt;
+    )
+    }
+}
+var styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+    },
+    hello: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10,
+    },
+});
 
-<span class="nx">AppRegistry</span><span class="p">.</span><span class="nx">registerComponent</span><span class="p">(</span><span class="s1">'HelloWorld'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">HelloWorld</span><span class="p">);</span>
+AppRegistry.registerComponent('HelloWorld', () =&gt; HelloWorld);
 </code></pre>
     </div>
   </li>
   <li>
     <p>在需要打开react-native应用的controller处加入如下代码:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="err">#</span><span class="kr">import</span> <span class="o">&lt;</span><span class="nx">React</span><span class="o">/</span><span class="nx">RCTBundleURLProvider</span><span class="p">.</span><span class="nx">h</span><span class="o">&gt;</span>
-<span class="err">#</span><span class="kr">import</span> <span class="o">&lt;</span><span class="nx">React</span><span class="o">/</span><span class="nx">RCTRootView</span><span class="p">.</span><span class="nx">h</span><span class="o">&gt;</span>
-</code></pre>
-    </div>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="o">-</span> <span class="p">(</span><span class="nx">IBAction</span><span class="p">)</span><span class="nx">ToReactNativeWorldPressed</span><span class="err">:</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="nx">sender</span> <span class="p">{</span>
-    <span class="nx">NSURL</span> <span class="o">*</span><span class="nx">jsCodeLocation</span><span class="p">;</span>
-
-    <span class="nx">jsCodeLocation</span> <span class="o">=</span> <span class="p">[[</span><span class="nx">RCTBundleURLProvider</span> <span class="nx">sharedSettings</span><span class="p">]</span> <span class="nx">jsBundleURLForBundleRoot</span><span class="err">:@</span><span class="s2">"index.ios"</span> <span class="nx">fallbackResource</span><span class="err">:</span><span class="nx">nil</span><span class="p">];</span>
-
-    <span class="nx">RCTRootView</span> <span class="o">*</span><span class="nx">rootView</span> <span class="o">=</span> <span class="p">[[</span><span class="nx">RCTRootView</span> <span class="nx">alloc</span><span class="p">]</span> <span class="nx">initWithBundleURL</span><span class="err">:</span><span class="nx">jsCodeLocation</span>
-                                                        <span class="nl">moduleName</span><span class="p">:</span><span class="err">@</span><span class="s2">"HelloWorld"</span>
-                                                 <span class="nl">initialProperties</span><span class="p">:</span><span class="err">@</span><span class="p">{</span>
-                                                                     <span class="err">@</span><span class="s2">"scores"</span> <span class="err">:</span> <span class="err">@</span><span class="p">[</span>
-                                                                             <span class="err">@</span><span class="p">{</span>
-                                                                                 <span class="err">@</span><span class="s2">"name"</span> <span class="err">:</span> <span class="err">@</span><span class="s2">"Alex"</span><span class="p">,</span>
-                                                                                 <span class="err">@</span><span class="s2">"value"</span><span class="err">:</span> <span class="err">@</span><span class="s2">"42"</span>
-                                                                                 <span class="p">},</span>
-                                                                             <span class="err">@</span><span class="p">{</span>
-                                                                                 <span class="err">@</span><span class="s2">"name"</span> <span class="err">:</span> <span class="err">@</span><span class="s2">"Joel"</span><span class="p">,</span>
-                                                                                 <span class="err">@</span><span class="s2">"value"</span><span class="err">:</span> <span class="err">@</span><span class="s2">"10"</span>
-                                                                                 <span class="p">}</span>
-                                                                             <span class="p">]</span>
-                                                                     <span class="p">}</span>
-
-                                                     <span class="nl">launchOptions</span><span class="p">:</span><span class="nx">nil</span><span class="p">];</span>
+    <div class="highlighter-rouge"><pre class="highlight"><code>#import &lt;React/RCTBundleURLProvider.h&gt;
+#import &lt;React/RCTRootView.h&gt;
 
 
-    <span class="nx">UIViewController</span> <span class="o">*</span><span class="nx">vc</span> <span class="o">=</span> <span class="p">[[</span><span class="nx">UIViewController</span> <span class="nx">alloc</span><span class="p">]</span> <span class="nx">init</span><span class="p">];</span>
-    <span class="nx">vc</span><span class="p">.</span><span class="nx">view</span> <span class="o">=</span> <span class="nx">rootView</span><span class="p">;</span>
-    <span class="p">[</span><span class="nx">self</span> <span class="nx">presentViewController</span><span class="err">:</span><span class="nx">vc</span> <span class="nx">animated</span><span class="err">:</span><span class="nx">YES</span> <span class="nx">completion</span><span class="err">:</span><span class="nx">nil</span><span class="p">];</span>
-<span class="p">}</span>
+
+- (IBAction)ToReactNativeWorldPressed:(id)sender {
+    NSURL *jsCodeLocation;
+
+    jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
+
+    RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
+                                                        moduleName:@"HelloWorld"
+                                                 initialProperties:@{
+                                                                     @"scores" : @[
+                                                                             @{
+                                                                                 @"name" : @"Alex",
+                                                                                 @"value": @"42"
+                                                                                 },
+                                                                             @{
+                                                                                 @"name" : @"Joel",
+                                                                                 @"value": @"10"
+                                                                                 }
+                                                                             ]
+                                                                     }
+
+                                                     launchOptions:nil];
+
+
+    UIViewController *vc = [[UIViewController alloc] init];
+    vc.view = rootView;
+    [self presentViewController:vc animated:YES completion:nil];
+}
 </code></pre>
     </div>
   </li>
