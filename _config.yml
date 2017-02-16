@@ -84,5 +84,9 @@ friends: [
     {
         title: "RockyChen的博客",
         href: "http://rockychen.me"
+    },
+    {
+        title: "VIVAXY的博客",
+        href: "https://vivaxyblog.github.io"
     }
 ]
