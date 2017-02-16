@@ -5,8 +5,8 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 29 Jan 2017 23:40:49 +0800</pubDate>
-    <lastBuildDate>Sun, 29 Jan 2017 23:40:49 +0800</lastBuildDate>
+    <pubDate>Thu, 16 Feb 2017 20:46:24 +0800</pubDate>
+    <lastBuildDate>Thu, 16 Feb 2017 20:46:24 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -446,7 +446,7 @@ AppRegistry.registerComponent(&#39;HelloWorld&#39;, () =&amp;gt; HelloWorld);
     &lt;p&gt;找到项目根目录下ios工程目录下的.xcworkspace文件(cocoapods配置后生成的新的工程文件), 双击打开&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;打开后, 在Xode的界面上点击Run&lt;/p&gt;
+    &lt;p&gt;打开后, 在Xcode的界面上点击Run&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;查看模拟器或真机上的运行情况&lt;/p&gt;
