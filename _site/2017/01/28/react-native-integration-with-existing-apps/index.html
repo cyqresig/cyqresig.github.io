@@ -263,14 +263,16 @@
   <li>
     <p>打开<code class="highlighter-rouge">Podfile</code>, 编辑内容:</p>
 
-    <p>target ‘reactnativeintotest’ do
-       pod ‘React’, :path =&gt; ‘../node_modules/react-native’, :subspecs =&gt; [
-        ‘Core’,
-        ‘RCTText’,
-        ‘RCTNetwork’,
-        ‘RCTWebSocket’,
+    <p><code class="highlighter-rouge">
+   target 'reactnativeintotest' do
+       pod 'React', :path =&gt; '../node_modules/react-native', :subspecs =&gt; [
+        'Core',
+        'RCTText',
+        'RCTNetwork',
+        'RCTWebSocket',
       ]
-    end</p>
+    end
+</code></p>
   </li>
   <li>
     <p>安装cocoapods管理的依赖项<code class="highlighter-rouge">pod install</code></p>

@@ -58,7 +58,7 @@ tags:
 
 8.  打开`Podfile`, 编辑内容:
 
-
+    ```
        target 'reactnativeintotest' do
            pod 'React', :path => '../node_modules/react-native', :subspecs => [
             'Core',
@@ -67,7 +67,7 @@ tags:
             'RCTWebSocket',
           ]
         end
-
+     ```
 
 9. 安装cocoapods管理的依赖项`pod install`
 

@@ -5,8 +5,8 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 16 Feb 2017 20:58:35 +0800</pubDate>
-    <lastBuildDate>Thu, 16 Feb 2017 20:58:35 +0800</lastBuildDate>
+    <pubDate>Thu, 16 Feb 2017 22:19:17 +0800</pubDate>
+    <lastBuildDate>Thu, 16 Feb 2017 22:19:17 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -353,14 +353,16 @@ ios默认使用最新版本没有问题,
   &lt;li&gt;
     &lt;p&gt;打开&lt;code class=&quot;highlighter-rouge&quot;&gt;Podfile&lt;/code&gt;, 编辑内容:&lt;/p&gt;
 
-    &lt;p&gt;target ‘reactnativeintotest’ do
-       pod ‘React’, :path =&amp;gt; ‘../node_modules/react-native’, :subspecs =&amp;gt; [
-        ‘Core’,
-        ‘RCTText’,
-        ‘RCTNetwork’,
-        ‘RCTWebSocket’,
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+   target &#39;reactnativeintotest&#39; do
+       pod &#39;React&#39;, :path =&amp;gt; &#39;../node_modules/react-native&#39;, :subspecs =&amp;gt; [
+        &#39;Core&#39;,
+        &#39;RCTText&#39;,
+        &#39;RCTNetwork&#39;,
+        &#39;RCTWebSocket&#39;,
       ]
-    end&lt;/p&gt;
+    end
+&lt;/code&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;安装cocoapods管理的依赖项&lt;code class=&quot;highlighter-rouge&quot;&gt;pod install&lt;/code&gt;&lt;/p&gt;
