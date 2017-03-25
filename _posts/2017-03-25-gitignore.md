@@ -6,6 +6,7 @@ author:     "绯雨闲丸"
 header-img: ""
 tags:
     - front-end
+    - git
     - gitignore
 ---
 
@@ -70,6 +71,28 @@ gitignore使用起来非常的方便。只需要如下几个步骤：
     ```
 
    说明：忽略全部内容，但是不忽略 `.gitignore` 文件、根目录下的 `/foo` 和 `/foo/bar    ` 目录
+
+## 推荐的前端项目配置
+
+```js
+# OSX
+#
+.DS_Store
+
+# WebStorm
+#
+.idea
+
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# others
+#
+build/
+```
 
 ## 资源
 

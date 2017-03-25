@@ -6,6 +6,7 @@ author:     "绯雨闲丸"
 header-img: ""
 tags:
     - front-end
+    - editor
     - editorconfig
 ---
 
@@ -63,6 +64,7 @@ EditorConfig使用起来非常的方便。只需要如下几个步骤：
 indent_style = space
 indent_size = 2
 ```
+
 ## 资源
 
 [EditorConfig 官网][1]

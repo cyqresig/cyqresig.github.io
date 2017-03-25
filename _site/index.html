@@ -286,6 +286,41 @@ EditorConfig的工作原理是：
 <hr>
 
 <div class="post-preview">
+    <a href="/2017/03/25/babelrc/">
+        <h2 class="post-title">
+            babelrc使用小记
+        </h2>
+        
+        <h3 class="post-subtitle">
+            
+        </h3>
+        
+        <div class="post-content-preview">
+            
+
+
+
+为什么要使用babelrc
+
+由于es6还没有被各大浏览器非常好的兼容支持，前端项目开发不得不使用babel将es6代码转换成es5后才能正常执行，为此，必须在项目根目录下配置.babelrc文件（针对babel 6）
+
+如何配置babelrc
+
+该文件用来设置转码规则和插件，基本格式如下：
+
+
+    {
+      "presets": [],
+      "plugins": ...
+        </div>
+    </a>
+    <p class="post-meta">
+        绯雨闲丸 发布于 2017-03-25
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/2017/03/19/create-your-own-front-end-scaffold/">
         <h2 class="post-title">
             创建你自己的前端项目脚手架工具
@@ -305,6 +340,46 @@ EditorConfig的工作原理是：
     </a>
     <p class="post-meta">
         绯雨闲丸 发布于 2017-03-19
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2017/03/18/babel-stage-x/">
+        <h2 class="post-title">
+            babel配置-各阶段的stage的区别
+        </h2>
+        
+        <h3 class="post-subtitle">
+            
+        </h3>
+        
+        <div class="post-content-preview">
+            
+
+
+
+前言
+
+由于各大浏览器并对es6的并没有完成支持，我们开发前端项目时需要使用Babel来将ES6代码编译为ES5。
+配置.babelrc文件时一般配置为如下：
+
+{
+    "presets": [
+        "es2015"，
+        "react",
+        "stage-0"
+    ],
+    "plugins": []
+}
+
+
+
+这个配置文件的意思。...
+        </div>
+    </a>
+    <p class="post-meta">
+        绯雨闲丸 发布于 2017-03-18
     </p>
 </div>
 <hr>
@@ -443,79 +518,6 @@ ReactNativeIntegrationWithExistingApps
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/2017/01/28/cocoapods-installation/">
-        <h2 class="post-title">
-            Mac上安装安装cocoapods的注意事项
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-安装步骤
-
-  
-    检查一下gem版本, 必要时升级gem，如果它的版本过低也可能导致安装失败，升级命令如下：
-
-    sudo gem update --system
-  
-  
-    Mac OS X 10.11以前，安装cocoapods的命令如下：
-
-    sudo gem install cocoapods
-
-    OS X 10.11以后，会在安装时碰到没有...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2017-01-28
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/01/28/cocoapods-entirely-remove/">
-        <h2 class="post-title">
-            ios开发移除cocoapods配置
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-前言
-
-CocoaPods可以通过命令,将第三方类库配置到我们的项目中,
-而不需要采用手动拖拽的方式进行配置.
-但是很遗憾的是, CocoaPads并没有移除这些配置的命令,
-所以,只能靠手动的方式从项目中移除了.
-
-在项目中删除某个CocoaPads配置的第三方类库
-
-  
-    在项目根目录下找到Podfile文件并打开
-  
-  
-    找到需要删除的配置文本, 将之删除,...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2017-01-28
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -618,7 +620,7 @@ CocoaPods可以通过命令,将第三方类库配置到我们的项目中,
                             
                         
                             
-                                <a href="/tags/#front-end" title="front-end" rel="5">
+                                <a href="/tags/#front-end" title="front-end" rel="7">
                                     front-end
                                 </a>
                             
@@ -636,8 +638,32 @@ CocoaPods可以通过命令,将第三方类库配置到我们的项目中,
                             
                         
                             
+                                <a href="/tags/#babel" title="babel" rel="2">
+                                    babel
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#stage" title="stage" rel="1">
+                                    stage
+                                </a>
+                            
+                        
+                            
                                 <a href="/tags/#scaffold" title="scaffold" rel="1">
                                     scaffold
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#babelrc" title="babelrc" rel="1">
+                                    babelrc
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#editor" title="editor" rel="1">
+                                    editor
                                 </a>
                             
                         
@@ -648,8 +674,20 @@ CocoaPods可以通过命令,将第三方类库配置到我们的项目中,
                             
                         
                             
+                                <a href="/tags/#git" title="git" rel="1">
+                                    git
+                                </a>
+                            
+                        
+                            
                                 <a href="/tags/#gitignore" title="gitignore" rel="1">
                                     gitignore
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#npm" title="npm" rel="1">
+                                    npm
                                 </a>
                             
                         
