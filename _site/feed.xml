@@ -5,9 +5,114 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 25 Mar 2017 19:51:34 +0800</pubDate>
-    <lastBuildDate>Sat, 25 Mar 2017 19:51:34 +0800</lastBuildDate>
+    <pubDate>Sat, 25 Mar 2017 20:25:52 +0800</pubDate>
+    <lastBuildDate>Sat, 25 Mar 2017 20:25:52 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
+    
+      <item>
+        <title>gitignore使用小记</title>
+        <description>&lt;blockquote&gt;
+
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;gitignore&quot;&gt;为什么要使用gitignore&lt;/h2&gt;
+
+&lt;p&gt;在进行项目源代码管理时，总会存在一些文件不希望加入管理，但每次在提交时手动控制是极不方便的。
+而&lt;code class=&quot;highlighter-rouge&quot;&gt;gitignore&lt;/code&gt;可以很方便地解决上面问题。&lt;/p&gt;
+
+&lt;h2 id=&quot;editorconfig&quot;&gt;EditorConfig是解决问题的&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gitignore&lt;/code&gt;的工作原理是：
+当你对文件进行源代码管理时，&lt;code class=&quot;highlighter-rouge&quot;&gt;gitignore&lt;/code&gt;插件会去查找当前编辑文件的目录或者其祖先目录中是否存在&lt;code class=&quot;highlighter-rouge&quot;&gt;.gitignore&lt;/code&gt;配置文件。
+如果存在，则&lt;code class=&quot;highlighter-rouge&quot;&gt;.gitignore&lt;/code&gt;配置文件中对应配置的规则会生效，忽略对应的文件。&lt;/p&gt;
+
+&lt;h2 id=&quot;editorconfig-1&quot;&gt;如何使用EditorConfig&lt;/h2&gt;
+
+&lt;p&gt;gitignore使用起来非常的方便。只需要如下几个步骤：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;在项目根目录创建一个&lt;code class=&quot;highlighter-rouge&quot;&gt;.gitignore&lt;/code&gt;的文件&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在这个文件中定义需要忽略的文件&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;给IDE安装gitignore插件&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;gitignore-1&quot;&gt;gitignore配置语法&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;以斜杠&lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt;开头表示目录&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;以星号&lt;code class=&quot;highlighter-rouge&quot;&gt;*&lt;/code&gt;通配多个字符&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;以问号&lt;code class=&quot;highlighter-rouge&quot;&gt;?&lt;/code&gt;通配单个字符&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;以方括号&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;包含单个字符的匹配列表&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;以叹号&lt;code class=&quot;highlighter-rouge&quot;&gt;!&lt;/code&gt;表示不忽略(跟踪)匹配到的文件或目录&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;以二个星号&lt;code class=&quot;highlighter-rouge&quot;&gt;**&lt;/code&gt;开头表示匹配所有目录&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;以二个星号&lt;code class=&quot;highlighter-rouge&quot;&gt;/**&lt;/code&gt;结尾表示匹配目录里的所有&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;以斜杠中间的二个星号&lt;code class=&quot;highlighter-rouge&quot;&gt;/**/&lt;/code&gt;表示0或多个目录&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;示例&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;规则：&lt;code class=&quot;highlighter-rouge&quot;&gt;fd1/*&lt;/code&gt;&lt;/p&gt;
+
+    &lt;p&gt;说明：忽略目录 &lt;code class=&quot;highlighter-rouge&quot;&gt;fd1&lt;/code&gt; 下的全部内容；注意，不管是根目录下的 &lt;code class=&quot;highlighter-rouge&quot;&gt;/fd1/&lt;/code&gt; 目录，还是某个子目录 &lt;code class=&quot;highlighter-rouge&quot;&gt;/child/fd1/&lt;/code&gt; 目录，都会被忽略；&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;规则：&lt;code class=&quot;highlighter-rouge&quot;&gt;/fd1/*&lt;/code&gt;
+　　　　&lt;br /&gt;
+ 说明：忽略根目录下的 &lt;code class=&quot;highlighter-rouge&quot;&gt;/fd1/&lt;/code&gt; 目录的全部内容；&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;规则：&lt;/p&gt;
+
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+ /*
+ !.gitignore
+ !/foo
+ !/foo/bar    
+&lt;/code&gt;&lt;/p&gt;
+
+    &lt;p&gt;说明：忽略全部内容，但是不忽略 &lt;code class=&quot;highlighter-rouge&quot;&gt;.gitignore&lt;/code&gt; 文件、根目录下的 &lt;code class=&quot;highlighter-rouge&quot;&gt;/foo&lt;/code&gt; 和 &lt;code class=&quot;highlighter-rouge&quot;&gt;/foo/bar    &lt;/code&gt; 目录&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;资源&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://git-scm.com/docs/gitignore&quot;&gt;gitignore 文档&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 25 Mar 2017 00:00:00 +0800</pubDate>
+        <link>http://www.vanadis.cn/2017/03/25/gitignore/</link>
+        <guid isPermaLink="true">http://www.vanadis.cn/2017/03/25/gitignore/</guid>
+        
+        <category>front-end</category>
+        
+        <category>gitignore</category>
+        
+        
+      </item>
     
       <item>
         <title>EditorConfig使用小记</title>
@@ -19,7 +124,7 @@
 
 &lt;p&gt;当存在多人协作开发项目时，每个人喜好使用的IDE经常各不相同，就算相同每个人对于IDE喜好的编码风格配置（例如缩进是2个空格还是4个空格）也未必相同。&lt;/p&gt;
 
-&lt;p&gt;而&lt;code class=&quot;highlighter-rouge&quot;&gt;EditorConfig&lt;/code&gt;却可以很方便地解决上面问题。&lt;/p&gt;
+&lt;p&gt;而&lt;code class=&quot;highlighter-rouge&quot;&gt;EditorConfig&lt;/code&gt;可以很方便地解决上面问题。&lt;/p&gt;
 
 &lt;h2 id=&quot;editorconfig-1&quot;&gt;EditorConfig是解决问题的&lt;/h2&gt;
 
@@ -97,11 +202,9 @@ indent_size = 2
         <link>http://www.vanadis.cn/2017/03/25/editor-config/</link>
         <guid isPermaLink="true">http://www.vanadis.cn/2017/03/25/editor-config/</guid>
         
-        <category>react-native</category>
+        <category>front-end</category>
         
-        <category>ios</category>
-        
-        <category>android</category>
+        <category>editorconfig</category>
         
         
       </item>
@@ -762,80 +865,6 @@ AppRegistry.registerComponent(&#39;HelloWorld&#39;, () =&amp;gt; HelloWorld);
         <pubDate>Wed, 06 Jul 2016 00:00:00 +0800</pubDate>
         <link>http://www.vanadis.cn/2016/07/06/explaination-for-package-json/</link>
         <guid isPermaLink="true">http://www.vanadis.cn/2016/07/06/explaination-for-package-json/</guid>
-        
-        <category>npm nodejs</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>如何在npm上发布一个包</title>
-        <description>&lt;blockquote&gt;
-
-&lt;/blockquote&gt;
-
-&lt;p&gt;我们可以从npm仓库上安装含有package.json文件的目录作为一个包,
-当然也可以将一个含有package.json文件的目录作为一个包发布至npm仓库.&lt;/p&gt;
-
-&lt;p&gt;下面就介绍一下如何发布包至npm仓库&lt;/p&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;发布前的必要步骤&lt;/h3&gt;
-
-&lt;h4 id=&quot;npm&quot;&gt;创建一个npm用户&lt;/h4&gt;
-
-&lt;p&gt;想要发布包, 你必须在npm仓库上有一个用户.
-如果你还没有创建过, 执行&lt;code class=&quot;highlighter-rouge&quot;&gt;npm adduser&lt;/code&gt;, 或者可以在&lt;a href=&quot;https://www.npmjs.com/&quot;&gt;npm仓库的网站&lt;/a&gt;上创建.&lt;/p&gt;
-
-&lt;h4 id=&quot;npm-1&quot;&gt;登录你的npm帐号&lt;/h4&gt;
-
-&lt;p&gt;通过&lt;code class=&quot;highlighter-rouge&quot;&gt;npm login&lt;/code&gt;登录,
-登录后可以通过&lt;code class=&quot;highlighter-rouge&quot;&gt;npm whoami&lt;/code&gt;以及&lt;code class=&quot;highlighter-rouge&quot;&gt;npm config ls&lt;/code&gt;来查看你的用户和权限信息&lt;/p&gt;
-
-&lt;h3 id=&quot;npm-2&quot;&gt;发布npm包&lt;/h3&gt;
-
-&lt;p&gt;通过&lt;code class=&quot;highlighter-rouge&quot;&gt;npm publish&lt;/code&gt;发布你的包, 包的名称在package.json的name里定义, &lt;a href=&quot;http://www.vanadis.cn/2016/07/06/explaination-for-package-json/&quot;&gt;点这里查看package.json中各字段的含义&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;需要注意, 除了&lt;em&gt;.gitignore&lt;/em&gt;或者&lt;em&gt;.npmignore&lt;/em&gt;中定义的忽略, 目录中所有的文件都会被发布&lt;/p&gt;
-
-&lt;p&gt;发布完后, 可以去&lt;code class=&quot;highlighter-rouge&quot;&gt;https://npmjs.com/package/&amp;lt;package&amp;gt;&lt;/code&gt;查看你新发布的包的信息&lt;/p&gt;
-
-&lt;h3 id=&quot;npm-3&quot;&gt;更新npm包&lt;/h3&gt;
-
-&lt;p&gt;修改你的包中的package.json中的&lt;em&gt;version&lt;/em&gt;版本号, &lt;a href=&quot;http://www.vanadis.cn/2016/07/06/explaination-for-package-json/&quot;&gt;点这里查看版本号的含义&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;通过&lt;code class=&quot;highlighter-rouge&quot;&gt;npm publish&lt;/code&gt;发布你的更新包&lt;/p&gt;
-
-&lt;p&gt;发布完后, 可以去&lt;code class=&quot;highlighter-rouge&quot;&gt;https://npmjs.com/package/&amp;lt;package&amp;gt;&lt;/code&gt;查看你新发布的包的信息, 可以看到版本号的变化&lt;/p&gt;
-
-&lt;p&gt;需要注意, 在npm仓库网站上你发布的包中, 显示的readme中的内容只有在版本号更新的发布操作下才会更新&lt;/p&gt;
-
-&lt;h3 id=&quot;npm-4&quot;&gt;下架npm包&lt;/h3&gt;
-
-&lt;p&gt;通过 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm unpublish&lt;/code&gt;下架你的包&lt;/p&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;注意事项&lt;/h3&gt;
-
-&lt;p&gt;由于众所周知的网络原因，react-native命令行从npm官方源拖代码时会遇上麻烦。
-一般开发时需要npm仓库源替换为国内镜像：&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;npm config set registry https://registry.npm.taobao.org --global&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;npm config set disturl https://npm.taobao.org/dist --global&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;但是发布包的时候如果不切换回默认配置, 在发布时会报错,&lt;/p&gt;
-
-&lt;p&gt;故需要将仓库源替换回默认源&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;npm config set registry http://registry.npmjs.org --global&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;npm config set disturl http://npmjs.org/dist --global&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;更详细的内容, 可以查阅&lt;a href=&quot;https://docs.npmjs.com/&quot;&gt;npm官方文档&lt;/a&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Tue, 05 Jul 2016 00:00:00 +0800</pubDate>
-        <link>http://www.vanadis.cn/2016/07/05/how-to-publish-a-package-to-npm/</link>
-        <guid isPermaLink="true">http://www.vanadis.cn/2016/07/05/how-to-publish-a-package-to-npm/</guid>
         
         <category>npm nodejs</category>
         

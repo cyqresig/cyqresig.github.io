@@ -5,9 +5,8 @@ subtitle:   ""
 author:     "绯雨闲丸"
 header-img: ""
 tags:
-    - react-native
-    - ios
-    - android
+    - front-end
+    - editorconfig
 ---
 
 >
@@ -16,7 +15,7 @@ tags:
 
 当存在多人协作开发项目时，每个人喜好使用的IDE经常各不相同，就算相同每个人对于IDE喜好的编码风格配置（例如缩进是2个空格还是4个空格）也未必相同。
 
-而`EditorConfig`却可以很方便地解决上面问题。
+而`EditorConfig`可以很方便地解决上面问题。
 
 ## EditorConfig是解决问题的
 
