@@ -184,6 +184,42 @@
             ">
     			
 <div class="post-preview">
+    <a href="/2017/03/25/npmrc/">
+        <h2 class="post-title">
+            npmrc使用小记
+        </h2>
+        
+        <h3 class="post-subtitle">
+            
+        </h3>
+        
+        <div class="post-content-preview">
+            
+
+
+
+为什么要使用npmrc
+
+前端项目开发离不开安装各种npm依赖包，可以选择远程的仓库也可以选择本地的仓库，但更改仓库地址需要在安装时控制台打命令，比较麻烦，
+而npmrc可以很方便地解决上面问题。
+
+npmrc是解决问题的
+
+npmrc的工作原理是：
+当安装项目的依赖包时，会查找并读取项目根目录下的.npmrc文件的配置，自动指定仓库地址。
+
+如何使用npmrc
+
+npmrc使用起来...
+        </div>
+    </a>
+    <p class="post-meta">
+        绯雨闲丸 发布于 2017-03-25
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/2017/03/25/gitignore/">
         <h2 class="post-title">
             gitignore使用小记
@@ -480,41 +516,6 @@ CocoaPods可以通过命令,将第三方类库配置到我们的项目中,
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/2016/07/06/explaination-for-package-json/">
-        <h2 class="post-title">
-            nodejs中package.json中的字段说明
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-package.json中的字段说明
-
-package.json文件可以通过npm init创建
-
-一个package.json文件通常有以下字段：
-
-
-  name —— 包的名称，必须是唯一的，由小写英文字母、数字和下划线组成，不能包含空格
-  description —— 包的简要说明
-  version —— 包的版本
-  author —— 包的作者
-  contribut...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2016-07-06
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -617,7 +618,7 @@ package.json文件可以通过npm init创建
                             
                         
                             
-                                <a href="/tags/#front-end" title="front-end" rel="4">
+                                <a href="/tags/#front-end" title="front-end" rel="5">
                                     front-end
                                 </a>
                             
@@ -649,6 +650,12 @@ package.json文件可以通过npm init创建
                             
                                 <a href="/tags/#gitignore" title="gitignore" rel="1">
                                     gitignore
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#npmrc" title="npmrc" rel="1">
+                                    npmrc
                                 </a>
                             
                         

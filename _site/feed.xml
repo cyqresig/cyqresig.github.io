@@ -5,9 +5,61 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 25 Mar 2017 20:25:52 +0800</pubDate>
-    <lastBuildDate>Sat, 25 Mar 2017 20:25:52 +0800</lastBuildDate>
+    <pubDate>Sat, 25 Mar 2017 20:37:59 +0800</pubDate>
+    <lastBuildDate>Sat, 25 Mar 2017 20:37:59 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
+    
+      <item>
+        <title>npmrc使用小记</title>
+        <description>&lt;blockquote&gt;
+
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;npmrc&quot;&gt;为什么要使用npmrc&lt;/h2&gt;
+
+&lt;p&gt;前端项目开发离不开安装各种npm依赖包，可以选择远程的仓库也可以选择本地的仓库，但更改仓库地址需要在安装时控制台打命令，比较麻烦，
+而&lt;code class=&quot;highlighter-rouge&quot;&gt;npmrc&lt;/code&gt;可以很方便地解决上面问题。&lt;/p&gt;
+
+&lt;h2 id=&quot;npmrc-1&quot;&gt;npmrc是解决问题的&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;npmrc&lt;/code&gt;的工作原理是：
+当安装项目的依赖包时，会查找并读取项目根目录下的&lt;code class=&quot;highlighter-rouge&quot;&gt;.npmrc&lt;/code&gt;文件的配置，自动指定仓库地址。&lt;/p&gt;
+
+&lt;h2 id=&quot;npmrc-2&quot;&gt;如何使用npmrc&lt;/h2&gt;
+
+&lt;p&gt;npmrc使用起来非常的方便。只需要如下几个步骤：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;在项目根目录创建一个&lt;code class=&quot;highlighter-rouge&quot;&gt;.npmrc&lt;/code&gt;的文件（虽然也可以在系统文件中全局创建，但不推荐）&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在这个文件中定义仓库地址&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;示例&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;registry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//registry.npmjs.org/&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;disturb&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//npmjs.org/dist&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;资源&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.npmjs.com/files/npmrc&quot;&gt;npmrc 文档&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 25 Mar 2017 00:00:00 +0800</pubDate>
+        <link>http://www.vanadis.cn/2017/03/25/npmrc/</link>
+        <guid isPermaLink="true">http://www.vanadis.cn/2017/03/25/npmrc/</guid>
+        
+        <category>front-end</category>
+        
+        <category>npmrc</category>
+        
+        
+      </item>
     
       <item>
         <title>gitignore使用小记</title>
@@ -828,45 +880,6 @@ AppRegistry.registerComponent(&#39;HelloWorld&#39;, () =&amp;gt; HelloWorld);
         <category>ios</category>
         
         <category>CocoaPod</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>nodejs中package.json中的字段说明</title>
-        <description>&lt;blockquote&gt;
-
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;packagejson&quot;&gt;package.json中的字段说明&lt;/h2&gt;
-
-&lt;p&gt;package.json文件可以通过&lt;code class=&quot;highlighter-rouge&quot;&gt;npm init&lt;/code&gt;创建&lt;/p&gt;
-
-&lt;p&gt;一个package.json文件通常有以下字段：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;name —— 包的名称，必须是唯一的，由小写英文字母、数字和下划线组成，不能包含空格&lt;/li&gt;
-  &lt;li&gt;description —— 包的简要说明&lt;/li&gt;
-  &lt;li&gt;version —— 包的版本&lt;/li&gt;
-  &lt;li&gt;author —— 包的作者&lt;/li&gt;
-  &lt;li&gt;contributors —— 贡献者数组，数组每一项为一个包含一个贡献者资料的对象&lt;/li&gt;
-  &lt;li&gt;dependencies —— 包的依赖，为一个对象，对象的属性为包名称，属性值为版本号&lt;/li&gt;
-  &lt;li&gt;devDependencies —— 开发环境下的包依赖，为一个对象，对象的属性为包名称，属性值为版本号&lt;/li&gt;
-  &lt;li&gt;keywords —— 关键字数组，通常用于搜索&lt;/li&gt;
-  &lt;li&gt;repository —— 仓库托管地址，通常为一个包含type（仓库的类型，如：git）和 url（仓库的地址）的对象&lt;/li&gt;
-  &lt;li&gt;main —— 包的入口文件，如不指定，则默认为根目录下的index.js或index.node&lt;/li&gt;
-  &lt;li&gt;bin —— 可执行文件的路径&lt;/li&gt;
-  &lt;li&gt;bugs —— 提交bug的地址&lt;/li&gt;
-  &lt;li&gt;maintainers —— 维护者数组，数组每一项为一个包含一个维护者资料的对象&lt;/li&gt;
-  &lt;li&gt;licenses —— 许可证数组，数组每一项为一个包含type（许可证的名称）和url（链接到许可证文本的地址）的对象&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Wed, 06 Jul 2016 00:00:00 +0800</pubDate>
-        <link>http://www.vanadis.cn/2016/07/06/explaination-for-package-json/</link>
-        <guid isPermaLink="true">http://www.vanadis.cn/2016/07/06/explaination-for-package-json/</guid>
-        
-        <category>npm nodejs</category>
         
         
       </item>
