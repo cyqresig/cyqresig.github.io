@@ -5,9 +5,144 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 25 Mar 2017 12:07:55 +0800</pubDate>
-    <lastBuildDate>Sat, 25 Mar 2017 12:07:55 +0800</lastBuildDate>
+    <pubDate>Sat, 25 Mar 2017 19:51:34 +0800</pubDate>
+    <lastBuildDate>Sat, 25 Mar 2017 19:51:34 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
+    
+      <item>
+        <title>EditorConfig使用小记</title>
+        <description>&lt;blockquote&gt;
+
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;editorconfig&quot;&gt;为什么要使用EditorConfig&lt;/h2&gt;
+
+&lt;p&gt;当存在多人协作开发项目时，每个人喜好使用的IDE经常各不相同，就算相同每个人对于IDE喜好的编码风格配置（例如缩进是2个空格还是4个空格）也未必相同。&lt;/p&gt;
+
+&lt;p&gt;而&lt;code class=&quot;highlighter-rouge&quot;&gt;EditorConfig&lt;/code&gt;却可以很方便地解决上面问题。&lt;/p&gt;
+
+&lt;h2 id=&quot;editorconfig-1&quot;&gt;EditorConfig是解决问题的&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;EditorConfig&lt;/code&gt;的工作原理是：
+当你打开文件进行coding时，&lt;code class=&quot;highlighter-rouge&quot;&gt;EditorConfig&lt;/code&gt;插件会去查找当前编辑文件的目录或者其祖先目录中是否存在&lt;code class=&quot;highlighter-rouge&quot;&gt;.editorconfig&lt;/code&gt;配置文件。
+如果存在，则IDE的编码风格会覆盖IDE自身的设置，与&lt;code class=&quot;highlighter-rouge&quot;&gt;.editorconfig&lt;/code&gt;文件中定义的保持一致，。&lt;/p&gt;
+
+&lt;h2 id=&quot;editorconfig-2&quot;&gt;如何使用EditorConfig&lt;/h2&gt;
+
+&lt;p&gt;EditorConfig使用起来非常的方便。只需要如下几个步骤：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;在项目根目录创建一个&lt;code class=&quot;highlighter-rouge&quot;&gt;.editorconfig&lt;/code&gt;的文件&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在这个文件中定义项目的编码规范&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;给IDE安装EditorConfig插件&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;editorconfig-3&quot;&gt;推荐的常用EditorConfig编码风格定义&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;indent_style 缩进风格，考虑到&lt;code class=&quot;highlighter-rouge&quot;&gt;tab&lt;/code&gt;的缩进表现可以被改变，推荐使用&lt;code class=&quot;highlighter-rouge&quot;&gt;space&lt;/code&gt;而不是&lt;code class=&quot;highlighter-rouge&quot;&gt;tab&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;indent_size 缩进数，只在indent_style设置为&lt;code class=&quot;highlighter-rouge&quot;&gt;space&lt;/code&gt;时有用，推荐设置为4个空格&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;end_of_line 换行符格式，推荐使用&lt;code class=&quot;highlighter-rouge&quot;&gt;lf&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;charset 文件编码，推荐使用&lt;code class=&quot;highlighter-rouge&quot;&gt;utf-8&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;trim_trailing_whitespace 是否删除行尾的空格，推荐使用&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;insert_final_newline 是否在文件最后插入一个空行，推荐使用&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;quote_type 字符串是否强制使用单/双引号，js文件推荐使用&lt;code class=&quot;highlighter-rouge&quot;&gt;single&lt;/code&gt;, 其他使用&lt;code class=&quot;highlighter-rouge&quot;&gt;double&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;spaces_around_operators 在操作符左右是否空格，推荐使用&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;spaces_around_brackets 在括号左右是否空格，推荐使用&lt;code class=&quot;highlighter-rouge&quot;&gt;none&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;indent_brace_style 使用圆括弧的风格，推荐使用&lt;code class=&quot;highlighter-rouge&quot;&gt;1TBS&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;定义使用编码风格的文件范围&lt;/h2&gt;
+
+&lt;p&gt;以下的配置只对lib目录下的js文件生效
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+[lib/**.js]
+indent_style = space
+indent_size = 2
+&lt;/code&gt;
+## 资源&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://editorconfig.org/&quot;&gt;EditorConfig 官网&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties&quot;&gt;EditorConfig 编码风格定义列表&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 25 Mar 2017 00:00:00 +0800</pubDate>
+        <link>http://www.vanadis.cn/2017/03/25/editor-config/</link>
+        <guid isPermaLink="true">http://www.vanadis.cn/2017/03/25/editor-config/</guid>
+        
+        <category>react-native</category>
+        
+        <category>ios</category>
+        
+        <category>android</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>创建你自己的前端项目脚手架工具</title>
+        <description>&lt;blockquote&gt;
+
+&lt;/blockquote&gt;
+
+</description>
+        <pubDate>Sun, 19 Mar 2017 00:00:00 +0800</pubDate>
+        <link>http://www.vanadis.cn/2017/03/19/create-your-own-front-end-scaffold/</link>
+        <guid isPermaLink="true">http://www.vanadis.cn/2017/03/19/create-your-own-front-end-scaffold/</guid>
+        
+        <category>front-end</category>
+        
+        <category>scaffold</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>创建你自己的前端项目模板</title>
+        <description>&lt;blockquote&gt;
+
+&lt;/blockquote&gt;
+
+</description>
+        <pubDate>Sun, 26 Feb 2017 00:00:00 +0800</pubDate>
+        <link>http://www.vanadis.cn/2017/02/26/create-your-own-front-end-archetype/</link>
+        <guid isPermaLink="true">http://www.vanadis.cn/2017/02/26/create-your-own-front-end-archetype/</guid>
+        
+        <category>front-end</category>
+        
+        <category>template</category>
+        
+        <category>archetype</category>
+        
+        
+      </item>
     
       <item>
         <title>react-native-navigation使用小记</title>
@@ -703,760 +838,6 @@ AppRegistry.registerComponent(&#39;HelloWorld&#39;, () =&amp;gt; HelloWorld);
         <guid isPermaLink="true">http://www.vanadis.cn/2016/07/05/how-to-publish-a-package-to-npm/</guid>
         
         <category>npm nodejs</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>全栈(js向)相关内容学习日志</title>
-        <description>&lt;blockquote&gt;
-
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;2016-2-16&lt;/h3&gt;
-
-&lt;p&gt;开始学习nodejs, 深入理解了nodejs机制, 以及npm命令&lt;/p&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;2016-2-17&lt;/h3&gt;
-
-&lt;p&gt;安装了nodejs, 并搭建了nodejs express 4.x框架web工程&lt;/p&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;2016-2-20&lt;/h3&gt;
-
-&lt;p&gt;加入了log4js日志, 并调整了各文件目录位置&lt;/p&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;2016-2-22&lt;/h3&gt;
-
-&lt;p&gt;开始学习并实践gulp命令及插件&lt;/p&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;2016-3-2&lt;/h3&gt;
-
-&lt;p&gt;在搭建的nodejs express 4.x框架web工程中加入gulp less编译, css/js合并, css/js压缩, 生成文件版本号, 打包等构建插件内容&lt;/p&gt;
-
-&lt;h3 id=&quot;section-5&quot;&gt;2016-3-5&lt;/h3&gt;
-
-&lt;p&gt;开始学习webpack并实践webpack命令及插件&lt;/p&gt;
-
-&lt;h3 id=&quot;section-6&quot;&gt;2016-3-18&lt;/h3&gt;
-
-&lt;p&gt;在搭建的nodejs express 4.x框架web工程中加入webpack管理js入口, 业务及插件模块等, 学习并实践了webpack-dev-server进行前端开发&lt;/p&gt;
-
-&lt;h3 id=&quot;section-7&quot;&gt;2016-3-22&lt;/h3&gt;
-
-&lt;p&gt;学习并实践webpack配置文件版本号, 如何打包前端js,&lt;/p&gt;
-
-&lt;h3 id=&quot;section-8&quot;&gt;2016-3-26&lt;/h3&gt;
-
-&lt;p&gt;学习并实践模块数据库mockjs&lt;/p&gt;
-
-&lt;h3 id=&quot;section-9&quot;&gt;2016-3-28&lt;/h3&gt;
-
-&lt;p&gt;学习并实践nodejs开发服务器插件nodemon, 以及开发环境参数配置&lt;/p&gt;
-
-&lt;h3 id=&quot;section-10&quot;&gt;2016-4-2&lt;/h3&gt;
-
-&lt;p&gt;学习并实践nodejs生产服务器插件pm2机制, pm2命令, 以及生产环境参数配置, 如何部署等&lt;/p&gt;
-
-&lt;h3 id=&quot;section-11&quot;&gt;2016-4-10&lt;/h3&gt;
-
-&lt;p&gt;在公司构建大前端架构雏形, 开发模式完全分离, 分为前端(浏览器客户端层, 服务端路由控制与视图层)与后端(服务端业务层与数据层)&lt;/p&gt;
-
-&lt;h3 id=&quot;section-12&quot;&gt;2016-4-21&lt;/h3&gt;
-
-&lt;p&gt;实践并优化了webpack common-chunk插件的使用配置&lt;/p&gt;
-
-&lt;h3 id=&quot;section-13&quot;&gt;2016-4-30&lt;/h3&gt;
-
-&lt;p&gt;学习并实践了webpack stats的使用&lt;/p&gt;
-
-&lt;h3 id=&quot;section-14&quot;&gt;2016-5-4&lt;/h3&gt;
-
-&lt;p&gt;学习并尝试了react-flux&lt;/p&gt;
-
-&lt;h3 id=&quot;section-15&quot;&gt;2016-5-12&lt;/h3&gt;
-
-&lt;p&gt;学习并尝试了react-redux&lt;/p&gt;
-
-&lt;h3 id=&quot;section-16&quot;&gt;2016-5-16&lt;/h3&gt;
-
-&lt;p&gt;学习并实践了es6&lt;/p&gt;
-
-&lt;h3 id=&quot;section-17&quot;&gt;2016-5-18&lt;/h3&gt;
-
-&lt;p&gt;学习并实践了react-native ios版环境部署&lt;/p&gt;
-
-&lt;h3 id=&quot;section-18&quot;&gt;2016-5-28&lt;/h3&gt;
-
-&lt;p&gt;学习并实践了react-native样式及布局控制&lt;/p&gt;
-
-&lt;h3 id=&quot;section-19&quot;&gt;2016-6-5&lt;/h3&gt;
-
-&lt;p&gt;学习并实践了react-native ios版基本组件&lt;/p&gt;
-
-&lt;h3 id=&quot;section-20&quot;&gt;2016-6-7&lt;/h3&gt;
-
-&lt;p&gt;学习并实践了react-native ios版打包部署&lt;/p&gt;
-
-&lt;h3 id=&quot;section-21&quot;&gt;2016-6-10&lt;/h3&gt;
-
-&lt;p&gt;学习并实践了react-native android版本环境部署&lt;/p&gt;
-
-&lt;h3 id=&quot;section-22&quot;&gt;2016-6-12&lt;/h3&gt;
-
-&lt;p&gt;学习并实践了react-native android版基本组件&lt;/p&gt;
-
-&lt;h3 id=&quot;section-23&quot;&gt;2016-6-16&lt;/h3&gt;
-
-&lt;p&gt;学习并实践了react-native实现launchImage及splashScreen&lt;/p&gt;
-
-&lt;h3 id=&quot;section-24&quot;&gt;2016-6-20&lt;/h3&gt;
-
-&lt;p&gt;学习并实践了react-native使用iconfont&lt;/p&gt;
-
-&lt;h3 id=&quot;section-25&quot;&gt;2016-6-22&lt;/h3&gt;
-
-&lt;p&gt;学习并了解了react-native中pt与ps设计图中px的关系&lt;/p&gt;
-
-&lt;h3 id=&quot;section-26&quot;&gt;2016-6-25&lt;/h3&gt;
-
-&lt;p&gt;学习并实践了如何新增, 编辑及生成iconfont字库, 如何重命名字库等&lt;/p&gt;
-
-&lt;h3 id=&quot;section-27&quot;&gt;2016-6-26&lt;/h3&gt;
-
-&lt;p&gt;学习并实践了如何快速对设计图上进行测距及标注&lt;/p&gt;
-
-&lt;h3 id=&quot;section-28&quot;&gt;2016-6-30&lt;/h3&gt;
-
-&lt;p&gt;学习并实践了react-native使用自定义iconfont&lt;/p&gt;
-
-&lt;h3 id=&quot;section-29&quot;&gt;2016-7-1&lt;/h3&gt;
-
-&lt;p&gt;学习并实践了如何发布npm包&lt;/p&gt;
-
-&lt;h3 id=&quot;section-30&quot;&gt;2016-7-2&lt;/h3&gt;
-
-&lt;p&gt;整理了需关注, 使用, 研究源代码及自实现的第三方组件列表&lt;/p&gt;
-
-&lt;h3 id=&quot;section-31&quot;&gt;2016-7-3&lt;/h3&gt;
-
-&lt;p&gt;查看了TouchOpacity及相关的部分源码&lt;/p&gt;
-
-&lt;h3 id=&quot;section-32&quot;&gt;2016-7-5&lt;/h3&gt;
-
-&lt;p&gt;完成编写react-native-smart-button初版, 支持opacity, highlight, 并实现了blur(ios)点击模糊效果
-了解了npm发布package&lt;/p&gt;
-
-&lt;h2 id=&quot;section-33&quot;&gt;2016-7-6&lt;/h2&gt;
-
-&lt;p&gt;查看了react-native-tab-navigator源码&lt;/p&gt;
-
-&lt;h2 id=&quot;section-34&quot;&gt;2016-7-7&lt;/h2&gt;
-
-&lt;p&gt;查看了react-native-splash-screen源码&lt;/p&gt;
-
-&lt;h2 id=&quot;section-35&quot;&gt;2016-7-11&lt;/h2&gt;
-
-&lt;p&gt;编写实现了自定义反馈效果按钮组件react-native-smart-button&lt;/p&gt;
-
-&lt;h2 id=&quot;section-36&quot;&gt;2016-7-12&lt;/h2&gt;
-
-&lt;p&gt;开始阅读ios9应用开发入门经典, 补充ios原生开发(swift)的知识, 为之后编写与原生模块交互的自定义组件作准备&lt;/p&gt;
-
-&lt;h2 id=&quot;section-37&quot;&gt;2016-7-14&lt;/h2&gt;
-
-&lt;p&gt;优化自定义反馈效果按钮组件react-native-smart-button&lt;/p&gt;
-
-&lt;h2 id=&quot;section-38&quot;&gt;2016-7-16&lt;/h2&gt;
-
-&lt;p&gt;开始阅读ios编程(第4版), 补充ios原生开发(objective-c)的知识, 为之后编写与原生模块交互的自定义组件作准备&lt;/p&gt;
-
-&lt;h2 id=&quot;section-39&quot;&gt;2016-7-17&lt;/h2&gt;
-
-&lt;p&gt;编写实现了九宫格组件react-native-smart-sudoku-grid&lt;/p&gt;
-
-&lt;h2 id=&quot;section-40&quot;&gt;2016-7-18&lt;/h2&gt;
-
-&lt;p&gt;开始阅读Android权威指南(第2版), 补充android原生开发的知识, 为之后编写与原生模块交互的自定义组件作准备&lt;/p&gt;
-
-&lt;h2 id=&quot;section-41&quot;&gt;2016-7-19&lt;/h2&gt;
-
-&lt;p&gt;编写实现了徽章组件react-native-smart-badge&lt;/p&gt;
-
-&lt;h2 id=&quot;section-42&quot;&gt;2016-7-20&lt;/h2&gt;
-
-&lt;p&gt;学习并尝试实践编写react-native原生ios组件&lt;/p&gt;
-
-&lt;h2 id=&quot;section-43&quot;&gt;2016-7-21&lt;/h2&gt;
-
-&lt;p&gt;编写实现了touch-id指纹验证组件react-native-smart-touch-id&lt;/p&gt;
-
-&lt;h2 id=&quot;section-44&quot;&gt;2016-7-22&lt;/h2&gt;
-
-&lt;p&gt;编写实现了角标组件react-native-smart-corner-label&lt;/p&gt;
-
-&lt;h2 id=&quot;section-45&quot;&gt;2016-7-27&lt;/h2&gt;
-
-&lt;p&gt;修正了按钮组件react-native-smart-button中使用blur模糊阴影功能有机率会报错的问题&lt;/p&gt;
-
-&lt;h2 id=&quot;section-46&quot;&gt;2016-7-28&lt;/h2&gt;
-
-&lt;p&gt;编写实现了手势密码组件react-native-smart-gesture-password&lt;/p&gt;
-
-&lt;h2 id=&quot;section-47&quot;&gt;2016-7-29&lt;/h2&gt;
-&lt;p&gt;在角标组件react-native-smart-corner-label中增加了角标可指定显示在左边和右边的功能
-在按钮组件react-native-smart-button中增加了显示加载状态的功能&lt;/p&gt;
-
-&lt;p&gt;编写实现了手势密码组件react-native-smart-gesture-password&lt;/p&gt;
-
-&lt;h2 id=&quot;section-48&quot;&gt;2016-8-1&lt;/h2&gt;
-&lt;p&gt;修改了按钮组件react-native-smart-button, 增加了对onLayout事件的支持&lt;/p&gt;
-
-&lt;h2 id=&quot;section-49&quot;&gt;2016-8-2&lt;/h2&gt;
-&lt;p&gt;修改了徽章组件react-native-smart-badge, 增加了允许限制最长距离, 超长后自定义显示(例如显示…)的支持&lt;/p&gt;
-
-&lt;h2 id=&quot;section-50&quot;&gt;2016-8-4&lt;/h2&gt;
-&lt;p&gt;编写实现了抛物线(主要用于购物车)组件react-native-smart-parabola&lt;/p&gt;
-
-&lt;h2 id=&quot;section-51&quot;&gt;2016-8-6&lt;/h2&gt;
-&lt;p&gt;优化了抛物线(主要用于购物车)组件react-native-smart-parabola&lt;/p&gt;
-
-&lt;h2 id=&quot;section-52&quot;&gt;2016-8-10&lt;/h2&gt;
-&lt;p&gt;编写实现了隐私文本组件react-native-smart-security-text&lt;/p&gt;
-
-&lt;h2 id=&quot;section-53&quot;&gt;2016-8-15&lt;/h2&gt;
-&lt;p&gt;编写实现了加载屏组件react-native-smart-splash-screen&lt;/p&gt;
-
-&lt;h2 id=&quot;section-54&quot;&gt;2016-8-16&lt;/h2&gt;
-&lt;p&gt;优化了加载屏组件react-native-smart-splash-screen(android部分)&lt;/p&gt;
-
-&lt;h2 id=&quot;section-55&quot;&gt;2016-8-20&lt;/h2&gt;
-&lt;p&gt;阅读ListView, ScrollView源码&lt;/p&gt;
-
-&lt;h2 id=&quot;section-56&quot;&gt;2016-8-24&lt;/h2&gt;
-&lt;p&gt;对ListView及ScrollView的容器高度, 内容高度以及滚动距离作了验证&lt;/p&gt;
-
-&lt;h2 id=&quot;section-57&quot;&gt;2016-8-30&lt;/h2&gt;
-&lt;p&gt;编写了react-native-smart-timer-enhance生命周期内安全移除timer组件&lt;/p&gt;
-
-&lt;h2 id=&quot;section-58&quot;&gt;2016-9-6&lt;/h2&gt;
-&lt;p&gt;编写实现了react-native-smart-pull-to-refresh下拉刷新, 上拉加载组件&lt;/p&gt;
-
-&lt;h2 id=&quot;section-59&quot;&gt;2016-9-7&lt;/h2&gt;
-&lt;p&gt;补充了react-native-smart-pull-to-refresh android遗漏的自动加载更多功能&lt;/p&gt;
-
-&lt;h2 id=&quot;section-60&quot;&gt;2016-9-8&lt;/h2&gt;
-&lt;p&gt;修正了在0.30+版本上react-native-smart-pull-to-refresh下拉刷新, 上拉加载组件的兼容性问题
-编写了针对自定义组件集的完整示例&lt;/p&gt;
-
-&lt;h2 id=&quot;section-61&quot;&gt;2016-9-12&lt;/h2&gt;
-&lt;p&gt;实践了react-native版本升级
-兼容支持0.33版本react-native-smart-pull-to-refresh&lt;/p&gt;
-
-&lt;h2 id=&quot;section-62&quot;&gt;2016-9-18&lt;/h2&gt;
-&lt;p&gt;修正了react-native-smart-splash-screen(android部分)背景图在透明View下永远显示的问题&lt;/p&gt;
-
-&lt;h2 id=&quot;section-63&quot;&gt;2016-9-20&lt;/h2&gt;
-&lt;p&gt;编写了react-native-smart-toast帮助信息提示组件&lt;/p&gt;
-
-&lt;h2 id=&quot;section-64&quot;&gt;2016-9-21&lt;/h2&gt;
-&lt;p&gt;优化react-native-smart-toast自定义功能&lt;/p&gt;
-
-&lt;h2 id=&quot;section-65&quot;&gt;2016-9-22&lt;/h2&gt;
-&lt;p&gt;编写了react-native-smart-loading-spinner-overlay加载信息提示组件&lt;/p&gt;
-
-&lt;h2 id=&quot;section-66&quot;&gt;2016-10-26&lt;/h2&gt;
-&lt;p&gt;编写了react-native-smart-barcode扫码组件&lt;/p&gt;
-
-&lt;h2 id=&quot;section-67&quot;&gt;2016-11-3&lt;/h2&gt;
-&lt;p&gt;更新了react-native-smart-pull-to-refresh-listview组件, 增加了可选的, 超出屏幕可视范围的行进行内存回收的功能&lt;/p&gt;
-
-&lt;h2 id=&quot;section-68&quot;&gt;2016-11-7&lt;/h2&gt;
-&lt;p&gt;编写了react-native-smart-image-loader图片缓存懒加载组件&lt;/p&gt;
-
-&lt;h2 id=&quot;section-69&quot;&gt;2016-11-12&lt;/h2&gt;
-&lt;p&gt;编写了react-native-smart-app-event-listener-enhance生命周期内安全移除设备事件组件&lt;/p&gt;
-
-&lt;h2 id=&quot;section-70&quot;&gt;2016-11-15&lt;/h2&gt;
-&lt;p&gt;编写了react-native-smart-amap-location高德地图定位SDK组件&lt;/p&gt;
-
-&lt;h2 id=&quot;section-71&quot;&gt;2016-11-23&lt;/h2&gt;
-&lt;p&gt;编写了react-native-smart-amap高德地图SDK组件&lt;/p&gt;
-
-&lt;h2 id=&quot;section-72&quot;&gt;2016-11-26&lt;/h2&gt;
-&lt;p&gt;更新react-native-smart-amap-location高德地图定位SDK组件, 加入后台连续定位功能&lt;/p&gt;
-
-&lt;h2 id=&quot;section-73&quot;&gt;2016-11-30&lt;/h2&gt;
-&lt;p&gt;更新react-native-smart-pull-to-refresh-listview, 修正bug&lt;/p&gt;
-
-&lt;h2 id=&quot;section-74&quot;&gt;2016-12-5&lt;/h2&gt;
-&lt;p&gt;更新react-native-smart-pull-to-refresh-listview, 增加android支持sticky header&lt;/p&gt;
-
-&lt;h2 id=&quot;section-75&quot;&gt;2016-12-8&lt;/h2&gt;
-&lt;p&gt;更新react-native-smart-pull-to-refresh-listview,
-增加android支持sticky header与pull to refresh混合使用,
-修正android有时onSwipe返回坐标值不正确的问题,
-修正ios/android在使用autoLoad加载更多模式下, onContentSizeChange中计算容器内容宽度逻辑判断条件不正确的问题&lt;/p&gt;
-
-&lt;h2 id=&quot;section-76&quot;&gt;2016-12-15&lt;/h2&gt;
-&lt;p&gt;增加了react-native-smart-sortable-sudoku-grid&lt;/p&gt;
-
-&lt;h2 id=&quot;section-77&quot;&gt;2016-12-17&lt;/h2&gt;
-&lt;p&gt;更新react-native-smart-pull-to-refresh-listview
-调整了onRefresh执行时机, 修正了在请求数据返回速度极快时, 下拉刷新动画无法显示正常的问题&lt;/p&gt;
-
-&lt;h2 id=&quot;section-78&quot;&gt;2016-12-21&lt;/h2&gt;
-&lt;p&gt;尝试通过了, 使用rn提供的XMLHttpRequest+FormData方式上传文件(官方示例只提供了访问相册中的照片, 而同时使用react-native-fs可以支持上传任意可访问目录下的文件),
-并且使图片上传前的生成裁剪缩放后的临时文件, 再上传临时文件的方式变得可行.&lt;/p&gt;
-
-&lt;h2 id=&quot;section-79&quot;&gt;2016-12-23&lt;/h2&gt;
-&lt;p&gt;新增了react-native-smart-alipay支付宝SDK插件&lt;/p&gt;
-
-&lt;h2 id=&quot;section-80&quot;&gt;2017-1-10&lt;/h2&gt;
-&lt;p&gt;尝试实现了多文件线程控制上传功能模块, 后续考虑封装组件&lt;/p&gt;
-
-&lt;h2 id=&quot;section-81&quot;&gt;2017-1-27&lt;/h2&gt;
-&lt;p&gt;尝试使用react-native-navigation&lt;/p&gt;
-
-&lt;h2 id=&quot;section-82&quot;&gt;2017-1-28&lt;/h2&gt;
-&lt;p&gt;尝试最新版本的源生应用内嵌react-native&lt;/p&gt;
-
-</description>
-        <pubDate>Fri, 01 Jul 2016 00:00:00 +0800</pubDate>
-        <link>http://www.vanadis.cn/2016/07/01/react-native-learning-log/</link>
-        <guid isPermaLink="true">http://www.vanadis.cn/2016/07/01/react-native-learning-log/</guid>
-        
-        <category>react-native</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>react-native使用iconfont来替代icon图片</title>
-        <description>&lt;blockquote&gt;
-
-&lt;/blockquote&gt;
-
-&lt;p&gt;众所周知, 图片是有诸多优点的，然而目前在网站以及APP设计这行业面临各种各样的挑战。
-图片不但增加了总文件的大小，还增加了很多额外的”http请求”，这都会大大降低性能的。
-图片还有一个缺点就是不能很好的进行“缩放”，
-因此，有时候在“响应式设计”中需要使用图像的最好解决方案就是不去使用图片。&lt;/p&gt;
-
-&lt;h3 id=&quot;iconfont&quot;&gt;为什么要使用iconfont(字体图标)&lt;/h3&gt;
-
-&lt;p&gt;点击&lt;a href=&quot;http://www.w3cplus.com/css3/icon-fonts.html&quot;&gt;这里&lt;/a&gt;或[这里]了解使用iconfont(字体图片)的优缺点&lt;/p&gt;
-
-&lt;h3 id=&quot;iosiconfont&quot;&gt;ios实现iconfont&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;安装第三方组件react-native-vector-icons &lt;code class=&quot;highlighter-rouge&quot;&gt;$ npm install react-native-vector-icons --save&lt;/code&gt;&lt;/p&gt;
-
-    &lt;p&gt;组件内置了如下字库:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;Entypo by Daniel Bruce (411 icons)&lt;/li&gt;
-      &lt;li&gt;EvilIcons by Alexander Madyankin &amp;amp; Roman Shamin (v1.8.0, 70 icons)&lt;/li&gt;
-      &lt;li&gt;FontAwesome by Dave Gandy (v4.6.3, 634 icons)&lt;/li&gt;
-      &lt;li&gt;Foundation by ZURB, Inc. (v3.0, 283 icons)&lt;/li&gt;
-      &lt;li&gt;Ionicons by Ben Sperry (v3.0.0, 859 icons)&lt;/li&gt;
-      &lt;li&gt;MaterialIcons by Google, Inc. (v2.2.3, 932 icons)&lt;/li&gt;
-      &lt;li&gt;Octicons by Github, Inc. (v3.5.0, 166 icons)&lt;/li&gt;
-      &lt;li&gt;Zocial by Sam Collins (v1.0, 100 icons)&lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;p&gt;也可以使用自定义的字库&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;如果需要使用组件内置字库, 需要执行如下步骤:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;找到&lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules/react-native-vector-icons&lt;/code&gt;目录, 并将&lt;code class=&quot;highlighter-rouge&quot;&gt;Fonts&lt;/code&gt;目录(或者只是你需要的一个字库文件)拖至Xcode中的工程里.
-需要注意的是加入时需要保证勾选&lt;code class=&quot;highlighter-rouge&quot;&gt;Add to targets&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;Create groups&lt;/code&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;修改&lt;code class=&quot;highlighter-rouge&quot;&gt;Info.plist&lt;/code&gt;, 新增一个&lt;code class=&quot;highlighter-rouge&quot;&gt;Fonts provided by application&lt;/code&gt;属性, 值设置为加入的字库文件, 如下图所示:&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;p&gt;&lt;a href=&quot;https://cloud.githubusercontent.com/assets/378279/12421498/2db1f93a-be88-11e5-89c8-2e563ba6251a.png&quot;&gt;Fonts provided by application&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;如果需要使用自定义字库, 需要执行如下步骤:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;需要自行生成一个*.ttf字库文件, &lt;a href=&quot;http://www.iconfont.cn/&quot;&gt;点这里查看如何快速获取自定义字库&lt;/a&gt;,&lt;/p&gt;
-
-        &lt;p&gt;字库文件中的内容, 包含字库名称, 每项icon矢量图等都可以自定义(下面的示例中定义为’iconfont’), &lt;a href=&quot;http://www.vanadis.cn/2016/06/30/font-creator/&quot;&gt;点这里查看如何快速修改字库&lt;/a&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;将自定义生成的字库文件(假设文件名为font.ttf)拖至Xcode中的工程里,&lt;/p&gt;
-
-        &lt;p&gt;需要注意的是加入时需要保证勾选&lt;code class=&quot;highlighter-rouge&quot;&gt;Add to targets&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;Create groups&lt;/code&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;修改&lt;code class=&quot;highlighter-rouge&quot;&gt;Info.plist&lt;/code&gt;, 新增一个&lt;code class=&quot;highlighter-rouge&quot;&gt;Fonts provided by application&lt;/code&gt;属性, 值设置为加入的字库文件, 同步骤2&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;androidiconfont&quot;&gt;android实现iconfont&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;安装第三方组件react-native-vector-icons &lt;code class=&quot;highlighter-rouge&quot;&gt;$ npm install react-native-vector-icons --save&lt;/code&gt;&lt;/p&gt;
-
-    &lt;p&gt;组件内置了如下字库:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;Entypo by Daniel Bruce (411 icons)&lt;/li&gt;
-      &lt;li&gt;EvilIcons by Alexander Madyankin &amp;amp; Roman Shamin (v1.8.0, 70 icons)&lt;/li&gt;
-      &lt;li&gt;FontAwesome by Dave Gandy (v4.6.3, 634 icons)&lt;/li&gt;
-      &lt;li&gt;Foundation by ZURB, Inc. (v3.0, 283 icons)&lt;/li&gt;
-      &lt;li&gt;Ionicons by Ben Sperry (v3.0.0, 859 icons)&lt;/li&gt;
-      &lt;li&gt;MaterialIcons by Google, Inc. (v2.2.3, 932 icons)&lt;/li&gt;
-      &lt;li&gt;Octicons by Github, Inc. (v3.5.0, 166 icons)&lt;/li&gt;
-      &lt;li&gt;Zocial by Sam Collins (v1.0, 100 icons)&lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;p&gt;也可以使用自定义的字库&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;如果需要使用组件内置字库, 需要执行如下步骤:&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;找到&lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules/react-native-vector-icons&lt;/code&gt;目录, 并将&lt;code class=&quot;highlighter-rouge&quot;&gt;Fonts&lt;/code&gt;目录中的字库文件拖至&lt;code class=&quot;highlighter-rouge&quot;&gt;android/app/src/main/assets/fonts&lt;/code&gt;里.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;如果需要使用自定义字库, 需要执行如下步骤:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;需要自行生成一个*.ttf字库文件, &lt;a href=&quot;http://www.iconfont.cn/&quot;&gt;点这里查看如何快速获取自定义字库&lt;/a&gt;,&lt;/p&gt;
-
-        &lt;p&gt;字库文件中的内容, 包含字库名称, 每项icon矢量图等都可以自定义(下面的示例中定义为’iconfont’), &lt;a href=&quot;http://www.vanadis.cn/2016/06/30/font-creator/&quot;&gt;点这里查看如何快速修改字库&lt;/a&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;将自定义生成的字库文件(假设文件名为font.ttf)拖至&lt;code class=&quot;highlighter-rouge&quot;&gt;android/app/src/main/assets/fonts&lt;/code&gt;里,&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;效果展示&lt;/h3&gt;
-
-&lt;h3 id=&quot;react-native&quot;&gt;react-native代码示例&lt;/h3&gt;
-
-&lt;h4 id=&quot;section-1&quot;&gt;使用内置字库&lt;/h4&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import Icon from &#39;react-native-vector-icons/Ionicons&#39;;
-
-function ExampleView(props) {
-  return (&amp;lt;Icon name=&quot;ios-person&quot; size={30} color=&quot;#4F8EF7&quot; /&amp;gt;);
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h4 id=&quot;section-2&quot;&gt;使用自定义字库&lt;/h4&gt;
-
-&lt;h4 id=&quot;ios&quot;&gt;ios&lt;/h4&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import { createIconSet } from &#39;react-native-vector-icons&#39;;
-const glyphMap = {
-  &#39;mui-nav-right&#39;: 58755,
-  &#39;mui-nav-left&#39;: 58481,
-};
-const MuiIcon = createIconSet(glyphMap, &#39;iconfont&#39;);
-
-function ExampleView(props) {
-    return (&amp;lt;MuiIcon size={20} name={&#39;mui-nav-left&#39;} color={&#39;#E5E5E5&#39;}/&amp;gt;);
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h4 id=&quot;android&quot;&gt;android&lt;/h4&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import { createIconSet } from &#39;react-native-vector-icons&#39;;
-const glyphMap = {
-  &#39;mui-nav-right&#39;: 58755,
-  &#39;mui-android-nav-left&#39;: 58481,
-  &#39;mui-voicer&#39;: 58162,
-};
-const MuiIcon = createIconSet(glyphMap, &#39;iconfont&#39;, &#39;mui.ttf&#39;);
-
-function ExampleView(props) {
-    return (&amp;lt;MuiIcon size={20} name={&#39;mui-android-nav-left&#39;} color={&#39;#E5E5E5&#39;}/&amp;gt;);
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;注意事项&lt;/h3&gt;
-
-&lt;p&gt;示例中的&lt;code class=&quot;highlighter-rouge&quot;&gt;&#39;mui-nav-right&#39;: 58755&lt;/code&gt;, &lt;em&gt;mui-nav-right&lt;/em&gt;为icon的名称, 可以自定义, 使用时赋值给&lt;em&gt;name&lt;/em&gt;,
-58755为这个字库文件中对应icon的16进制表示.&lt;/p&gt;
-
-</description>
-        <pubDate>Fri, 01 Jul 2016 00:00:00 +0800</pubDate>
-        <link>http://www.vanadis.cn/2016/07/01/react-native-iconfont/</link>
-        <guid isPermaLink="true">http://www.vanadis.cn/2016/07/01/react-native-iconfont/</guid>
-        
-        <category>react-native</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>react-native实现launchImage和splash-screen</title>
-        <description>&lt;blockquote&gt;
-
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;splashscreen&quot;&gt;为什么实现splashScreen&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;对于ios版本, 点击桌面的app icon后, 自动加载launchImage, launchImage加载完毕后就会进入应用首屏,
-虽然launchImage加载持续时间可以手动设置, 但是却没有关闭launchImage的api, 如果希望在加载首屏前执行一
-些逻辑(例如, 网络请求一些数据), 在这些逻辑执行完毕之前用户看不见首屏, 仍然只能看到lauchImage展现的部分,
-是无法实现的. 因此, ios需要自行实现类似android的splashScreen.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;对于android版本, 源生支持实现splashScreen, 但要实现类似ios的launchImage效果, 需要对AndroidManifest.
-xml文件进行微调.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;ioslaunchimage&quot;&gt;ios实现launchImage&lt;/h2&gt;
-&lt;p&gt;ios源生支持实现launchImage, 可以点&lt;a href=&quot;http://www.vanadis.cn/2016/06/30/ios-launch-image&quot;&gt;这里&lt;/a&gt;了解, 这里就不展开了.&lt;/p&gt;
-
-&lt;h2 id=&quot;iossplashscreen&quot;&gt;ios实现splashScreen&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;安装组件&lt;code class=&quot;highlighter-rouge&quot;&gt;react-native-splashscreen&lt;/code&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install @remobile/react-native-splashscreen --save&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;将&lt;code class=&quot;highlighter-rouge&quot;&gt;RCTSplashScreen.xcodeproj&lt;/code&gt;拖入你的Xode工程的&lt;code class=&quot;highlighter-rouge&quot;&gt;Libraries&lt;/code&gt;下.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;点击你的主工程文件, 选择&lt;code class=&quot;highlighter-rouge&quot;&gt;Build Phases&lt;/code&gt;, 并在工程Products目录下找到&lt;code class=&quot;highlighter-rouge&quot;&gt;RCTSplashScreen.xcodeproj&lt;/code&gt;, 将其中包含的&lt;code class=&quot;highlighter-rouge&quot;&gt;libRCTSplashScreen.a&lt;/code&gt;拖入.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在&lt;code class=&quot;highlighter-rouge&quot;&gt;Builder Settings&lt;/code&gt;中找到&lt;code class=&quot;highlighter-rouge&quot;&gt;Header Search Paths&lt;/code&gt;, 确认其中包含&lt;code class=&quot;highlighter-rouge&quot;&gt;$(SRCROOT)/../../../react-native/React&lt;/code&gt;(recursive).&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在&lt;code class=&quot;highlighter-rouge&quot;&gt;Builder Settings&lt;/code&gt;中找到&lt;code class=&quot;highlighter-rouge&quot;&gt;Header Search Paths&lt;/code&gt;,  确认其中包含&lt;code class=&quot;highlighter-rouge&quot;&gt;$(SRCROOT)/../node_modules/@remobile/react-native-splashscreen/ios/RCTSplashScreen&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;删除工程里的LaunchScreen.xib&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;将组件中的&lt;code class=&quot;highlighter-rouge&quot;&gt;SplashScreenResource&lt;/code&gt;目录拖入工程, 确认类型是&lt;code class=&quot;highlighter-rouge&quot;&gt;groups&lt;/code&gt;, 并且&lt;code class=&quot;highlighter-rouge&quot;&gt;Add Targets&lt;/code&gt;选中, 如果希望使用不同的splash图片, 可以替换&lt;code class=&quot;highlighter-rouge&quot;&gt;splash.png&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;工程里找到AppDelegate.m&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;...
-#import &quot;RCTSplashScreen.h&quot; //&amp;lt;--- 新增导入
-...
-RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
-                                                      moduleName:@&quot;KitchenSink&quot;
-                                               initialProperties:nil
-                                                   launchOptions:launchOptions];
-
-  [RCTSplashScreen show:rootView]; //&amp;lt;--- 新增显示splashScreen
-
-  self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-  UIViewController *rootViewController = [[UIViewController alloc] init];
-  rootViewController.view = rootView;
-  self.window.rootViewController = rootViewController;
-  [self.window makeKeyAndVisible];
-  return YES;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;androidlaunchimage&quot;&gt;android实现launchImage&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;准备一张背景图片, 自定义命名(比如命名为splash), 自己选择图片格式, 放在drawable目录下&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;配置strings.xml&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;resources&amp;gt;
-
-    &amp;lt;!--&amp;amp;lt;!&amp;amp;ndash; Base application theme. &amp;amp;ndash;&amp;amp;gt;--&amp;gt;
-    &amp;lt;!--&amp;lt;style name=&quot;AppTheme&quot; parent=&quot;Theme.AppCompat.Light.NoActionBar&quot;&amp;gt;--&amp;gt;
-        &amp;lt;!--&amp;amp;lt;!&amp;amp;ndash; Customize your theme here. &amp;amp;ndash;&amp;amp;gt;--&amp;gt;
-    &amp;lt;!--&amp;lt;/style&amp;gt;--&amp;gt;
-
-    &amp;lt;style name=&quot;AppTheme&quot; parent=&quot;@android:style/Theme.Black&quot;&amp;gt;
-        &amp;lt;item name=&quot;android:windowBackground&quot;&amp;gt;@drawable/splash&amp;lt;/item&amp;gt;
-        &amp;lt;item name=&quot;android:windowNoTitle&quot;&amp;gt;true&amp;lt;/item&amp;gt;
-        &amp;lt;item name=&quot;android:windowFullscreen&quot;&amp;gt;true&amp;lt;/item&amp;gt;
-        &amp;lt;item name=&quot;android:windowContentOverlay&quot;&amp;gt;@null&amp;lt;/item&amp;gt;
-    &amp;lt;/style&amp;gt;
-&amp;lt;/resources&amp;gt;
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;配置AndroidManifest.xml&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    package=&quot;com.helloreactnative&quot;
-    android:versionCode=&quot;1&quot;
-    android:versionName=&quot;1.0&quot;&amp;gt;
-
-    &amp;lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&amp;gt;
-    &amp;lt;uses-permission android:name=&quot;android.permission.SYSTEM_ALERT_WINDOW&quot;/&amp;gt;
-
-    &amp;lt;uses-sdk
-        android:minSdkVersion=&quot;16&quot;
-        android:targetSdkVersion=&quot;22&quot; /&amp;gt;
-
-    &amp;lt;application
-      android:allowBackup=&quot;true&quot;
-      android:label=&quot;@string/app_name&quot;
-      android:icon=&quot;@mipmap/ic_launcher&quot;&amp;gt;
-      &amp;lt;activity
-        android:name=&quot;.MainActivity&quot;
-        android:label=&quot;@string/app_name&quot;
-        android:configChanges=&quot;keyboard|keyboardHidden|orientation|screenSize&quot;
-          android:theme=&quot;@style/AppTheme&quot;&amp;gt;
-        &amp;lt;intent-filter&amp;gt;
-            &amp;lt;action android:name=&quot;android.intent.action.MAIN&quot; /&amp;gt;
-            &amp;lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&amp;gt;
-        &amp;lt;/intent-filter&amp;gt;
-      &amp;lt;/activity&amp;gt;
-      &amp;lt;activity android:name=&quot;com.facebook.react.devsupport.DevSettingsActivity&quot; /&amp;gt;
-    &amp;lt;/application&amp;gt;
-
-&amp;lt;/manifest&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;androidsplashscreen&quot;&gt;android实现splashScreen&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;安装组件&lt;code class=&quot;highlighter-rouge&quot;&gt;react-native-splashscreen&lt;/code&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install @remobile/react-native-splashscreen --save&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在工程中找到&lt;code class=&quot;highlighter-rouge&quot;&gt;android/settings.gradle&lt;/code&gt;, 加入如下:&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;...
-include &#39;:react-native-splashscreen&#39;
-project(&#39;:react-native-splashscreen&#39;).projectDir = new File(rootProject.projectDir, &#39;../node_modules/@remobile/react-native-splashscreen/android&#39;)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;在工程中找到&lt;code class=&quot;highlighter-rouge&quot;&gt;android/app/build.gradle&lt;/code&gt;, 加入如下:&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;...
-dependencies {
-    ...
-    compile project(&#39;:react-native-splashscreen&#39;)
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;如果希望使用不同的splash图片, 替换&lt;code class=&quot;highlighter-rouge&quot;&gt;res/drawable/splash.png&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在MainActivity.java中注册模块&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import com.remobile.splashscreen.*;  // &amp;lt;--- 导入包
-
-public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
-  ......
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-
-    mReactInstanceManager = ReactInstanceManager.builder()
-      .setApplication(getApplication())
-      .setBundleAssetName(&quot;index.android.bundle&quot;)
-      .setJSMainModuleName(&quot;index.android&quot;)
-      .addPackage(new MainReactPackage())
-      .addPackage(new RCTSplashScreenPackage(this))              // &amp;lt;------ 加入splashScreen的package
-      .setUseDeveloperSupport(BuildConfig.DEBUG)
-      .setInitialLifecycleState(LifecycleState.RESUMED)
-      .build();
-
-    mReactRootView.startReactApplication(mReactInstanceManager, &quot;ExampleRN&quot;, null);
-
-    setContentView(mReactRootView);
-  }
-
-  ......
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;效果展示&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://www.vanadis.cn/img/ios-splash-screen.gif&quot; alt=&quot;ios-splash-screen&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://www.vanadis.cn/img/android-splash-screen.gif&quot; alt=&quot;android-splash-screen&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;react-nativesplashscreen&quot;&gt;react-native中关闭splashScreen&lt;/h2&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&#39;use strict&#39;;
-var React = require(&#39;react-native&#39;);
-var {
-    AppRegistry,
-    View,
-    Text,
-} = React;
-
-var SplashScreen = require(&#39;@remobile/react-native-splashscreen&#39;);  //导入包
-
-var KitchenSink = React.createClass({
-    componentDidMount: function() {
-        SplashScreen.hide();    //调用api隐藏splashScreen
-    },
-    render() {
-        return(
-            &amp;lt;View&amp;gt;
-                &amp;lt;Text&amp;gt;
-                    fangyunjiang is a good developer!
-                &amp;lt;/Text&amp;gt;
-            &amp;lt;/View&amp;gt;
-        );
-    }
-});
-
-AppRegistry.registerComponent(&#39;KitchenSink&#39;, () =&amp;gt; KitchenSink);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-</description>
-        <pubDate>Thu, 30 Jun 2016 00:00:00 +0800</pubDate>
-        <link>http://www.vanadis.cn/2016/06/30/react-native-splash-screen/</link>
-        <guid isPermaLink="true">http://www.vanadis.cn/2016/06/30/react-native-splash-screen/</guid>
-        
-        <category>react-native</category>
         
         
       </item>
