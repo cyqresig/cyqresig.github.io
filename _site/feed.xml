@@ -5,8 +5,8 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 16 Feb 2017 22:19:17 +0800</pubDate>
-    <lastBuildDate>Thu, 16 Feb 2017 22:19:17 +0800</lastBuildDate>
+    <pubDate>Sat, 25 Mar 2017 12:07:55 +0800</pubDate>
+    <lastBuildDate>Sat, 25 Mar 2017 12:07:55 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -440,6 +440,9 @@ AppRegistry.registerComponent(&#39;HelloWorld&#39;, () =&amp;gt; HelloWorld);
 }
 &lt;/code&gt;&lt;/pre&gt;
     &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在storyboard中加入一个button, 将该button的点击事件绑定&lt;code class=&quot;highlighter-rouge&quot;&gt;ToReactNativeWorldPressed&lt;/code&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;在项目根目录下, 运行&lt;code class=&quot;highlighter-rouge&quot;&gt;npm start&lt;/code&gt;, 启动debug server.&lt;/p&gt;

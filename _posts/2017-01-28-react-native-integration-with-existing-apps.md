@@ -142,14 +142,15 @@ tags:
             [self presentViewController:vc animated:YES completion:nil];
         }
 
+12. 在storyboard中加入一个button, 将该button的点击事件绑定`ToReactNativeWorldPressed`
 
-12. 在项目根目录下, 运行`npm start`, 启动debug server.
+13. 在项目根目录下, 运行`npm start`, 启动debug server.
 
-13. 找到项目根目录下ios工程目录下的.xcworkspace文件(cocoapods配置后生成的新的工程文件), 双击打开
+14. 找到项目根目录下ios工程目录下的.xcworkspace文件(cocoapods配置后生成的新的工程文件), 双击打开
 
-14. 打开后, 在Xcode的界面上点击Run
+15. 打开后, 在Xcode的界面上点击Run
 
-15. 查看模拟器或真机上的运行情况
+16. 查看模拟器或真机上的运行情况
 
 [1]: https://github.com/cyqresig/ReactNativeIntegrationWithExistingApps
 
