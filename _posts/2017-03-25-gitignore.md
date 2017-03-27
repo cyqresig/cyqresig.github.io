@@ -17,13 +17,13 @@ tags:
 在进行项目源代码管理时，总会存在一些文件不希望加入管理，但每次在提交时手动控制是极不方便的。
 而`gitignore`可以很方便地解决上面问题。
 
-## EditorConfig是解决问题的
+## gitignore是如何解决问题的
 
 `gitignore`的工作原理是：
 当你对文件进行源代码管理时，`gitignore`插件会去查找当前编辑文件的目录或者其祖先目录中是否存在`.gitignore`配置文件。
 如果存在，则`.gitignore`配置文件中对应配置的规则会生效，忽略对应的文件。
 
-## 如何使用EditorConfig
+## 如何使用gitignore
 
 gitignore使用起来非常的方便。只需要如下几个步骤：
 

@@ -5,8 +5,8 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 26 Mar 2017 21:49:54 +0800</pubDate>
-    <lastBuildDate>Sun, 26 Mar 2017 21:49:54 +0800</lastBuildDate>
+    <pubDate>Mon, 27 Mar 2017 10:45:36 +0800</pubDate>
+    <lastBuildDate>Mon, 27 Mar 2017 10:45:36 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -339,13 +339,13 @@
 &lt;p&gt;在进行项目源代码管理时，总会存在一些文件不希望加入管理，但每次在提交时手动控制是极不方便的。
 而&lt;code class=&quot;highlighter-rouge&quot;&gt;gitignore&lt;/code&gt;可以很方便地解决上面问题。&lt;/p&gt;
 
-&lt;h2 id=&quot;editorconfig&quot;&gt;EditorConfig是解决问题的&lt;/h2&gt;
+&lt;h2 id=&quot;gitignore-1&quot;&gt;gitignore是如何解决问题的&lt;/h2&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gitignore&lt;/code&gt;的工作原理是：
 当你对文件进行源代码管理时，&lt;code class=&quot;highlighter-rouge&quot;&gt;gitignore&lt;/code&gt;插件会去查找当前编辑文件的目录或者其祖先目录中是否存在&lt;code class=&quot;highlighter-rouge&quot;&gt;.gitignore&lt;/code&gt;配置文件。
 如果存在，则&lt;code class=&quot;highlighter-rouge&quot;&gt;.gitignore&lt;/code&gt;配置文件中对应配置的规则会生效，忽略对应的文件。&lt;/p&gt;
 
-&lt;h2 id=&quot;editorconfig-1&quot;&gt;如何使用EditorConfig&lt;/h2&gt;
+&lt;h2 id=&quot;gitignore-2&quot;&gt;如何使用gitignore&lt;/h2&gt;
 
 &lt;p&gt;gitignore使用起来非常的方便。只需要如下几个步骤：&lt;/p&gt;
 
@@ -361,7 +361,7 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;gitignore-1&quot;&gt;gitignore配置语法&lt;/h2&gt;
+&lt;h2 id=&quot;gitignore-3&quot;&gt;gitignore配置语法&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -469,7 +469,7 @@
 
 &lt;p&gt;而&lt;code class=&quot;highlighter-rouge&quot;&gt;EditorConfig&lt;/code&gt;可以很方便地解决上面问题。&lt;/p&gt;
 
-&lt;h2 id=&quot;editorconfig-1&quot;&gt;EditorConfig是解决问题的&lt;/h2&gt;
+&lt;h2 id=&quot;editorconfig-1&quot;&gt;EditorConfig是如何解决问题的&lt;/h2&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;EditorConfig&lt;/code&gt;的工作原理是：
 当你打开文件进行coding时，&lt;code class=&quot;highlighter-rouge&quot;&gt;EditorConfig&lt;/code&gt;插件会去查找当前编辑文件的目录或者其祖先目录中是否存在&lt;code class=&quot;highlighter-rouge&quot;&gt;.editorconfig&lt;/code&gt;配置文件。
@@ -601,14 +601,20 @@ indent_size = 2
 
 &lt;h2 id=&quot;section&quot;&gt;示例&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;registry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//registry.npmjs.org/&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;disturb&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//npmjs.org/dist&lt;/span&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;presets&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&quot;es2015&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&quot;react&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&quot;stage-0&quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;plugins&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
 &lt;h2 id=&quot;section-1&quot;&gt;资源&lt;/h2&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://docs.npmjs.com/files/npmrc&quot;&gt;npmrc 文档&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://babeljs.cn/docs/usage/babelrc/&quot;&gt;babel 文档&lt;/a&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Sat, 25 Mar 2017 00:00:00 +0800</pubDate>

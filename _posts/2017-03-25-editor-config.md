@@ -18,7 +18,7 @@ tags:
 
 而`EditorConfig`可以很方便地解决上面问题。
 
-## EditorConfig是解决问题的
+## EditorConfig是如何解决问题的
 
 `EditorConfig`的工作原理是：
 当你打开文件进行coding时，`EditorConfig`插件会去查找当前编辑文件的目录或者其祖先目录中是否存在`.editorconfig`配置文件。

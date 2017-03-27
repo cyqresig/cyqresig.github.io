@@ -12,7 +12,7 @@
 
     <title>绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
 
-    <link rel="canonical" href="http://www.vanadis.cn/">
+    <link rel="canonical" href="http://www.vanadis.cn/page5/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -184,333 +184,113 @@
             ">
     			
 <div class="post-preview">
-    <a href="/2017/03/26/webpack/">
+    <a href="/2016/03/04/plugin-jquery-autocomplete/">
         <h2 class="post-title">
-            webpack使用小记
+            autocomplete组件分析与实现
         </h2>
         
         <h3 class="post-subtitle">
-            
+             "实现任何功能前都应先分析"
         </h3>
         
         <div class="post-content-preview">
             
+  “”
 
+
+由于项目中有急需用到搜索推荐+自动填充的功能, 但是github上找的jquery-autocomplete又不能完全满足需求,
+  并且由于jquery插件编写方式的格式, 修改起来不是很方便, 还不如自己实现一个,
+  故开始自己造轮子
+
+autocomplete 功能实现分析
+
+
+  一般说来, 一个组件内抽象着很多具体的实现, 想要全面控制这些实现,
+   需要先分析...
+        </div>
+    </a>
+    <p class="post-meta">
+        绯雨闲丸 发布于 2016-03-04
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2016/03/03/markdown-welcome/">
+        <h2 class="post-title">
+            请使用Markdown写文档
+        </h2>
+        
+        <h3 class="post-subtitle">
+             "程序员快速优雅的写文档方式"
+        </h3>
+        
+        <div class="post-content-preview">
+            
+  “尝试使用一下markdown吧”
+
+
+Markdown语法说明
+
+
+  概述
+    
+      宗旨
+      兼容 HTML
+      特殊字符自动转换
+    
+  
+  区块元素
+    
+      段落和换行
+      标题
+      区块引用
+      列表
+      代码区块
+      分隔线
+    
+  
+  区段元素
+    
+      链接
+...
+        </div>
+    </a>
+    <p class="post-meta">
+        绯雨闲丸 发布于 2016-03-03
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2016/03/02/Hi-2016/">
+        <h2 class="post-title">
+            嗨 2016
+        </h2>
+        
+        <h3 class="post-subtitle">
+             "终于见到你了, 我的博客"
+        </h3>
+        
+        <div class="post-content-preview">
+            
+  “现在可以用啦! ”
 
 
 前言
 
-webpack是目前前端开发必不可少的一款模块加载器兼构建工具，它能极其方便的处理各种资源的打包和使用，
-让前端开发获得与后端开发几乎一致的体验。
+终于把个人 Blog 开通了.
 
-webpack特点
+直接看如何在github上开通个人博客 
 
-
-  
-    webpack 是以 commonJS 的形式来书写脚本的，可以直接使用 require或者import(es6写法，配置babel支持) 的写法来引入各模块
-  
-  
-    webpa...
+2016 年前, 一直想开通个人博客, 但国内的各种博客程序的UI大多不敢恭维, wordpress又被墙,
+自己买个主机放个定制程序吧, 部署维护也很麻烦.
+早就听说github上面可以放定制blog, 无限流量, 无须维护, 不过之前因为太懒没去折腾,
+结果就一直连个写 ...
         </div>
     </a>
     <p class="post-meta">
-        绯雨闲丸 发布于 2017-03-26
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/03/25/npmrc/">
-        <h2 class="post-title">
-            npmrc使用小记
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-为什么要使用npmrc
-
-前端项目开发离不开安装各种npm依赖包，可以选择远程的仓库也可以选择本地的仓库，但更改仓库地址需要在安装时控制台打命令，比较麻烦，
-而npmrc可以很方便地解决上面问题。
-
-npmrc是解决问题的
-
-npmrc的工作原理是：
-当安装项目的依赖包时，会查找并读取项目根目录下的.npmrc文件的配置，自动指定仓库地址。
-
-如何使用npmrc
-
-npmrc使用起来...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2017-03-25
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/03/25/gitignore/">
-        <h2 class="post-title">
-            gitignore使用小记
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-为什么要使用gitignore
-
-在进行项目源代码管理时，总会存在一些文件不希望加入管理，但每次在提交时手动控制是极不方便的。
-而gitignore可以很方便地解决上面问题。
-
-gitignore是如何解决问题的
-
-gitignore的工作原理是：
-当你对文件进行源代码管理时，gitignore插件会去查找当前编辑文件的目录或者其祖先目录中是否存在.gitignore配置文件。
-如果...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2017-03-25
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/03/25/editor-config/">
-        <h2 class="post-title">
-            EditorConfig使用小记
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-为什么要使用EditorConfig
-
-当存在多人协作开发项目时，每个人喜好使用的IDE经常各不相同，就算相同每个人对于IDE喜好的编码风格配置（例如缩进是2个空格还是4个空格）也未必相同。
-
-而EditorConfig可以很方便地解决上面问题。
-
-EditorConfig是如何解决问题的
-
-EditorConfig的工作原理是：
-当你打开文件进行coding时，EditorConf...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2017-03-25
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/03/25/babelrc/">
-        <h2 class="post-title">
-            babelrc使用小记
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-为什么要使用babelrc
-
-由于es6还没有被各大浏览器非常好的兼容支持，前端项目开发不得不使用babel将es6代码转换成es5后才能正常执行，为此，必须在项目根目录下配置.babelrc文件（针对babel 6）
-
-如何配置babelrc
-
-该文件用来设置转码规则和插件，基本格式如下：
-
-
-    {
-      "presets": [],
-      "plugins": ...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2017-03-25
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/03/19/create-your-own-front-end-scaffold/">
-        <h2 class="post-title">
-            创建你自己的前端项目脚手架工具
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2017-03-19
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/03/18/babel-stage-x/">
-        <h2 class="post-title">
-            babel配置-各阶段的stage的区别
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-前言
-
-由于各大浏览器并对es6的并没有完成支持，我们开发前端项目时需要使用Babel来将ES6代码编译为ES5。
-配置.babelrc文件时一般配置为如下：
-
-{
-    "presets": [
-        "es2015"，
-        "react",
-        "stage-0"
-    ],
-    "plugins": []
-}
-
-
-
-这个配置文件的意思。...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2017-03-18
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/02/26/create-your-own-front-end-archetype/">
-        <h2 class="post-title">
-            创建你自己的前端项目模板
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2017-02-26
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/01/29/react-native-navigation-usage/">
-        <h2 class="post-title">
-            react-native-navigation使用小记
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-github
-
-react-native-navigation
-
-感受
-react-native-navigation是目前唯一一款使用原生代码来实现navigator的插件,
-使用后navigator的push/pop的动画将脱离js线程而改由原生的UI线程处理, 切屏效果会和原生态一样流畅, 再也不会出现由于js线程渲染导致的navigator切屏动画的卡顿效果了,
-并且该插件还...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2017-01-29
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/01/29/react-native-integration-with-existing-apps-android/">
-        <h2 class="post-title">
-            react-native整合进已存在的Android原生app
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-示例
-
-ReactNativeIntegrationWithExistingApps
-
-步骤
-
-  
-    首先安装好react-native开发环境
-  
-  
-    保证你的android工程在项目目录的android目录下$root/android
-  
-  
-    新建一个原生app, 选Android Application
-  
-  
-    在项目根目录下, 执行...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2017-01-29
+        绯雨闲丸 发布于 2016-03-02
     </p>
 </div>
 <hr>
@@ -520,10 +300,10 @@ ReactNativeIntegrationWithExistingApps
 
 <ul class="pager">
     
-    
-    <li class="next">
-        <a href="/page2">历史文章 &rarr;</a>
+    <li class="previous">
+        <a href="/page4">&larr; 最新文章</a>
     </li>
+    
     
 </ul>
 

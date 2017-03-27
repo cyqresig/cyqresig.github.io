@@ -10,9 +10,9 @@
     <meta name="keyword"  content="绯雨闲丸, HISAME SHIZUMARU绯雨闲丸, HISAME SHIZUMARU, 绯雨闲丸的博客, HISAME SHIZUMARU Blog, 博客, 个人网站, 互联网, 移动, 手机, APP, h5, 前端, 大前端, 前后端分离, 工程化, 构建, 自动化, 网站优化, js, javascript, html, css, html5, css3, react-native, ios, android, nodejs, webpack, gulp, reactjs, angularjs">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
+    <title>npmrc使用小记 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
 
-    <link rel="canonical" href="http://www.vanadis.cn/">
+    <link rel="canonical" href="http://www.vanadis.cn/2017/03/25/npmrc/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -153,587 +153,340 @@
 </script>
 
 
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>绯雨闲丸 Blog</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">极客: 是每一个程序员的目标</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#front-end" title="front-end">front-end</a>
+                        
+                        <a class="tag" href="/tags/#npm" title="npm">npm</a>
+                        
+                        <a class="tag" href="/tags/#npmrc" title="npmrc">npmrc</a>
+                        
+                    </div>
+                    <h1>npmrc使用小记</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">绯雨闲丸 发布于 </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-	<div class="row">
-        
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-<!-- USE SIDEBAR -->
-    <!-- PostList Container -->
-    		<div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                postlist-container
-            ">
-    			
-<div class="post-preview">
-    <a href="/2017/03/26/webpack/">
-        <h2 class="post-title">
-            webpack使用小记
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
+    <!-- Post Container -->
+            <div class="
+                col-lg-10 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
 
+				<blockquote>
 
+</blockquote>
 
-前言
+<h2 id="npmrc">为什么要使用npmrc</h2>
 
-webpack是目前前端开发必不可少的一款模块加载器兼构建工具，它能极其方便的处理各种资源的打包和使用，
-让前端开发获得与后端开发几乎一致的体验。
+<p>前端项目开发离不开安装各种npm依赖包，可以选择远程的仓库也可以选择本地的仓库，但更改仓库地址需要在安装时控制台打命令，比较麻烦，
+而<code class="highlighter-rouge">npmrc</code>可以很方便地解决上面问题。</p>
 
-webpack特点
+<h2 id="npmrc-1">npmrc是解决问题的</h2>
 
+<p><code class="highlighter-rouge">npmrc</code>的工作原理是：
+当安装项目的依赖包时，会查找并读取项目根目录下的<code class="highlighter-rouge">.npmrc</code>文件的配置，自动指定仓库地址。</p>
 
-  
-    webpack 是以 commonJS 的形式来书写脚本的，可以直接使用 require或者import(es6写法，配置babel支持) 的写法来引入各模块
-  
-  
-    webpa...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2017-03-26
-    </p>
+<h2 id="npmrc-2">如何使用npmrc</h2>
+
+<p>npmrc使用起来非常的方便。只需要如下几个步骤：</p>
+
+<ul>
+  <li>
+    <p>在项目根目录创建一个<code class="highlighter-rouge">.npmrc</code>的文件（虽然也可以在系统文件中全局创建，但不推荐）</p>
+  </li>
+  <li>
+    <p>在这个文件中定义仓库地址</p>
+  </li>
+</ul>
+
+<h2 id="section">示例</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">registry</span><span class="o">=</span><span class="nx">http</span><span class="err">:</span><span class="c1">//registry.npmjs.org/</span>
+<span class="nx">disturb</span><span class="o">=</span><span class="nx">http</span><span class="err">:</span><span class="c1">//npmjs.org/dist</span>
+</code></pre>
 </div>
-<hr>
 
-<div class="post-preview">
-    <a href="/2017/03/25/npmrc/">
-        <h2 class="post-title">
-            npmrc使用小记
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
+<h2 id="section-1">资源</h2>
+
+<p><a href="https://docs.npmjs.com/files/npmrc">npmrc 文档</a></p>
+
+
+
+                <hr>
+
+                
+                <!-- 多说 Share start -->
+                </style>
+                <div class="ds-share"
+                    style="text-align: right"
+                    data-thread-key="/2017/03/25/npmrc"
+                    data-title="npmrc使用小记"
+                    data-url="http://www.vanadis.cn/2017/03/25/npmrc/"
+                    data-images="http://www.vanadis.cn/"
+                    data-content="
 
 
 
 为什么要使用npmrc
 
-前端项目开发离不开安装各种npm依赖包，可以选择远程的仓库也可以选择本地的仓库，但更改仓库地址需要在安装时控制台打命令，比较麻烦，
-而npmrc可以很方便地解决上面问题。
+前端项目开发离不开安装各种npm依赖包，可以选择远程的仓库也可以选择本地的仓库，但更改仓库地址需要在安装时控制台打命令，... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- 多说 Share end-->
+                
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/03/25/gitignore/" data-toggle="tooltip" data-placement="top" title="gitignore使用小记">
+                        上一篇<br>
+                        <span>gitignore使用小记</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/03/26/webpack/" data-toggle="tooltip" data-placement="top" title="webpack使用小记">
+                        下一篇<br>
+                        <span>webpack使用小记</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/2017/03/25/npmrc"
+                        data-title="npmrc使用小记"
+                        data-url="http://www.vanadis.cn/2017/03/25/npmrc/" >
+                    </div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+
+            </div>
 
-npmrc是解决问题的
-
-npmrc的工作原理是：
-当安装项目的依赖包时，会查找并读取项目根目录下的.npmrc文件的配置，自动指定仓库地址。
-
-如何使用npmrc
-
-npmrc使用起来...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2017-03-25
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/03/25/gitignore/">
-        <h2 class="post-title">
-            gitignore使用小记
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-为什么要使用gitignore
-
-在进行项目源代码管理时，总会存在一些文件不希望加入管理，但每次在提交时手动控制是极不方便的。
-而gitignore可以很方便地解决上面问题。
-
-gitignore是如何解决问题的
-
-gitignore的工作原理是：
-当你对文件进行源代码管理时，gitignore插件会去查找当前编辑文件的目录或者其祖先目录中是否存在.gitignore配置文件。
-如果...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2017-03-25
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/03/25/editor-config/">
-        <h2 class="post-title">
-            EditorConfig使用小记
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-为什么要使用EditorConfig
-
-当存在多人协作开发项目时，每个人喜好使用的IDE经常各不相同，就算相同每个人对于IDE喜好的编码风格配置（例如缩进是2个空格还是4个空格）也未必相同。
-
-而EditorConfig可以很方便地解决上面问题。
-
-EditorConfig是如何解决问题的
-
-EditorConfig的工作原理是：
-当你打开文件进行coding时，EditorConf...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2017-03-25
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/03/25/babelrc/">
-        <h2 class="post-title">
-            babelrc使用小记
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-为什么要使用babelrc
-
-由于es6还没有被各大浏览器非常好的兼容支持，前端项目开发不得不使用babel将es6代码转换成es5后才能正常执行，为此，必须在项目根目录下配置.babelrc文件（针对babel 6）
-
-如何配置babelrc
-
-该文件用来设置转码规则和插件，基本格式如下：
-
-
-    {
-      "presets": [],
-      "plugins": ...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2017-03-25
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/03/19/create-your-own-front-end-scaffold/">
-        <h2 class="post-title">
-            创建你自己的前端项目脚手架工具
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2017-03-19
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/03/18/babel-stage-x/">
-        <h2 class="post-title">
-            babel配置-各阶段的stage的区别
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-前言
-
-由于各大浏览器并对es6的并没有完成支持，我们开发前端项目时需要使用Babel来将ES6代码编译为ES5。
-配置.babelrc文件时一般配置为如下：
-
-{
-    "presets": [
-        "es2015"，
-        "react",
-        "stage-0"
-    ],
-    "plugins": []
-}
-
-
-
-这个配置文件的意思。...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2017-03-18
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/02/26/create-your-own-front-end-archetype/">
-        <h2 class="post-title">
-            创建你自己的前端项目模板
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2017-02-26
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/01/29/react-native-navigation-usage/">
-        <h2 class="post-title">
-            react-native-navigation使用小记
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-github
-
-react-native-navigation
-
-感受
-react-native-navigation是目前唯一一款使用原生代码来实现navigator的插件,
-使用后navigator的push/pop的动画将脱离js线程而改由原生的UI线程处理, 切屏效果会和原生态一样流畅, 再也不会出现由于js线程渲染导致的navigator切屏动画的卡顿效果了,
-并且该插件还...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2017-01-29
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2017/01/29/react-native-integration-with-existing-apps-android/">
-        <h2 class="post-title">
-            react-native整合进已存在的Android原生app
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-示例
-
-ReactNativeIntegrationWithExistingApps
-
-步骤
-
-  
-    首先安装好react-native开发环境
-  
-  
-    保证你的android工程在项目目录的android目录下$root/android
-  
-  
-    新建一个原生app, 选Android Application
-  
-  
-    在项目根目录下, 执行...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2017-01-29
-    </p>
-</div>
-<hr>
-
-
-<!-- Pager -->
-
-<ul class="pager">
-    
-    
-    <li class="next">
-        <a href="/page2">历史文章 &rarr;</a>
-    </li>
-    
-</ul>
-
-
-    		</div>
     <!-- Sidebar Container -->
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
                 <section>
                     <hr class="hidden-sm hidden-xs">
-                    <h5><a href="">分类标签</a></h5>
+                    <h5><a href="/tags/">分类标签</a></h5>
                     <div class="tags">
-                        
+        				
                             
-                                <a href="/tags/#生活" title="生活" rel="1">
+                				<a href="/tags/#生活" title="生活" rel="1">
                                     生活
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#文档" title="文档" rel="1">
+                				<a href="/tags/#文档" title="文档" rel="1">
                                     文档
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#javascript组件" title="javascript组件" rel="1">
+                				<a href="/tags/#javascript组件" title="javascript组件" rel="1">
                                     javascript组件
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#javascript" title="javascript" rel="5">
+                				<a href="/tags/#javascript" title="javascript" rel="5">
                                     javascript
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#nodejs" title="nodejs" rel="1">
+                				<a href="/tags/#nodejs" title="nodejs" rel="1">
                                     nodejs
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#es5" title="es5" rel="1">
+                				<a href="/tags/#es5" title="es5" rel="1">
                                     es5
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#es6" title="es6" rel="8">
+                				<a href="/tags/#es6" title="es6" rel="8">
                                     es6
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#react-native" title="react-native" rel="15">
+                				<a href="/tags/#react-native" title="react-native" rel="15">
                                     react-native
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#npm nodejs" title="npm nodejs" rel="2">
+                				<a href="/tags/#npm nodejs" title="npm nodejs" rel="2">
                                     npm nodejs
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#ios" title="ios" rel="5">
+                				<a href="/tags/#ios" title="ios" rel="5">
                                     ios
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#CocoaPod" title="CocoaPod" rel="2">
+                				<a href="/tags/#CocoaPod" title="CocoaPod" rel="2">
                                     CocoaPod
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#android" title="android" rel="3">
+                				<a href="/tags/#android" title="android" rel="3">
                                     android
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#front-end" title="front-end" rel="8">
+                				<a href="/tags/#front-end" title="front-end" rel="8">
                                     front-end
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#template" title="template" rel="1">
+                				<a href="/tags/#template" title="template" rel="1">
                                     template
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#archetype" title="archetype" rel="1">
+                				<a href="/tags/#archetype" title="archetype" rel="1">
                                     archetype
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#babel" title="babel" rel="2">
+                				<a href="/tags/#babel" title="babel" rel="2">
                                     babel
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#stage" title="stage" rel="1">
+                				<a href="/tags/#stage" title="stage" rel="1">
                                     stage
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#scaffold" title="scaffold" rel="1">
+                				<a href="/tags/#scaffold" title="scaffold" rel="1">
                                     scaffold
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#babelrc" title="babelrc" rel="1">
+                				<a href="/tags/#babelrc" title="babelrc" rel="1">
                                     babelrc
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#editor" title="editor" rel="1">
+                				<a href="/tags/#editor" title="editor" rel="1">
                                     editor
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#editorconfig" title="editorconfig" rel="1">
+                				<a href="/tags/#editorconfig" title="editorconfig" rel="1">
                                     editorconfig
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#git" title="git" rel="1">
+                				<a href="/tags/#git" title="git" rel="1">
                                     git
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#gitignore" title="gitignore" rel="1">
+                				<a href="/tags/#gitignore" title="gitignore" rel="1">
                                     gitignore
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#npm" title="npm" rel="1">
+                				<a href="/tags/#npm" title="npm" rel="1">
                                     npm
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#npmrc" title="npmrc" rel="1">
+                				<a href="/tags/#npmrc" title="npmrc" rel="1">
                                     npmrc
                                 </a>
                             
-                        
+        				
                             
-                                <a href="/tags/#webpack" title="webpack" rel="1">
+                				<a href="/tags/#webpack" title="webpack" rel="1">
                                     webpack
                                 </a>
                             
-                        
-                    </div>
+        				
+        			</div>
                 </section>
                 
 
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-                    <hr><h5><a href="">关于博主</a></h5>
-                    <div class="short-about">
-                        
-                            <img src="/img/avatar-cyqresig.jpg" />
-                        
-                        
-                            <p>前端工程师, 擅长手机App(react-native),手机web(h5),大前端,服务端(nodejs)开发, 目前专注于手机App领域, 同时也在进行全栈修行.</p>
-                        
-                        <!-- SNS Link -->
-                        <ul class="list-inline">
-                            
-                            
-                            
-                            
-                            
-                            
-                            <li>
-                                <a target="_blank" href="https://github.com/cyqresig">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            
-                        </ul>
-                    </div>
-                </section>
                 <!-- Friends Blog -->
                 
                 <hr>
@@ -746,10 +499,70 @@ ReactNativeIntegrationWithExistingApps
                     
                 </ul>
                 
-    		</div>
-        
-	</div>
-</div>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by cyqresig
+    var _user = 'vanadis';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->
