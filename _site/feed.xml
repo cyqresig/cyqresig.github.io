@@ -5,8 +5,8 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 27 Mar 2017 10:45:36 +0800</pubDate>
-    <lastBuildDate>Mon, 27 Mar 2017 10:45:36 +0800</lastBuildDate>
+    <pubDate>Mon, 27 Mar 2017 22:02:33 +0800</pubDate>
+    <lastBuildDate>Mon, 27 Mar 2017 22:02:33 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -65,30 +65,20 @@
     &lt;span class=&quot;c1&quot;&gt;// 需要编译的入口文件配置&lt;/span&gt;
     &lt;span class=&quot;na&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
         &lt;span class=&quot;na&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;./app/entry/index.js&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// index 指模块的名称，其他配置项加入模块时需要指定模块名称&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;login&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;./app/entry/login.js&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// ./src/js/page/login.js 指的是该模块的文件的路径&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;useinfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;./app/entry/userinfo.js&#39;&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;login&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;./app/entry/login.js&#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// ./src/js/page/login.js 指的是该模块的文件的路径&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;useinfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;./app/entry/userinfo.js&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;./app/entry/user.js&#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 可以将二个文件合并作为一个入口&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
     
     &lt;span class=&quot;c1&quot;&gt;// 编译完的入口文件输出配置&lt;/span&gt;
     &lt;span class=&quot;na&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        
-        &lt;span class=&quot;cm&quot;&gt;/*
-           ：
-            publicPath：虚拟目录，自动指向path编译目录（/assets/ =&amp;gt; /build/js/）。html中引用js文件时，必须引用此虚拟路径（但实际上引用的是内存中的文件，既不是/build/js/也不是/assets/）。
-            ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-            发布至生产环境：
-            1.webpack进行编译（当然是编译到/build/js/）
-            2.把编译目录（/build/js/）下的文件，全部复制到/assets/目录下（注意：不是去修改index.html中引用bundle.js的路径）
-        */&lt;/span&gt;
-        
         &lt;span class=&quot;c1&quot;&gt;// 指定编译模块文件的存放目录（/build/js/），不能用于html中的文件引用。&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;__dirname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;build&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//如使用webpack-dev-server, 则相对该目录的位置为web服务器的根目录&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;__dirname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;build&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//如使用webpack-dev-server, 则该目录的位置为虚拟web服务器的根目录&lt;/span&gt;
         
         &lt;span class=&quot;c1&quot;&gt;// 配置文件在html中引用的根路径，会影响在html中模块的引用路径&lt;/span&gt;
         &lt;span class=&quot;na&quot;&gt;publicPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;/assets/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
         &lt;span class=&quot;c1&quot;&gt;//publicPath: &quot;http://cdn.com/assets/&quot;,//你也可以加上完整的url，效果与上面一致（不需要修改index.html中引用bundle.js的路径，但发布生产环境时，建议使用HtmlWebpackPlugin插件批量修改引用地址为cdn地址）。&lt;/span&gt;
         
-        &lt;span class=&quot;c1&quot;&gt;// filename 指输出的每个js模块名称的引用路径模板定义，会影响在html中模块的引用路径&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// filename 指输出的每个js模块名称及存放路径的定义，会影响在html中模块的引用路径&lt;/span&gt;
         &lt;span class=&quot;na&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;js/bundle.js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 单页应用只有一个入口文件时使用，在html页面上通过&amp;lt;script src=&quot;/js/bundle.js&quot;&amp;gt;&amp;lt;/script&amp;gt;引用入口模块&lt;/span&gt;
         &lt;span class=&quot;na&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;js/[name].js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 传统多页应用有多个入口文件时使用，[name] 代入entry配置中的任意一项模块的名称，例如：index, 在不同的页面上引用不同的入口，例如在index.html页面上通过&amp;lt;script src=&quot;/js/index.js&quot;&amp;gt;&amp;lt;/script&amp;gt;引用入口模块&lt;/span&gt;
         &lt;span class=&quot;na&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;js/[hash]/[chunkhash].js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 为生产环境实现前端静态资源增量更新时使用，[hash]是根据每次编译后项目总体文件的hash值, [chunkhash]是根据每个模块内容计算出的hash值。&lt;/span&gt;
@@ -122,7 +112,10 @@
                     &lt;span class=&quot;na&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
                       &lt;span class=&quot;na&quot;&gt;presets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;es2015&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
                     &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-                 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+                 &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+                 
+                 &lt;span class=&quot;c1&quot;&gt;// 如使用react-hot-loader，则需要在这里加入&lt;/span&gt;
+                 &lt;span class=&quot;s1&quot;&gt;&#39;react-hot-loader/webpack&#39;&lt;/span&gt;
             &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
           &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
     
@@ -149,6 +142,9 @@
                   &lt;span class=&quot;s1&quot;&gt;&#39;css-loader&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
                   &lt;span class=&quot;s1&quot;&gt;&#39;less-loader&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
               &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+              &lt;span class=&quot;na&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                  &lt;span class=&quot;nx&quot;&gt;extractTextPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;extract&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;style&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;css&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;less&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// &lt;/span&gt;
+              &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
           &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
           
           &lt;span class=&quot;c1&quot;&gt;// pcss文件使用style-loader, css-loader, postcss-loader来处理&lt;/span&gt;
@@ -239,12 +235,15 @@
     &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
       
      &lt;span class=&quot;c1&quot;&gt;// 配置开发服务器&lt;/span&gt;
+     &lt;span class=&quot;c1&quot;&gt;// 要使之生效，还需要同时在entry的每一项之前加入&#39;webpack-dev-server/client?http://{指定的IP}:{指定的端口}&#39;, &lt;/span&gt;
+     &lt;span class=&quot;c1&quot;&gt;// &#39;webpack/hot/log-apply-result&#39;与&#39;webpack/hot/only-dev-server&#39;&lt;/span&gt;
+     &lt;span class=&quot;c1&quot;&gt;// 如使用了react-hot-loader, 则还需要加入&#39;react-hot-loader/patch&#39;&lt;/span&gt;
      &lt;span class=&quot;na&quot;&gt;devServer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
          &lt;span class=&quot;c1&quot;&gt;// 配置代理服务器&lt;/span&gt;
          &lt;span class=&quot;na&quot;&gt;proxy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; 
            &lt;span class=&quot;s1&quot;&gt;&#39;/api&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;http://localhost:3000&#39;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 访问路由/api，会转发到localhost:3000的地址去&lt;/span&gt;
          &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-         &lt;span class=&quot;na&quot;&gt;contentBase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;__dirname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;build&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 需要配置成编译后的模块文件存放的路径（同output中的path）&lt;/span&gt;
+         &lt;span class=&quot;na&quot;&gt;contentBase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;__dirname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;build&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;__dirname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;mock&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//  静态资源路径，需要配置编译后的模块文件存放的路径（同output中的path），也可以在这里配置其他的，比如mock文件存放的路径&lt;/span&gt;
          &lt;span class=&quot;na&quot;&gt;compress&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 是否开启压缩&lt;/span&gt;
          &lt;span class=&quot;na&quot;&gt;historyApiFallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true for index.html upon 404, object for multiple paths&lt;/span&gt;
          &lt;span class=&quot;na&quot;&gt;hot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 是否开启热更新，需要配置HotModuleReplacementPlugin&lt;/span&gt;
@@ -255,7 +254,41 @@
      
      &lt;span class=&quot;c1&quot;&gt;// 配置插件（未完待续）&lt;/span&gt;
      &lt;span class=&quot;na&quot;&gt;plugins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-         &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+         &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;webpack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;DefinePlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+           &lt;span class=&quot;s1&quot;&gt;&#39;process.env&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;NODE_ENV&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;&quot;development&quot;&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// 可以随意指定前端node环境&lt;/span&gt;
+         &lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;    
+         &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;extractTextPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;css/[name].css&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// css抽取，需要引入模块extract-text-webpack-plugin，并且需要在模块加载器处也加入对应配置&lt;/span&gt;
+         &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;HtmlWebpackPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;                        &lt;span class=&quot;c1&quot;&gt;// html插件，定义html模板，生成html文件，并将指定的模块插入html中（需要引入模块html-webpack-plugin）&lt;/span&gt;
+             &lt;span class=&quot;na&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;src/&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;template.html&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 模板html文件的存放位置&lt;/span&gt;
+             &lt;span class=&quot;na&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;build/&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;index.html&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// 指输出的每个html文件名称及存放路径的定义&lt;/span&gt;
+             &lt;span class=&quot;na&quot;&gt;inject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;body&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;                                &lt;span class=&quot;c1&quot;&gt;// 表示插入至body标签内&lt;/span&gt;
+             &lt;span class=&quot;na&quot;&gt;chunks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// 插入的模块在html上会自动使用publicPath与模块的filename作为引用路径&lt;/span&gt;
+                &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// 插入index入口模块，也可以插入其他入口模块或者公共模块（比如使用CommonsChunkPlugin提取的common模块）&lt;/span&gt;
+             &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+         &lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;
+         &lt;span class=&quot;c1&quot;&gt;// 提供公共代码&lt;/span&gt;
+         &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;webpack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;optimize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;CommonsChunkPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;common.js&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 默认会把所有入口节点的公共代码提取出来,生成一个common.js&lt;/span&gt;
+         &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;webpack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;optimize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;CommonsChunkPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;common.js&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;main&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;index&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]),&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 默认会把所有入口节点的公共代码提取出来,生成一个common.js, 只提取main节点和index节点&lt;/span&gt;
+         &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;webpack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;optimize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;CommonsChunkPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;// 有选择性的提取（对象方式传参）&lt;/span&gt;
+             &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;common&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;                                &lt;span class=&quot;c1&quot;&gt;// 注意不要.js后缀&lt;/span&gt;
+             &lt;span class=&quot;na&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;js/[name].js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;                      &lt;span class=&quot;c1&quot;&gt;// 指定输出的js文件名称及路径   &lt;/span&gt;
+             &lt;span class=&quot;na&quot;&gt;chunks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;main&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;user&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;index&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;    
+             &lt;span class=&quot;na&quot;&gt;minChunks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+         &lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;
+         &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;webpack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;optimize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;CommonsChunkPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;// 有选择性的提取（对象方式传参）&lt;/span&gt;
+              &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;index&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;                                &lt;span class=&quot;c1&quot;&gt;// 注意不要.js后缀&lt;/span&gt;
+              &lt;span class=&quot;na&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;js/[name].js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;                      &lt;span class=&quot;c1&quot;&gt;// 指定输出的js文件名称及路径 &lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;
+         &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;webpack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;HotModuleReplacementPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 热更新插件，使用dev-server必备&lt;/span&gt;
+         &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;webpack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;NoEmitOnErrorsPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;// 在webpack 2中使用NoErrorsPlugin会有警告提示&lt;/span&gt;
+         &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;webpack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ProgressPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;percentage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+             &lt;span class=&quot;nx&quot;&gt;logUpdate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;percentage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;%&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 实时更新编译进度，需要同时使用实时更新日志模块log-update&lt;/span&gt;
+         &lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;
+         &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;webpack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;optimize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;UglifyJsPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;// 解析/压缩/美化所有的js模块，如有需要，这里可以通过配置except可以防止变量被改变&lt;/span&gt;
+             &lt;span class=&quot;na&quot;&gt;mangle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                 &lt;span class=&quot;na&quot;&gt;except&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;$super&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;$&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;exports&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;require&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+             &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+         &lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;
      &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
