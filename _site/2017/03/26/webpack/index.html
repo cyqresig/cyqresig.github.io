@@ -250,7 +250,7 @@
   </li>
 </ul>
 
-<h2 id="webpack-2">webpack常用配置参数介绍</h2>
+<h2 id="webpack-2">webpack 2常用配置参数介绍</h2>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">webpackConfig</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// 需要编译的入口文件配置</span>
@@ -263,7 +263,7 @@
     <span class="c1">// 编译完的入口文件输出配置</span>
     <span class="na">output</span><span class="p">:</span> <span class="p">{</span>
         <span class="c1">// 指定编译模块文件的存放目录（/build/js/），不能用于html中的文件引用。</span>
-        <span class="na">path</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s2">"build"</span><span class="p">),</span> <span class="c1">//如使用webpack-dev-server, 则该目录的位置为虚拟web服务器的根目录</span>
+        <span class="na">path</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s2">"build"</span><span class="p">),</span> <span class="c1">//如使用webpack-dev-server, 则该目录的位置应设置为为虚拟web服务器的根目录</span>
         
         <span class="c1">// 配置文件在html中引用的根路径，会影响在html中模块的引用路径</span>
         <span class="na">publicPath</span><span class="p">:</span> <span class="s2">"/assets/"</span><span class="p">,</span>
@@ -318,7 +318,7 @@
                       <span class="na">loader</span><span class="p">:</span> <span class="s1">'url-loader'</span><span class="p">,</span>
                       <span class="na">options</span><span class="p">:</span> <span class="p">{</span>
                           <span class="na">limit</span><span class="p">:</span> <span class="mi">8192</span><span class="p">,</span>
-                          <span class="c1">// name 指输出的每个图片模块名称的引用路径模板定义</span>
+                          <span class="c1">// name 指输出的每个图片模块名称的路径定义</span>
                           <span class="na">name</span><span class="p">:</span> <span class="s1">'images/[name]-[chunkhash].[ext]'</span><span class="p">,</span>   <span class="c1">//[name]指图片文件名, [ext]指图片的后缀名称</span>
                       <span class="p">},</span>
                   <span class="p">},</span>
@@ -445,8 +445,9 @@
      
      <span class="c1">// 配置插件（未完待续）</span>
      <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span>
+         <span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">EnvironmentPlugin</span><span class="p">([</span><span class="s1">'NODE_ENV'</span><span class="p">]),</span>  <span class="c1">// 可以随意指定前端node环境</span>
          <span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">DefinePlugin</span><span class="p">({</span>
-           <span class="s1">'process.env'</span><span class="p">:</span> <span class="p">{</span><span class="nl">NODE_ENV</span><span class="p">:</span> <span class="s1">'"development"'</span><span class="p">}</span>   <span class="c1">// 可以随意指定前端node环境</span>
+           <span class="s1">'process.env'</span><span class="p">:</span> <span class="p">{</span><span class="nl">NODE_ENV</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span><span class="p">)}</span>   <span class="c1">// 可以随意指定前端node环境</span>
          <span class="p">}),</span>    
          <span class="k">new</span> <span class="nx">extractTextPlugin</span><span class="p">(</span><span class="s2">"css/[name].css"</span><span class="p">),</span>       <span class="c1">// css抽取，需要引入模块extract-text-webpack-plugin，并且需要在模块加载器处也加入对应配置</span>
          <span class="k">new</span> <span class="nx">HtmlWebpackPlugin</span><span class="p">({</span>                        <span class="c1">// html插件，定义html模板，生成html文件，并将指定的模块插入html中（需要引入模块html-webpack-plugin）</span>
@@ -461,14 +462,14 @@
          <span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">optimize</span><span class="p">.</span><span class="nx">CommonsChunkPlugin</span><span class="p">(</span><span class="s1">'common.js'</span><span class="p">),</span> <span class="c1">// 默认会把所有入口节点的公共代码提取出来,生成一个common.js</span>
          <span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">optimize</span><span class="p">.</span><span class="nx">CommonsChunkPlugin</span><span class="p">(</span><span class="s1">'common.js'</span><span class="p">,[</span><span class="s1">'main'</span><span class="p">,</span><span class="s1">'index'</span><span class="p">]),</span> <span class="c1">// 默认会把所有入口节点的公共代码提取出来,生成一个common.js, 只提取main节点和index节点</span>
          <span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">optimize</span><span class="p">.</span><span class="nx">CommonsChunkPlugin</span><span class="p">({</span>          <span class="c1">// 有选择性的提取（对象方式传参）</span>
-             <span class="na">name</span><span class="p">:</span> <span class="s2">"common"</span><span class="p">,</span>                                <span class="c1">// 注意不要.js后缀</span>
+             <span class="na">name</span><span class="p">:</span> <span class="s2">"common"</span><span class="p">,</span>                                <span class="c1">// name可以是做生意模块名（common是公共模块名）注意不要.js后缀</span>
              <span class="na">filename</span><span class="p">:</span> <span class="s2">"js/[name].js"</span><span class="p">,</span>                      <span class="c1">// 指定输出的js文件名称及路径   </span>
-             <span class="na">chunks</span><span class="p">:</span> <span class="p">[</span><span class="s1">'main'</span><span class="p">,</span><span class="s1">'user'</span><span class="p">,</span><span class="s1">'index'</span><span class="p">]</span>    
-             <span class="na">minChunks</span><span class="p">:</span> <span class="mi">2</span>
+             <span class="na">chunks</span><span class="p">:</span> <span class="p">[</span><span class="s1">'main'</span><span class="p">,</span><span class="s1">'user'</span><span class="p">,</span><span class="s1">'index'</span><span class="p">],</span>               <span class="c1">// 将指定的入口模块提取出来</span>
+             <span class="na">minChunks</span><span class="p">:</span> <span class="mi">2</span>                                   <span class="c1">// 公共模块被使用的最小次数。比如配置为2，也就是同一个模块只有被2个以外的页面同时引用时才会被提取出来作为common chunks。</span>
          <span class="p">}),</span>
          <span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">optimize</span><span class="p">.</span><span class="nx">CommonsChunkPlugin</span><span class="p">({</span>          <span class="c1">// 有选择性的提取（对象方式传参）</span>
-              <span class="na">name</span><span class="p">:</span> <span class="s2">"index"</span><span class="p">,</span>                                <span class="c1">// 注意不要.js后缀</span>
-              <span class="na">filename</span><span class="p">:</span> <span class="s2">"js/[name].js"</span><span class="p">,</span>                      <span class="c1">// 指定输出的js文件名称及路径 </span>
+              <span class="na">name</span><span class="p">:</span> <span class="s2">"index"</span><span class="p">,</span>                                <span class="c1">// name可以是任意模块名，注意不要.js后缀</span>
+              <span class="na">filename</span><span class="p">:</span> <span class="s2">"js/[name].js"</span><span class="p">,</span>                     <span class="c1">// 指定输出的js文件名称及路径 </span>
           <span class="p">}),</span>
          <span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">HotModuleReplacementPlugin</span><span class="p">(),</span>  <span class="c1">// 热更新插件，使用dev-server必备</span>
          <span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">NoEmitOnErrorsPlugin</span><span class="p">(),</span>        <span class="c1">// 在webpack 2中使用NoErrorsPlugin会有警告提示</span>
