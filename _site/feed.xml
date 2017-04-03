@@ -5,9 +5,96 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 03 Apr 2017 13:58:17 +0800</pubDate>
-    <lastBuildDate>Mon, 03 Apr 2017 13:58:17 +0800</lastBuildDate>
+    <pubDate>Mon, 03 Apr 2017 14:32:11 +0800</pubDate>
+    <lastBuildDate>Mon, 03 Apr 2017 14:32:11 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
+    
+      <item>
+        <title>eslint使用小记</title>
+        <description>&lt;blockquote&gt;
+
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;eslint&quot;&gt;eslint是什么&lt;/h2&gt;
+
+&lt;p&gt;ESLint 是一个开源的 JavaScript 代码校验工具，最初是由 Nicholas C. Zakas 在2013年创建的。经常被用来发现问题的模式或代码，不符合特定的风格准则。&lt;/p&gt;
+
+&lt;p&gt;ESLint 创建的首要原因是为了让开发人员创建自己的校验规则，ESLint 的目的是让所有的规则完全可插拔。虽然ESLint将附带一些内置的规则，你可以在任何时间点动态加载规则。&lt;/p&gt;
+
+&lt;h2 id=&quot;eslint-1&quot;&gt;eslint有什么用&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;可以辅助编码规范执行，有效控制代码质量&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;默认规则包含所有 JSLint、JSHint 中存在的规则，易迁移&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;规则可配置性高：可设置「警告」、「错误」两个 error 等级，或者直接禁用&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;包含代码风格检测的规则&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;支持插件扩展、自定义规则&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;eslintrc&quot;&gt;eslintrc是如何解决问题的&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;eslintrc&lt;/code&gt;有二种使用方式：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;在编译时验证，需要配置IDE上的插件，比如webstorm，配置方法可参考&lt;a href=&quot;http://blog.csdn.net/jw5678/article/details/54947045&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在代码提交前验证，在package.json中配置，代码如下：&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s2&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;precommit&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;eslint . --quiet&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;eslintrc-1&quot;&gt;如何使用eslintrc&lt;/h2&gt;
+
+&lt;p&gt;eslintrc使用起来非常的方便。只需要如下几个步骤：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;全局安装eslint &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install -g eslint&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在项目根目录创建一个&lt;code class=&quot;highlighter-rouge&quot;&gt;.eslintrc&lt;/code&gt;的文件&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在这个文件中定义项目的编码规范&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;eslintrc-2&quot;&gt;推荐的常用eslintrc编码风格定义&lt;/h2&gt;
+
+&lt;p&gt;由于规则较多，这里不一一罗列，需要的可以参考&lt;a href=&quot;http://cn.eslint.org/docs/rules/&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;不希望自己一个个检查及配置，推荐安装插件并使用airbnb的配置，参考&lt;a href=&quot;https://www.npmjs.com/package/eslint-config-airbnb-base&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 02 Apr 2017 00:00:00 +0800</pubDate>
+        <link>http://www.vanadis.cn/2017/04/02/eslint-config/</link>
+        <guid isPermaLink="true">http://www.vanadis.cn/2017/04/02/eslint-config/</guid>
+        
+        <category>front-end</category>
+        
+        <category>eslint</category>
+        
+        <category>eslintrc</category>
+        
+        
+      </item>
     
       <item>
         <title>webpack使用小记</title>
@@ -1099,234 +1186,6 @@ ios默认使用最新版本没有问题,
         <pubDate>Sun, 29 Jan 2017 00:00:00 +0800</pubDate>
         <link>http://www.vanadis.cn/2017/01/29/react-native-navigation-usage/</link>
         <guid isPermaLink="true">http://www.vanadis.cn/2017/01/29/react-native-navigation-usage/</guid>
-        
-        <category>react-native</category>
-        
-        <category>ios</category>
-        
-        <category>android</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>react-native整合进已存在的Android原生app</title>
-        <description>&lt;blockquote&gt;
-
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;示例&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/cyqresig/ReactNativeIntegrationWithExistingApps&quot;&gt;ReactNativeIntegrationWithExistingApps&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;步骤&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;首先安装好react-native开发环境&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;保证你的android工程在项目目录的android目录下&lt;code class=&quot;highlighter-rouge&quot;&gt;$root/android&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;新建一个原生app, 选&lt;code class=&quot;highlighter-rouge&quot;&gt;Android Application&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在项目根目录下, 执行&lt;code class=&quot;highlighter-rouge&quot;&gt;npm init&lt;/code&gt;创建&lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt;文件, 并加入必要的scripts与dependency&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-   &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;react-native-into-test&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-   &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1.0.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-   &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;description&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-   &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;main&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;index.js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-   &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;start&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;node node_modules/react-native/local-cli/cli.js start&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;test&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;echo \&quot;Error: no test specified\&quot; &amp;amp;&amp;amp; exit 1&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-   &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-   &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;author&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-   &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;license&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;MIT&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-   &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;dependencies&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;react&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;15.4.2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;react-native&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;^0.40.0&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-   &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
- &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;安装依赖包&lt;/p&gt;
-
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在项目根目录下创建一个&lt;code class=&quot;highlighter-rouge&quot;&gt;index.android.js&lt;/code&gt;文件, 并编辑内容:&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; import React from &#39;react&#39;;
- import {
-     AppRegistry,
-     StyleSheet,
-     Text,
-     View
- } from &#39;react-native&#39;;
-
- class HelloWorld extends React.Component {
-     render() {
-         return (
-             &amp;lt;View style={styles.container}&amp;gt;
-     &amp;lt;Text style={styles.hello}&amp;gt;It is react-native Text!&amp;lt;/Text&amp;gt;
-         &amp;lt;/View&amp;gt;
-     )
-     }
- }
- var styles = StyleSheet.create({
-     container: {
-         flex: 1,
-         justifyContent: &#39;center&#39;,
-     },
-     hello: {
-         fontSize: 20,
-         textAlign: &#39;center&#39;,
-         margin: 10,
-     },
- });
-
- AppRegistry.registerComponent(&#39;HelloWorld&#39;, () =&amp;gt; HelloWorld);
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在app下的&lt;code class=&quot;highlighter-rouge&quot;&gt;build.gradle&lt;/code&gt;下添加React Native依赖配置:&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; dependencies {
-         ...
-         compile &quot;com.facebook.react:react-native:+&quot; // From node_modules.
- }
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在project下的&lt;code class=&quot;highlighter-rouge&quot;&gt;build.gradle&lt;/code&gt;下, 增加react-native的本地maven入口配置&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; allprojects {
-     repositories {
-         ...
-         maven {
-             // All of React Native (JS, Android binaries) is installed from npm
-             url &quot;$rootDir/../node_modules/react-native/android&quot;
-         }
-     }
-     ...
- }
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在&lt;code class=&quot;highlighter-rouge&quot;&gt;AndroidManifest.xml&lt;/code&gt;下增加权限与Activity&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &amp;lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&amp;gt;
-
- &amp;lt;activity android:name=&quot;com.facebook.react.devsupport.DevSettingsActivity&quot; /&amp;gt;
-
- &amp;lt;activity
-   android:name=&quot;.MyReactActivity&quot;
-   android:label=&quot;@string/app_name&quot;
-   android:theme=&quot;@style/Theme.AppCompat.Light.NoActionBar&quot;&amp;gt;
- &amp;lt;/activity&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;增加原生代码&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public class MyReactActivity extends Activity implements DefaultHardwareBackBtnHandler {
-    private ReactRootView mReactRootView;
-    private ReactInstanceManager mReactInstanceManager;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        mReactRootView = new ReactRootView(this);
-        mReactInstanceManager = ReactInstanceManager.builder()
-                .setApplication(getApplication())
-                .setBundleAssetName(&quot;index.android.bundle&quot;)
-                .setJSMainModuleName(&quot;index.android&quot;)
-                .addPackage(new MainReactPackage())
-                .setUseDeveloperSupport(BuildConfig.DEBUG)
-                .setInitialLifecycleState(LifecycleState.RESUMED)
-                .build();
-        mReactRootView.startReactApplication(mReactInstanceManager, &quot;HelloWorld&quot;, null);
-
-        setContentView(mReactRootView);
-    }
-
-    @Override
-    public void invokeDefaultOnBackPressed() {
-        super.onBackPressed();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        if (mReactInstanceManager != null) {
-            mReactInstanceManager.onHostPause(this);
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if (mReactInstanceManager != null) {
-            mReactInstanceManager.onHostResume(this, this);
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        if (mReactInstanceManager != null) {
-            mReactInstanceManager.onHostDestroy();
-        }
-    }
-
-    @Override
-     public void onBackPressed() {
-        if (mReactInstanceManager != null) {
-            mReactInstanceManager.onBackPressed();
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_MENU &amp;amp;&amp;amp; mReactInstanceManager != null) {
-            mReactInstanceManager.showDevOptionsDialog();
-            return true;
-        }
-        return super.onKeyUp(keyCode, event);
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在项目根目录下, 运行&lt;code class=&quot;highlighter-rouge&quot;&gt;npm start&lt;/code&gt;, 启动debug server.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在项目根目录下, 运行&lt;code class=&quot;highlighter-rouge&quot;&gt;cd android &amp;amp;&amp;amp; ./gradlew installDebug&lt;/code&gt;, 编译后app会安装入模拟器或设备中&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;查看模拟器或真机上的运行情况&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-</description>
-        <pubDate>Sun, 29 Jan 2017 00:00:00 +0800</pubDate>
-        <link>http://www.vanadis.cn/2017/01/29/react-native-integration-with-existing-apps-android/</link>
-        <guid isPermaLink="true">http://www.vanadis.cn/2017/01/29/react-native-integration-with-existing-apps-android/</guid>
         
         <category>react-native</category>
         
