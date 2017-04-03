@@ -252,7 +252,8 @@
 
 <h2 id="webpack-2">webpack 2常用配置参数介绍</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">webpackConfig</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// file -&gt; webpack.config</span>
+<span class="kd">var</span> <span class="nx">webpackConfig</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// 需要编译的入口文件配置</span>
     <span class="na">entry</span><span class="p">:</span> <span class="p">{</span>
         <span class="na">index</span><span class="p">:</span> <span class="s1">'./app/entry/index.js'</span><span class="p">,</span>    <span class="c1">// index 指模块的名称，其他配置项加入模块时需要指定模块名称</span>
@@ -403,6 +404,13 @@
      <span class="c1">// 通过增加输出信息的方式为浏览器开发者工具增强调试</span>
      <span class="na">devtool</span><span class="p">:</span> <span class="s2">"source-map"</span><span class="p">,</span> <span class="c1">// 为模块生成单独的source-map文件，会大幅影响编译速度</span>
      <span class="na">devtool</span><span class="p">:</span> <span class="s2">"eval"</span><span class="p">,</span> <span class="c1">// 不生成sourceMap, 但是命名模块，编译速度最快.</span>
+     <span class="na">devtool</span><span class="p">:</span> <span class="s2">"cheap-module-eval-source-map"</span><span class="p">,</span> <span class="c1">// 开发环境推荐 </span>
+     <span class="na">devtool</span><span class="p">:</span> <span class="s2">"cheap-module-source-map"</span><span class="p">,</span> <span class="c1">// 生产环境推荐 </span>
+     
+     <span class="c1">// 使用 cheap 模式可以大幅提高 souremap 生成的效率。大部分情况我们调试并不关心列信息，而且就算 sourcemap 没有列，有些浏览器引擎（例如 v8） 也会给出列信息。</span>
+     <span class="c1">// 使用 eval 方式可大幅提高持续构建效率。官方文档提供的速度对比表格可以看到 eval 模式的编译速度很快。</span>
+     <span class="c1">// 使用 module 可支持 babel 这种预编译工具（在 webpack 里做为 loader 使用）。</span>
+     <span class="c1">// 使用 eval-source-map 模式可以减少网络请求。这种模式开启 DataUrl 本身包含完整 sourcemap 信息，并不需要像 sourceURL 那样，浏览器需要发送一个完整请求去获取 sourcemap 文件，这会略微提高点效率。而生产环境中则不宜用 eval，这样会让文件变得极大。</span>
      
      <span class="c1">// 根路径，默认值是__dirname，基于这个路径去处理配置的模块入口和加载器</span>
      <span class="na">context</span><span class="p">:</span> <span class="nx">__dirname</span><span class="p">,</span> <span class="c1">// 默认值</span>
@@ -481,9 +489,47 @@
                  <span class="na">except</span><span class="p">:</span> <span class="p">[</span><span class="s1">'$super'</span><span class="p">,</span> <span class="s1">'$'</span><span class="p">,</span> <span class="s1">'exports'</span><span class="p">,</span> <span class="s1">'require'</span><span class="p">]</span>
              <span class="p">}</span>
          <span class="p">}),</span>
+         
+         <span class="c1">// 自定义插件函数，函数会接受到webpack的编译对象compiler，用this同样也能获取到</span>
+         <span class="kd">function</span><span class="p">(</span><span class="nx">compiler</span><span class="p">)</span> <span class="p">{</span>
+             <span class="k">this</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s2">"done"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">stats</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">//使用.plugin api增加自定义插件，'done'表示触发时机为编译结束后，stats表示编译生成的模块的详细信息</span>
+                 <span class="nx">require</span><span class="p">(</span><span class="s2">"fs"</span><span class="p">).</span><span class="nx">writeFileSync</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s2">"stats.generated.json"</span><span class="p">),</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">stats</span><span class="p">.</span><span class="nx">toJson</span><span class="p">()));</span>
+                 <span class="nx">require</span><span class="p">(</span><span class="s2">"open"</span><span class="p">)((</span><span class="s1">'http://localhost:9090/index.html'</span><span class="p">));</span> <span class="c1">// 还可以在编译完成后控制自动唤起浏览器并打开项目的入口页面（需要安装open模块）</span>
+             <span class="p">});</span>
+         <span class="p">},</span>
      <span class="p">],</span>
-<span class="p">}</span>
+<span class="p">};</span>
 
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">webpackConfig</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<h2 id="webpack--devserver">webpack 启动 devServer</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">webpackConfig</span> <span class="nx">from</span> <span class="s1">'./webpack.config'</span><span class="p">;</span>  <span class="c1">// 获取webpack配置</span>
+<span class="kd">var</span> <span class="nx">webpack</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'webpack'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">WebpackDevServer</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'webpack-dev-server'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">devServerOptions</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// 配置代理服务器</span>
+     <span class="na">proxy</span><span class="p">:</span> <span class="p">{</span> 
+       <span class="s1">'/api'</span><span class="p">:</span> <span class="s1">'http://localhost:3000'</span> <span class="c1">// 访问路由/api，会转发到localhost:3000的地址去</span>
+     <span class="p">},</span>
+     <span class="na">contentBase</span><span class="p">:</span> <span class="p">[</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s2">"build"</span><span class="p">),</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s2">"mock"</span><span class="p">)</span> <span class="p">],</span> <span class="c1">//  静态资源路径，需要配置编译后的模块文件存放的路径（同output中的path），也可以在这里配置其他的，比如mock文件存放的路径</span>
+     <span class="na">compress</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">// 是否开启压缩</span>
+     <span class="na">historyApiFallback</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">// true for index.html upon 404, object for multiple paths</span>
+     <span class="na">hot</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">// 是否开启热更新，需要配置HotModuleReplacementPlugin</span>
+     <span class="na">https</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="c1">// 是否使用https</span>
+     <span class="na">noInfo</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">// 在热更新时，只会输出错误与警告信息，不会输出其他日志</span>
+     <span class="na">stats</span><span class="p">:</span> <span class="s2">"verbose"</span> <span class="c1">// 输出所有日志</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">compiler</span> <span class="o">=</span> <span class="nx">webpack</span><span class="p">(</span><span class="nx">webpackConfig</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">webpackDevServer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebpackDevServer</span><span class="p">(</span><span class="nx">compiler</span><span class="p">,</span> <span class="nx">devServerOptions</span><span class="p">);</span>
+<span class="nx">webpackDevServer</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="s1">'9090'</span><span class="p">,</span> <span class="s1">'http://localhost'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
 </code></pre>
 </div>
 
