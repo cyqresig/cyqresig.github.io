@@ -243,11 +243,14 @@
     <p>在编译时验证，需要配置IDE上的插件，比如webstorm，配置方法可参考<a href="http://blog.csdn.net/jw5678/article/details/54947045">这里</a></p>
   </li>
   <li>
-    <p>在代码提交前验证，在package.json中配置，代码如下：</p>
+    <p>在代码提交前验证，需要安装<code class="highlighter-rouge">pre-commit</code>模块，并在package.json中配置，代码如下：</p>
 
     <div class="highlighter-rouge"><pre class="highlight"><code><span class="s2">"scripts"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"precommit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eslint . --quiet"</span><span class="w">
-  </span><span class="p">}</span><span class="err">,</span><span class="w">
+    </span><span class="nt">"eslint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eslint . --quiet"</span><span class="w">
+</span><span class="p">}</span><span class="err">,</span><span class="w">
+</span><span class="s2">"pre-commit"</span><span class="err">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"eslint"</span><span class="w">
+</span><span class="p">]</span><span class="err">,</span><span class="w">
 </span></code></pre>
     </div>
   </li>

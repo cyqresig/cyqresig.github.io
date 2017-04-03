@@ -219,23 +219,345 @@
 
 <h2 id="git">git配置</h2>
 
+<ul>
+  <li>配置.gitignore</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">#</span> <span class="nx">OSX</span>
+<span class="err">#</span>
+<span class="p">.</span><span class="nx">DS_Store</span>
+
+<span class="err">#</span> <span class="nx">WebStorm</span>
+<span class="err">#</span>
+<span class="p">.</span><span class="nx">idea</span>
+
+<span class="err">#</span> <span class="nx">node</span><span class="p">.</span><span class="nx">js</span>
+<span class="err">#</span>
+<span class="nx">node_modules</span><span class="o">/</span>
+<span class="nx">npm</span><span class="o">-</span><span class="nx">debug</span><span class="p">.</span><span class="nx">log</span>
+<span class="nx">yarn</span><span class="o">-</span><span class="nx">error</span><span class="p">.</span><span class="nx">log</span>
+
+<span class="err">#</span> <span class="nx">others</span>
+<span class="err">#</span>
+<span class="nx">build</span><span class="o">/</span>
+</code></pre>
+</div>
+
 <h2 id="npm">npm仓库配置</h2>
+
+<ul>
+  <li>配置.npmrc</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">registry</span><span class="o">=</span><span class="nx">http</span><span class="err">:</span><span class="c1">//registry.npmjs.org/</span>
+<span class="nx">disturb</span><span class="o">=</span><span class="nx">http</span><span class="err">:</span><span class="c1">//npmjs.org/dist</span>
+</code></pre>
+</div>
 
 <h2 id="section-2">代码风格配置</h2>
 
-<h2 id="section-3">代码检查配置</h2>
+<ul>
+  <li>配置.editorconfig</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">root</span> <span class="o">=</span> <span class="kc">true</span>
+
+<span class="p">[</span><span class="o">*</span><span class="p">]</span>
+<span class="nx">indent_style</span> <span class="o">=</span> <span class="nx">space</span>
+<span class="nx">indent_size</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="nx">end_of_line</span> <span class="o">=</span> <span class="nx">lf</span>
+<span class="nx">charset</span> <span class="o">=</span> <span class="nx">utf</span><span class="o">-</span><span class="mi">8</span>
+<span class="nx">trim_trailing_whitespace</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="nx">insert_final_newline</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="nx">curly_bracket_next_line</span> <span class="o">=</span> <span class="kc">false</span>
+<span class="nx">spaces_around_operators</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="nx">spaces_around_brackets</span> <span class="o">=</span> <span class="nx">none</span>
+<span class="nx">indent_brace_style</span> <span class="o">=</span> <span class="mi">1</span><span class="nx">TBS</span>
+
+<span class="p">[</span><span class="o">*</span><span class="p">.</span><span class="nx">js</span><span class="p">]</span>
+<span class="nx">quote_type</span> <span class="o">=</span> <span class="nx">single</span>
+
+<span class="p">[</span><span class="o">*</span><span class="p">.{</span><span class="nx">html</span><span class="p">,</span><span class="nx">less</span><span class="p">,</span><span class="nx">css</span><span class="p">,</span><span class="nx">json</span><span class="p">}]</span>
+<span class="nx">quote_type</span> <span class="o">=</span> <span class="kr">double</span>
+</code></pre>
+</div>
+
+<h2 id="section-3">代码质量检查配置</h2>
+
+<ul>
+  <li>配置.eslintrc</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span>
+    <span class="s2">"extends"</span><span class="err">:</span> <span class="s2">"airbnb-base/legacy"</span><span class="p">,</span>
+    <span class="s2">"parser"</span><span class="err">:</span> <span class="s2">"babel-eslint"</span><span class="p">,</span>
+    <span class="s2">"plugins"</span><span class="err">:</span> <span class="p">[</span>
+        <span class="s2">"import"</span>
+    <span class="p">],</span>
+    <span class="s2">"rules"</span><span class="err">:</span> <span class="p">{</span>
+        <span class="s2">"indent"</span><span class="err">:</span> <span class="p">[</span><span class="s2">"error"</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+        <span class="s2">"semi"</span><span class="err">:</span> <span class="p">[</span><span class="s2">"error"</span><span class="p">,</span> <span class="s2">"never"</span><span class="p">],</span>
+        <span class="s2">"comma-dangle"</span><span class="err">:</span> <span class="p">[</span><span class="s2">"error"</span><span class="p">,</span> <span class="s2">"always"</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s2">"globals"</span><span class="err">:</span> <span class="p">{</span>
+        <span class="s2">"cc"</span><span class="err">:</span> <span class="kc">true</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>
+    <p>安装相关依赖 <code class="highlighter-rouge">yarn add --dev babel-eslint eslint eslint-config-airbnb-base eslint-plugin-import pre-commit</code></p>
+  </li>
+  <li>
+    <p>在WebStorm中配置eslint, 并将IDE的javascript质量检查都关闭</p>
+  </li>
+  <li>
+    <p>在package.json中配置提交检查</p>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s2">"scripts"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"eslint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eslint . --quiet"</span><span class="w">
+    </span><span class="p">}</span><span class="err">,</span><span class="w">
+    </span><span class="s2">"pre-commit"</span><span class="err">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"eslint"</span><span class="w">
+    </span><span class="p">]</span><span class="err">,</span><span class="w">
+</span></code></pre>
+</div>
 
 <h2 id="section-4">开发环境配置</h2>
 
+<ul>
+  <li>
+    <p>安装webpack及相关依赖项 <code class="highlighter-rouge">yarn add --dev webpack webpack-dev-server json-loader file-loader url-loader style-loader css-loader less less-loader postcss postcss-cssnext postcss-import postcss-loader precss</code></p>
+
+    <ol>
+      <li>
+        <p>webpack <code class="highlighter-rouge">webpack核心库</code></p>
+      </li>
+      <li>
+        <p>webpack-dev-server <code class="highlighter-rouge">webpack开发服务器</code></p>
+      </li>
+      <li>
+        <p>json-loader <code class="highlighter-rouge">json文件加载器</code></p>
+      </li>
+      <li>
+        <p>file-loader <code class="highlighter-rouge">文件加载器</code></p>
+      </li>
+      <li>
+        <p>url-loader <code class="highlighter-rouge">url加载器，用于加载样式文件中引用的资源</code></p>
+      </li>
+      <li>
+        <p>style-loader <code class="highlighter-rouge">样式加载器，用于加载内联样式</code></p>
+      </li>
+      <li>
+        <p>css-loader <code class="highlighter-rouge">css文件加载器</code></p>
+      </li>
+      <li>
+        <p>less <code class="highlighter-rouge">less核心库</code></p>
+      </li>
+      <li>
+        <p>less-loader <code class="highlighter-rouge">less文件加载器</code></p>
+      </li>
+      <li>
+        <p>postcss <code class="highlighter-rouge">postcss核心库，自带浏览器前缀兼容处理</code></p>
+      </li>
+      <li>
+        <p>postcss-loader postcss-cssnext postcss-import precss <code class="highlighter-rouge">postcss文件加载器依赖的相关插件</code></p>
+      </li>
+    </ol>
+  </li>
+  <li>
+    <p>配置webpack</p>
+  </li>
+  <li>
+    <p>配置webpack-dev-server</p>
+  </li>
+  <li>
+    <p>安装webpack提取文件内容插件 <code class="highlighter-rouge">yarn add --dev extract-text-webpack-plugin</code></p>
+  </li>
+  <li>
+    <p>安装webpack视图html文件注入插件 <code class="highlighter-rouge">yarn add --dev html-webpack-plugin</code></p>
+  </li>
+  <li>
+    <p>安装node环境变量注入 <code class="highlighter-rouge">yarn add --dev cross-env</code></p>
+
+    <p>之后就可以在执行nodejs脚本时自由改变环境变量<code class="highlighter-rouge">cross-env NODE_ENV=development node ./script.js</code></p>
+  </li>
+  <li>
+    <p>安装ip依赖包 <code class="highlighter-rouge">yarn add --dev ip</code></p>
+  </li>
+  <li>
+    <p>安装open依赖包 <code class="highlighter-rouge">yarn add --dev open</code></p>
+  </li>
+  <li>
+    <p>安装log-update依赖包 <code class="highlighter-rouge">yarn add --dev log-update</code></p>
+  </li>
+  <li>
+    <p>安装numeral依赖包 <code class="highlighter-rouge">yarn add --dev numeral</code></p>
+  </li>
+</ul>
+
 <h2 id="section-5">代码编译配置</h2>
+
+<ul>
+  <li>
+    <p>安装babel及相关依赖 <code class="highlighter-rouge">yarn add --dev babel-core babel-loader babel-polyfill babel-preset-es2015 babel-preset-react babel-preset-stage-0 babel-register babel-runtime</code></p>
+
+    <ol>
+      <li>
+        <p>babel-core</p>
+
+        <p>babel转码核心库, 可以使用transform api手动转码字符串或者文件</p>
+      </li>
+      <li>
+        <p>babel-loader</p>
+
+        <p>支持webpack处理babel的loader</p>
+      </li>
+      <li>
+        <p>babel-polyfill</p>
+
+        <p>加载后可以完整模拟es2015环境，以支持完整的es6，7转码</p>
+      </li>
+      <li>
+        <p>babel-preset-es2015</p>
+
+        <p>支持es6编译</p>
+      </li>
+      <li>
+        <p>babel-preset-react</p>
+
+        <p>支持react编译</p>
+      </li>
+      <li>
+        <p>babel-preset-stage-0</p>
+
+        <p>支持es7编译</p>
+      </li>
+      <li>
+        <p>babel-register</p>
+
+        <p>引用执行后可以自动转码代码, 一般与babel-polyfill一起使用</p>
+      </li>
+      <li>
+        <p>babel-runtime</p>
+
+        <p>避免重复的模块引用代码在编译中的输出</p>
+      </li>
+    </ol>
+  </li>
+  <li>
+    <p>配置.babelrc</p>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span>
+    <span class="s2">"presets"</span><span class="err">:</span> <span class="p">[</span>
+        <span class="s2">"es2015"</span><span class="p">,</span>
+        <span class="s2">"react"</span><span class="p">,</span>    <span class="c1">// 只有react项目才需要</span>
+        <span class="s2">"stage-0"</span>
+    <span class="p">],</span>
+    <span class="s2">"plugins"</span><span class="err">:</span> <span class="p">[]</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>调整webpack中的babel设置</li>
+</ul>
 
 <h2 id="section-6">代码打包配置</h2>
 
+<p>配置打包脚本</p>
+
 <h2 id="section-7">代码发布配置</h2>
+
+<p>配置发布脚本</p>
 
 <h2 id="section-8">目录结构</h2>
 
+<div class="highlighter-rouge"><pre class="highlight"><code>├── ...
+├── build                   # 编译后的文件存入的目录
+├── mock                    # 服务端模拟数据的目录
+├── src                     # 所有组件所在的文件夹
+│   ├── action              # redux -&gt; action目录
+│   ├── api                 # 服务端api目录
+│   ├── component           # 业务组件目录
+│   ├── constant            # 项目常量配置目录
+│   ├── container           # redux -&gt; container目录
+│   ├── error               # 自定义错误类目录
+│   ├── images              # 图片存放目录
+│   ├── main                # 项目入口目录
+│   ├── pcss                # pcss样式目录
+│   ├── reducer             # redux -&gt; reducer目录
+│   ├── route               # route目录
+│   ├── view                # 项目视图目录
+│   ├── util                # 项目工具类目录
+│   │   
+│   └── ...其他组件
+└── ...
+</code></pre>
+</div>
+
 <h2 id="section-9">模板示例</h2>
+
+<h2 id="section-10">变更日志</h2>
+
+<h2 id="section-11">文档</h2>
+
+<h2 id="react">react环境配置</h2>
+
+<ul>
+  <li>
+    <p>安装react及相关依赖 <code class="highlighter-rouge">yarn add --dev react react-dom react-hot-loader@3.0.0-beta.6</code></p>
+
+    <p>react-hot-loader@3.0版本还没有正式发布，需要手动指定版本号</p>
+  </li>
+  <li>
+    <p>配置react</p>
+  </li>
+</ul>
+
+<h2 id="redux">redux环境配置</h2>
+
+<ul>
+  <li>
+    <p>安装react及相关依赖 <code class="highlighter-rouge">yarn add --dev redux redux-devtools redux-logger redux-thunk react-redux</code></p>
+  </li>
+  <li>
+    <p>配置redux</p>
+  </li>
+</ul>
+
+<h2 id="router">router环境配置</h2>
+
+<ul>
+  <li>
+    <p>安装react及相关依赖 <code class="highlighter-rouge">yarn add --dev react-router react-router-redux</code></p>
+  </li>
+  <li>
+    <p>配置router</p>
+  </li>
+</ul>
+
+<h2 id="section-12">其他依赖</h2>
+
+<ul>
+  <li>
+    <p>安装cookie依赖 <code class="highlighter-rouge">yarn add --dev js-cookie</code></p>
+  </li>
+  <li>
+    <p>安装fetch依赖 <code class="highlighter-rouge">yarn add --dev isomorphic-fetch</code></p>
+
+    <p>支持在浏览器和node二端使用同样的api</p>
+  </li>
+  <li>
+    <p>安装国际化依赖 <code class="highlighter-rouge">yarn add --dev i18n</code></p>
+  </li>
+</ul>
 
 
 
