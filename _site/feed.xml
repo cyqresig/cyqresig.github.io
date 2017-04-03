@@ -5,8 +5,8 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 03 Apr 2017 14:32:11 +0800</pubDate>
-    <lastBuildDate>Mon, 03 Apr 2017 14:32:11 +0800</lastBuildDate>
+    <pubDate>Mon, 03 Apr 2017 18:59:23 +0800</pubDate>
+    <lastBuildDate>Mon, 03 Apr 2017 18:59:23 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -50,11 +50,14 @@
     &lt;p&gt;在编译时验证，需要配置IDE上的插件，比如webstorm，配置方法可参考&lt;a href=&quot;http://blog.csdn.net/jw5678/article/details/54947045&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;在代码提交前验证，在package.json中配置，代码如下：&lt;/p&gt;
+    &lt;p&gt;在代码提交前验证，需要安装&lt;code class=&quot;highlighter-rouge&quot;&gt;pre-commit&lt;/code&gt;模块，并在package.json中配置，代码如下：&lt;/p&gt;
 
     &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s2&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;precommit&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;eslint . --quiet&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;eslint&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;eslint . --quiet&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;pre-commit&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;eslint&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
     &lt;/div&gt;
   &lt;/li&gt;
@@ -1126,6 +1129,35 @@ indent_size = 2
         <description>&lt;blockquote&gt;
 
 &lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;前端项目模板是什么&lt;/h2&gt;
+
+&lt;p&gt;前端项目模板是针对特定范围的前端项目开发所使用的项目模板，它预先内置了项目开发所需的结构与配置，包含但不限于：
+项目的目录结构，模板示例，git配置，npm仓库配置，代码风格配置，代码检查配置，开发环境配置，代码编译配置，代码打包配置，代码发布配置。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;为什么要使用前端项目模板&lt;/h2&gt;
+
+&lt;p&gt;使用项目模板，可以避免每次创建新项目都需要重新设定项目的结构与配置，并可以保证同类型项目使用完全一致的项目结构与配置。&lt;/p&gt;
+
+&lt;h2 id=&quot;git&quot;&gt;git配置&lt;/h2&gt;
+
+&lt;h2 id=&quot;npm&quot;&gt;npm仓库配置&lt;/h2&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;代码风格配置&lt;/h2&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;代码检查配置&lt;/h2&gt;
+
+&lt;h2 id=&quot;section-4&quot;&gt;开发环境配置&lt;/h2&gt;
+
+&lt;h2 id=&quot;section-5&quot;&gt;代码编译配置&lt;/h2&gt;
+
+&lt;h2 id=&quot;section-6&quot;&gt;代码打包配置&lt;/h2&gt;
+
+&lt;h2 id=&quot;section-7&quot;&gt;代码发布配置&lt;/h2&gt;
+
+&lt;h2 id=&quot;section-8&quot;&gt;目录结构&lt;/h2&gt;
+
+&lt;h2 id=&quot;section-9&quot;&gt;模板示例&lt;/h2&gt;
 
 </description>
         <pubDate>Sun, 26 Feb 2017 00:00:00 +0800</pubDate>
