@@ -1,10 +1,13 @@
 ---
 layout:     post
-title:      "创建你自己的前端项目模板"
+title:      "创建你自己的pc前端react spa项目模板"
 subtitle:   ""
 author:     "绯雨闲丸"
 header-img: ""
 tags:
+    - react
+    - pc
+    - spa
     - front-end
     - template
     - archetype
@@ -102,7 +105,7 @@ quote_type = double
 }
 ```
 
-* 安装相关依赖 `yarn add --dev babel-eslint eslint eslint-config-airbnb-base eslint-plugin-import pre-commit`
+* 安装相关依赖 `yarn add --dev babel-eslint eslint eslint-config-airbnb-base eslint-plugin-import eslint-plugin-react pre-commit`
 
 * 在WebStorm中配置eslint, 并将IDE的javascript质量检查都关闭
 
@@ -141,7 +144,7 @@ quote_type = double
   
   10. postcss `postcss核心库，自带浏览器前缀兼容处理`
   
-  11. postcss-loader postcss-cssnext postcss-import precss `postcss文件加载器依赖的相关插件`
+  11. postcss-loader postcss-cssnext postcss-import precss `postcss文件加载器依赖的相关插件 postcss-cssnext内包含autoprefixer`
 
 * 配置webpack
 
@@ -214,6 +217,46 @@ quote_type = double
 
 * 调整webpack中的babel设置
 
+```js
+// 模块配置
+     module: {
+        // 模块处理规则（包括配置模块加载器，模块编译解析规则等等）
+        rules: [
+          // es6的js文件使用 babel-loader 来处理，转换成es5
+          {
+            // 匹配的模块文件范围  
+            test: /\.js$/,
+            
+            // 包括哪些范围
+            include: [
+              path.resolve(__dirname, "app")
+            ],
+            
+            // 排除哪些范围
+            exclude: [
+              path.resolve(__dirname, "app/demo-files")
+            ],
+            
+            // 使用多个插件，及指定插件配置
+            use: [
+                 // "babel-loader",         // 不指定插件配置的方式
+                 {
+                    loader: "babel-loader", // 指定插件配置的方式，注：babel的配置建议使用.babelrc来配置
+                    options: {
+                      presets: ["es2015"]
+                    },
+                 },
+                 
+                 // 如使用react-hot-loader，则需要在这里加入
+                 'react-hot-loader/webpack'
+            ]
+          },
+          ...
+        ],
+        ...
+     }         
+```
+
 ## 代码打包配置
 
 配置打包脚本
@@ -285,6 +328,16 @@ quote_type = double
   支持在浏览器和node二端使用同样的api
   
 * 安装国际化依赖 `yarn add --dev i18n`  
+
+* 安装fetch mock `yarn add --dev fetch-mock`
+
+## 自定义封装
+
+* 封装自定义错误
+
+* 封装fetch
+
+
 
 
 
