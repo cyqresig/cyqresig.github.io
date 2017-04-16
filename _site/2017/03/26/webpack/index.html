@@ -3,6 +3,12 @@
 
 <head>
     <meta charset="utf-8">
+    <!-- https redirect -->
+    <script type="text/javascript">
+        var host = "www.vanadis.cn";
+        if ((host == window.location.host) && (window.location.protocol != "https:"))
+            window.location.protocol = "https";
+    </script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +18,7 @@
 
     <title>webpack使用小记 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
 
-    <link rel="canonical" href="http://www.vanadis.cn/2017/03/26/webpack/">
+    <link rel="canonical" href="https://www.vanadis.cn/2017/03/26/webpack/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -333,10 +339,8 @@
                   <span class="s1">'style-loader'</span><span class="p">,</span>
                   <span class="s1">'css-loader'</span><span class="p">,</span>
                   <span class="s1">'less-loader'</span><span class="p">,</span>
-              <span class="p">],</span>
-              <span class="na">use</span><span class="p">:</span> <span class="p">[</span>
                   <span class="nx">extractTextPlugin</span><span class="p">.</span><span class="nx">extract</span><span class="p">([</span><span class="s1">'style'</span><span class="p">,</span><span class="s1">'css'</span><span class="p">,</span> <span class="s1">'less'</span><span class="p">])</span>     <span class="c1">// </span>
-              <span class="p">]</span>
+              <span class="p">],</span>
           <span class="p">},</span>
           
           <span class="c1">// pcss文件使用style-loader, css-loader, postcss-loader来处理</span>
@@ -506,7 +510,7 @@
 
 <h2 id="webpack--devserver">webpack 启动 devServer</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">webpackConfig</span> <span class="nx">from</span> <span class="s1">'./webpack.config'</span><span class="p">;</span>  <span class="c1">// 获取webpack配置</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">webpackConfig</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./webpack.config'</span><span class="p">);</span>  <span class="c1">// 获取webpack配置</span>
 <span class="kd">var</span> <span class="nx">webpack</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'webpack'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">WebpackDevServer</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'webpack-dev-server'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">devServerOptions</span> <span class="o">=</span> <span class="p">{</span>
@@ -544,8 +548,8 @@
                     style="text-align: right"
                     data-thread-key="/2017/03/26/webpack"
                     data-title="webpack使用小记"
-                    data-url="http://www.vanadis.cn/2017/03/26/webpack/"
-                    data-images="http://www.vanadis.cn/"
+                    data-url="https://www.vanadis.cn/2017/03/26/webpack/"
+                    data-images="https://www.vanadis.cn/"
                     data-content="
 
 
@@ -596,7 +600,7 @@ webpack是目前前端开发必不可少的一款模块加载器兼构建工具�
                     <div class="ds-thread"
                         data-thread-key="/2017/03/26/webpack"
                         data-title="webpack使用小记"
-                        data-url="http://www.vanadis.cn/2017/03/26/webpack/" >
+                        data-url="https://www.vanadis.cn/2017/03/26/webpack/" >
                     </div>
                 </div>
                 <!-- 多说评论框 end -->

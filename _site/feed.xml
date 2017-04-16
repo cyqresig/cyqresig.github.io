@@ -3,10 +3,10 @@
   <channel>
     <title>绯雨闲丸 Blog</title>
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
-    <link>http://www.vanadis.cn/</link>
-    <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 04 Apr 2017 21:21:17 +0800</pubDate>
-    <lastBuildDate>Tue, 04 Apr 2017 21:21:17 +0800</lastBuildDate>
+    <link>https://www.vanadis.cn/</link>
+    <atom:link href="https://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Sun, 16 Apr 2017 11:33:33 +0800</pubDate>
+    <lastBuildDate>Sun, 16 Apr 2017 11:33:33 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -87,8 +87,8 @@
 
 </description>
         <pubDate>Sun, 02 Apr 2017 00:00:00 +0800</pubDate>
-        <link>http://www.vanadis.cn/2017/04/02/eslint-config/</link>
-        <guid isPermaLink="true">http://www.vanadis.cn/2017/04/02/eslint-config/</guid>
+        <link>https://www.vanadis.cn/2017/04/02/eslint-config/</link>
+        <guid isPermaLink="true">https://www.vanadis.cn/2017/04/02/eslint-config/</guid>
         
         <category>front-end</category>
         
@@ -232,10 +232,8 @@
                   &lt;span class=&quot;s1&quot;&gt;&#39;style-loader&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
                   &lt;span class=&quot;s1&quot;&gt;&#39;css-loader&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
                   &lt;span class=&quot;s1&quot;&gt;&#39;less-loader&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-              &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-              &lt;span class=&quot;na&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
                   &lt;span class=&quot;nx&quot;&gt;extractTextPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;extract&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;style&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;css&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;less&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// &lt;/span&gt;
-              &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+              &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
           &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
           
           &lt;span class=&quot;c1&quot;&gt;// pcss文件使用style-loader, css-loader, postcss-loader来处理&lt;/span&gt;
@@ -405,7 +403,7 @@
 
 &lt;h2 id=&quot;webpack--devserver&quot;&gt;webpack 启动 devServer&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;webpackConfig&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;./webpack.config&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 获取webpack配置&lt;/span&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;webpackConfig&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;./webpack.config&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 获取webpack配置&lt;/span&gt;
 &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;webpack&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;webpack&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;WebpackDevServer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;webpack-dev-server&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;devServerOptions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -434,8 +432,8 @@
 
 </description>
         <pubDate>Sun, 26 Mar 2017 00:00:00 +0800</pubDate>
-        <link>http://www.vanadis.cn/2017/03/26/webpack/</link>
-        <guid isPermaLink="true">http://www.vanadis.cn/2017/03/26/webpack/</guid>
+        <link>https://www.vanadis.cn/2017/03/26/webpack/</link>
+        <guid isPermaLink="true">https://www.vanadis.cn/2017/03/26/webpack/</guid>
         
         <category>front-end</category>
         
@@ -486,8 +484,8 @@
 
 </description>
         <pubDate>Sat, 25 Mar 2017 00:00:00 +0800</pubDate>
-        <link>http://www.vanadis.cn/2017/03/25/npmrc/</link>
-        <guid isPermaLink="true">http://www.vanadis.cn/2017/03/25/npmrc/</guid>
+        <link>https://www.vanadis.cn/2017/03/25/npmrc/</link>
+        <guid isPermaLink="true">https://www.vanadis.cn/2017/03/25/npmrc/</guid>
         
         <category>front-end</category>
         
@@ -615,8 +613,8 @@
 
 </description>
         <pubDate>Sat, 25 Mar 2017 00:00:00 +0800</pubDate>
-        <link>http://www.vanadis.cn/2017/03/25/gitignore/</link>
-        <guid isPermaLink="true">http://www.vanadis.cn/2017/03/25/gitignore/</guid>
+        <link>https://www.vanadis.cn/2017/03/25/gitignore/</link>
+        <guid isPermaLink="true">https://www.vanadis.cn/2017/03/25/gitignore/</guid>
         
         <category>front-end</category>
         
@@ -713,8 +711,8 @@ indent_size = 2
 
 </description>
         <pubDate>Sat, 25 Mar 2017 00:00:00 +0800</pubDate>
-        <link>http://www.vanadis.cn/2017/03/25/editor-config/</link>
-        <guid isPermaLink="true">http://www.vanadis.cn/2017/03/25/editor-config/</guid>
+        <link>https://www.vanadis.cn/2017/03/25/editor-config/</link>
+        <guid isPermaLink="true">https://www.vanadis.cn/2017/03/25/editor-config/</guid>
         
         <category>front-end</category>
         
@@ -788,8 +786,8 @@ indent_size = 2
 
 </description>
         <pubDate>Sat, 25 Mar 2017 00:00:00 +0800</pubDate>
-        <link>http://www.vanadis.cn/2017/03/25/babelrc/</link>
-        <guid isPermaLink="true">http://www.vanadis.cn/2017/03/25/babelrc/</guid>
+        <link>https://www.vanadis.cn/2017/03/25/babelrc/</link>
+        <guid isPermaLink="true">https://www.vanadis.cn/2017/03/25/babelrc/</guid>
         
         <category>front-end</category>
         
@@ -808,8 +806,8 @@ indent_size = 2
 
 </description>
         <pubDate>Sun, 19 Mar 2017 00:00:00 +0800</pubDate>
-        <link>http://www.vanadis.cn/2017/03/19/create-your-own-front-end-scaffold/</link>
-        <guid isPermaLink="true">http://www.vanadis.cn/2017/03/19/create-your-own-front-end-scaffold/</guid>
+        <link>https://www.vanadis.cn/2017/03/19/create-your-own-front-end-scaffold/</link>
+        <guid isPermaLink="true">https://www.vanadis.cn/2017/03/19/create-your-own-front-end-scaffold/</guid>
         
         <category>front-end</category>
         
@@ -1112,8 +1110,8 @@ indent_size = 2
 
 </description>
         <pubDate>Sat, 18 Mar 2017 00:00:00 +0800</pubDate>
-        <link>http://www.vanadis.cn/2017/03/18/babel-stage-x/</link>
-        <guid isPermaLink="true">http://www.vanadis.cn/2017/03/18/babel-stage-x/</guid>
+        <link>https://www.vanadis.cn/2017/03/18/babel-stage-x/</link>
+        <guid isPermaLink="true">https://www.vanadis.cn/2017/03/18/babel-stage-x/</guid>
         
         <category>front-end</category>
         
@@ -1537,8 +1535,8 @@ indent_size = 2
 
 </description>
         <pubDate>Sun, 26 Feb 2017 00:00:00 +0800</pubDate>
-        <link>http://www.vanadis.cn/2017/02/26/create-your-own-front-end-archetype/</link>
-        <guid isPermaLink="true">http://www.vanadis.cn/2017/02/26/create-your-own-front-end-archetype/</guid>
+        <link>https://www.vanadis.cn/2017/02/26/create-your-own-front-end-archetype/</link>
+        <guid isPermaLink="true">https://www.vanadis.cn/2017/02/26/create-your-own-front-end-archetype/</guid>
         
         <category>react</category>
         
@@ -1598,8 +1596,8 @@ ios默认使用最新版本没有问题,
 
 </description>
         <pubDate>Sun, 29 Jan 2017 00:00:00 +0800</pubDate>
-        <link>http://www.vanadis.cn/2017/01/29/react-native-navigation-usage/</link>
-        <guid isPermaLink="true">http://www.vanadis.cn/2017/01/29/react-native-navigation-usage/</guid>
+        <link>https://www.vanadis.cn/2017/01/29/react-native-navigation-usage/</link>
+        <guid isPermaLink="true">https://www.vanadis.cn/2017/01/29/react-native-navigation-usage/</guid>
         
         <category>react-native</category>
         
