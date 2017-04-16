@@ -16,9 +16,9 @@
     <meta name="keyword"  content="绯雨闲丸, HISAME SHIZUMARU绯雨闲丸, HISAME SHIZUMARU, 绯雨闲丸的博客, HISAME SHIZUMARU Blog, 博客, 个人网站, 互联网, 移动, 手机, APP, h5, 前端, 大前端, 前后端分离, 工程化, 构建, 自动化, 网站优化, js, javascript, html, css, html5, css3, react-native, ios, android, nodejs, webpack, gulp, reactjs, angularjs">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>嗨 2016 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
+    <title>设置github个人网站页使用https访问 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
 
-    <link rel="canonical" href="https://www.vanadis.cn/2016/03/02/Hi-2016/">
+    <link rel="canonical" href="https://www.vanadis.cn/2017/04/15/set-ssl-for-Github-Pages/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -161,13 +161,13 @@
 
     <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/post-bg-2016.jpg" width="0" height="0"> -->
+<!-- <img src="/" width="0" height="0"> -->
 
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/post-bg-2016.jpg')
+        background-image: url('/')
     }
 
     
@@ -180,13 +180,21 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#生活" title="生活">生活</a>
+                        <a class="tag" href="/tags/#front-end" title="front-end">front-end</a>
+                        
+                        <a class="tag" href="/tags/#github" title="github">github</a>
+                        
+                        <a class="tag" href="/tags/#page" title="page">page</a>
+                        
+                        <a class="tag" href="/tags/#ssl" title="ssl">ssl</a>
+                        
+                        <a class="tag" href="/tags/#https" title="https">https</a>
                         
                     </div>
-                    <h1>嗨 2016</h1>
+                    <h1>设置github个人网站页使用https访问</h1>
                     
                     
-                    <h2 class="subheading"> "终于见到你了, 我的博客"</h2>
+                    <h2 class="subheading"></h2>
                     
                     <span class="meta">绯雨闲丸 发布于 </span>
                 </div>
@@ -207,70 +215,133 @@
                 post-container">
 
 				<blockquote>
-  <p>“现在可以用啦! ”</p>
+  <p>[译]</p>
 </blockquote>
 
-<h2 id="section">前言</h2>
+<h2 id="github-pages">Github Pages</h2>
 
-<p>终于把个人 Blog 开通了.</p>
+<p>使用Github的Github pages的功能可以免费搭建博客或者托管网页，但是访问方式默认是http的，如果我希望使用https应该如何设置呢？</p>
 
-<p><a href="#build">直接看如何在github上开通个人博客 </a></p>
-
-<p>2016 年前, 一直想开通个人博客, 但国内的各种博客程序的UI大多不敢恭维, wordpress又被墙,
-自己买个主机放个定制程序吧, 部署维护也很麻烦.
-早就听说github上面可以放定制blog, 无限流量, 无须维护, 不过之前因为太懒没去折腾,
-结果就一直连个写 Blog 的地方都没有.</p>
-
-<p>过年时, 被一名好友吐槽说, 作为一名程序员, 竟然在互联网上没有展现自我的空间(没有blog, github也长年没有更新),
-实在是太low. 然后我竟然悲剧的无言以对… -_-!!!</p>
-
-<p>一不做二不休, 花了一个周末搞掉!!!</p>
-
-<p id="build"></p>
-<hr />
-
-<h2 id="section-1">正文</h2>
-
-<p>在github上开通个人博客很简单,</p>
-
-<p>最佳的方式是查看官网引导的 <a href="https://pages.github.com/">GitHub Pages</a> + <a href="http://jekyllrb.com/">Jekyll</a> 快速创建 Blog 的技术方案.</p>
-
-<p>优点非常明显：</p>
+<h2 id="githubio">使用github.io域名时的设置</h2>
 
 <ul>
-  <li><strong>Markdown</strong> 优雅的编写语法</li>
-  <li><strong>Git Commit</strong> 进行 Blog 文章发布</li>
-  <li><strong>GitHub Pages</strong> 的域名和免费无限空间，不用自己折腾主机
-    <ul>
-      <li>并且提供了简单的自定义域名的方法</li>
-    </ul>
+  <li>
+    <p>进入github pages对应的仓库首界面</p>
   </li>
-  <li><strong>Jekyll</strong> 的定制非常容易，基本就是个模版引擎</li>
+  <li>
+    <p>点击Settings，进入这个仓库的设置界面</p>
+  </li>
+  <li>
+    <p>找到<code class="highlighter-rouge">GitHub Pages</code>配置栏，勾选<code class="highlighter-rouge">Enforce HTTPS</code></p>
+  </li>
 </ul>
 
-<p>唯一的缺点是github是国外的域名, 访问速度在国内有时不太稳定</p>
+<h2 id="section">使用自定义域名的设置</h2>
 
-<hr />
+<p>当在仓库的Settings中设置过<code class="highlighter-rouge">Custom domain</code>时，是无法勾选<code class="highlighter-rouge">Enforce HTTPS</code>的。
+在这种情况下，将不得不借助第三方的支持来实现https的访问。</p>
 
-<p>由于之前没有在mac系统上很好的用过命令, 在配置的时候没少遇坑,</p>
+<ul>
+  <li>
+    <p>访问https://support.cloudflare.com/</p>
+  </li>
+  <li>
+    <p>登录，如果没有帐号，则新建一个帐号。</p>
+  </li>
+  <li>
+    <p>点击<code class="highlighter-rouge">Add Website</code>新增一个网站，注意需要输入你的自定义域名</p>
+  </li>
+  <li>
+    <p>创建<code class="highlighter-rouge">A</code>记录-你的自定义域名，指向你的Github Pages的IP</p>
+  </li>
+  <li>
+    <p>创建<code class="highlighter-rouge">A</code>记录-<code class="highlighter-rouge">www</code>，指向你的Github Pages的IP</p>
+  </li>
+  <li>
+    <p>确保在你的Github Pages根目录下存在一个文件<code class="highlighter-rouge">CNAME</code>，里面设置了你的自定义域名</p>
+  </li>
+  <li>
+    <p>打开你的域名管理网站，将这个域名对应的DNS服务器地址设置成cloudflare提供给你的地址</p>
+  </li>
+  <li>
+    <p>在cloudflare的域设置中，将<code class="highlighter-rouge">Setting SSL</code>这项设置为<code class="highlighter-rouge">Flexible</code></p>
+  </li>
+  <li>
+    <p>完成cloudflare的设置</p>
+  </li>
+  <li>
+    <p>过数分钟或者数小时后，配置将生效</p>
+  </li>
+</ul>
 
-<p>包括安装gem, 切换使用taobao的仓库, mac系统安装时权限不够的问题等等,</p>
+<h2 id="https">让搜索引擎知道网站是使用https访问的</h2>
 
-<p>不过在强大的度娘的支持下, 最终还是一一解决.</p>
+<p>上面的配置，只是允许你的站点能使用https访问，但同时还是允许http的方式访问，如要强制使用https访问，则需要：</p>
 
-<p>这里Jekyll的主题使用了国人基于 <a href="https://github.com/BlackrockDigital/startbootstrap-clean-blog-jekyll">IronSummitMedia/startbootstrap-clean-blog-jekyll · GitHub</a> 修改的方案 <a href="https://github.com/Huxpro/huxpro.github.io">Huxpro/huxpro.github.io · GitHub</a></p>
+<ul>
+  <li>在你的Github Pages仓库根目录下的<code class="highlighter-rouge">_config.yml</code>文件中，加入</li>
+</ul>
 
-<p>(不得不感叹下后生可畏)</p>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">url</span><span class="err">:</span> <span class="nx">https</span><span class="err">:</span><span class="c1">//www.yoursite.com   # with the https protocol</span>
+<span class="nl">enforce_ssl</span><span class="p">:</span> <span class="nx">www</span><span class="p">.</span><span class="nx">yoursite</span><span class="p">.</span><span class="nx">com</span>   <span class="err">#</span> <span class="nx">without</span> <span class="nx">any</span> <span class="nx">protocol</span>
 
-<h2 id="section-2">后记</h2>
+<span class="err">#</span> <span class="nx">For</span> <span class="nx">example</span><span class="p">,</span> <span class="nx">my</span> <span class="nx">configuration</span> <span class="nx">is</span> <span class="k">this</span><span class="err">:</span>
+<span class="nl">url</span><span class="p">:</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//vanadis.cn</span>
+<span class="nl">enforce_ssl</span><span class="p">:</span> <span class="nx">vanadis</span><span class="p">.</span><span class="nx">cn</span>
+</code></pre>
+</div>
 
-<p>回顾这个博客的诞生，纯粹是因为被好友low了下-_-!!!.</p>
+<ul>
+  <li>确保在页面的&lt;head&gt;标签中存在带<code class="highlighter-rouge">canonical</code>属性的<link />标签</li>
+</ul>
 
-<p>不过既然开始写, 就继续坚持写下去.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">link</span> <span class="nx">rel</span><span class="o">=</span><span class="s2">"canonical"</span> <span class="nx">href</span><span class="o">=</span><span class="s2">" { { site.url } }{ { page.url } }"</span> <span class="o">/&gt;</span>
+</code></pre>
+</div>
 
-<p>github上也会开始频繁提交代码, 作为个人展示部分作品集, 同时也是对之前经历的生涯的记忆与回顾</p>
+<h2 id="httphttps">强制使用http访问的用户重定向至https访问</h2>
 
-<p>—— HISAME SHIZUMARU 后记于 2016.3.2</p>
+<ul>
+  <li>你的页面的&lt;head&gt;标签中的最底部增加script代码</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"text/javascript"</span><span class="o">&gt;</span>
+    <span class="kd">var</span> <span class="nx">host</span> <span class="o">=</span> <span class="s2">"yoursite.com"</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">((</span><span class="nx">host</span> <span class="o">==</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">host</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span> <span class="o">!=</span> <span class="s2">"https:"</span><span class="p">))</span>
+        <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span> <span class="o">=</span> <span class="s2">"https"</span><span class="p">;</span>
+<span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre>
+</div>
+
+<h2 id="section-1">其他注意事项</h2>
+
+<ul>
+  <li>如果你发现有一些css样式文件或者js文件报没有找到的错误，需要检查一下引用的路径是否是使用https的方式，一个比较好的解决办法是引用路径不写协议<code class="highlighter-rouge">protocol</code>的部分</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">&lt;!--</span> <span class="nx">Change</span> <span class="k">this</span> <span class="o">--&gt;</span>
+<span class="o">&lt;</span><span class="nx">link</span> <span class="nx">rel</span><span class="o">=</span><span class="s2">"stylesheet"</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"http://www.somesite.com/path/to/styles.css"</span><span class="o">&gt;</span>
+
+<span class="c">&lt;!--</span> <span class="nx">to</span> <span class="k">this</span><span class="err">:</span> <span class="o">--&gt;</span>
+<span class="o">&lt;</span><span class="nx">link</span> <span class="nx">rel</span><span class="o">=</span><span class="s2">"stylesheet"</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"//www.somesite.com/path/to/styles.css"</span><span class="o">&gt;</span>
+</code></pre>
+</div>
+
+<h2 id="section-2">资源和示例</h2>
+
+<p><a href="https://help.github.com/articles/using-a-custom-domain-with-github-pages/">设置Github Pages使用自定义域名</a></p>
+
+<p><a href="https://konklone.com/post/github-pages-now-sorta-supports-https-so-use-it">设置Github Pages使用https访问</a></p>
+
+<p><a href="https://github.com/sheharyarn/sheharyarn.github.io/blob/code/_config.yml#L5-L6">示例-设置_config.yml文件</a></p>
+
+<p><a href="https://github.com/sheharyarn/sheharyarn.github.io/blob/master/CNAME">示例-设置CNAME.yml文件</a></p>
+
+<p><a href="https://github.com/sheharyarn/sheharyarn.github.io/blob/code/.themes/sybtle/source/_includes/head.html#L7-L11">示例-设置head.html文件</a></p>
+
+<h2 id="section-3">英文原文参考</h2>
+
+<p><a href="https://sheharyar.me/blog/free-ssl-for-github-pages-with-custom-domains/">https://sheharyar.me/blog/free-ssl-for-github-pages-with-custom-domains/</a></p>
 
 
 
@@ -281,21 +352,17 @@
                 </style>
                 <div class="ds-share"
                     style="text-align: right"
-                    data-thread-key="/2016/03/02/Hi-2016"
-                    data-title="嗨 2016"
-                    data-url="https://www.vanadis.cn/2016/03/02/Hi-2016/"
-                    data-images="https://www.vanadis.cn/img/post-bg-2016.jpg"
+                    data-thread-key="/2017/04/15/set-ssl-for-Github-Pages"
+                    data-title="设置github个人网站页使用https访问"
+                    data-url="https://www.vanadis.cn/2017/04/15/set-ssl-for-Github-Pages/"
+                    data-images="https://www.vanadis.cn/"
                     data-content="
-  “现在可以用啦! ”
+  [译]
 
 
-前言
+Github Pages
 
-终于把个人 Blog 开通了.
-
-直接看如何在github上开通个人博客 
-
-2016 年前, 一直想开通个人博客... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
+使用Github的Github pages的功能可以免费搭建博客或者托管网页，但是访问方式默认是http的，... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
                         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
@@ -314,13 +381,13 @@
 
                 <ul class="pager">
                     
-                    
-                    <li class="next">
-                        <a href="/2016/03/03/markdown-welcome/" data-toggle="tooltip" data-placement="top" title="请使用Markdown写文档">
-                        下一篇<br>
-                        <span>请使用Markdown写文档</span>
+                    <li class="previous">
+                        <a href="/2017/04/02/eslint-config/" data-toggle="tooltip" data-placement="top" title="eslint使用小记">
+                        上一篇<br>
+                        <span>eslint使用小记</span>
                         </a>
                     </li>
+                    
                     
                 </ul>
 
@@ -329,9 +396,9 @@
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/2016/03/02/Hi-2016"
-                        data-title="嗨 2016"
-                        data-url="https://www.vanadis.cn/2016/03/02/Hi-2016/" >
+                        data-thread-key="/2017/04/15/set-ssl-for-Github-Pages"
+                        data-title="设置github个人网站页使用https访问"
+                        data-url="https://www.vanadis.cn/2017/04/15/set-ssl-for-Github-Pages/" >
                     </div>
                 </div>
                 <!-- 多说评论框 end -->

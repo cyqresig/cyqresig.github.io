@@ -5,9 +5,158 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>https://www.vanadis.cn/</link>
     <atom:link href="https://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 16 Apr 2017 11:33:33 +0800</pubDate>
-    <lastBuildDate>Sun, 16 Apr 2017 11:33:33 +0800</lastBuildDate>
+    <pubDate>Sun, 16 Apr 2017 21:48:42 +0800</pubDate>
+    <lastBuildDate>Sun, 16 Apr 2017 21:48:42 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
+    
+      <item>
+        <title>设置github个人网站页使用https访问</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;[译]&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;github-pages&quot;&gt;Github Pages&lt;/h2&gt;
+
+&lt;p&gt;使用Github的Github pages的功能可以免费搭建博客或者托管网页，但是访问方式默认是http的，如果我希望使用https应该如何设置呢？&lt;/p&gt;
+
+&lt;h2 id=&quot;githubio&quot;&gt;使用github.io域名时的设置&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;进入github pages对应的仓库首界面&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;点击Settings，进入这个仓库的设置界面&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;找到&lt;code class=&quot;highlighter-rouge&quot;&gt;GitHub Pages&lt;/code&gt;配置栏，勾选&lt;code class=&quot;highlighter-rouge&quot;&gt;Enforce HTTPS&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;使用自定义域名的设置&lt;/h2&gt;
+
+&lt;p&gt;当在仓库的Settings中设置过&lt;code class=&quot;highlighter-rouge&quot;&gt;Custom domain&lt;/code&gt;时，是无法勾选&lt;code class=&quot;highlighter-rouge&quot;&gt;Enforce HTTPS&lt;/code&gt;的。
+在这种情况下，将不得不借助第三方的支持来实现https的访问。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;访问https://support.cloudflare.com/&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;登录，如果没有帐号，则新建一个帐号。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;点击&lt;code class=&quot;highlighter-rouge&quot;&gt;Add Website&lt;/code&gt;新增一个网站，注意需要输入你的自定义域名&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;创建&lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt;记录-你的自定义域名，指向你的Github Pages的IP&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;创建&lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt;记录-&lt;code class=&quot;highlighter-rouge&quot;&gt;www&lt;/code&gt;，指向你的Github Pages的IP&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;确保在你的Github Pages根目录下存在一个文件&lt;code class=&quot;highlighter-rouge&quot;&gt;CNAME&lt;/code&gt;，里面设置了你的自定义域名&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;打开你的域名管理网站，将这个域名对应的DNS服务器地址设置成cloudflare提供给你的地址&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在cloudflare的域设置中，将&lt;code class=&quot;highlighter-rouge&quot;&gt;Setting SSL&lt;/code&gt;这项设置为&lt;code class=&quot;highlighter-rouge&quot;&gt;Flexible&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;完成cloudflare的设置&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;过数分钟或者数小时后，配置将生效&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;https&quot;&gt;让搜索引擎知道网站是使用https访问的&lt;/h2&gt;
+
+&lt;p&gt;上面的配置，只是允许你的站点能使用https访问，但同时还是允许http的方式访问，如要强制使用https访问，则需要：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;在你的Github Pages仓库根目录下的&lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt;文件中，加入&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;https&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//www.yoursite.com   # with the https protocol&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;enforce_ssl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;www&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;yoursite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;com&lt;/span&gt;   &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;without&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;any&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;protocol&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;For&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;configuration&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;https&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//vanadis.cn&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;enforce_ssl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;vanadis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cn&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;确保在页面的&amp;lt;head&amp;gt;标签中存在带&lt;code class=&quot;highlighter-rouge&quot;&gt;canonical&lt;/code&gt;属性的&lt;link /&gt;标签&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;link&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;rel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;canonical&quot;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot; { { site.url } }{ { page.url } }&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;httphttps&quot;&gt;强制使用http访问的用户重定向至https访问&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;你的页面的&amp;lt;head&amp;gt;标签中的最底部增加script代码&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;script&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;host&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;yoursite.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;host&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;location&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;location&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;protocol&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;https:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;location&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;protocol&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;https&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/script&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;其他注意事项&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;如果你发现有一些css样式文件或者js文件报没有找到的错误，需要检查一下引用的路径是否是使用https的方式，一个比较好的解决办法是引用路径不写协议&lt;code class=&quot;highlighter-rouge&quot;&gt;protocol&lt;/code&gt;的部分&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!--&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Change&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;link&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;rel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;stylesheet&quot;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://www.somesite.com/path/to/styles.css&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!--&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;link&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;rel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;stylesheet&quot;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;//www.somesite.com/path/to/styles.css&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;资源和示例&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://help.github.com/articles/using-a-custom-domain-with-github-pages/&quot;&gt;设置Github Pages使用自定义域名&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://konklone.com/post/github-pages-now-sorta-supports-https-so-use-it&quot;&gt;设置Github Pages使用https访问&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/sheharyarn/sheharyarn.github.io/blob/code/_config.yml#L5-L6&quot;&gt;示例-设置_config.yml文件&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/sheharyarn/sheharyarn.github.io/blob/master/CNAME&quot;&gt;示例-设置CNAME.yml文件&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/sheharyarn/sheharyarn.github.io/blob/code/.themes/sybtle/source/_includes/head.html#L7-L11&quot;&gt;示例-设置head.html文件&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;英文原文参考&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://sheharyar.me/blog/free-ssl-for-github-pages-with-custom-domains/&quot;&gt;https://sheharyar.me/blog/free-ssl-for-github-pages-with-custom-domains/&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 15 Apr 2017 00:00:00 +0800</pubDate>
+        <link>https://www.vanadis.cn/2017/04/15/set-ssl-for-Github-Pages/</link>
+        <guid isPermaLink="true">https://www.vanadis.cn/2017/04/15/set-ssl-for-Github-Pages/</guid>
+        
+        <category>front-end</category>
+        
+        <category>github</category>
+        
+        <category>page</category>
+        
+        <category>ssl</category>
+        
+        <category>https</category>
+        
+        
+      </item>
     
       <item>
         <title>eslint使用小记</title>
@@ -1549,61 +1698,6 @@ indent_size = 2
         <category>template</category>
         
         <category>archetype</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>react-native-navigation使用小记</title>
-        <description>&lt;blockquote&gt;
-
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;github&quot;&gt;github&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/wix/react-native-navigation/&quot;&gt;react-native-navigation&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;感受&lt;/h2&gt;
-&lt;p&gt;react-native-navigation是目前唯一一款使用原生代码来实现navigator的插件,
-使用后navigator的push/pop的动画将脱离js线程而改由原生的UI线程处理, 切屏效果会和原生态一样流畅, 再也不会出现由于js线程渲染导致的navigator切屏动画的卡顿效果了,
-并且该插件还同时内置实现了原生态版本的tabbar
-但是使用下来发现还是有不少地方需要自行做额外的优化处理.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;需要自行修改少许ios/android代码实现类似react-native官方的Navigator具备的’willfocus’与’didfocus’事件监听&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;由于navigator的切屏效果由原生的UI线程处理, 使用一些带有原生态动画效果的组件(比如, react-native-swiper, 由scrollView实现动画)时,
-切屏效果会导致组件的动画效果执行到一半时中断, 所以需要在切屏事件上做处理, 重置组件的动画状态&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;由于使用的原生态默认的切屏动画效果, 动画的形态取决于编译的sdk,
-ios默认使用最新版本没有问题,
-但android使用7.1新版时切屏的动画并不是传统的slide-from-right, 效果比较尴尬. 如果要调整, 需要修改插件的android版本代码及编译的sdk版本, 比较麻烦.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;android部分必须api 25才可以编译, react-native项目默认api 23就可以了, 需要自行更改项目的配置.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;github上有数以百计的issues, 根据需求情况可能会碰到新的坑, 虽然说理论上可以自行处理, 但, 实在是好麻烦…&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;总结&lt;/h2&gt;
-&lt;p&gt;虽然使用react-native-navigation可以使得app在切屏时获得与原生完全一致的体验, 但是完全掌握插件的使用方法代价也不小,
-如对体验要求不是特别高, 建议还是使用官方的Navigator比较实在一点(虽然这玩意儿也有隐藏的坑-_-!!!).&lt;/p&gt;
-
-</description>
-        <pubDate>Sun, 29 Jan 2017 00:00:00 +0800</pubDate>
-        <link>https://www.vanadis.cn/2017/01/29/react-native-navigation-usage/</link>
-        <guid isPermaLink="true">https://www.vanadis.cn/2017/01/29/react-native-navigation-usage/</guid>
-        
-        <category>react-native</category>
-        
-        <category>ios</category>
-        
-        <category>android</category>
         
         
       </item>
