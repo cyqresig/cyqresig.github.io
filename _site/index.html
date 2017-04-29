@@ -190,6 +190,36 @@
             ">
     			
 <div class="post-preview">
+    <a href="/2017/04/28/difference-between-babel-polyfill-and-babel-runtime/">
+        <h2 class="post-title">
+            babel-polyfill和babel-runtime的区别
+        </h2>
+        
+        <h3 class="post-subtitle">
+            
+        </h3>
+        
+        <div class="post-content-preview">
+            
+
+
+
+Babel编译转码的范围
+
+Babel默认只转换新的JavaScript语法，而不转换新的API。
+例如，Iterator、Generator、Set、Maps、Proxy、Reflect、Symbol、Promise 等全局对象，以及一些定义在全局对象上的方法（比如 Object.assign）都不会转译。
+如果想使用这些新的对象和方法，则需要为当前环境提供一个polyfill
+
+...
+        </div>
+    </a>
+    <p class="post-meta">
+        绯雨闲丸 发布于 2017-04-28
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/2017/04/15/set-ssl-for-Github-Pages/">
         <h2 class="post-title">
             设置github个人网站页使用https访问
@@ -492,37 +522,6 @@ EditorConfig的工作原理是：
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/2017/02/26/create-your-own-front-end-archetype/">
-        <h2 class="post-title">
-            创建你自己的pc前端react spa项目模板
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-前端项目模板是什么
-
-前端项目模板是针对特定范围的前端项目开发所使用的项目模板，它预先内置了项目开发所需的结构与配置，包含但不限于：
-项目的目录结构，模板示例，git配置，npm仓库配置，代码风格配置，代码检查配置，开发环境配置，代码编译配置，代码打包配置，代码发布配置。
-
-为什么要使用前端项目模板
-
-使用项目模板，可以避免每次创建新项目都需要重新设定项目的结构与配置，并可以保证同类...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2017-02-26
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -643,7 +642,7 @@ EditorConfig的工作原理是：
                             
                         
                             
-                                <a href="/tags/#front-end" title="front-end" rel="10">
+                                <a href="/tags/#front-end" title="front-end" rel="11">
                                     front-end
                                 </a>
                             
@@ -661,7 +660,7 @@ EditorConfig的工作原理是：
                             
                         
                             
-                                <a href="/tags/#babel" title="babel" rel="2">
+                                <a href="/tags/#babel" title="babel" rel="3">
                                     babel
                                 </a>
                             
@@ -759,6 +758,24 @@ EditorConfig的工作原理是：
                             
                                 <a href="/tags/#https" title="https" rel="1">
                                     https
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#babel-polyfill" title="babel-polyfill" rel="1">
+                                    babel-polyfill
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#babel-runtime" title="babel-runtime" rel="1">
+                                    babel-runtime
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#babel-plugin-transform-runtime" title="babel-plugin-transform-runtime" rel="1">
+                                    babel-plugin-transform-runtime
                                 </a>
                             
                         

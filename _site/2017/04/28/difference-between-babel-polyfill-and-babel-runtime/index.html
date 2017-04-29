@@ -16,9 +16,9 @@
     <meta name="keyword"  content="绯雨闲丸, HISAME SHIZUMARU绯雨闲丸, HISAME SHIZUMARU, 绯雨闲丸的博客, HISAME SHIZUMARU Blog, 博客, 个人网站, 互联网, 移动, 手机, APP, h5, 前端, 大前端, 前后端分离, 工程化, 构建, 自动化, 网站优化, js, javascript, html, css, html5, css3, react-native, ios, android, nodejs, webpack, gulp, reactjs, angularjs">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>es6新增内容简介 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
+    <title>babel-polyfill和babel-runtime的区别 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
 
-    <link rel="canonical" href="https://www.vanadis.cn/2016/05/05/es6-instruction/">
+    <link rel="canonical" href="https://www.vanadis.cn/2017/04/28/difference-between-babel-polyfill-and-babel-runtime/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -161,13 +161,13 @@
 
     <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/post-bg-2016.jpg" width="0" height="0"> -->
+<!-- <img src="/" width="0" height="0"> -->
 
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/post-bg-2016.jpg')
+        background-image: url('/')
     }
 
     
@@ -180,13 +180,21 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#es6" title="es6">es6</a>
+                        <a class="tag" href="/tags/#front-end" title="front-end">front-end</a>
+                        
+                        <a class="tag" href="/tags/#babel" title="babel">babel</a>
+                        
+                        <a class="tag" href="/tags/#babel-polyfill" title="babel-polyfill">babel-polyfill</a>
+                        
+                        <a class="tag" href="/tags/#babel-runtime" title="babel-runtime">babel-runtime</a>
+                        
+                        <a class="tag" href="/tags/#babel-plugin-transform-runtime" title="babel-plugin-transform-runtime">babel-plugin-transform-runtime</a>
                         
                     </div>
-                    <h1>es6新增内容简介</h1>
+                    <h1>babel-polyfill和babel-runtime的区别</h1>
                     
                     
-                    <h2 class="subheading"> ""</h2>
+                    <h2 class="subheading"></h2>
                     
                     <span class="meta">绯雨闲丸 发布于 </span>
                 </div>
@@ -207,273 +215,117 @@
                 post-container">
 
 				<blockquote>
-  <p>“”</p>
+
 </blockquote>
 
-<h2 id="es6">ES6新增的内容</h2>
+<h2 id="babel">Babel编译转码的范围</h2>
 
-<p>ES6新增了大量的内容。</p>
+<p>Babel默认只转换新的JavaScript语法，而不转换新的API。
+例如，Iterator、Generator、Set、Maps、Proxy、Reflect、Symbol、Promise 等全局对象，以及一些定义在全局对象上的方法（比如 Object.assign）都不会转译。
+如果想使用这些新的对象和方法，则需要为当前环境提供一个polyfill</p>
 
-<p>这里可以查看es6中文详细教程<a href="http://es6.ruanyifeng.com/#docs/intro">http://es6.ruanyifeng.com/#docs/intro</a></p>
+<h2 id="babel-polyfill">babel-polyfill</h2>
 
-<p>这可以查看主流浏览器和自己当前浏览器的兼容性 <a href="https://kangax.github.io/compat-table/es6/">https://kangax.github.io/compat-table/es6/</a></p>
+<p>目前最常用的配合Babel一起使用的polyfill是<code class="highlighter-rouge">babel-polyfill</code>，它会针对编译的代码中新的API进行处理，并且在代码中插入一些帮助函数。</p>
 
-<p>一般在开发时,都使用 babel 来把 es6 的代码编译成 es5。它支持绝大部分的特性。</p>
+<p>比如说：代码中包含</p>
 
-<p>而且查看编译后的代码很容易理解这些特性。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kr">const</span> <span class="nx">key</span> <span class="o">=</span> <span class="s1">'babel'</span>
+<span class="kr">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">[</span><span class="nx">key</span><span class="p">]:</span> <span class="s1">'polyfill'</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre>
+</div>
 
-<h2 id="let--const">let &amp; const</h2>
+<p>使用<code class="highlighter-rouge">babel-polyfill</code>配合转码后，代码会变成这样</p>
 
-<p>可以通过 let 和 const 来声明块级作用于的变量（通过 var 声明的是函数级作用域）。而且 const 声明的是不可变变量。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">_defineProperty</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="p">{</span> <span class="na">value</span><span class="p">:</span> <span class="nx">value</span><span class="p">,</span> <span class="na">enumerable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">configurable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">writable</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">obj</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">obj</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">key</span> <span class="o">=</span> <span class="s1">'babel'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nx">_defineProperty</span><span class="p">({},</span> <span class="nx">key</span><span class="p">,</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({},</span> <span class="p">{</span> <span class="na">key</span><span class="p">:</span> <span class="s1">'polyfill'</span> <span class="p">}));</span>
+</code></pre>
+</div>
+
+<h2 id="babel-runtime">babel-runtime</h2>
+
+<p><code class="highlighter-rouge">babel-polyfill</code>解决了Babel不转换新API的问题，但是直接在代码中插入帮助函数，会导致不同的代码文件中包含重复的代码，导致编译后的代码体积变大。
+（比如：上述的帮助函数_defineProperty有可能在很多的代码模块文件中都会被插入）</p>
+
+<p>Babel为了解决这个问题，提供了单独的包<code class="highlighter-rouge">babel-runtime</code>用以提供编译模块的工具函数，
+启用插件<code class="highlighter-rouge">babel-plugin-transform-runtime</code>后，Babel就会使用<code class="highlighter-rouge">babel-runtime</code>下的工具函数，上述的代码就会变成这样</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">_defineProperty2</span> <span class="o">=</span> <span class="nx">__webpack_require__</span><span class="p">(</span><span class="s2">"./node_modules/babel-runtime/helpers/defineProperty.js"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">_defineProperty3</span> <span class="o">=</span> <span class="nx">_interopRequireDefault</span><span class="p">(</span><span class="nx">_defineProperty2</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">_assign</span> <span class="o">=</span> <span class="nx">__webpack_require__</span><span class="p">(</span><span class="s2">"./node_modules/babel-runtime/core-js/object/assign.js"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">_assign2</span> <span class="o">=</span> <span class="nx">_interopRequireDefault</span><span class="p">(</span><span class="nx">_assign</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">_interopRequireDefault</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="k">return</span> <span class="nx">obj</span> <span class="o">&amp;&amp;</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">__esModule</span> <span class="p">?</span> <span class="nx">obj</span> <span class="p">:</span> <span class="p">{</span> <span class="na">default</span><span class="p">:</span> <span class="nx">obj</span> <span class="p">};</span> 
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">key</span> <span class="o">=</span> <span class="s1">'babel'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">_defineProperty3</span><span class="p">.</span><span class="k">default</span><span class="p">)(</span>
+            <span class="p">{},</span> <span class="nx">key</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">_assign2</span><span class="p">.</span><span class="k">default</span><span class="p">)({},</span> <span class="p">{</span> <span class="na">key</span><span class="p">:</span> <span class="s1">'polyfill'</span> <span class="p">})</span>
+          <span class="p">);</span>
+</code></pre>
+</div>
+
+<p>可以看到上述转换后的代码中_defineProperty帮助函数是通过<code class="highlighter-rouge">babel-runtime</code>下的模块引用的，
+同时Object.assign也变成了模块引用, 这样可以避免自行引入polyfill时导致的污染全局命名空间的问题。</p>
+
+<h2 id="section">配置</h2>
+
+<ul>
+  <li>使用<code class="highlighter-rouge">babel-polyfill</code>需要额外安装<code class="highlighter-rouge">babel-polyfill</code>依赖包，
+然后在webpack配置文件中的入口或者公共模块中加入’babel-polyfill’即可，代码如下：</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">entry</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nl">common</span><span class="p">:</span> <span class="p">[</span>
+        <span class="err">`</span><span class="nx">babel</span><span class="o">-</span><span class="nx">polyfill</span><span class="err">`</span><span class="p">,</span>
+        <span class="err">`</span><span class="nx">whatwg</span><span class="o">-</span><span class="nx">fetch</span><span class="err">`</span><span class="p">,</span>
+        <span class="err">`</span><span class="nx">react</span><span class="err">`</span><span class="p">,</span>
+        <span class="err">`</span><span class="nx">react</span><span class="o">-</span><span class="nx">dom</span><span class="err">`</span><span class="p">,</span>
+        <span class="err">`</span><span class="nx">redux</span><span class="err">`</span><span class="p">,</span>
+        <span class="err">`</span><span class="nx">react</span><span class="o">-</span><span class="nx">redux</span><span class="err">`</span><span class="p">,</span>
+        <span class="err">`</span><span class="nx">js</span><span class="o">-</span><span class="nx">cookie</span><span class="err">`</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">},</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>使用<code class="highlighter-rouge">babel-runtime</code>需要额外安装<code class="highlighter-rouge">babel-runtime</code>和<code class="highlighter-rouge">babel-plugin-transform-runtime</code>依赖包，
+然后在<code class="highlighter-rouge">.babelrc</code>配置文件中启用<code class="highlighter-rouge">transform-runtime</code>, 代码如下：</li>
+</ul>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span>
-    <span class="kd">let</span> <span class="nx">x</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">y</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span>
-</code></pre>
-</div>
-
-<h3 id="destructuring">解构(destructuring)</h3>
-
-<p>可以用一个对象来给一个对象（或者数组）的每一个属性赋值。</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="p">[</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">c</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">];</span>    <span class="c1">//通过数组给多个变量赋值</span>
-<span class="kd">var</span> <span class="p">{</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">}</span> <span class="o">=</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"Tom"</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span><span class="mi">12</span><span class="p">}</span> <span class="c1">//通过一个对象来给多个变量赋值</span>
-
-<span class="c1">//用对象来定义参数</span>
-<span class="kd">function</span> <span class="nx">g</span><span class="p">({</span><span class="na">name</span><span class="p">:</span> <span class="nx">x</span><span class="p">})</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="nx">g</span><span class="p">({</span><span class="na">name</span><span class="p">:</span> <span class="mi">5</span><span class="p">})</span>
-</code></pre>
-</div>
-
-<h2 id="arrow-function">箭头函数(arrow function)</h2>
-
-<p>箭头函数很像 lambda 表达式，而且还会自动绑定this为当前上下文。</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">].</span><span class="nx">map</span><span class="p">(</span><span class="nx">d</span><span class="o">=&gt;</span><span class="nx">d</span><span class="o">*</span><span class="nx">d</span><span class="p">);</span> <span class="c1">//单行</span>
-
-<span class="err">等同于</span>
-
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">].</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">d</span><span class="o">*</span><span class="nx">d</span><span class="p">;</span>
-<span class="p">});</span>
-
-<span class="c1">//也可以写多行</span>
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">].</span><span class="nx">map</span><span class="p">(</span><span class="nx">d</span><span class="o">=&gt;</span><span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-    <span class="k">return</span> <span class="nx">d</span><span class="o">*</span><span class="nx">d</span><span class="p">;</span>
-<span class="p">});</span>
-
-<span class="err">等同于</span>
-
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">].</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-    <span class="k">return</span> <span class="nx">d</span><span class="o">*</span><span class="nx">d</span><span class="p">;</span>
-<span class="p">});</span>
-</code></pre>
-</div>
-
-<h3 id="section">函数默认变量和延展属性</h3>
-
-<p>可以在函数声明的时候指定一个默认值，还有用三个点号来表示延展属性</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">say</span><span class="p">(</span><span class="nx">name</span><span class="o">=</span><span class="s2">"Tom"</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">name</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kd">function</span> <span class="nx">a</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="p">...</span><span class="nx">y</span><span class="p">)</span> <span class="p">{</span><span class="c1">//延展属性</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span>
-<span class="p">}</span>
-<span class="nx">a</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span>
-</code></pre>
-</div>
-
-<h2 id="modules">modules</h2>
-
-<p>对模块的语法支持</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">sum</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="k">return</span> <span class="mi">2</span><span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kr">export</span> <span class="k">default</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kr">export</span> <span class="kd">function</span> <span class="nx">sum</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kr">import</span> <span class="nx">sum</span> <span class="nx">from</span> <span class="s2">"math"</span>
-
-<span class="nx">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
-</div>
-
-<h2 id="class">类(class)</h2>
-
-<p>es6原生支持class 关键字来声明一个类了，当然最终还是会内部转换成基于原型继承实现的。但是毕竟可以很方便的实现创建和继承一个类了</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kr">class</span> <span class="nx">People</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="nx">sayName</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sayName</span><span class="p">);</span>
-    <span class="p">}</span>
+    <span class="s2">"presets"</span><span class="err">:</span> <span class="p">[</span>
+        <span class="s2">"es2015"</span><span class="p">,</span>
+        <span class="s2">"react"</span><span class="p">,</span>
+        <span class="s2">"stage-0"</span>
+    <span class="p">],</span>
+    <span class="s2">"plugins"</span><span class="err">:</span> <span class="p">[</span>
+        <span class="s2">"transform-runtime"</span>
+    <span class="p">]</span>
 <span class="p">}</span>
 </code></pre>
 </div>
 
-<h2 id="improve-object-literal">对象字面量的增强(improve object literal)</h2>
+<h2 id="section-1">参考</h2>
 
-<p>现在可以这样写了：</p>
+<p><a href="http://stackoverflow.com/questions/31781756/is-there-any-practical-difference-between-using-babel-runtime-and-the-babel-poly">http://stackoverflow.com/questions/31781756/is-there-any-practical-difference-between-using-babel-runtime-and-the-babel-poly</a></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">people</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="na">name</span><span class="p">:</span> <span class="s2">"Tom"</span><span class="p">,</span>
-      <span class="nx">sayName</span><span class="p">()</span> <span class="p">{</span>    <span class="c1">//更方便定义函数</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
-      <span class="p">},</span>
-      <span class="p">[</span> <span class="s1">'prop_'</span> <span class="o">+</span> <span class="p">(()</span> <span class="o">=&gt;</span> <span class="mi">42</span><span class="p">)()</span> <span class="p">]:</span> <span class="mi">42</span>    <span class="c1">//甚至可以计算属性名</span>
-<span class="p">}</span>
-</code></pre>
-</div>
-
-<h3 id="string-template">字符串模板(string template)</h3>
-
-<p>现在终于不用引用模板库了, 原生有语法支持了，并且用反引号支持多行字符串</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">people</span> <span class="o">=</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"Tom"</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">12</span><span class="p">};</span>
-<span class="kd">var</span> <span class="nx">html</span> <span class="o">=</span> <span class="err">`</span><span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">name</span><span class="err">:</span> <span class="nx">$</span><span class="p">{</span><span class="nx">people</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/li</span><span class="err">&gt;
-</span><span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">age</span><span class="err">:</span> <span class="nx">$</span><span class="p">{</span><span class="nx">people</span><span class="p">.</span><span class="nx">age</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/li</span><span class="err">&gt;
-</span><span class="o">&lt;</span><span class="sr">/ul&gt;`</span><span class="err">;
-</span></code></pre>
-</div>
-
-<h2 id="iterators--forof">Iterators + For..Of</h2>
-
-<p>Iterator 用来实现一个可以用 for 关键字遍历的对象：</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">students</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="p">[</span><span class="nx">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">]()</span> <span class="p">{</span>
-    <span class="kd">let</span> <span class="nx">current</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">return</span> <span class="p">{</span>
-      <span class="nx">next</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="p">{</span><span class="na">done</span><span class="p">:</span> <span class="nx">current</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="nx">current</span><span class="o">++</span><span class="p">};</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">for</span><span class="p">(</span><span class="nx">s</span> <span class="nx">of</span> <span class="nx">students</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="c1">//输出 0 - 100</span>
-</code></pre>
-</div>
-
-<h2 id="yield">yield</h2>
-
-<p>JS终于支持大名顶顶的 yield 了，就是在一个函数内部可以返回多次 return 一个变量。如果用 yield 来实现上面的代码，应该是这样的</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">students</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="p">[</span><span class="nx">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">]:</span> <span class="kd">function</span><span class="o">*</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;=</span><span class="mi">100</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">yield</span> <span class="nx">i</span><span class="p">;</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">s</span> <span class="nx">of</span> <span class="nx">students</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre>
-</div>
-
-<h2 id="unicode">unicode</h2>
-
-<p>原生支持unicode api</p>
-
-<h2 id="map--set--weakmap--weakset">Map + Set + WeakMap + WeakSet</h2>
-
-<p>map 和 set 在其他语言中很常用。 WeakMap 和 WeakSet 用来防止内存泄露</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="err">#</span><span class="nx">map</span>
-<span class="kd">var</span> <span class="nx">m</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">();</span>
-<span class="nx">m</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-<span class="nx">m</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"a"</span><span class="p">)</span>
-
-<span class="err">#</span><span class="nx">set</span>
-<span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Set</span><span class="p">();</span>
-<span class="nx">s</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">"a"</span><span class="p">);</span>
-<span class="nx">s</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">"b"</span><span class="p">);</span>
-<span class="nx">s</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">"a"</span><span class="p">);</span> <span class="c1">//不变，因为 a 已经存在了</span>
-</code></pre>
-</div>
-
-<h2 id="proxy">proxy</h2>
-
-<p>这里的proxy和 jQuery.proxy 可是两码事，不是用来绑定this的。它和 java 的annotation，Python 的 decorator 类似。就是它可以代理一个对象的所有行为，比如你取一个对象的属性，正常是直接取，但是加了 proxy之后，“取”的这个操作会先传个proxy，他来决定到底怎么取。</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="p">{};</span>
-<span class="kd">var</span> <span class="nx">handler</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">get</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">receiver</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="err">`</span><span class="nx">Hello</span><span class="p">,</span> <span class="nx">$</span><span class="p">{</span><span class="nx">name</span><span class="p">}</span><span class="o">!</span><span class="err">`</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Proxy</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>
-<span class="nx">p</span><span class="p">.</span><span class="nx">world</span> <span class="o">===</span> <span class="s1">'Hello, world!'</span><span class="p">;</span>
-</code></pre>
-</div>
-<p>当然他不止可以代理 get，还有 set, has 等一堆操作可以被代理。</p>
-
-<h2 id="symbol">Symbol</h2>
-
-<p>Sybmol 用来创建唯一不可变字符串</p>
-
-<h2 id="section-1">继承内置类</h2>
-
-<p>现在内置的 Array, Date 和 Element 都可以被继承了</p>
-
-<h2 id="math--number--string--array--object-api-">Math + Number + String + Array + Object API 增强</h2>
-
-<p>增加了一大推新的API：</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="s2">"abcd"</span><span class="p">.</span><span class="nx">include</span><span class="p">(</span><span class="s2">"bc"</span><span class="p">);</span>
-</code></pre>
-</div>
-
-<h2 id="promise">promise</h2>
-
-<p>现在原生支持了</p>
-
-<h2 id="section-2">反射</h2>
-
-<p>类似java的反射，可以通过反射机制去操作运行时的对象。</p>
-
-<h2 id="section-3">尾递归调用优化</h2>
-
-<p>关于尾递归的说明可以参考这里 <a href="http://www.zhihu.com/question/20761771">http://www.zhihu.com/question/20761771</a></p>
-
-<p>ES6规定了解释器必须对尾递归进行优化，无论你的尾递归有多少次调用再也不会造成栈溢出了。</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">factorial</span><span class="p">(</span><span class="nx">n</span><span class="p">,</span> <span class="nx">acc</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-    <span class="s1">'use strict'</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="nx">acc</span><span class="p">;</span>
-    <span class="k">return</span> <span class="nx">factorial</span><span class="p">(</span><span class="nx">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">n</span> <span class="o">*</span> <span class="nx">acc</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="nx">factorial</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
-</code></pre>
-</div>
-<p>上面这个是计算阶乘的，现在在任何浏览器中运行都会造成栈溢出。</p>
 
 
                 <hr>
@@ -483,19 +335,18 @@
                 </style>
                 <div class="ds-share"
                     style="text-align: right"
-                    data-thread-key="/2016/05/05/es6-instruction"
-                    data-title="es6新增内容简介"
-                    data-url="https://www.vanadis.cn/2016/05/05/es6-instruction/"
-                    data-images="https://www.vanadis.cn/img/post-bg-2016.jpg"
+                    data-thread-key="/2017/04/28/difference-between-babel-polyfill-and-babel-runtime"
+                    data-title="babel-polyfill和babel-runtime的区别"
+                    data-url="https://www.vanadis.cn/2017/04/28/difference-between-babel-polyfill-and-babel-runtime/"
+                    data-images="https://www.vanadis.cn/"
                     data-content="
-  “”
 
 
-ES6新增的内容
 
-ES6新增了大量的内容。
+Babel编译转码的范围
 
-这里可以查看es6中文详细教程http://es6.ruanyifeng.com/#doc... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
+Babel默认只转换新的JavaScript语法，而不转换新的API。
+例如，Iterator、Generator、S... | 绯雨闲丸的博客 | HISAME SHIZUMARU Blog " >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
                         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
@@ -515,19 +366,12 @@ ES6新增了大量的内容。
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2016/05/05/es6-destructing-spread/" data-toggle="tooltip" data-placement="top" title="es6-destructing-spread的用法">
+                        <a href="/2017/04/15/set-ssl-for-Github-Pages/" data-toggle="tooltip" data-placement="top" title="设置github个人网站页使用https访问">
                         上一篇<br>
-                        <span>es6-destructing-spread的用法</span>
+                        <span>设置github个人网站页使用https访问</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2016/05/05/es6-iterator-yield/" data-toggle="tooltip" data-placement="top" title="es6-iterator-yield的用法">
-                        下一篇<br>
-                        <span>es6-iterator-yield的用法</span>
-                        </a>
-                    </li>
                     
                 </ul>
 
@@ -536,9 +380,9 @@ ES6新增了大量的内容。
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/2016/05/05/es6-instruction"
-                        data-title="es6新增内容简介"
-                        data-url="https://www.vanadis.cn/2016/05/05/es6-instruction/" >
+                        data-thread-key="/2017/04/28/difference-between-babel-polyfill-and-babel-runtime"
+                        data-title="babel-polyfill和babel-runtime的区别"
+                        data-url="https://www.vanadis.cn/2017/04/28/difference-between-babel-polyfill-and-babel-runtime/" >
                     </div>
                 </div>
                 <!-- 多说评论框 end -->

@@ -374,8 +374,12 @@
           <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s2">"app"</span><span class="p">)</span>
         <span class="p">],</span>
         
-        <span class="c1">// 使用了哪些文件后缀名</span>
-        <span class="na">extensions</span><span class="p">:</span> <span class="p">[</span><span class="s2">".js"</span><span class="p">,</span> <span class="s2">".json"</span><span class="p">,</span> <span class="s2">".jsx"</span><span class="p">,</span> <span class="s2">".css"</span><span class="p">],</span>
+        <span class="c1">// 默认值 [".js", ".json"]</span>
+        <span class="c1">// 当引用路径的模块没有文件后缀名时优先匹配哪些文件后缀名，</span>
+        <span class="c1">// 比如使用了代码import Button from './Button', </span>
+        <span class="c1">// 当同路径下同时存在Button.web.js，Button.js时，需要在extensions里（.js前配置.web才会引用Button.web.js）</span>
+        <span class="c1">// 否则会使用引用Button.js</span>
+        <span class="na">extensions</span><span class="p">:</span> <span class="p">[</span><span class="s2">".web.js"</span><span class="p">,</span> <span class="s2">".js"</span><span class="p">,</span> <span class="s2">".json"</span><span class="p">,</span> <span class="s2">".jsx"</span><span class="p">,</span> <span class="s2">".css"</span><span class="p">],</span>
             
         <span class="c1">// 模块路径的别名配置，将冗长的模块引用路径配置成简短的模块别名</span>
         <span class="na">alias</span><span class="p">:</span> <span class="p">{</span>    
@@ -714,7 +718,7 @@ webpack是目前前端开发必不可少的一款模块加载器兼构建工具�
                             
         				
                             
-                				<a href="/tags/#front-end" title="front-end" rel="10">
+                				<a href="/tags/#front-end" title="front-end" rel="11">
                                     front-end
                                 </a>
                             
@@ -732,7 +736,7 @@ webpack是目前前端开发必不可少的一款模块加载器兼构建工具�
                             
         				
                             
-                				<a href="/tags/#babel" title="babel" rel="2">
+                				<a href="/tags/#babel" title="babel" rel="3">
                                     babel
                                 </a>
                             
@@ -830,6 +834,24 @@ webpack是目前前端开发必不可少的一款模块加载器兼构建工具�
                             
                 				<a href="/tags/#https" title="https" rel="1">
                                     https
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#babel-polyfill" title="babel-polyfill" rel="1">
+                                    babel-polyfill
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#babel-runtime" title="babel-runtime" rel="1">
+                                    babel-runtime
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#babel-plugin-transform-runtime" title="babel-plugin-transform-runtime" rel="1">
+                                    babel-plugin-transform-runtime
                                 </a>
                             
         				
