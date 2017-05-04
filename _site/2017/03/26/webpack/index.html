@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <!-- https redirect -->
-    <script type="text/javascript">
-        var host = "www.vanadis.cn";
-        if ((host == window.location.host) && (window.location.protocol != "https:"))
-            window.location.protocol = "https";
-    </script>
+    <!--<script type="text/javascript">-->
+        <!--var host = "www.vanadis.cn";-->
+        <!--if ((host == window.location.host) && (window.location.protocol != "https:"))-->
+            <!--window.location.protocol = "https";-->
+    <!--</script>-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +18,7 @@
 
     <title>webpack使用小记 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
 
-    <link rel="canonical" href="https://www.vanadis.cn/2017/03/26/webpack/">
+    <link rel="canonical" href="http://www.vanadis.cn/2017/03/26/webpack/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -467,7 +467,7 @@
          <span class="p">}),</span>    
          <span class="k">new</span> <span class="nx">extractTextPlugin</span><span class="p">(</span><span class="s2">"css/[name].css"</span><span class="p">),</span>       <span class="c1">// css抽取，需要引入模块extract-text-webpack-plugin，并且需要在模块加载器处也加入对应配置</span>
          <span class="k">new</span> <span class="nx">HtmlWebpackPlugin</span><span class="p">({</span>                        <span class="c1">// html插件，定义html模板，生成html文件，并将指定的模块插入html中（需要引入模块html-webpack-plugin）</span>
-             <span class="na">template</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">'src/'</span><span class="p">,</span> <span class="s1">'template.html'</span><span class="p">),</span>  <span class="c1">// 模板html文件的存放位置</span>
+             <span class="na">template</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">'src/'</span><span class="p">,</span> <span class="s1">'template.html'</span><span class="p">),</span>  <span class="c1">// 模板html文件的存放位置(相对进程执行目录，一般就是项目根目录)</span>
              <span class="na">filename</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">'build/'</span><span class="p">,</span> <span class="s1">'index.html'</span><span class="p">),</span>   <span class="c1">// 指输出的每个html文件名称及存放路径的定义</span>
              <span class="na">inject</span><span class="p">:</span> <span class="s1">'body'</span><span class="p">,</span>                                <span class="c1">// 表示插入至body标签内</span>
              <span class="na">chunks</span><span class="p">:</span> <span class="p">[</span>      <span class="c1">// 插入的模块在html上会自动使用publicPath与模块的filename作为引用路径</span>
@@ -552,8 +552,8 @@
                     style="text-align: right"
                     data-thread-key="/2017/03/26/webpack"
                     data-title="webpack使用小记"
-                    data-url="https://www.vanadis.cn/2017/03/26/webpack/"
-                    data-images="https://www.vanadis.cn/"
+                    data-url="http://www.vanadis.cn/2017/03/26/webpack/"
+                    data-images="http://www.vanadis.cn/"
                     data-content="
 
 
@@ -604,7 +604,7 @@ webpack是目前前端开发必不可少的一款模块加载器兼构建工具�
                     <div class="ds-thread"
                         data-thread-key="/2017/03/26/webpack"
                         data-title="webpack使用小记"
-                        data-url="https://www.vanadis.cn/2017/03/26/webpack/" >
+                        data-url="http://www.vanadis.cn/2017/03/26/webpack/" >
                     </div>
                 </div>
                 <!-- 多说评论框 end -->
@@ -700,7 +700,7 @@ webpack是目前前端开发必不可少的一款模块加载器兼构建工具�
                             
         				
                             
-                				<a href="/tags/#react" title="react" rel="1">
+                				<a href="/tags/#react" title="react" rel="2">
                                     react
                                 </a>
                             
@@ -718,7 +718,7 @@ webpack是目前前端开发必不可少的一款模块加载器兼构建工具�
                             
         				
                             
-                				<a href="/tags/#front-end" title="front-end" rel="11">
+                				<a href="/tags/#front-end" title="front-end" rel="12">
                                     front-end
                                 </a>
                             
@@ -852,6 +852,42 @@ webpack是目前前端开发必不可少的一款模块加载器兼构建工具�
                             
                 				<a href="/tags/#babel-plugin-transform-runtime" title="babel-plugin-transform-runtime" rel="1">
                                     babel-plugin-transform-runtime
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#component" title="component" rel="1">
+                                    component
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#test" title="test" rel="1">
+                                    test
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#case" title="case" rel="1">
+                                    case
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#mocha" title="mocha" rel="1">
+                                    mocha
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#karma" title="karma" rel="1">
+                                    karma
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#enzyme" title="enzyme" rel="1">
+                                    enzyme
                                 </a>
                             
         				

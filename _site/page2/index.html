@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <!-- https redirect -->
-    <script type="text/javascript">
-        var host = "www.vanadis.cn";
-        if ((host == window.location.host) && (window.location.protocol != "https:"))
-            window.location.protocol = "https";
-    </script>
+    <!--<script type="text/javascript">-->
+        <!--var host = "www.vanadis.cn";-->
+        <!--if ((host == window.location.host) && (window.location.protocol != "https:"))-->
+            <!--window.location.protocol = "https";-->
+    <!--</script>-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +18,7 @@
 
     <title>绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
 
-    <link rel="canonical" href="https://www.vanadis.cn/page2/">
+    <link rel="canonical" href="http://www.vanadis.cn/page2/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -189,6 +189,46 @@
                 postlist-container
             ">
     			
+<div class="post-preview">
+    <a href="/2017/03/18/babel-stage-x/">
+        <h2 class="post-title">
+            babel配置-各阶段的stage的区别
+        </h2>
+        
+        <h3 class="post-subtitle">
+            
+        </h3>
+        
+        <div class="post-content-preview">
+            
+
+
+
+前言
+
+由于各大浏览器并对es6的并没有完成支持，我们开发前端项目时需要使用Babel来将ES6代码编译为ES5。
+配置.babelrc文件时一般配置为如下：
+
+{
+    "presets": [
+        "es2015"，
+        "react",
+        "stage-0"
+    ],
+    "plugins": []
+}
+
+
+
+这个配置文件的意思。...
+        </div>
+    </a>
+    <p class="post-meta">
+        绯雨闲丸 发布于 2017-03-18
+    </p>
+</div>
+<hr>
+
 <div class="post-preview">
     <a href="/2017/02/26/create-your-own-front-end-archetype/">
         <h2 class="post-title">
@@ -516,37 +556,6 @@ package.json文件可以通过npm init创建
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/2016/07/01/react-native-iconfont/">
-        <h2 class="post-title">
-            react-native使用iconfont来替代icon图片
-        </h2>
-        
-        <h3 class="post-subtitle">
-            
-        </h3>
-        
-        <div class="post-content-preview">
-            
-
-
-
-众所周知, 图片是有诸多优点的，然而目前在网站以及APP设计这行业面临各种各样的挑战。
-图片不但增加了总文件的大小，还增加了很多额外的”http请求”，这都会大大降低性能的。
-图片还有一个缺点就是不能很好的进行“缩放”，
-因此，有时候在“响应式设计”中需要使用图像的最好解决方案就是不去使用图片。
-
-为什么要使用iconfont(字体图标)
-
-点击这里或[这里]了解使用iconfont...
-        </div>
-    </a>
-    <p class="post-meta">
-        绯雨闲丸 发布于 2016-07-01
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -653,7 +662,7 @@ package.json文件可以通过npm init创建
                             
                         
                             
-                                <a href="/tags/#react" title="react" rel="1">
+                                <a href="/tags/#react" title="react" rel="2">
                                     react
                                 </a>
                             
@@ -671,7 +680,7 @@ package.json文件可以通过npm init创建
                             
                         
                             
-                                <a href="/tags/#front-end" title="front-end" rel="11">
+                                <a href="/tags/#front-end" title="front-end" rel="12">
                                     front-end
                                 </a>
                             
@@ -805,6 +814,42 @@ package.json文件可以通过npm init创建
                             
                                 <a href="/tags/#babel-plugin-transform-runtime" title="babel-plugin-transform-runtime" rel="1">
                                     babel-plugin-transform-runtime
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#component" title="component" rel="1">
+                                    component
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#test" title="test" rel="1">
+                                    test
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#case" title="case" rel="1">
+                                    case
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#mocha" title="mocha" rel="1">
+                                    mocha
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#karma" title="karma" rel="1">
+                                    karma
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#enzyme" title="enzyme" rel="1">
+                                    enzyme
                                 </a>
                             
                         
