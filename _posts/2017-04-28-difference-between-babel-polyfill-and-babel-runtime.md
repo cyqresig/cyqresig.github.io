@@ -51,7 +51,7 @@ var obj = _defineProperty({}, key, Object.assign({}, { key: 'polyfill' }));
 
 ## babel-runtime
 
-`babel-polyfill`解决了Babel不转换新API的问题，但是直接在代码中插入帮助函数，会导致不同的代码文件中包含重复的代码，导致编译后的代码体积变大。
+`babel-polyfill`解决了Babel不转换新API的问题，但是直接在代码中插入帮助函数，会导致污染了全局环境，并且不同的代码文件中包含重复的代码，导致编译后的代码体积变大。
 （比如：上述的帮助函数_defineProperty有可能在很多的代码模块文件中都会被插入）
 
 Babel为了解决这个问题，提供了单独的包`babel-runtime`用以提供编译模块的工具函数，
@@ -113,6 +113,16 @@ entry: {
     ]
 }
 ```
+
+## 比较
+
+`babel-polyfill`与`babel-runtime`相比虽然有各种缺点，但在某些情况下仍然不能被`babel-runtime`替代，
+例如，代码：`[1, 2, 3].includes(3)`，`Object.assign({}, {key: 'value'})`，Array，Object以及其他"实例"下es6的方法，`babel-runtime`是无法支持的，
+因为`babel-runtime`只支持到static的方法。
+
+## 结论
+
+`babel-runtime`适合在组件，类库项目中使用，而`babel-polyfill`适合在业务项目中使用。
 
 ## 参考
 

@@ -29,15 +29,19 @@ tags:
 
 目前适用于React的测试框架很多，例如：facebook的[jest][2], airbnb的[enzyme][0]等。
 
-这里我们使用airbnb的[enzyme][0], 并使用[mocha][1]来配合编写测试用例。
+这里我们使用airbnb的[enzyme][0], 并使用[ava][1]来配合编写测试用例。
 
 ### 安装测试依赖
 
-* 安装测试框架，`npm install --dev enzyme mocha`
+* 安装测试框架，`npm install --dev ava enzyme nya`
+
+* 安装配套的代理包，`npm install --dev sinon`
 
 * 如果使用的react版本在15.5以下，则需要指定安装react测试套件，`npm install --dev react-addons-test-utils`
 
-* 如需使用[enzyme][0]的`mount`api，则需要安装[jsdom][3]，`npm install --dev jsdom`
+* 如果使用的react版本在15.5及以上，则需要指定安装react测试套件 `npm install --dev react-test-renderer`
+
+* 如需使用[enzyme][0]的`mount`api，则需要安装[jsdom][3]，`npm install --dev jsdom@9.12` (由于版本10有break change，为方便兼容旧代码先安装版本9)
 
 ### 配置测试环境
 
@@ -57,9 +61,11 @@ tags:
 
 ### 输出HTMLElement
 
+...未完待续
+
 
 [0]: http://airbnb.io/enzyme/
-[1]: http://mochajs.org
+[1]: https://github.com/avajs/ava
 [2]: http://facebook.github.io/jest/
 [3]: https://github.com/tmpvar/jsdom
 

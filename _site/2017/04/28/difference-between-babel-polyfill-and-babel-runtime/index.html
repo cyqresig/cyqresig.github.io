@@ -255,7 +255,7 @@
 
 <h2 id="babel-runtime">babel-runtime</h2>
 
-<p><code class="highlighter-rouge">babel-polyfill</code>解决了Babel不转换新API的问题，但是直接在代码中插入帮助函数，会导致不同的代码文件中包含重复的代码，导致编译后的代码体积变大。
+<p><code class="highlighter-rouge">babel-polyfill</code>解决了Babel不转换新API的问题，但是直接在代码中插入帮助函数，会导致污染了全局环境，并且不同的代码文件中包含重复的代码，导致编译后的代码体积变大。
 （比如：上述的帮助函数_defineProperty有可能在很多的代码模块文件中都会被插入）</p>
 
 <p>Babel为了解决这个问题，提供了单独的包<code class="highlighter-rouge">babel-runtime</code>用以提供编译模块的工具函数，
@@ -322,7 +322,17 @@
 </code></pre>
 </div>
 
-<h2 id="section-1">参考</h2>
+<h2 id="section-1">比较</h2>
+
+<p><code class="highlighter-rouge">babel-polyfill</code>与<code class="highlighter-rouge">babel-runtime</code>相比虽然有各种缺点，但在某些情况下仍然不能被<code class="highlighter-rouge">babel-runtime</code>替代，
+例如，代码：<code class="highlighter-rouge">[1, 2, 3].includes(3)</code>，<code class="highlighter-rouge">Object.assign({}, {key: 'value'})</code>，Array，Object以及其他”实例”下es6的方法，<code class="highlighter-rouge">babel-runtime</code>是无法支持的，
+因为<code class="highlighter-rouge">babel-runtime</code>只支持到static的方法。</p>
+
+<h2 id="section-2">结论</h2>
+
+<p><code class="highlighter-rouge">babel-runtime</code>适合在组件，类库项目中使用，而<code class="highlighter-rouge">babel-polyfill</code>适合在业务项目中使用。</p>
+
+<h2 id="section-3">参考</h2>
 
 <p><a href="http://stackoverflow.com/questions/31781756/is-there-any-practical-difference-between-using-babel-runtime-and-the-babel-poly">http://stackoverflow.com/questions/31781756/is-there-any-practical-difference-between-using-babel-runtime-and-the-babel-poly</a></p>
 

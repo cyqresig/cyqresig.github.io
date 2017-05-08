@@ -5,8 +5,8 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>http://www.vanadis.cn/</link>
     <atom:link href="http://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 04 May 2017 21:37:48 +0800</pubDate>
-    <lastBuildDate>Thu, 04 May 2017 21:37:48 +0800</lastBuildDate>
+    <pubDate>Mon, 08 May 2017 20:07:59 +0800</pubDate>
+    <lastBuildDate>Mon, 08 May 2017 20:07:59 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -27,19 +27,25 @@
 
 &lt;p&gt;目前适用于React的测试框架很多，例如：facebook的&lt;a href=&quot;http://facebook.github.io/jest/&quot;&gt;jest&lt;/a&gt;, airbnb的&lt;a href=&quot;http://airbnb.io/enzyme/&quot;&gt;enzyme&lt;/a&gt;等。&lt;/p&gt;
 
-&lt;p&gt;这里我们使用airbnb的&lt;a href=&quot;http://airbnb.io/enzyme/&quot;&gt;enzyme&lt;/a&gt;, 并使用&lt;a href=&quot;http://mochajs.org&quot;&gt;mocha&lt;/a&gt;来配合编写测试用例。&lt;/p&gt;
+&lt;p&gt;这里我们使用airbnb的&lt;a href=&quot;http://airbnb.io/enzyme/&quot;&gt;enzyme&lt;/a&gt;, 并使用&lt;a href=&quot;https://github.com/avajs/ava&quot;&gt;ava&lt;/a&gt;来配合编写测试用例。&lt;/p&gt;
 
 &lt;h3 id=&quot;section-1&quot;&gt;安装测试依赖&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;安装测试框架，&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install --dev enzyme mocha&lt;/code&gt;&lt;/p&gt;
+    &lt;p&gt;安装测试框架，&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install --dev ava enzyme nya&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;安装配套的代理包，&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install --dev sinon&lt;/code&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;如果使用的react版本在15.5以下，则需要指定安装react测试套件，&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install --dev react-addons-test-utils&lt;/code&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;如需使用&lt;a href=&quot;http://airbnb.io/enzyme/&quot;&gt;enzyme&lt;/a&gt;的&lt;code class=&quot;highlighter-rouge&quot;&gt;mount&lt;/code&gt;api，则需要安装&lt;a href=&quot;https://github.com/tmpvar/jsdom&quot;&gt;jsdom&lt;/a&gt;，&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install --dev jsdom&lt;/code&gt;&lt;/p&gt;
+    &lt;p&gt;如果使用的react版本在15.5及以上，则需要指定安装react测试套件 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install --dev react-test-renderer&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;如需使用&lt;a href=&quot;http://airbnb.io/enzyme/&quot;&gt;enzyme&lt;/a&gt;的&lt;code class=&quot;highlighter-rouge&quot;&gt;mount&lt;/code&gt;api，则需要安装&lt;a href=&quot;https://github.com/tmpvar/jsdom&quot;&gt;jsdom&lt;/a&gt;，&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install --dev jsdom@9.12&lt;/code&gt; (由于版本10有break change，为方便兼容旧代码先安装版本9)&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -58,6 +64,8 @@
 &lt;h3 id=&quot;component&quot;&gt;输出component&lt;/h3&gt;
 
 &lt;h3 id=&quot;htmlelement&quot;&gt;输出HTMLElement&lt;/h3&gt;
+
+&lt;p&gt;…未完待续&lt;/p&gt;
 
 </description>
         <pubDate>Tue, 02 May 2017 00:00:00 +0800</pubDate>
@@ -126,7 +134,7 @@
 
 &lt;h2 id=&quot;babel-runtime&quot;&gt;babel-runtime&lt;/h2&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;babel-polyfill&lt;/code&gt;解决了Babel不转换新API的问题，但是直接在代码中插入帮助函数，会导致不同的代码文件中包含重复的代码，导致编译后的代码体积变大。
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;babel-polyfill&lt;/code&gt;解决了Babel不转换新API的问题，但是直接在代码中插入帮助函数，会导致污染了全局环境，并且不同的代码文件中包含重复的代码，导致编译后的代码体积变大。
 （比如：上述的帮助函数_defineProperty有可能在很多的代码模块文件中都会被插入）&lt;/p&gt;
 
 &lt;p&gt;Babel为了解决这个问题，提供了单独的包&lt;code class=&quot;highlighter-rouge&quot;&gt;babel-runtime&lt;/code&gt;用以提供编译模块的工具函数，
@@ -193,7 +201,17 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;参考&lt;/h2&gt;
+&lt;h2 id=&quot;section-1&quot;&gt;比较&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;babel-polyfill&lt;/code&gt;与&lt;code class=&quot;highlighter-rouge&quot;&gt;babel-runtime&lt;/code&gt;相比虽然有各种缺点，但在某些情况下仍然不能被&lt;code class=&quot;highlighter-rouge&quot;&gt;babel-runtime&lt;/code&gt;替代，
+例如，代码：&lt;code class=&quot;highlighter-rouge&quot;&gt;[1, 2, 3].includes(3)&lt;/code&gt;，&lt;code class=&quot;highlighter-rouge&quot;&gt;Object.assign({}, {key: &#39;value&#39;})&lt;/code&gt;，Array，Object以及其他”实例”下es6的方法，&lt;code class=&quot;highlighter-rouge&quot;&gt;babel-runtime&lt;/code&gt;是无法支持的，
+因为&lt;code class=&quot;highlighter-rouge&quot;&gt;babel-runtime&lt;/code&gt;只支持到static的方法。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;结论&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;babel-runtime&lt;/code&gt;适合在组件，类库项目中使用，而&lt;code class=&quot;highlighter-rouge&quot;&gt;babel-polyfill&lt;/code&gt;适合在业务项目中使用。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;参考&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/31781756/is-there-any-practical-difference-between-using-babel-runtime-and-the-babel-poly&quot;&gt;http://stackoverflow.com/questions/31781756/is-there-any-practical-difference-between-using-babel-runtime-and-the-babel-poly&lt;/a&gt;&lt;/p&gt;
 
