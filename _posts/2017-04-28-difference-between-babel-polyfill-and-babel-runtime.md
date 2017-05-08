@@ -22,7 +22,7 @@ Babel默认只转换新的JavaScript语法，而不转换新的API。
 
 ## babel-polyfill
 
-目前最常用的配合Babel一起使用的polyfill是`babel-polyfill`，它会针对编译的代码中新的API进行处理，并且在代码中插入一些帮助函数。
+目前最常用的配合Babel一起使用的polyfill是`babel-polyfill`，它会"加载整个polyfill库"，针对编译的代码中新的API进行处理，并且在代码中插入一些帮助函数。
 
 比如说：代码中包含
 
