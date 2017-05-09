@@ -41,6 +41,8 @@ tags:
 
 * 创建`A`记录-`www`，指向你的Github Pages的IP
 
+* 或者创建`CNAME`记录-`www`，指向你的Github Pages的域名
+
 * 确保在你的Github Pages根目录下存在一个文件`CNAME`，里面设置了你的自定义域名
 
 * 打开你的域名管理网站，将这个域名对应的DNS服务器地址设置成cloudflare提供给你的地址
