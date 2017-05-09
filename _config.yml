@@ -5,11 +5,11 @@ header-img: img/home-bg.jpg
 email: moonsunfall@aliyun.com
 description: "关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web & Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。"
 keyword: "绯雨闲丸, HISAME SHIZUMARU绯雨闲丸, HISAME SHIZUMARU, 绯雨闲丸的博客, HISAME SHIZUMARU Blog, 博客, 个人网站, 互联网, 移动, 手机, APP, h5, 前端, 大前端, 前后端分离, 工程化, 构建, 自动化, 网站优化, js, javascript, html, css, html5, css3, react-native, ios, android, nodejs, webpack, gulp, reactjs, angularjs"
-url: "http://www.vanadis.cn"                # your host, for http absolute URL
+#url: "http://www.vanadis.cn"                # your host, for http absolute URL
 baseurl: ""                                 # for example, '/blog' if your blog hosted on 'host/blog'
 
-#url: https://www.vanadis.cn   # your host, with the https protocol
-#enforce_ssl: www.vanadis.cn   # your host, for ssl, without any protocol
+url: https://www.vanadis.cn   # your host, with the https protocol
+enforce_ssl: www.vanadis.cn   # your host, for ssl, without any protocol
 
 
 # SNS settings
