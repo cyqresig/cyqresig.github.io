@@ -18,7 +18,7 @@
 
     <title>React自动化测试 - 绯雨闲丸的博客 | HISAME SHIZUMARU Blog</title>
 
-    <link rel="canonical" href="http://www.vanadis.cn/2017/05/02/how-to-test-react-automatically/">
+    <link rel="canonical" href="https://www.vanadis.cn/2017/05/02/how-to-test-react-automatically/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -242,7 +242,7 @@
 
 <ul>
   <li>
-    <p>安装测试框架，<code class="highlighter-rouge">npm install --dev ava enzyme nya</code></p>
+    <p>安装测试框架，<code class="highlighter-rouge">npm install --dev ava enzyme</code></p>
   </li>
   <li>
     <p>安装配套的代理包，<code class="highlighter-rouge">npm install --dev sinon</code></p>
@@ -260,21 +260,431 @@
 
 <h3 id="section-2">配置测试环境</h3>
 
+<ul>
+  <li>
+    <p>创建一个用于测试的组件类<code class="highlighter-rouge">Bar</code>，代码如下：</p>
+
+    <p>```js
+  import React, { PropTypes, PureComponent, } from ‘react’
+  import noop from ‘./util/noop’</p>
+
+    <p>const renderClickCountLabel = (clickCount) =&gt; {
+      let clickCountLabelView = null</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>  if (clickCount &gt; 0) {
+      clickCountLabelView = (
+          &lt;span click-count-label&gt;{clickCount}&lt;/span&gt;
+      )
+  }
+
+  return clickCountLabelView   }
+</code></pre>
+    </div>
+
+    <p>class Bar extends PureComponent {</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>  static defaultProps = {
+      title: 'bar',
+      value: '',
+      data: noop.obj,
+      deepData: noop.obj,
+      onClick: noop.func,
+      onChange: noop.func,
+  }
+
+  static propTypes = {
+      title: PropTypes.string.isRequired,
+      onClick: PropTypes.func.isRequired,
+      onChange: PropTypes.func.isRequired,
+      value: PropTypes.string.isRequired,
+      data: PropTypes.object.isRequired,
+      deepData: PropTypes.object.isRequired,
+  }
+
+  constructor(props) {
+      super(props)
+      const {
+          value,
+          data,
+          deepData,
+      } = props
+
+      this.state = {
+          clickCount: 0,
+          value,
+          data: {...data,},
+          deepData: {...deepData,}
+      }
+  }
+
+  handleOnClick = () =&gt; {
+      const {
+          onClick,
+      } = this.props
+      const {
+          clickCount,
+      } = this.state
+
+      const newClickCount = clickCount + 1
+
+      this.setState({
+          clickCount: newClickCount,
+      }, () =&gt; {
+          onClick(newClickCount)
+      })
+  }
+
+  handleOnChange = (e) =&gt; {
+      const {
+          onChange,
+      } = this.props
+
+      const {
+          value,
+      } = e.target
+
+      this.setState({
+          value,
+      }, () =&gt; {
+          onChange(value)
+      })
+  }
+
+  render() {
+      const {
+          title,
+      } = this.props
+      const {
+          value,
+          clickCount,
+      } = this.state
+
+      return (
+          &lt;div
+              title={title}
+              className="bar"
+              onClick={this.handleOnClick}&gt;
+              &lt;input type="text" value={value} onChange={this.handleOnChange}/&gt;
+              {renderClickCountLabel(clickCount)}
+          &lt;/div&gt;
+      )
+  }   }
+</code></pre>
+    </div>
+
+    <p>export default Bar
+  ```</p>
+  </li>
+  <li>
+    <p>在根目录下创建<code class="highlighter-rouge">test</code>目录</p>
+  </li>
+  <li>
+    <p>预加载jsdom配置，代码如下：</p>
+
+    <p><code class="highlighter-rouge">js
+  /* eslint-env browser */
+  global.document = require('jsdom').jsdom('&lt;body&gt;&lt;/body&gt;')
+  global.window = document.defaultView
+  global.navigator = window.navigator      
+ </code></p>
+  </li>
+  <li>
+    <p>在<code class="highlighter-rouge">package.json</code>中配置<a href="https://github.com/avajs/ava">ava</a>，代码如下：</p>
+
+    <p><code class="highlighter-rouge">js
+  "ava": {
+      "files": [
+          "test/**/*-test.js",                  // 指定测试哪些文件
+          "!test/**/{empty,not}-test.js"        // 指定排除哪些文件
+      ],
+      "require": [
+          "babel-register",                     // 预加载babel转码
+          "./test/helpers/setup-browser-env.js" // 预加载jsdom模拟浏览器配置
+      ],
+      "concurrency": 5,                         // 最多并发执行5个测试用例
+      "verbose": true,                          // 日志模式
+      "failFast": true,                         // 遇到测试用例报错时，停止执行后续的用例
+      "failWithoutAssertions": false,           // 报错时显示断言
+      "babel": "inherit"                        // 使用.babelrc中的babel配置进行转码
+  }
+ </code></p>
+  </li>
+  <li>
+    <p>在<code class="highlighter-rouge">package.json</code>中配置测试脚本命令</p>
+
+    <p><code class="highlighter-rouge">js
+  "scripts": {
+      "test": "ava"
+  }
+ </code></p>
+  </li>
+</ul>
+
 <h3 id="section-3">编写测试用例</h3>
 
-<h2 id="react-1">React组件需要如何测试</h2>
+<p>我们使用<a href="https://github.com/avajs/ava">ava</a>来编写测试用例，使用<a href="http://airbnb.io/enzyme/">enzyme</a>的<code class="highlighter-rouge">shallow</code>以及<code class="highlighter-rouge">mount</code>方法来模拟测试容器，使用<code class="highlighter-rouge">sinon</code>来模拟事件，代码如下：</p>
 
-<h3 id="props">输入props</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">test</span> <span class="nx">from</span> <span class="s1">'ava'</span>
+<span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">'react'</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">shallow</span><span class="p">,</span> <span class="nx">mount</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'enzyme'</span>
+<span class="kr">import</span> <span class="nx">sinon</span> <span class="nx">from</span> <span class="s1">'sinon'</span>
+<span class="kr">import</span> <span class="nx">Bar</span> <span class="nx">from</span> <span class="s1">'../src/Bar'</span>
+<span class="kr">import</span> <span class="nx">noop</span> <span class="nx">from</span> <span class="s1">'../src/util/noop'</span>
 
-<h3 id="section-4">输入模拟用户交互</h3>
+<span class="c1">// 测试用例集标题</span>
+<span class="nx">test</span><span class="p">.</span><span class="nx">todo</span><span class="p">(</span><span class="s1">'Bar-test'</span><span class="p">);</span>
 
-<h3 id="state">输出state</h3>
+<span class="c1">// 测试组件是否触发render</span>
+<span class="nx">test</span><span class="p">(</span><span class="s1">'组件是否触发render'</span><span class="p">,</span> <span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">sinon</span><span class="p">.</span><span class="nx">spy</span><span class="p">(</span><span class="nx">Bar</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span> <span class="s1">'render'</span><span class="p">)</span>
+    <span class="kr">const</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="nx">mount</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Bar</span> <span class="o">/&gt;</span><span class="p">)</span>
+    <span class="nx">t</span><span class="p">.</span><span class="kc">true</span><span class="p">(</span><span class="nx">Bar</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">render</span><span class="p">.</span><span class="nx">calledOnce</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre>
+</div>
 
-<h3 id="component">输出component</h3>
+<h4 id="section-4">属性与状态</h4>
 
-<h3 id="htmlelement">输出HTMLElement</h3>
+<p>我们需要在测试属性与状态在组件初始化时，以及组件交互时，是否符合预期，代码如下：</p>
 
-<p>…未完待续</p>
+<h5 id="section-5">组件初始化</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// 测试块标题</span>
+<span class="nx">test</span><span class="p">.</span><span class="nx">todo</span><span class="p">(</span><span class="s1">'测试组件初始化，属性赋值后，组件的属性与状态是否符合预期'</span><span class="p">);</span>
+
+<span class="c1">// 测试组件初始属性赋值后，初始状态的值是否符合预期</span>
+<span class="nx">test</span><span class="p">(</span><span class="s1">'检查默认值是否生效'</span><span class="p">,</span> <span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">defaultProps</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">title</span><span class="p">:</span> <span class="s1">'bar'</span><span class="p">,</span>
+        <span class="na">value</span><span class="p">:</span> <span class="s1">''</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="nx">noop</span><span class="p">.</span><span class="nx">obj</span><span class="p">,</span>
+        <span class="na">deepData</span><span class="p">:</span> <span class="nx">noop</span><span class="p">.</span><span class="nx">obj</span><span class="p">,</span>
+        <span class="na">onClick</span><span class="p">:</span> <span class="nx">noop</span><span class="p">.</span><span class="nx">func</span><span class="p">,</span>
+        <span class="na">onChange</span><span class="p">:</span> <span class="nx">noop</span><span class="p">.</span><span class="nx">func</span>
+    <span class="p">}</span>
+    <span class="kr">const</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="nx">shallow</span><span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Bar</span><span class="o">/&gt;</span>
+    <span class="p">)</span>
+    <span class="kr">const</span> <span class="nx">instance</span> <span class="o">=</span> <span class="nx">wrapper</span><span class="p">.</span><span class="nx">instance</span><span class="p">()</span>
+
+    <span class="nx">t</span><span class="p">.</span><span class="nx">deepEqual</span><span class="p">(</span><span class="nx">instance</span><span class="p">.</span><span class="nx">props</span><span class="p">,</span> <span class="nx">defaultProps</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="nx">test</span><span class="p">(</span><span class="s1">'初始props -&gt; value赋值是否成功'</span><span class="p">,</span> <span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="nx">shallow</span><span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Bar</span> <span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="s1">'0'</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
+</span>    <span class="p">)</span>
+    <span class="kr">const</span> <span class="nx">instance</span> <span class="o">=</span> <span class="nx">wrapper</span><span class="p">.</span><span class="nx">instance</span><span class="p">()</span>
+
+    <span class="nx">t</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="nx">instance</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span> <span class="s1">'0'</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// 测试组件初始属性赋值后，初始状态的值是否符合预期</span>
+<span class="nx">test</span><span class="p">(</span><span class="s1">'初始props -&gt; value赋"0"，初始state -&gt; value值应为"0"'</span><span class="p">,</span> <span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="nx">shallow</span><span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Bar</span> <span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="s1">'0'</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
+</span>    <span class="p">)</span>
+
+    <span class="nx">t</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="nx">wrapper</span><span class="p">.</span><span class="nx">state</span><span class="p">().</span><span class="nx">value</span><span class="p">,</span> <span class="s1">'0'</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// 测试组件初始属性赋值后，初始状态的值是否符合预期</span>
+<span class="nx">test</span><span class="p">(</span><span class="s1">'初始props -&gt; data赋值，初始state -&gt; data值与赋的值相等'</span><span class="p">,</span> <span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">key</span><span class="p">:</span> <span class="s1">'data'</span><span class="p">,</span>
+        <span class="na">value</span><span class="p">:</span> <span class="mi">8</span>
+    <span class="p">};</span>
+    <span class="kr">const</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="nx">shallow</span><span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Bar</span>
+            <span class="nx">data</span><span class="o">=</span><span class="p">{</span><span class="nx">data</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
+</span>    <span class="p">)</span>
+
+    <span class="nx">t</span><span class="p">.</span><span class="nx">deepEqual</span><span class="p">(</span><span class="nx">wrapper</span><span class="p">.</span><span class="nx">state</span><span class="p">().</span><span class="nx">data</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// 测试组件初始属性赋值后，初始状态的值是否符合预期</span>
+<span class="nx">test</span><span class="p">(</span><span class="s1">'初始props -&gt; deepData赋值，初始state -&gt; deepData值与赋的值相等'</span><span class="p">,</span> <span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">deepData</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">key</span><span class="p">:</span> <span class="s1">'data'</span><span class="p">,</span>
+        <span class="na">value</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="na">children</span><span class="p">:</span> <span class="p">[{</span>
+            <span class="na">key</span><span class="p">:</span> <span class="s1">'child'</span><span class="p">,</span>
+            <span class="na">value</span><span class="p">:</span> <span class="mi">88</span>
+        <span class="p">}]</span>
+    <span class="p">};</span>
+    <span class="kr">const</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="nx">shallow</span><span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Bar</span>
+            <span class="nx">deepData</span><span class="o">=</span><span class="p">{</span><span class="nx">deepData</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
+</span>    <span class="p">)</span>
+
+    <span class="nx">t</span><span class="p">.</span><span class="nx">deepEqual</span><span class="p">(</span><span class="nx">wrapper</span><span class="p">.</span><span class="nx">state</span><span class="p">().</span><span class="nx">deepData</span><span class="p">,</span> <span class="nx">deepData</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<h5 id="section-6">组件交互</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// 测试块标题</span>
+<span class="nx">test</span><span class="p">.</span><span class="nx">todo</span><span class="p">(</span><span class="s1">'测试组件交互后，组件的属性与状态是否符合预期'</span><span class="p">);</span>
+
+<span class="nx">test</span><span class="p">(</span><span class="s1">'测试组件交互click点击后，组件的clickCount状态值+1（从0变更到1）'</span><span class="p">,</span> <span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="kc">null</span>
+    <span class="nx">wrapper</span> <span class="o">=</span> <span class="nx">shallow</span><span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Bar</span> <span class="o">/&gt;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="nx">wrapper</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">'div'</span><span class="p">).</span><span class="nx">simulate</span><span class="p">(</span><span class="s1">'click'</span><span class="p">)</span>
+    <span class="nx">t</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="nx">wrapper</span><span class="p">.</span><span class="nx">state</span><span class="p">(</span><span class="s1">'clickCount'</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="nx">test</span><span class="p">(</span><span class="s1">'测试组件交互click点击后，回调函数onClick返回的clickCount值等于组件的clickCount状态值+1（从0变更到1）'</span><span class="p">,</span> <span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="kc">null</span>
+    <span class="kr">const</span> <span class="nx">onClick</span> <span class="o">=</span> <span class="p">(</span><span class="nx">clickCount</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="nx">clickCount</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nx">wrapper</span> <span class="o">=</span> <span class="nx">shallow</span><span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Bar</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">onClick</span><span class="p">}</span><span class="sr">/&gt;</span><span class="err">,
+</span>    <span class="p">)</span>
+    <span class="nx">wrapper</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">'div'</span><span class="p">).</span><span class="nx">simulate</span><span class="p">(</span><span class="s1">'click'</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="nx">test</span><span class="p">(</span><span class="s1">'测试组件交互文本内容change改变为888后，组件的value状态值也同步变更为888'</span><span class="p">,</span> <span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="kc">null</span>
+    <span class="nx">wrapper</span> <span class="o">=</span> <span class="nx">shallow</span><span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Bar</span> <span class="o">/&gt;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="kr">const</span> <span class="nx">fakeEvent</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">target</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">value</span><span class="p">:</span> <span class="mi">888</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nx">wrapper</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">'input[type="text"]'</span><span class="p">).</span><span class="nx">simulate</span><span class="p">(</span><span class="s1">'change'</span><span class="p">,</span> <span class="nx">fakeEvent</span><span class="p">)</span>
+    <span class="nx">t</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="nx">wrapper</span><span class="p">.</span><span class="nx">state</span><span class="p">(</span><span class="s1">'value'</span><span class="p">),</span> <span class="mi">888</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="nx">test</span><span class="p">(</span><span class="s1">'测试组件交互文本内容change改变为888，回调函数onChange返回的value值等于组件的value状态值888'</span><span class="p">,</span> <span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="kc">null</span>
+    <span class="kr">const</span> <span class="nx">onChange</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="mi">888</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nx">wrapper</span> <span class="o">=</span> <span class="nx">shallow</span><span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Bar</span> <span class="nx">onChange</span><span class="o">=</span><span class="p">{</span><span class="nx">onChange</span><span class="p">}</span><span class="sr">/&gt;</span><span class="err">,
+</span>    <span class="p">)</span>
+    <span class="kr">const</span> <span class="nx">fakeEvent</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">target</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">value</span><span class="p">:</span> <span class="mi">888</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nx">wrapper</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">'input[type="text"]'</span><span class="p">).</span><span class="nx">simulate</span><span class="p">(</span><span class="s1">'change'</span><span class="p">,</span> <span class="nx">fakeEvent</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<h4 id="section-7">界面渲染</h4>
+
+<p>我们还需要在测试界面的渲染在组件初始化时，以及组件交互时，是否符合预期，代码如下：</p>
+
+<h5 id="section-8">组件初始化</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// 测试块标题</span>
+<span class="nx">test</span><span class="p">.</span><span class="nx">todo</span><span class="p">(</span><span class="s1">'测试组件初始化，属性赋值后，组件的界面渲染是否符合预期'</span><span class="p">);</span>
+
+<span class="nx">test</span><span class="p">(</span><span class="s1">'组件初始化后，根节点应是一个class为"bar"的div'</span><span class="p">,</span> <span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="nx">shallow</span><span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Bar</span><span class="o">/&gt;</span>
+    <span class="p">)</span>
+
+    <span class="nx">t</span><span class="p">.</span><span class="kc">true</span><span class="p">(</span><span class="nx">wrapper</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="s1">'div.bar'</span><span class="p">))</span>
+<span class="p">})</span>
+
+<span class="nx">test</span><span class="p">(</span><span class="s1">'组件初始化后，应包含一个input'</span><span class="p">,</span> <span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="nx">shallow</span><span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Bar</span><span class="o">/&gt;</span>
+    <span class="p">)</span>
+
+    <span class="nx">t</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="nx">wrapper</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">'input'</span><span class="p">).</span><span class="nx">length</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="nx">test</span><span class="p">(</span><span class="s1">'组件初始化后，应渲染一个class为"bar"的div, 并且div内还包含一个value值为"1"的input:text'</span><span class="p">,</span> <span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="nx">shallow</span><span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Bar</span> <span class="nx">value</span><span class="o">=</span><span class="s2">"1"</span><span class="o">/&gt;</span>
+    <span class="p">)</span>
+
+    <span class="kd">let</span> <span class="nx">flag</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="kr">const</span> <span class="nx">divWrapper</span> <span class="o">=</span> <span class="nx">wrapper</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">'div'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">divWrapper</span><span class="p">.</span><span class="nx">length</span> <span class="o">!==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">flag</span> <span class="o">=</span> <span class="kc">false</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">flag</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">const</span> <span class="nx">inputWrapper</span> <span class="o">=</span> <span class="nx">divWrapper</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">'input[type="text"]'</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">inputWrapper</span><span class="p">.</span><span class="nx">length</span> <span class="o">!==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">flag</span> <span class="o">=</span> <span class="kc">false</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">inputWrapper</span><span class="p">.</span><span class="nx">props</span><span class="p">().</span><span class="nx">value</span> <span class="o">!==</span> <span class="s1">'1'</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">flag</span> <span class="o">=</span> <span class="kc">false</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">flag</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nx">pass</span><span class="p">()</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nx">fail</span><span class="p">()</span>
+    <span class="p">}</span>
+
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<h5 id="section-9">组件交互</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// 测试块标题</span>
+<span class="nx">test</span><span class="p">.</span><span class="nx">todo</span><span class="p">(</span><span class="s1">'测试组件交互后，组件的界面渲染是否符合预期'</span><span class="p">);</span>
+
+<span class="nx">test</span><span class="p">(</span><span class="s1">'测试组件交互click点击一次后，组件包含一个带click-count-label属性的span节点，并且节点内的文本为1'</span><span class="p">,</span> <span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="kc">null</span>
+    <span class="kd">let</span> <span class="nx">divWrapper</span> <span class="o">=</span> <span class="kc">null</span>
+    <span class="nx">wrapper</span> <span class="o">=</span> <span class="nx">shallow</span><span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Bar</span> <span class="o">/&gt;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="nx">wrapper</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">'div'</span><span class="p">).</span><span class="nx">simulate</span><span class="p">(</span><span class="s1">'click'</span><span class="p">)</span>
+    <span class="kr">const</span> <span class="nx">findSpan</span> <span class="o">=</span> <span class="nx">wrapper</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">'span[click-count-label]'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">findSpan</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">findSpan</span><span class="p">.</span><span class="nx">text</span><span class="p">()</span> <span class="o">===</span> <span class="s1">'1'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nx">pass</span><span class="p">()</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nx">fail</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="c1">// t.true(wrapper.find('div').contains(spanView))</span>
+<span class="p">})</span>
+
+<span class="nx">test</span><span class="p">(</span><span class="s1">'测试组件交互文本内容change改变为888，input的value显示888'</span><span class="p">,</span> <span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="kc">null</span>
+    <span class="nx">wrapper</span> <span class="o">=</span> <span class="nx">shallow</span><span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Bar</span> <span class="o">/&gt;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="kr">const</span> <span class="nx">fakeEvent</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">target</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">value</span><span class="p">:</span> <span class="mi">888</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nx">wrapper</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">'input[type="text"]'</span><span class="p">).</span><span class="nx">simulate</span><span class="p">(</span><span class="s1">'change'</span><span class="p">,</span> <span class="nx">fakeEvent</span><span class="p">)</span>
+    <span class="nx">t</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="nx">wrapper</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">'input[type="text"]'</span><span class="p">).</span><span class="nx">props</span><span class="p">().</span><span class="nx">value</span><span class="p">,</span> <span class="mi">888</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<h2 id="section-10">执行</h2>
+
+<p>通过<code class="highlighter-rouge">npm run test</code>即可执行测试用例</p>
+
+<h2 id="section-11">自动化</h2>
+
+<p>可以选择在编译，提交或部署代码前，通过嵌入自定义脚本的方式在特定的操作前执行测试，测试不通过会抛出异常，并中断当前操作</p>
+
+<p>例如可以在使用<a href="https://github.com/observing/pre-commit">pre-commit</a>，将会在git commit时自动执行<code class="highlighter-rouge">package.json</code>中scripts脚本里的test命令。</p>
+
+<h2 id="section-12">参考示例</h2>
+
+<p><a href="https://github.com/cyqresig/react-test-case-demo">react-test-case-demo</a></p>
 
 
 
@@ -287,8 +697,8 @@
                     style="text-align: right"
                     data-thread-key="/2017/05/02/how-to-test-react-automatically"
                     data-title="React自动化测试"
-                    data-url="http://www.vanadis.cn/2017/05/02/how-to-test-react-automatically/"
-                    data-images="http://www.vanadis.cn/"
+                    data-url="https://www.vanadis.cn/2017/05/02/how-to-test-react-automatically/"
+                    data-images="https://www.vanadis.cn/"
                     data-content="
 
 
@@ -331,7 +741,7 @@
                     <div class="ds-thread"
                         data-thread-key="/2017/05/02/how-to-test-react-automatically"
                         data-title="React自动化测试"
-                        data-url="http://www.vanadis.cn/2017/05/02/how-to-test-react-automatically/" >
+                        data-url="https://www.vanadis.cn/2017/05/02/how-to-test-react-automatically/" >
                     </div>
                 </div>
                 <!-- 多说评论框 end -->
