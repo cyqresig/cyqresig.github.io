@@ -452,9 +452,17 @@ test('测试组件交互文本内容change改变为888，input的value显示888'
 
 ## 自动化
 
-可以选择在编译，提交或部署代码前，通过嵌入自定义脚本的方式在特定的操作前执行测试，测试不通过会抛出异常，并中断当前操作
+可以使用[pre-commit][5]，在`package.json`中配置代码如下：
 
-例如可以在使用[pre-commit][5]，将会在git commit时自动执行`package.json`中scripts脚本里的test命令。
+```js
+"pre-commit": [
+    "test"
+],
+```
+
+将会在git commit时自动执行`package.json`中scripts脚本里的test命令，测试不通过会抛出异常，并中断commit操作
+
+除此之外，也可以选择在编译或部署代码时嵌入测试命令，以达到在执行这些操作时自动执行测试的目的
 
 ## 参考示例
 

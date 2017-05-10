@@ -678,9 +678,17 @@
 
 <h2 id="section-11">自动化</h2>
 
-<p>可以选择在编译，提交或部署代码前，通过嵌入自定义脚本的方式在特定的操作前执行测试，测试不通过会抛出异常，并中断当前操作</p>
+<p>可以使用<a href="https://github.com/observing/pre-commit">pre-commit</a>，在<code class="highlighter-rouge">package.json</code>中配置代码如下：</p>
 
-<p>例如可以在使用<a href="https://github.com/observing/pre-commit">pre-commit</a>，将会在git commit时自动执行<code class="highlighter-rouge">package.json</code>中scripts脚本里的test命令。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s2">"pre-commit"</span><span class="err">:</span> <span class="p">[</span>
+    <span class="s2">"test"</span>
+<span class="p">],</span>
+</code></pre>
+</div>
+
+<p>将会在git commit时自动执行<code class="highlighter-rouge">package.json</code>中scripts脚本里的test命令，测试不通过会抛出异常，并中断commit操作</p>
+
+<p>除此之外，也可以选择在编译或部署代码时嵌入测试命令，以达到在执行这些操作时自动执行测试的目的</p>
 
 <h2 id="section-12">参考示例</h2>
 

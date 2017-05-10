@@ -5,8 +5,8 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>https://www.vanadis.cn/</link>
     <atom:link href="https://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 10 May 2017 23:14:42 +0800</pubDate>
-    <lastBuildDate>Wed, 10 May 2017 23:14:42 +0800</lastBuildDate>
+    <pubDate>Wed, 10 May 2017 23:34:25 +0800</pubDate>
+    <lastBuildDate>Wed, 10 May 2017 23:34:25 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -469,9 +469,17 @@
 
 &lt;h2 id=&quot;section-11&quot;&gt;自动化&lt;/h2&gt;
 
-&lt;p&gt;可以选择在编译，提交或部署代码前，通过嵌入自定义脚本的方式在特定的操作前执行测试，测试不通过会抛出异常，并中断当前操作&lt;/p&gt;
+&lt;p&gt;可以使用&lt;a href=&quot;https://github.com/observing/pre-commit&quot;&gt;pre-commit&lt;/a&gt;，在&lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt;中配置代码如下：&lt;/p&gt;
 
-&lt;p&gt;例如可以在使用&lt;a href=&quot;https://github.com/observing/pre-commit&quot;&gt;pre-commit&lt;/a&gt;，将会在git commit时自动执行&lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt;中scripts脚本里的test命令。&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s2&quot;&gt;&quot;pre-commit&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;test&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;将会在git commit时自动执行&lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt;中scripts脚本里的test命令，测试不通过会抛出异常，并中断commit操作&lt;/p&gt;
+
+&lt;p&gt;除此之外，也可以选择在编译或部署代码时嵌入测试命令，以达到在执行这些操作时自动执行测试的目的&lt;/p&gt;
 
 &lt;h2 id=&quot;section-12&quot;&gt;参考示例&lt;/h2&gt;
 
