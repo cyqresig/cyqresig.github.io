@@ -5,8 +5,8 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>https://www.vanadis.cn/</link>
     <atom:link href="https://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 10 May 2017 23:34:25 +0800</pubDate>
-    <lastBuildDate>Wed, 10 May 2017 23:34:25 +0800</lastBuildDate>
+    <pubDate>Mon, 15 May 2017 18:22:54 +0800</pubDate>
+    <lastBuildDate>Mon, 15 May 2017 18:22:54 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -968,6 +968,10 @@
         &lt;span class=&quot;na&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;js/[name].js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 传统多页应用有多个入口文件时使用，[name] 代入entry配置中的任意一项模块的名称，例如：index, 在不同的页面上引用不同的入口，例如在index.html页面上通过&amp;lt;script src=&quot;/js/index.js&quot;&amp;gt;&amp;lt;/script&amp;gt;引用入口模块&lt;/span&gt;
         &lt;span class=&quot;na&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;js/[hash]/[chunkhash].js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 为生产环境实现前端静态资源增量更新时使用，[hash]是根据每次编译后项目总体文件的hash值, [chunkhash]是根据每个模块内容计算出的hash值。&lt;/span&gt;
         
+        &lt;span class=&quot;na&quot;&gt;libraryTarget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;umd&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+        &lt;span class=&quot;c1&quot;&gt;// 写了scope/packageName，最终可以通过window[&quot;scope&quot;][&quot;packageName&quot;]的方式来调用这个library&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 写了packageVersion, 则会在library目录下额外生成一个版本号的目录，目录中生成一个library的js文件（js文件不在模块打包文件中，需要外部自行引入）&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;scope&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;packageName&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;packageVersion&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;    
     &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
     
      &lt;span class=&quot;c1&quot;&gt;// 模块配置&lt;/span&gt;
@@ -1114,8 +1118,10 @@
      &lt;span class=&quot;na&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;web&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 浏览器编译环境&lt;/span&gt;
        
      &lt;span class=&quot;c1&quot;&gt;// 将配置的模块从bundle文件中分离出来，模块可以是 CommonJS, AMD, global and ES2015 modules 4种类型  &lt;/span&gt;
+     &lt;span class=&quot;c1&quot;&gt;// externals对象的key是给require时用的，比如require(&#39;react&#39;)，对象的value表示的是如何在global（即window）中访问到该对象，这里是window.React。&lt;/span&gt;
      &lt;span class=&quot;na&quot;&gt;externals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-       &lt;span class=&quot;na&quot;&gt;react&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;react&#39;&lt;/span&gt;
+       &lt;span class=&quot;na&quot;&gt;react&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;React&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+       &lt;span class=&quot;s1&quot;&gt;&#39;react-dom&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;ReactDOM&#39;&lt;/span&gt;
      &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
        
      &lt;span class=&quot;c1&quot;&gt;// 配置在编译时输出相关信息&lt;/span&gt;

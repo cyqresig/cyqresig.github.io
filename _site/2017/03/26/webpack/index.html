@@ -281,6 +281,10 @@
         <span class="na">filename</span><span class="p">:</span> <span class="s2">"js/[name].js"</span><span class="p">,</span>  <span class="c1">// 传统多页应用有多个入口文件时使用，[name] 代入entry配置中的任意一项模块的名称，例如：index, 在不同的页面上引用不同的入口，例如在index.html页面上通过&lt;script src="/js/index.js"&gt;&lt;/script&gt;引用入口模块</span>
         <span class="na">filename</span><span class="p">:</span> <span class="s2">"js/[hash]/[chunkhash].js"</span><span class="p">,</span>  <span class="c1">// 为生产环境实现前端静态资源增量更新时使用，[hash]是根据每次编译后项目总体文件的hash值, [chunkhash]是根据每个模块内容计算出的hash值。</span>
         
+        <span class="na">libraryTarget</span><span class="p">:</span> <span class="s1">'umd'</span><span class="p">,</span> 
+        <span class="c1">// 写了scope/packageName，最终可以通过window["scope"]["packageName"]的方式来调用这个library</span>
+        <span class="c1">// 写了packageVersion, 则会在library目录下额外生成一个版本号的目录，目录中生成一个library的js文件（js文件不在模块打包文件中，需要外部自行引入）</span>
+        <span class="na">library</span><span class="p">:</span> <span class="p">[</span><span class="s1">'scope'</span><span class="p">,</span> <span class="s1">'packageName'</span><span class="p">,</span> <span class="s1">'packageVersion'</span><span class="p">],</span>    
     <span class="p">},</span>
     
      <span class="c1">// 模块配置</span>
@@ -427,8 +431,10 @@
      <span class="na">target</span><span class="p">:</span> <span class="s2">"web"</span><span class="p">,</span> <span class="c1">// 浏览器编译环境</span>
        
      <span class="c1">// 将配置的模块从bundle文件中分离出来，模块可以是 CommonJS, AMD, global and ES2015 modules 4种类型  </span>
+     <span class="c1">// externals对象的key是给require时用的，比如require('react')，对象的value表示的是如何在global（即window）中访问到该对象，这里是window.React。</span>
      <span class="na">externals</span><span class="p">:</span> <span class="p">{</span>
-       <span class="na">react</span><span class="p">:</span> <span class="s1">'react'</span>
+       <span class="na">react</span><span class="p">:</span> <span class="s1">'React'</span><span class="p">,</span>
+       <span class="s1">'react-dom'</span><span class="p">:</span> <span class="s1">'ReactDOM'</span>
      <span class="p">},</span>
        
      <span class="c1">// 配置在编译时输出相关信息</span>
@@ -904,6 +910,8 @@ webpack是目前前端开发必不可少的一款模块加载器兼构建工具�
                         <li><a href="http://rockychen.me">RockyChen的博客</a></li>
                     
                         <li><a href="https://vivaxyblog.github.io">VIVAXY的博客</a></li>
+                    
+                        <li><a href="http://www.jackzxl.net">Jack的博客</a></li>
                     
                 </ul>
                 

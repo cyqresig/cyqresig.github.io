@@ -90,5 +90,9 @@ friends: [
     {
         title: "VIVAXY的博客",
         href: "https://vivaxyblog.github.io"
+    },
+    {
+        title: "Jack的博客",
+        href: "http://www.jackzxl.net"
     }
 ]
