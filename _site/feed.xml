@@ -5,8 +5,8 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>https://www.vanadis.cn/</link>
     <atom:link href="https://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 15 May 2017 18:25:53 +0800</pubDate>
-    <lastBuildDate>Mon, 15 May 2017 18:25:53 +0800</lastBuildDate>
+    <pubDate>Mon, 05 Jun 2017 11:40:13 +0800</pubDate>
+    <lastBuildDate>Mon, 05 Jun 2017 11:40:13 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -190,6 +190,7 @@
       ],
       &quot;require&quot;: [
           &quot;babel-register&quot;,                     // 预加载babel转码
+          &quot;ignore-styles&quot;,                      // 使babel不解析css/style相关代码，否则被测试的组件如果引入了css/less/pcss等样式文件的话测试时会报错
           &quot;./test/helpers/setup-browser-env.js&quot; // 预加载jsdom模拟浏览器配置
       ],
       &quot;concurrency&quot;: 5,                         // 最多并发执行5个测试用例

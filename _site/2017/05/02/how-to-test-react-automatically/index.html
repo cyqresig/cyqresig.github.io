@@ -399,6 +399,7 @@
       ],
       "require": [
           "babel-register",                     // 预加载babel转码
+          "ignore-styles",                      // 使babel不解析css/style相关代码，否则被测试的组件如果引入了css/less/pcss等样式文件的话测试时会报错
           "./test/helpers/setup-browser-env.js" // 预加载jsdom模拟浏览器配置
       ],
       "concurrency": 5,                         // 最多并发执行5个测试用例
