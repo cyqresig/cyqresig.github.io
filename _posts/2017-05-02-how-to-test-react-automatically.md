@@ -185,6 +185,29 @@ tags:
         "failWithoutAssertions": false,           // 报错时显示断言
         "babel": "inherit"                        // 使用.babelrc中的babel配置进行转码
     }
+    "nyc": {
+        "check-coverage": true,                   // 检查覆盖率
+        "lines": 60,                              // 低于这个比率测试会失败
+        "statements": 60,                         // 低于这个比率测试会失败
+        "functions": 60,                          // 低于这个比率测试会失败
+        "branches": 60,                           // 低于这个比率测试会失败
+        "watermarks": {   
+          "lines": [60, 85],                      // 预警范围
+          "functions": [60, 85],                  // 预警范围
+          "branches": [60, 85],                   // 预警范围
+          "statements": [60, 85]                  // 预警范围
+        },
+        "include": [
+          "src/**/*.js"                           // 覆盖范围
+        ],
+        "reporter": [
+          "lcov",                                 // 生成页面以便于查看覆盖率
+          "text-summary"
+        ],
+        "cache": true,
+        "all": true,
+        "report-dir": "./coverage"                // 报告文件输出路径
+      }
     ```
     
 * 在`package.json`中配置测试脚本命令
