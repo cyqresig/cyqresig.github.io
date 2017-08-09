@@ -38,7 +38,7 @@ router按需加载时需要把 `component` 参数改成 `getComponent`，并且�
 ```js
 const getComponent => (location, cb) {
   require.ensure([], (require) => {
-    cb(null, require('../containers/UserList'))
+    cb(null, require('../containers/UserList').default)
   }, 'userlist')
 },
 ...
