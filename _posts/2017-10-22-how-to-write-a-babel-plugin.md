@@ -85,10 +85,10 @@ module.exports = function(babel) {
         visitor: {
             <babel语法树类型1>: function(path, options) {
             		// 改变语法树实现1
-            }，
+            },
             <babel语法树类型2>: function(path, options) {
             		// 改变语法树实现2
-            }，
+            },
             ...
         }
     };
@@ -103,7 +103,7 @@ module.exports = function(babel) {
 
 ```js
 var a = 1;
-var b = 2'
+var b = 2;
 ```
 
 转换后代码
@@ -143,10 +143,10 @@ const babel = require('babel-core');
 const ast = babel.transform(code, {
     plugins: [
         [
-	        require(‘./babel-custom-code-filter’), 
+	        require('./babel-custom-code-filter'), 
 	        {
 	            debug: true,
-	        }，
+	        },
         ],
     ],
 });

@@ -289,10 +289,10 @@
         <span class="na">visitor</span><span class="p">:</span> <span class="p">{</span>
             <span class="o">&lt;</span><span class="nx">babel</span><span class="err">语法树类型</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
             		<span class="c1">// 改变语法树实现1</span>
-            <span class="p">}</span><span class="err">，</span>
+            <span class="p">},</span>
             <span class="o">&lt;</span><span class="nx">babel</span><span class="err">语法树类型</span><span class="mi">2</span><span class="o">&gt;</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
             		<span class="c1">// 改变语法树实现2</span>
-            <span class="p">}</span><span class="err">，</span>
+            <span class="p">},</span>
             <span class="p">...</span>
         <span class="p">}</span>
     <span class="p">};</span>
@@ -307,7 +307,7 @@
 <p>原始代码：</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">2</span><span class="err">'</span>
+<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 </code></pre>
 </div>
 
@@ -343,14 +343,14 @@ var b = 1;
 <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">2</span><span class="s1">'
 `;
-const babel = require('</span><span class="nx">babel</span><span class="o">-</span><span class="nx">core</span><span class="err">'</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">ast</span> <span class="o">=</span> <span class="nx">babel</span><span class="p">.</span><span class="nx">transform</span><span class="p">(</span><span class="nx">code</span><span class="p">,</span> <span class="p">{</span>
-    <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">[</span>
-	        <span class="nx">require</span><span class="p">(</span><span class="err">‘</span><span class="p">.</span><span class="o">/</span><span class="nx">babel</span><span class="o">-</span><span class="nx">custom</span><span class="o">-</span><span class="nx">code</span><span class="o">-</span><span class="nx">filter</span><span class="err">’</span><span class="p">),</span> 
+const babel = require('</span><span class="nx">babel</span><span class="o">-</span><span class="nx">core</span><span class="s1">');
+const ast = babel.transform(code, {
+    plugins: [
+        [
+	        require('</span><span class="p">.</span><span class="o">/</span><span class="nx">babel</span><span class="o">-</span><span class="nx">custom</span><span class="o">-</span><span class="nx">code</span><span class="o">-</span><span class="nx">filter</span><span class="err">'</span><span class="p">),</span> 
 	        <span class="p">{</span>
 	            <span class="na">debug</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-	        <span class="p">}</span><span class="err">，</span>
+	        <span class="p">},</span>
         <span class="p">],</span>
     <span class="p">],</span>
 <span class="p">});</span>
