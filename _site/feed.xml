@@ -5,8 +5,8 @@
     <description>关于前端开发,react-native开发,nodejs开发 | 绯雨闲丸，Web &amp; Mobile，Front-End Engineer | 这里是 @HISAME SHIZUMARU绯雨闲丸 的个人博客，与你一起发现更大的世界。</description>
     <link>https://www.vanadis.cn/</link>
     <atom:link href="https://www.vanadis.cn/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 22 Oct 2017 23:18:40 +0800</pubDate>
-    <lastBuildDate>Sun, 22 Oct 2017 23:18:40 +0800</lastBuildDate>
+    <pubDate>Mon, 23 Oct 2017 09:51:13 +0800</pubDate>
+    <lastBuildDate>Mon, 23 Oct 2017 09:51:13 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -187,7 +187,7 @@ var b = 1;
 
 &lt;p&gt;&lt;img src=&quot;../../../../img//ast-example-6.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;在了解了语法树的差异后，我们可以开始编写插件了，我们只需要定位到符合规则的语法树插件，
+&lt;p&gt;在了解了语法树的差异后，我们可以开始编写插件了，我们只需要定位到符合规则的语法树，
 并将其替换成我们需要的语法树即可。&lt;/p&gt;
 
 &lt;p&gt;代码如下：&lt;/p&gt;
