@@ -154,6 +154,7 @@ console.log(ast.code);
 ```
 
 最终转换后的代码为：
+
 ```js
 var a = 2;
 var b = 1;
